@@ -1,0 +1,17 @@
+# Fortran build artifacts
+/build/
+*.o
+*.mod
+/mandelbrot_gen
+
+# Generated images / outputs
+*.ppm
+
+# Python bytecode
+__pycache__/
+*.pyc
+
+# Local app runtime state
+/data/
+/worksheets/
+/video_test/

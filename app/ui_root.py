@@ -1,0 +1,79 @@
+from __future__ import annotations
+
+import tkinter as tk
+from tkinter import ttk
+
+from .ui_arithmetic import ArithmeticPanel
+from .ui_dashboard import DashboardPanel
+from .ui_fractals import FractalPanel
+from .ui_parent import ParentPanel
+from .ui_quiz import QuizPanel
+
+
+class AppShell:
+    def __init__(self, root: tk.Tk, profile) -> None:
+        self.root = root
+        self.profile = profile
+
+        self.root.title("Homeschool Math Visualizer")
+        self.root.geometry("1200x720")
+
+        self._build_header()
+        self._build_layout()
+
+    def _build_header(self) -> None:
+        bar = ttk.Frame(self.root)
+        bar.pack(fill=tk.X)
+        self.profile_var = tk.StringVar(value=f"Profile: {self.profile.name}")
+        ttk.Label(bar, textvariable=self.profile_var, font=("Helvetica", 11, "bold")).pack(side=tk.LEFT, padx=10, pady=6)
+
+    def _build_layout(self) -> None:
+        self.paned = ttk.Panedwindow(self.root, orient=tk.HORIZONTAL)
+        self.paned.pack(fill=tk.BOTH, expand=True)
+
+        self.left_panel = ttk.Frame(self.paned, width=320)
+        self.right_panel = ttk.Frame(self.paned)
+        self.paned.add(self.left_panel, weight=1)
+        self.paned.add(self.right_panel, weight=3)
+
+        self.notebook = ttk.Notebook(self.left_panel)
+        self.notebook.pack(fill=tk.BOTH, expand=True)
+
+        self.view_stack = ttk.Frame(self.right_panel)
+        self.view_stack.pack(fill=tk.BOTH, expand=True)
+        self.view_stack.rowconfigure(0, weight=1)
+        self.view_stack.columnconfigure(0, weight=1)
+
+        self.fractal = FractalPanel(self.notebook, self.view_stack)
+        self.arithmetic = ArithmeticPanel(self.notebook, self.view_stack)
+        self.quiz = QuizPanel(self.notebook, self.view_stack, self.get_profile)
+        self.parent = ParentPanel(self.notebook, self.view_stack, self.get_profile)
+        self.dashboard = DashboardPanel(self.notebook, self.view_stack, self.get_profile)
+
+        self._modules = [
+            ("Fractals", self.fractal),
+            ("Arithmetic", self.arithmetic),
+            ("Quizzes", self.quiz),
+            ("Parent", self.parent),
+            ("Dashboard", self.dashboard),
+        ]
+
+        for name, module in self._modules:
+            self.notebook.add(module.controls_frame, text=name)
+            module.view_frame.grid(row=0, column=0, sticky="nsew")
+
+        self.notebook.bind("<<NotebookTabChanged>>", self._on_tab_changed)
+        self._show_module(0)
+
+    def _on_tab_changed(self, _event) -> None:
+        idx = self.notebook.index(self.notebook.select())
+        self._show_module(idx)
+
+    def _show_module(self, idx: int) -> None:
+        module = self._modules[idx][1]
+        module.view_frame.tkraise()
+        if hasattr(module, "render"):
+            module.render()
+
+    def get_profile(self):
+        return self.profile
