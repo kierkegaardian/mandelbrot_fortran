@@ -120,18 +120,6 @@ def render_arithmetic(panel) -> None:
         panel.expression_var.set(_fraction_label(numerator, denominator))
         draw_fraction_circle(canvas, numerator, denominator, (10, 10, w - 20, h - 20))
         return
-
-
-def _fraction_label(numerator: int, denominator: int) -> str:
-    if denominator <= 0:
-        return f"{numerator}/0"
-    if numerator < denominator:
-        return f"{numerator}/{denominator}"
-    whole = numerator // denominator
-    remainder = numerator % denominator
-    if remainder == 0:
-        return f"{numerator}/{denominator} = {whole}"
-    return f"{numerator}/{denominator} = {whole} {remainder}/{denominator}"
     if skill == "long_addition":
         a = panel.long_a_var.get()
         b = panel.long_b_var.get()
@@ -169,3 +157,15 @@ def _fraction_label(numerator: int, denominator: int) -> str:
         panel.expression_var.set(f"Money: ${dollars}.{cents:02d}")
         draw_money_breakdown(canvas, dollars, cents, (10, 10, w - 20, h - 20))
         return
+
+
+def _fraction_label(numerator: int, denominator: int) -> str:
+    if denominator <= 0:
+        return f"{numerator}/0"
+    if numerator < denominator:
+        return f"{numerator}/{denominator}"
+    whole = numerator // denominator
+    remainder = numerator % denominator
+    if remainder == 0:
+        return f"{numerator}/{denominator} = {whole}"
+    return f"{numerator}/{denominator} = {whole} {remainder}/{denominator}"

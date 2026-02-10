@@ -10,10 +10,10 @@ def draw_long_addition(canvas: tk.Canvas, a: int, b: int, bounds: tuple[int, int
 
 
 def draw_long_subtraction(canvas: tk.Canvas, a: int, b: int, bounds: tuple[int, int, int, int]) -> None:
-    a = max(a, b)
-    b = min(a, b)
-    result = a - b
-    _draw_long_add_sub(canvas, a, b, "-", result, bounds, show_borrow=True)
+    big = max(a, b)
+    small = min(a, b)
+    result = big - small
+    _draw_long_add_sub(canvas, big, small, "-", result, bounds, show_borrow=True)
 
 
 def draw_long_multiplication(canvas: tk.Canvas, a: int, b: int, bounds: tuple[int, int, int, int]) -> None:
