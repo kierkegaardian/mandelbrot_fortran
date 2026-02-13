@@ -275,3 +275,95 @@ def draw_ratio_bars(
     canvas.create_text(x + bar_width_a + 10, y + 20 + bar_height / 2, text=str(a), anchor=tk.W, fill="#333")
     canvas.create_text(x + bar_width_b + 10, y + 60 + bar_height / 2, text=str(b), anchor=tk.W, fill="#333")
 
+
+def draw_number_line(
+    canvas: tk.Canvas,
+    values: list[int],
+    bounds: tuple[int, int, int, int],
+    *,
+    span: int = 10,
+) -> None:
+    x, y, width, height = bounds
+    width = max(1, width)
+    height = max(1, height)
+    left_x = x + 24
+    right_x = x + max(1, width - 24)
+    mid_y = y + height // 2
+    zero_x = left_x + (width - 48) // 2
+    canvas.create_line(left_x, mid_y, right_x, mid_y, width=2)
+    if span > 0:
+        step = (right_x - left_x) / (2 * span)
+        for tick in range(-span, span + 1):
+            tx = zero_x + tick * step
+            canvas.create_line(tx, mid_y - 5, tx, mid_y + 5)
+            if tick % 2 == 0:
+                canvas.create_text(tx, mid_y + 12, text=str(tick), anchor=tk.N, font=("Helvetica", 8))
+    for value in values:
+        if span == 0:
+            t = 0.5
+        else:
+            t = (value / span + 1) / 2
+        t = max(0.0, min(1.0, t))
+        cx = left_x + (right_x - left_x) * t
+        color = "#2e7d32" if value >= 0 else "#c62828"
+        canvas.create_oval(cx - 5, mid_y - 5, cx + 5, mid_y + 5, fill=color, outline="#333")
+        canvas.create_text(cx, mid_y - 12, text=str(value), anchor=tk.S, font=("Helvetica", 9), fill="#222")
+
+
+def draw_right_triangle(
+    canvas: tk.Canvas,
+    opposite: int,
+    adjacent: int,
+    hypotenuse: int,
+    bounds: tuple[int, int, int, int],
+) -> None:
+    x, y, width, height = bounds
+    width = max(1, width)
+    height = max(1, height)
+    pad = 14
+    p1 = (x + pad, y + height - pad)
+    p2 = (x + width - pad, y + height - pad)
+    p3 = (x + pad, y + height - pad - (height - 2 * pad) * 0.72)
+    canvas.create_polygon(p1, p2, p3, outline="#4a4a4a", width=2, fill="")
+    for x0, y0, label in [( (p1[0] + p2[0]) / 2, p1[1] + 10, str(adjacent)),
+                           (p3[0] - 12, (p1[1] + p3[1]) / 2, str(opposite)),
+                           (((p1[0] + p2[0]) / 2), ((p1[1] + p3[1]) / 2 + 8), f"h = {hypotenuse}")]:
+        canvas.create_text(x0, y0, text=label, fill="#333", font=("Helvetica", 9))
+    right_angle_x = p3[0] + 12
+    right_angle_y = p1[1] - 12
+    canvas.create_arc(p3[0], p3[1], p3[0] + 24, p1[1], start=90, extent=90, style=tk.ARC, width=1)
+
+
+def draw_bar_chart(
+    canvas: tk.Canvas,
+    values: list[float],
+    bounds: tuple[int, int, int, int],
+    *,
+    height_label: str,
+) -> None:
+    x, y, width, height = bounds
+    width = max(1, width)
+    height = max(1, height)
+    if not values:
+        return
+    max_value = max(values) if max(values) > 0 else 1.0
+    bottom = y + height - 16
+    left = x + 10
+    right = x + width - 10
+    bars = len(values)
+    gap = 10
+    bar_area = max(1, right - left - gap * max(0, bars - 1))
+    bar_width = max(12, bar_area // max(1, bars))
+    origin = left
+    canvas.create_line(left, bottom, right, bottom, width=2)
+    for idx, value in enumerate(values):
+        fraction = max(0.0, value / max_value)
+        bar_h = fraction * (height - 40)
+        bx0 = origin + idx * (bar_width + gap)
+        bx1 = bx0 + bar_width
+        by0 = bottom
+        by1 = by0 - bar_h
+        canvas.create_rectangle(bx0, by1, bx1, by0, fill="#5b8def", outline="#365f9c")
+        canvas.create_text((bx0 + bx1) / 2, by1 - 12, text=f"{value:.2g}", font=("Helvetica", 8), fill="#333")
+        canvas.create_text((bx0 + bx1) / 2, bottom + 4, text=str(idx + 1), anchor=tk.N, font=("Helvetica", 8), fill="#555")
+    canvas.create_text(x + 8, y + 8, text=height_label, anchor=tk.NW, font=("Helvetica", 9), fill="#333")

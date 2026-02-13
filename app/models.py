@@ -45,3 +45,13 @@ class Worksheet:
     level: int
     file_path: str
     created_at: str
+
+
+@dataclass(frozen=True)
+class SubskillProgress:
+    profile_id: int
+    skill: str
+    subskill: str
+    current_streak: int
+    best_streak: int
+    mastered: bool

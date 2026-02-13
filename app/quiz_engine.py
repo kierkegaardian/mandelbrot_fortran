@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import math
 import random
 from dataclasses import dataclass
 from typing import Optional
@@ -17,8 +18,18 @@ SKILLS = [
     "long_multiplication",
     "long_division",
     "money",
+    "integers",
+    "order_of_operations",
+    "algebra_linear",
+    "geometry_area",
+    "trig_right_triangle",
+    "stats_percent",
+    "stats_mean",
+    "stats_probability",
+    "calculus_slope",
 ]
 QUESTION_TYPES = ["mc", "typed", "both"]
+RIGHT_TRIANGLE_TRIPLES = [(3, 4, 5), (5, 12, 13), (6, 8, 10), (8, 15, 17), (9, 12, 15)]
 
 
 @dataclass(frozen=True)
@@ -49,6 +60,55 @@ def _choice_set(correct: int, spread: int = 4) -> list[str]:
     ordered = list(choices)
     random.shuffle(ordered)
     return [str(c) for c in ordered]
+
+
+def _signed_choice_set(correct: int, spread: int = 4) -> list[str]:
+    choices = {correct}
+    while len(choices) < 4:
+        delta = random.randint(-spread, spread)
+        if delta == 0:
+            continue
+        choices.add(correct + delta)
+    ordered = list(choices)
+    random.shuffle(ordered)
+    return [str(c) for c in ordered]
+
+
+def _float_choice_set(correct: float, spread: float = 2.0) -> list[str]:
+    cent = int(round(correct * 100))
+    choices = {correct}
+    while len(choices) < 4:
+        delta = random.randint(-round(spread * 100), round(spread * 100))
+        if delta == 0:
+            continue
+        choices.add(round((cent + delta) / 100, 2))
+    ordered = list(choices)
+    random.shuffle(ordered)
+    return [_format_numeric(v) for v in ordered]
+
+
+def _format_numeric(value: float) -> str:
+    rounded = round(value, 2)
+    if abs(rounded - round(rounded)) < 1e-9:
+        return str(int(round(rounded)))
+    return f"{rounded:.2f}".rstrip("0").rstrip(".")
+
+
+def _frac(num: int, den: int) -> tuple[int, int]:
+    if den == 0:
+        return (0, 1)
+    if den < 0:
+        num = -num
+        den = -den
+    gcd = math.gcd(num, den)
+    if gcd == 0:
+        return (0, 1)
+    return (num // gcd, den // gcd)
+
+
+def _fraction_string(num: int, den: int) -> str:
+    num, den = _frac(num, den)
+    return f"{num}/{den}"
 
 
 def _long_range(level: int) -> tuple[int, int]:
@@ -87,6 +147,99 @@ def _fraction_choice_set(numerator: int, denominator: int) -> list[str]:
     ordered = list(choices)
     random.shuffle(ordered)
     return ordered
+
+
+def _ratio_choice_set(numerator: int, denominator: int) -> list[str]:
+    choices = {_fraction_string(numerator, denominator)}
+    while len(choices) < 4:
+        wrong_num = max(0, numerator + random.randint(-5, 5))
+        wrong_den = max(1, denominator + random.randint(-5, 5))
+        if wrong_num == numerator and wrong_den == denominator:
+            continue
+        choices.add(_fraction_string(wrong_num, wrong_den))
+    ordered = list(choices)
+    random.shuffle(ordered)
+    return ordered
+
+
+def _random_expression_with_parentheses(level: int) -> tuple[str, int]:
+    a = random.randint(-12, 12)
+    b = random.randint(-12, 12)
+    c = random.randint(-6, 6)
+    if c == 0:
+        c = 1
+
+    templates = [
+        (f"({a} + {b}) * {c}", (a + b) * c),
+        (f"{a} * ({b} + {c})", a * (b + c)),
+        (f"({a} - {b}) * {c}", (a - b) * c),
+        (f"{a} - ({b} * {c})", a - (b * c)),
+    ]
+    if level >= 2:
+        templates.extend([
+            (f"({a} + {b}) - ({c} * 2)", (a + b) - (c * 2)),
+            (f"({a} * {b}) + ({c} * {c})", (a * b) + (c * c)),
+        ])
+    prompt, answer = random.choice(templates)
+    return prompt, answer
+
+
+def _linear_term(coeff: int) -> str:
+    if coeff == 1:
+        return "x"
+    if coeff == -1:
+        return "-x"
+    return f"{coeff}x"
+
+
+def _linear_problem(level: int) -> tuple[str, float]:
+    coeff = random.randint(-9, 9)
+    if coeff == 0:
+        coeff = 1
+    x = random.randint(-12, 12)
+    if level == 1:
+        intercept = random.randint(-15, 15)
+        rhs = coeff * x + intercept
+        if random.choice([True, False]):
+            lhs = (
+                f"{_linear_term(coeff)} + {abs(intercept)}"
+                if intercept >= 0
+                else f"{_linear_term(coeff)} - {abs(intercept)}"
+            )
+            answer = float(x)
+        else:
+            lhs = (
+                f"{_linear_term(coeff)} - {abs(intercept)}"
+                if intercept >= 0
+                else f"{_linear_term(coeff)} + {abs(intercept)}"
+            )
+            answer = float(x)
+        prompt = f"Solve for x: {lhs} = {rhs}"
+        return prompt, answer
+
+    denominator = random.choice([2, 3, 4, 5, 6])
+    intercept = random.randint(-9, 9)
+    rhs = (coeff * x + intercept * denominator) / denominator
+    prompt = (
+        f"Solve for x: ({_linear_term(coeff)} / {denominator}) + "
+        f"{intercept} = {_format_numeric(rhs)}"
+    )
+    return prompt, float(x)
+
+
+def _slope_line_points(level: int) -> tuple[int, int, int, int, int]:
+    x1 = random.randint(0, max(1, level * 2))
+    x2 = random.randint(x1 + 1, x1 + 5)
+    slope = random.choice([n for n in range(-5, 6) if n != 0])
+    intercept = random.randint(-8, 8)
+    y1 = slope * x1 + intercept
+    y2 = slope * x2 + intercept
+    return x1, y1, x2, y2, slope
+
+
+def _format_probability_as_fraction(numer: int, denom: int) -> str:
+    g = math.gcd(numer, denom)
+    return _fraction_string(numer // g, denom // g)
 
 
 def _division_answer(quotient: int, remainder: int) -> str:
@@ -270,5 +423,98 @@ def generate_question(skill: str, level: int, question_type: str) -> Question:
         choices = _money_choice_set(dollars, cents) if question_type == "mc" else None
         visual = {"kind": "money", "dollars": dollars, "cents": cents}
         return Question(skill, prompt, answer, explanation, choices, visual)
+
+    if skill == "integers":
+        prompt, answer = _random_expression_with_parentheses(level)
+        explanation = "Apply parentheses first, then multiplication, and finally addition and subtraction."
+        answer_int = int(answer)
+        choices = _signed_choice_set(answer_int, spread=14) if question_type == "mc" else None
+        return Question(skill, f"Simplify this expression: {prompt}", str(answer_int), explanation, choices, None)
+
+    if skill == "order_of_operations":
+        prompt, answer = _random_expression_with_parentheses(level)
+        answer = int(answer)
+        explanation = "Use order-of-operations: parentheses, multiplication, then addition and subtraction."
+        choices = _signed_choice_set(answer) if question_type == "mc" else None
+        return Question(skill, f"Evaluate: {prompt}", str(answer), explanation, choices, None)
+
+    if skill == "algebra_linear":
+        prompt, answer = _linear_problem(level)
+        answer = float(answer)
+        explanation = "Isolate x using inverse operations, doing the reverse order of operations."
+        choices = _signed_choice_set(int(answer), spread=8) if question_type == "mc" else None
+        return Question(skill, prompt, _format_numeric(answer), explanation, choices, None)
+
+    if skill == "geometry_area":
+        if level == 1:
+            length = random.randint(1, 12)
+            width = random.randint(1, 12)
+            answer = float(length * width)
+            prompt = f"Find the area of a rectangle with length {length} and width {width}."
+        elif level == 2:
+            base = random.randint(1, 12)
+            height = random.randint(1, 12)
+            answer = float(base * height)
+            prompt = f"Find the area of a square with side {base}." if base == height else f"Find the area of a rectangle with length {base} and width {height}."
+        else:
+            base = random.choice([2, 4, 6, 8, 10, 12])
+            height = random.randint(1, 12)
+            answer = base * height / 2
+            prompt = f"Find the area of a right triangle with base {base} and height {height}."
+        explanation = "Area is built from the shape formula: width × height for rectangles, 1/2 × base × height for triangles."
+        choices = _float_choice_set(answer, spread=6.0) if question_type == "mc" else None
+        return Question(skill, prompt, _format_numeric(answer), explanation, choices, None)
+
+    if skill == "trig_right_triangle":
+        a, b, c = random.choice(RIGHT_TRIANGLE_TRIPLES)
+        function = random.choice(["sin", "cos", "tan"])
+        if function == "sin":
+            prompt = f"For a right triangle with opposite side {a}, adjacent side {b}, hypotenuse {c}, find sin θ."
+            answer = a / c
+        elif function == "cos":
+            prompt = f"For a right triangle with opposite side {a}, adjacent side {b}, hypotenuse {c}, find cos θ."
+            answer = b / c
+        else:
+            prompt = f"For a right triangle with opposite side {a}, adjacent side {b}, hypotenuse {c}, find tan θ."
+            answer = a / b
+        explanation = "Use the primary trig ratio: sin, cos, tan correspond to opposite/hypotenuse, adjacent/hypotenuse, opposite/adjacent."
+        choices = _float_choice_set(answer, spread=0.5) if question_type == "mc" else None
+        return Question(skill, prompt, _format_numeric(answer), explanation, choices, None)
+
+    if skill == "stats_percent":
+        number = random.randint(10, 400)
+        percent = random.choice([10, 12.5, 15, 20, 25, 33, 40, 50, 60, 75, 80, 90]) if level == 1 else random.randint(1, 99)
+        answer = number * (percent / 100)
+        prompt = f"What is {percent}% of {number}?"
+        explanation = "Percent questions are multiplying by a decimal fraction of one."
+        choices = _float_choice_set(answer, spread=6.0) if question_type == "mc" else None
+        return Question(skill, prompt, _format_numeric(answer), explanation, choices, None)
+
+    if skill == "stats_mean":
+        count = 3 if level == 1 else 4 if level == 2 else 5
+        values = [random.randint(0, 30) for _ in range(count)]
+        answer = sum(values) / count
+        prompt = f"Find the mean of these values: {', '.join(map(str, values))}"
+        explanation = "The mean is the sum of values divided by how many values there are."
+        choices = _float_choice_set(answer, spread=8.0) if question_type == "mc" else None
+        return Question(skill, prompt, _format_numeric(answer), explanation, choices, None)
+
+    if skill == "stats_probability":
+        favorable = random.randint(1, 9)
+        total = random.randint(favorable + 1, favorable + 10)
+        answer = _format_probability_as_fraction(favorable, total)
+        prompt = f"In equally likely outcomes, if {favorable} outcomes are a success out of {total}, what is the probability of success?"
+        explanation = "Probability is the number of successful outcomes divided by all equally likely outcomes."
+        choices = _ratio_choice_set(favorable, total) if question_type == "mc" else None
+        return Question(skill, prompt, answer, explanation, choices, None)
+
+    if skill == "calculus_slope":
+        x1, y1, x2, y2, slope = _slope_line_points(level)
+        prompt = f"Find the slope of the line through ({x1}, {y1}) and ({x2}, {y2})."
+        answer = slope
+        explanation = "Slope is rise over run: (y2 - y1)/(x2 - x1)."
+        choices = _signed_choice_set(answer, spread=4) if question_type == "mc" else None
+        visual = {"kind": "slope", "x1": x1, "y1": y1, "x2": x2, "y2": y2}
+        return Question(skill, prompt, str(answer), explanation, choices, visual)
 
     raise ValueError("Unknown skill")

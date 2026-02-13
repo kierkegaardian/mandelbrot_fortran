@@ -38,6 +38,7 @@ def generate_custom_worksheet(
         "long_subtraction",
         "long_multiplication",
         "long_division",
+        "calculus_slope",
     }
     for spec in topics:
         skill = spec["skill"]
@@ -174,6 +175,12 @@ def _worksheet_prompt(question: Question) -> Tuple[str, Optional[str], Optional[
         denominator = max(1, int(visual.get("denominator", 1)))
         prompt = "What fraction is shaded? (fraction, decimal, or repeating like 0.(3) or 0.1(6))"
         return prompt, fraction_svg(numerator, denominator), f"{numerator}/{denominator}"
+    if kind == "slope":
+        x1 = int(visual.get("x1", 0))
+        y1 = int(visual.get("y1", 0))
+        x2 = int(visual.get("x2", 0))
+        y2 = int(visual.get("y2", 0))
+        return f"Find the slope of the line through ({x1}, {y1}) and ({x2}, {y2}).", None, None
     return question.prompt, None, None
 
 

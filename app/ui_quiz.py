@@ -1,13 +1,17 @@
 from __future__ import annotations
 
 import tkinter as tk
+import hashlib
 from tkinter import messagebox, ttk
+import webbrowser
 
 from . import db
 from .explanations import QUIZ_EXPLANATION
 from .quiz_answers import is_correct_answer
-from .quiz_engine import QUESTION_TYPES, Question, generate_question
+from .quiz_engine import QUESTION_TYPES, Question, SKILLS, generate_question
+from .curriculum import curriculum_pdf_path, get_curriculum_for_skill
 from .quiz_visuals import render_quiz_visual
+from .skill_graph import SUBSKILL_STREAK_TO_MASTER, subskills_for
 from .time_utils import now_iso
 from .ui_explain import ExplanationPanel
 from .ui_widgets import int_spinbox
@@ -37,25 +41,20 @@ class QuizPanel:
         frame.pack(fill=tk.BOTH, expand=True)
 
         ttk.Label(frame, text="Skill").pack(anchor=tk.W)
-        ttk.Combobox(
+        self.skill_combo = ttk.Combobox(
             frame,
             textvariable=self.skill_var,
-            values=[
-                "counting",
-                "add_subtract",
-                "multiply",
-                "divide",
-                "ratios",
-                "fractions",
-                "long_addition",
-                "long_subtraction",
-                "long_multiplication",
-                "long_division",
-                "money",
-                "mixed",
-            ],
+            values=[*SKILLS, "mixed"],
             state="readonly",
-        ).pack(fill=tk.X, pady=(0, 8))
+            width=20,
+        )
+        self.skill_combo.pack(fill=tk.X, pady=(0, 8))
+        self.skill_combo.bind("<<ComboboxSelected>>", lambda _e: self._on_skill_change())
+        ttk.Label(frame, text="Curriculum source:").pack(anchor=tk.W)
+        self.curriculum_label = ttk.Label(frame, text="No source mapped", foreground="#4f6b7a")
+        self.curriculum_label.pack(anchor=tk.W, pady=(0, 4))
+        ttk.Button(frame, text="Open Source PDF", command=self._open_curriculum_pdf).pack(anchor=tk.W)
+        ttk.Label(frame, text="(Choose a skill to refresh)").pack(anchor=tk.W, padx=2, pady=(0, 8))
 
         ttk.Label(frame, text="Question Type").pack(anchor=tk.W)
         ttk.Combobox(frame, textvariable=self.type_var, values=QUESTION_TYPES, state="readonly").pack(
@@ -73,6 +72,7 @@ class QuizPanel:
         self.explain = ExplanationPanel(frame)
         self.explain.set_explanation(QUIZ_EXPLANATION)
         self.explain.frame.pack(fill=tk.X, pady=(12, 0))
+        self._update_curriculum_label()
 
     def _build_view(self) -> None:
         self.prompt_var = tk.StringVar(value="Choose settings on the left to start a quiz.")
@@ -102,6 +102,25 @@ class QuizPanel:
         self.summary_box = tk.Text(self.view_frame, height=8, wrap=tk.WORD, font=("Helvetica", 10))
         self.summary_box.pack(fill=tk.BOTH, expand=True, padx=16, pady=8)
         self.summary_box.config(state=tk.DISABLED)
+
+    def _update_curriculum_label(self) -> None:
+        skill = self.skill_var.get()
+        entry = get_curriculum_for_skill(skill)
+        if entry is None:
+            self.curriculum_label.config(text="No source mapped for this skill.")
+            return
+        topics = ", ".join(entry.topics)
+        self.curriculum_label.config(text=f"{entry.label}: {topics} ({entry.source})")
+
+    def _open_curriculum_pdf(self) -> None:
+        path = curriculum_pdf_path(self.skill_var.get())
+        if path is None:
+            messagebox.showerror("No curriculum file", "No local PDF found for this skill.")
+            return
+        webbrowser.open(f"file://{path}")
+
+    def _on_skill_change(self) -> None:
+        self._update_curriculum_label()
 
     def start_quiz(self) -> None:
         profile = self._profile_getter()
@@ -214,6 +233,15 @@ class QuizPanel:
             created_at=now_iso(),
         )
         for question, answer, correct in self._answers:
+            subskill = _subskill_for_question(question)
+            db.upsert_subskill_progress(
+                profile.id,
+                question.skill,
+                subskill,
+                correct,
+                now_iso(),
+                SUBSKILL_STREAK_TO_MASTER,
+            )
             db.add_question_result(
                 attempt_id,
                 question.skill,
@@ -244,3 +272,13 @@ class QuizPanel:
         if not visual:
             return
         render_quiz_visual(self.visual_canvas, visual)
+
+
+def _subskill_for_question(question: Question) -> str:
+    subskills = subskills_for(question.skill)
+    if not subskills:
+        return "core"
+    seed = f"{question.skill}|{question.prompt}|{question.correct_answer}"
+    digest = hashlib.sha1(seed.encode("utf-8")).hexdigest()
+    index = int(digest[:10], 16) % len(subskills)
+    return subskills[index]

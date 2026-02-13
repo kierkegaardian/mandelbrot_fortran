@@ -6,6 +6,7 @@ from tkinter import messagebox, ttk
 from . import db
 from .explanations import PARENT_EXPLANATION
 from .parent_worksheets import WorksheetSection
+from .quiz_engine import SKILLS
 from .time_utils import now_iso
 from .ui_explain import ExplanationPanel
 from .ui_widgets import int_spinbox
@@ -86,20 +87,7 @@ class ParentPanel:
         ttk.Combobox(
             form,
             textvariable=self.quiz_skill,
-            values=[
-                "counting",
-                "add_subtract",
-                "multiply",
-                "divide",
-                "ratios",
-                "fractions",
-                "long_addition",
-                "long_subtraction",
-                "long_multiplication",
-                "long_division",
-                "money",
-                "mixed",
-            ],
+            values=[*SKILLS, "mixed"],
             state="readonly",
         ).grid(row=1, column=1, sticky=tk.EW, pady=4)
 
@@ -197,6 +185,15 @@ class ParentPanel:
             ("Long Multiplication", "long_multiplication"),
             ("Long Division", "long_division"),
             ("Money Basics", "money"),
+            ("Integers Basics", "integers"),
+            ("Order of Operations", "order_of_operations"),
+            ("Linear Equations Basics", "algebra_linear"),
+            ("Geometry Area Basics", "geometry_area"),
+            ("Right-Triangle Trig Basics", "trig_right_triangle"),
+            ("Percent and Ratios", "stats_percent"),
+            ("Averages", "stats_mean"),
+            ("Probabilities", "stats_probability"),
+            ("Slope and Rates", "calculus_slope"),
         ]
         added = 0
         for name, skill in defaults:

@@ -2,9 +2,9 @@ from __future__ import annotations
 
 import sqlite3
 from dataclasses import dataclass
-from typing import Iterable, Optional
+from typing import Optional
 
-from .models import Profile, QuizAttempt, QuizSet, Worksheet
+from .models import Profile, QuizAttempt, QuizSet, SubskillProgress, Worksheet
 from .paths import data_dir
 
 
@@ -85,6 +85,18 @@ def init_db() -> None:
                 created_at TEXT NOT NULL,
                 FOREIGN KEY(profile_id) REFERENCES profiles(id) ON DELETE CASCADE,
                 FOREIGN KEY(quiz_set_id) REFERENCES quiz_sets(id) ON DELETE SET NULL
+            );
+
+            CREATE TABLE IF NOT EXISTS skill_subskill_progress (
+                profile_id INTEGER NOT NULL,
+                skill TEXT NOT NULL,
+                subskill TEXT NOT NULL,
+                current_streak INTEGER NOT NULL DEFAULT 0,
+                best_streak INTEGER NOT NULL DEFAULT 0,
+                mastered INTEGER NOT NULL DEFAULT 0,
+                updated_at TEXT NOT NULL,
+                PRIMARY KEY (profile_id, skill, subskill),
+                FOREIGN KEY(profile_id) REFERENCES profiles(id) ON DELETE CASCADE
             );
             """
         )
@@ -236,6 +248,96 @@ def list_attempts(profile_id: int) -> list[QuizAttempt]:
             int(r["level"]),
             int(r["score"]),
             r["created_at"],
+        )
+        for r in rows
+    ]
+
+
+def upsert_subskill_progress(
+    profile_id: int, skill: str, subskill: str, is_correct: bool, updated_at: str, streak_to_master: int
+) -> None:
+    with connect() as conn:
+        row = conn.execute(
+            """
+            SELECT current_streak, best_streak, mastered
+            FROM skill_subskill_progress
+            WHERE profile_id = ? AND skill = ? AND subskill = ?
+            """,
+            (profile_id, skill, subskill),
+        ).fetchone()
+        if row is None:
+            current_streak = 1 if is_correct else 0
+            best_streak = current_streak
+            mastered = 1 if is_correct and current_streak >= streak_to_master else 0
+            conn.execute(
+                """
+                INSERT INTO skill_subskill_progress
+                (profile_id, skill, subskill, current_streak, best_streak, mastered, updated_at)
+                VALUES (?, ?, ?, ?, ?, ?, ?)
+                """,
+                (
+                    profile_id,
+                    skill,
+                    subskill,
+                    current_streak,
+                    best_streak,
+                    mastered,
+                    updated_at,
+                ),
+            )
+            return
+
+        current_streak = row["current_streak"] + 1 if is_correct else 0
+        best_streak = max(row["best_streak"], current_streak)
+        mastered = 1 if row["mastered"] or current_streak >= streak_to_master else 0
+        conn.execute(
+            """
+            UPDATE skill_subskill_progress
+            SET current_streak = ?, best_streak = ?, mastered = ?, updated_at = ?
+            WHERE profile_id = ? AND skill = ? AND subskill = ?
+            """,
+            (
+                current_streak,
+                best_streak,
+                mastered,
+                updated_at,
+                profile_id,
+                skill,
+                subskill,
+            ),
+        )
+
+
+def list_subskill_progress(profile_id: int, skill: str | None = None) -> list[SubskillProgress]:
+    with connect() as conn:
+        if skill is None:
+            rows = conn.execute(
+                """
+                SELECT profile_id, skill, subskill, current_streak, best_streak, mastered
+                FROM skill_subskill_progress
+                WHERE profile_id = ?
+                ORDER BY skill ASC, subskill ASC
+                """,
+                (profile_id,),
+            ).fetchall()
+        else:
+            rows = conn.execute(
+                """
+                SELECT profile_id, skill, subskill, current_streak, best_streak, mastered
+                FROM skill_subskill_progress
+                WHERE profile_id = ? AND skill = ?
+                ORDER BY subskill ASC
+                """,
+                (profile_id, skill),
+            ).fetchall()
+    return [
+        SubskillProgress(
+            int(r["profile_id"]),
+            r["skill"],
+            r["subskill"],
+            int(r["current_streak"]),
+            int(r["best_streak"]),
+            bool(r["mastered"]),
         )
         for r in rows
     ]

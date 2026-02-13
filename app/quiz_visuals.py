@@ -51,3 +51,46 @@ def render_quiz_visual(canvas: tk.Canvas, visual: dict) -> None:
         draw_long_division(canvas, visual["dividend"], visual["divisor"], (10, 10, w - 20, h - 20))
     if kind == "money":
         draw_money_breakdown(canvas, visual["dollars"], visual["cents"], (10, 10, w - 20, h - 20))
+    if kind == "slope":
+        _draw_slope_line(
+            canvas,
+            visual["x1"],
+            visual["y1"],
+            visual["x2"],
+            visual["y2"],
+            (10, 10, w - 20, h - 20),
+        )
+
+
+def _draw_slope_line(
+    canvas: tk.Canvas, x1: int, y1: int, x2: int, y2: int, bounds: tuple[int, int, int, int]
+) -> None:
+    x0, y0, width, height = bounds
+    padding = 10
+    min_x = min(0, x1, x2) - 1
+    max_x = max(0, x1, x2) + 1
+    min_y = min(0, y1, y2) - 2
+    max_y = max(0, y1, y2) + 2
+
+    x_range = max(1, max_x - min_x)
+    y_range = max(1, max_y - min_y)
+    scale_x = max(1.0, (width - 2 * padding) / x_range)
+    scale_y = max(1.0, (height - 2 * padding) / y_range)
+    scale = min(scale_x, scale_y)
+    cx1 = int(x0 + padding + (x1 - min_x) * scale)
+    cy1 = int(y0 + height - padding - (y1 - min_y) * scale)
+    cx2 = int(x0 + padding + (x2 - min_x) * scale)
+    cy2 = int(y0 + height - padding - (y2 - min_y) * scale)
+
+    canvas.create_line(cx1, cy1, cx2, cy2, fill="#2e7d32", width=2)
+    canvas.create_oval(cx1 - 4, cy1 - 4, cx1 + 4, cy1 + 4, fill="#5b8def", outline="")
+    canvas.create_oval(cx2 - 4, cy2 - 4, cx2 + 4, cy2 + 4, fill="#5b8def", outline="")
+    canvas.create_text(cx1, cy1 - 8, text=f"({x1}, {y1})", fill="#2a2a2a", font=("Helvetica", 9))
+    canvas.create_text(cx2, cy2 + 10, text=f"({x2}, {y2})", fill="#2a2a2a", font=("Helvetica", 9))
+
+    axis_y = y0 + height - padding - (0 - min_y) * scale
+    axis_x = x0 + padding + (0 - min_x) * scale
+    axis_y = min(max(axis_y, y0 + padding), y0 + height - padding)
+    axis_x = min(max(axis_x, x0 + padding), x0 + width - padding)
+    canvas.create_line(x0 + padding, axis_y, x0 + width - padding, axis_y, fill="#b0bec5")
+    canvas.create_line(axis_x, y0 + padding, axis_x, y0 + height - padding, fill="#b0bec5")

@@ -8,20 +8,11 @@ from . import db
 from .time_utils import now_iso
 from .ui_widgets import int_spinbox
 from .worksheet import generate_custom_worksheet, generate_worksheet
+from .quiz_engine import SKILLS
 
 
 CUSTOM_TOPIC_SKILLS = [
-    "counting",
-    "add_subtract",
-    "multiply",
-    "divide",
-    "ratios",
-    "fractions",
-    "long_addition",
-    "long_subtraction",
-    "long_multiplication",
-    "long_division",
-    "money",
+    *SKILLS,
 ]
 
 

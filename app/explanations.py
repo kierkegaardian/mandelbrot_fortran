@@ -224,6 +224,60 @@ ARITHMETIC_MODE_EXPLANATIONS = {
         why_short="Money turns numbers into real-world amounts.",
         why_long="Seeing bills and coins helps learners connect arithmetic to shopping and change-making.",
     ),
+    "integers": Explanation(
+        how_short="Use negative numbers and see them move a point across a number line.",
+        how_long="Build signed arithmetic expressions and watch values on a number line, where values left are negative and right are positive.",
+        why_short="Negative values are the same arithmetic rules with values below zero.",
+        why_long="Keeping sign and magnitude explicit prevents confusion and helps students reason with subtraction and addition.",
+    ),
+    "order_of_operations": Explanation(
+        how_short="Change the expression and see the operation order visually.",
+        how_long="Parentheses are resolved first, then multiplication and division, then addition and subtraction.",
+        why_short="Operator precedence makes answers consistent.",
+        why_long="A clear order keeps students from getting different answers for the same expression.",
+    ),
+    "algebra_linear": Explanation(
+        how_short="Set an equation and watch operations isolate x.",
+        how_long="Use inverse steps on both sides to keep the equation balanced while removing constants and coefficients.",
+        why_short="A balance stays true when both sides change equally.",
+        why_long="If every operation is mirrored on both sides, the final x value is mathematically valid.",
+    ),
+    "geometry_area": Explanation(
+        how_short="Pick rectangles or right triangles and compare unit area.",
+        how_long="Use count-and-block area models to show width × height, and 1/2 × base × height for triangles.",
+        why_short="Area is counting square units.",
+        why_long="Drawing unit cells or halves of rectangles makes area formulas concrete.",
+    ),
+    "trig_right_triangle": Explanation(
+        how_short="Build a right triangle and read the trig ratio from side labels.",
+        how_long="For sine, cosine, and tangent, use opposite/hypotenuse, adjacent/hypotenuse, and opposite/adjacent respectively.",
+        why_short="Trig is about fixed side-length relationships.",
+        why_long="Consistent labeling prevents common angle and ratio swaps.",
+    ),
+    "stats_percent": Explanation(
+        how_short="Set total and percent to get a rate problem.",
+        how_long="Convert the percent to decimal by dividing by 100 and multiply by the base value.",
+        why_short="Percent is a scaled whole.",
+        why_long="This keeps part-of problems in one multiplication workflow.",
+    ),
+    "stats_mean": Explanation(
+        how_short="Enter a few values and average them.",
+        how_long="Add all values, then divide by the count of values to get the mean.",
+        why_short="Mean represents the equal-shares value.",
+        why_long="The average is where values balance around the center if redistributed equally.",
+    ),
+    "stats_probability": Explanation(
+        how_short="Set successful outcomes and total outcomes.",
+        how_long="Probability is successful outcomes divided by equally likely outcomes.",
+        why_short="Fractions naturally represent chances.",
+        why_long="A numerator and denominator together describe likelihood without approximation.",
+    ),
+    "calculus_slope": Explanation(
+        how_short="Set two points and calculate rise over run.",
+        how_long="Slope is (y2 - y1) / (x2 - x1), then interpret positive, negative, or zero growth.",
+        why_short="Slope describes how fast y changes as x changes.",
+        why_long="Using the same point pair, slope connects geometry to rate of change.",
+    ),
 }
 
 QUIZ_EXPLANATION = Explanation(

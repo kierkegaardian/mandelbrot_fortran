@@ -4,36 +4,13 @@ import tkinter as tk
 from tkinter import ttk
 
 from . import db
-
-
-SKILL_ORDER = [
-    "counting",
-    "add_subtract",
-    "multiply",
-    "divide",
-    "ratios",
-    "fractions",
-    "long_addition",
-    "long_subtraction",
-    "long_multiplication",
-    "long_division",
-    "money",
-]
-
-SKILL_LABELS = {
-    "counting": "Counting",
-    "add_subtract": "Add/Subtract",
-    "multiply": "Multiply",
-    "divide": "Divide",
-    "ratios": "Ratios",
-    "fractions": "Fractions",
-    "long_addition": "Long Addition",
-    "long_subtraction": "Long Subtraction",
-    "long_multiplication": "Long Multiplication",
-    "long_division": "Long Division",
-    "money": "Money",
-    "mixed": "Mixed Review",
-}
+from .skill_graph import (
+    SKILL_LABELS,
+    SKILL_ORDER,
+    SUBSKILL_STREAK_TO_MASTER,
+    recommend_next_skills,
+    subskills_for,
+)
 
 
 class DashboardPanel:
@@ -103,6 +80,10 @@ class DashboardPanel:
         ttk.Label(self.view_frame, textvariable=self.reco_var, foreground="#2d5d7c").pack(
             anchor=tk.W, padx=10, pady=(6, 10)
         )
+        self.subskill_var = tk.StringVar(value="")
+        ttk.Label(self.view_frame, textvariable=self.subskill_var, foreground="#4f6b7a", wraplength=520).pack(
+            anchor=tk.W, padx=10, pady=(0, 10)
+        )
 
     def render(self) -> None:
         profile = self._profile_getter()
@@ -148,12 +129,40 @@ class DashboardPanel:
 
         completed = sum(1 for s in SKILL_ORDER if mastery_map.get(s) == "Mastered")
         self.summary_var.set(f"{profile.name}: {completed}/{len(SKILL_ORDER)} skills mastered")
-        recommendations = _recommend_next(mastery_map)
+        recommendations = recommend_next_skills(mastery_map)
         if recommendations:
             labels = [SKILL_LABELS.get(skill, skill) for skill in recommendations]
             self.reco_var.set(f"Recommended next: {', '.join(labels)}")
+            top_recommendation = recommendations[0]
+            subskills = subskills_for(top_recommendation)
+            progress = {
+                item.subskill: item
+                for item in db.list_subskill_progress(profile.id, top_recommendation)
+            }
+            if subskills:
+                subskill_status: list[str] = []
+                for subskill in subskills:
+                    item = progress.get(subskill)
+                    if item is None:
+                        icon = "◻"
+                    elif item.mastered:
+                        icon = "🏅"
+                    elif item.current_streak > 0:
+                        icon = _streak_graph(item.current_streak, SUBSKILL_STREAK_TO_MASTER)
+                    else:
+                        icon = _streak_graph(0, SUBSKILL_STREAK_TO_MASTER)
+                    subskill_status.append(f"{icon} {subskill}")
+                self.subskill_var.set("Subskills to build: " + " • ".join(subskill_status))
+            else:
+                self.subskill_var.set("")
         else:
             self.reco_var.set("Recommended next: Mixed review")
+            self.subskill_var.set("")
+
+
+def _streak_graph(current: int, target: int) -> str:
+    blocks = min(max(current, 0), target)
+    return ("🔥" * blocks) + ("⬜" * (target - blocks))
 
 
 def _mastery_label(attempts: int, avg: float) -> str:
@@ -166,10 +175,3 @@ def _mastery_label(attempts: int, avg: float) -> str:
     if avg >= 60:
         return "Developing"
     return "Needs work"
-
-
-def _recommend_next(mastery_map: dict[str, str]) -> list[str]:
-    for idx, skill in enumerate(SKILL_ORDER):
-        if mastery_map.get(skill) != "Mastered":
-            return SKILL_ORDER[idx : idx + 3]
-    return []
