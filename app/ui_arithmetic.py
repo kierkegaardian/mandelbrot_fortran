@@ -93,6 +93,7 @@ class ArithmeticPanel:
         self.slope_y1_var = tk.IntVar(value=2)
         self.slope_x2_var = tk.IntVar(value=5)
         self.slope_y2_var = tk.IntVar(value=6)
+        self.canvas: tk.Canvas | None = None
 
         self._build_controls()
         self._build_view()
@@ -471,4 +472,6 @@ class ArithmeticPanel:
         return self._scaled_image(style, base, size)
 
     def render(self) -> None:
+        if self.canvas is None:
+            return
         render_arithmetic(self)
