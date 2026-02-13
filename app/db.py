@@ -650,6 +650,48 @@ def list_template_vars(template_id: int) -> list[TemplateVar]:
     ]
 
 
+def list_all_question_templates(active_only: bool = True) -> list[QuestionTemplate]:
+    with connect() as conn:
+        if active_only:
+            rows = conn.execute(
+                """
+                SELECT id, book_id, external_id, skill, subskill, label, prompt_template, answer_expr, constraint_expr, explanation_template,
+                       min_level, max_level, choice_spread, active
+                FROM question_templates
+                WHERE active = 1
+                ORDER BY skill ASC, id ASC
+                """
+            ).fetchall()
+        else:
+            rows = conn.execute(
+                """
+                SELECT id, book_id, external_id, skill, subskill, label, prompt_template, answer_expr, constraint_expr, explanation_template,
+                       min_level, max_level, choice_spread, active
+                FROM question_templates
+                ORDER BY skill ASC, id ASC
+                """
+            ).fetchall()
+    return [
+        QuestionTemplate(
+            int(r["id"]),
+            int(r["book_id"]) if r["book_id"] is not None else None,
+            r["external_id"],
+            r["skill"],
+            r["subskill"],
+            r["label"],
+            r["prompt_template"],
+            r["answer_expr"],
+            r["constraint_expr"],
+            r["explanation_template"],
+            int(r["min_level"]),
+            int(r["max_level"]),
+            float(r["choice_spread"]),
+            bool(r["active"]),
+        )
+        for r in rows
+    ]
+
+
 def create_worksheet(
     profile_id: int,
     quiz_set_id: Optional[int],

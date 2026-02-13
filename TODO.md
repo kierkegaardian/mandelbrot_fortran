@@ -79,6 +79,6 @@
 - [ ] Add “daily goal” history (track completion streak per day).
 
 ## Roadmap: Template Bank QA
-- [ ] Template dry-run tool (generate N variants per template; report failures).
+- [x] Template dry-run tool (generate N variants per template; report failures).
 - [ ] External IDs for templates everywhere (manifest + UI tooling).
 - [ ] Subskill-targeted quiz presets for parent assignments.
