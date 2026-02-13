@@ -42,6 +42,8 @@ class Question:
     explanation: str
     choices: Optional[list[str]]
     visual: Optional[dict]
+    template_id: Optional[int] = None
+    subskill: Optional[str] = None
 
 
 def _level_range(level: int) -> tuple[int, int]:

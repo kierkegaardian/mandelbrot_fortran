@@ -57,7 +57,7 @@ def main() -> None:
 
 def _candidate_blocks(text: str) -> list[str]:
     # Heuristic: split into paragraph-like blocks, then keep blocks that look like exercises.
-    raw_blocks = [b.strip() for b in re.split(r"\n\\s*\n", text) if b.strip()]
+    raw_blocks = [b.strip() for b in re.split(r"\n\s*\n", text) if b.strip()]
     candidates: list[str] = []
     for b in raw_blocks:
         b2 = _normalize_block(b)

@@ -13,12 +13,28 @@ def try_generate_from_templates(skill: str, level: int, question_type: str, *, r
     templates = db.list_question_templates(skill, level)
     if not templates:
         return None
-    template = rng.choice(templates)
-    vars_spec = db.list_template_vars(template.id)
-    inst = instantiate_template(template, vars_spec, rng=rng)
-    choices = None
-    if question_type == "mc":
-        if inst.numeric_answer is None:
-            return None
-        choices = mc_choices(inst.numeric_answer, spread=template.choice_spread, rng=rng)
-    return Question(skill, inst.prompt, inst.answer, inst.explanation, choices, None)
+    # Try a few templates; constraints or eval errors should not crash the app.
+    candidates = list(templates)
+    rng.shuffle(candidates)
+    for template in candidates[: min(12, len(candidates))]:
+        try:
+            vars_spec = db.list_template_vars(template.id)
+            inst = instantiate_template(template, vars_spec, rng=rng)
+            choices = None
+            if question_type == "mc":
+                if inst.numeric_answer is None:
+                    continue
+                choices = mc_choices(inst.numeric_answer, spread=template.choice_spread, rng=rng)
+            return Question(
+                skill,
+                inst.prompt,
+                inst.answer,
+                inst.explanation,
+                choices,
+                None,
+                template_id=template.id,
+                subskill=template.subskill,
+            )
+        except Exception:
+            continue
+    return None

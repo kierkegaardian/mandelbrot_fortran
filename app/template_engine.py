@@ -168,7 +168,9 @@ def _eval_node(node: ast.AST, variables: dict[str, float]) -> float:
     if isinstance(node, ast.UnaryOp) and isinstance(node.op, (ast.UAdd, ast.USub)):
         val = _eval_node(node.operand, variables)
         return val if isinstance(node.op, ast.UAdd) else -val
-    if isinstance(node, ast.BinOp) and isinstance(node.op, (ast.Add, ast.Sub, ast.Mult, ast.Div, ast.FloorDiv, ast.Mod, ast.Pow)):
+    if isinstance(node, ast.BinOp) and isinstance(
+        node.op, (ast.Add, ast.Sub, ast.Mult, ast.Div, ast.FloorDiv, ast.Mod, ast.Pow)
+    ):
         left = _eval_node(node.left, variables)
         right = _eval_node(node.right, variables)
         if isinstance(node.op, ast.Add):
@@ -183,5 +185,17 @@ def _eval_node(node: ast.AST, variables: dict[str, float]) -> float:
             return float(math.floor(left / right))
         if isinstance(node.op, ast.Mod):
             return left % right
-        return left**right
+        return _safe_pow(left, right)
     raise ValueError("Unsupported expression node")
+
+
+def _safe_pow(base: float, exp: float) -> float:
+    # Prevent accidental/hostile exponentiation from consuming huge CPU/memory.
+    if abs(exp - round(exp)) > 1e-9:
+        raise ValueError("Exponent must be an integer")
+    iexp = int(round(exp))
+    if iexp < -8 or iexp > 8:
+        raise ValueError("Exponent out of allowed range")
+    if abs(base) > 1e6 and abs(iexp) > 2:
+        raise ValueError("Base too large for exponentiation")
+    return float(base**iexp)

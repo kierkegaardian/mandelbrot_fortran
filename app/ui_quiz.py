@@ -303,6 +303,8 @@ class QuizPanel:
 
 
 def _subskill_for_question(question: Question) -> str:
+    if getattr(question, "subskill", None):
+        return str(question.subskill)
     subskills = subskills_for(question.skill)
     if not subskills:
         return "core"
