@@ -31,6 +31,53 @@ SKILL_LABELS = {
 
 SKILL_ORDER = list(SKILLS)
 
+SKILL_TRACKS: dict[str, tuple[str, ...]] = {
+    "Arithmetic": (
+        "counting",
+        "add_subtract",
+        "multiply",
+        "divide",
+        "ratios",
+        "fractions",
+        "long_addition",
+        "long_subtraction",
+        "long_multiplication",
+        "long_division",
+        "money",
+    ),
+    "Pre-Algebra": (
+        "integers",
+        "order_of_operations",
+    ),
+    "Algebra": (
+        "algebra_linear",
+    ),
+    "Geometry": (
+        "geometry_area",
+    ),
+    "Pre-Calculus & Trig": (
+        "trig_right_triangle",
+    ),
+    "Statistics / Probability": (
+        "stats_percent",
+        "stats_mean",
+        "stats_probability",
+    ),
+    "Calculus": (
+        "calculus_slope",
+    ),
+}
+
+SKILL_TRACK_ORDER = [
+    "Arithmetic",
+    "Pre-Algebra",
+    "Algebra",
+    "Geometry",
+    "Pre-Calculus & Trig",
+    "Statistics / Probability",
+    "Calculus",
+]
+
 SKILL_PREREQUISITES: dict[str, tuple[str, ...]] = {
     "counting": (),
     "add_subtract": ("counting",),
@@ -206,6 +253,16 @@ def prerequisites_for(skill: str) -> tuple[str, ...]:
 
 def subskills_for(skill: str) -> tuple[str, ...]:
     return SKILL_GRAPH.get(skill, SkillNode(skill, (), ())).subskills
+
+
+def track_names() -> tuple[str, ...]:
+    return tuple(SKILL_TRACK_ORDER)
+
+
+def skills_in_track(track: str) -> tuple[str, ...]:
+    if track == "All":
+        return tuple(SKILL_ORDER)
+    return SKILL_TRACKS.get(track, tuple())
 
 
 def recommend_next_skills(mastery_map: dict[str, str], limit: int = 3) -> list[str]:

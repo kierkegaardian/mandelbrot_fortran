@@ -7,32 +7,9 @@ from .arithmetic_render import render_arithmetic
 from .arithmetic_draw import cell_positions
 from .explanations import ARITHMETIC_MODE_EXPLANATIONS
 from .openmoji_assets import openmoji_paths
+from .skill_graph import SKILLS, skills_in_track, track_names
 from .ui_explain import ExplanationPanel
 from .ui_widgets import int_spinbox
-
-
-ARITHMETIC_SKILLS = [
-    "counting",
-    "add_subtract",
-    "multiply",
-    "divide",
-    "ratios",
-    "fractions",
-    "long_addition",
-    "long_subtraction",
-    "long_multiplication",
-    "long_division",
-    "money",
-    "integers",
-    "order_of_operations",
-    "algebra_linear",
-    "geometry_area",
-    "trig_right_triangle",
-    "stats_percent",
-    "stats_mean",
-    "stats_probability",
-    "calculus_slope",
-]
 
 
 class ArithmeticPanel:
@@ -41,6 +18,7 @@ class ArithmeticPanel:
         self.view_frame = ttk.Frame(view_parent)
 
         self.skill_var = tk.StringVar(value="counting")
+        self.track_var = tk.StringVar(value="All")
         self.object_style_var = tk.StringVar(value="Circles")
         self.expression_var = tk.StringVar(value="")
         self._openmoji_images: dict[str, tk.PhotoImage] = {}
@@ -104,15 +82,25 @@ class ArithmeticPanel:
         frame = ttk.Frame(self.controls_frame, padding=10)
         frame.pack(fill=tk.BOTH, expand=True)
 
-        ttk.Label(frame, text="Arithmetic Skill").pack(anchor=tk.W)
-        skill_cb = ttk.Combobox(
+        ttk.Label(frame, text="Math Track").pack(anchor=tk.W)
+        track_cb = ttk.Combobox(
             frame,
-            textvariable=self.skill_var,
-            values=ARITHMETIC_SKILLS,
+            textvariable=self.track_var,
+            values=["All", *track_names()],
             state="readonly",
         )
-        skill_cb.pack(fill=tk.X, pady=(0, 8))
-        skill_cb.bind("<<ComboboxSelected>>", lambda _e: self._on_skill_change())
+        track_cb.pack(fill=tk.X, pady=(0, 8))
+        track_cb.bind("<<ComboboxSelected>>", lambda _e: self._on_track_change())
+
+        ttk.Label(frame, text="Arithmetic Skill").pack(anchor=tk.W)
+        self._skill_combo = ttk.Combobox(
+            frame,
+            textvariable=self.skill_var,
+            values=SKILLS,
+            state="readonly",
+        )
+        self._skill_combo.pack(fill=tk.X, pady=(0, 8))
+        self._skill_combo.bind("<<ComboboxSelected>>", lambda _e: self._on_skill_change())
 
         ttk.Label(frame, text="Object Style").pack(anchor=tk.W)
         self.style_cb = ttk.Combobox(
@@ -156,6 +144,8 @@ class ArithmeticPanel:
         self.explain = ExplanationPanel(frame)
         self.explain.set_explanation(ARITHMETIC_MODE_EXPLANATIONS["counting"])
         self.explain.frame.pack(fill=tk.X, pady=(12, 0))
+        self._apply_track_filter()
+        self._on_skill_change()
 
     def _build_view(self) -> None:
         ttk.Label(self.view_frame, textvariable=self.expression_var, font=("Helvetica", 13, "bold")).pack(pady=(8, 4))
@@ -398,6 +388,19 @@ class ArithmeticPanel:
         for child in self.stack.winfo_children():
             child.pack_forget()
         frame.pack(fill=tk.X, pady=(0, 8))
+
+    def _apply_track_filter(self) -> None:
+        track = self.track_var.get()
+        skills = list(skills_in_track(track))
+        if not skills:
+            skills = list(SKILLS)
+        if self.skill_var.get() not in skills:
+            self.skill_var.set(skills[0])
+        self._skill_combo.config(values=skills)
+
+    def _on_track_change(self) -> None:
+        self._apply_track_filter()
+        self._on_skill_change()
 
     def _on_skill_change(self) -> None:
         skill = self.skill_var.get()

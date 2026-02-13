@@ -8,10 +8,10 @@ import webbrowser
 from . import db
 from .explanations import QUIZ_EXPLANATION
 from .quiz_answers import is_correct_answer
-from .quiz_engine import QUESTION_TYPES, Question, SKILLS, generate_question
+from .quiz_engine import QUESTION_TYPES, Question, generate_question
 from .curriculum import curriculum_pdf_path, get_curriculum_for_skill
 from .quiz_visuals import render_quiz_visual
-from .skill_graph import SUBSKILL_STREAK_TO_MASTER, subskills_for
+from .skill_graph import SKILLS, SUBSKILL_STREAK_TO_MASTER, skills_in_track, track_names
 from .time_utils import now_iso
 from .ui_explain import ExplanationPanel
 from .ui_widgets import int_spinbox
@@ -24,6 +24,7 @@ class QuizPanel:
         self._profile_getter = profile_getter
 
         self.skill_var = tk.StringVar(value="counting")
+        self.track_var = tk.StringVar(value="All")
         self.type_var = tk.StringVar(value="both")
         self.num_var = tk.IntVar(value=5)
         self.level_var = tk.IntVar(value=1)
@@ -41,6 +42,16 @@ class QuizPanel:
         frame.pack(fill=tk.BOTH, expand=True)
 
         ttk.Label(frame, text="Skill").pack(anchor=tk.W)
+        track_combo = ttk.Combobox(
+            frame,
+            textvariable=self.track_var,
+            values=["All", *track_names()],
+            state="readonly",
+            width=20,
+        )
+        track_combo.pack(fill=tk.X, pady=(0, 8))
+        track_combo.bind("<<ComboboxSelected>>", lambda _e: self._on_track_change())
+
         self.skill_combo = ttk.Combobox(
             frame,
             textvariable=self.skill_var,
@@ -73,6 +84,7 @@ class QuizPanel:
         self.explain.set_explanation(QUIZ_EXPLANATION)
         self.explain.frame.pack(fill=tk.X, pady=(12, 0))
         self._update_curriculum_label()
+        self._apply_track_filter()
 
     def _build_view(self) -> None:
         self.prompt_var = tk.StringVar(value="Choose settings on the left to start a quiz.")
@@ -118,6 +130,22 @@ class QuizPanel:
             messagebox.showerror("No curriculum file", "No local PDF found for this skill.")
             return
         webbrowser.open(f"file://{path}")
+
+    def _apply_track_filter(self) -> None:
+        track = self.track_var.get()
+        skills = list(skills_in_track(track))
+        values = list(skills)
+        if track == "All":
+            values.append("mixed")
+        if self.skill_var.get() not in values and "mixed" in values:
+            self.skill_var.set("mixed")
+        elif self.skill_var.get() not in values:
+            self.skill_var.set(values[0] if values else "counting")
+        self.skill_combo.config(values=values if values else ["counting"])
+
+    def _on_track_change(self) -> None:
+        self._apply_track_filter()
+        self._on_skill_change()
 
     def _on_skill_change(self) -> None:
         self._update_curriculum_label()
