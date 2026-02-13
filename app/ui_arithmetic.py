@@ -92,7 +92,7 @@ class ArithmeticPanel:
         track_cb.pack(fill=tk.X, pady=(0, 8))
         track_cb.bind("<<ComboboxSelected>>", lambda _e: self._on_track_change())
 
-        ttk.Label(frame, text="Arithmetic Skill").pack(anchor=tk.W)
+        ttk.Label(frame, text="Math Topic").pack(anchor=tk.W)
         self._skill_combo = ttk.Combobox(
             frame,
             textvariable=self.skill_var,
