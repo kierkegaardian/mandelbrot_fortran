@@ -55,3 +55,47 @@ class SubskillProgress:
     current_streak: int
     best_streak: int
     mastered: bool
+
+
+@dataclass(frozen=True)
+class Book:
+    id: int
+    title: str
+    source: str
+    pdf_filename: str
+
+
+@dataclass(frozen=True)
+class ExerciseCandidate:
+    id: int
+    book_id: int
+    location: str
+    text: str
+    status: str  # "new", "ignored", "templated"
+
+
+@dataclass(frozen=True)
+class QuestionTemplate:
+    id: int
+    book_id: Optional[int]
+    skill: str
+    subskill: str
+    label: str
+    prompt_template: str
+    answer_expr: str
+    constraint_expr: str
+    explanation_template: str
+    min_level: int
+    max_level: int
+    choice_spread: float
+    active: bool
+
+
+@dataclass(frozen=True)
+class TemplateVar:
+    template_id: int
+    name: str
+    kind: str  # "int" or "float"
+    min_value: float
+    max_value: float
+    step: float

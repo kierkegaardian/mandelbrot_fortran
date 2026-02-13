@@ -5,6 +5,8 @@ import random
 from dataclasses import dataclass
 from typing import Optional
 
+from .question_bank import try_generate_from_templates
+
 
 SKILLS = [
     "counting",
@@ -32,7 +34,7 @@ QUESTION_TYPES = ["mc", "typed", "both"]
 RIGHT_TRIANGLE_TRIPLES = [(3, 4, 5), (5, 12, 13), (6, 8, 10), (8, 15, 17), (9, 12, 15)]
 
 
-@dataclass(frozen=True)
+@dataclass
 class Question:
     skill: str
     prompt: str
@@ -269,6 +271,18 @@ def generate_question(skill: str, level: int, question_type: str) -> Question:
 
     if skill == "mixed":
         skill = random.choice(SKILLS)
+
+    templated = try_generate_from_templates(
+        skill,
+        level,
+        question_type if question_type != "both" else "typed",
+        rng=random,
+    )
+    if templated is not None:
+        if question_type == "both":
+            # Let the caller alternate mc/typed; we generated typed above.
+            return templated
+        return templated
 
     if skill == "counting":
         low, high = _level_range(level)

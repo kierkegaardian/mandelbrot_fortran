@@ -4,7 +4,17 @@ import sqlite3
 from dataclasses import dataclass
 from typing import Optional
 
-from .models import Profile, QuizAttempt, QuizSet, SubskillProgress, Worksheet
+from .models import (
+    Book,
+    ExerciseCandidate,
+    Profile,
+    QuestionTemplate,
+    QuizAttempt,
+    QuizSet,
+    SubskillProgress,
+    TemplateVar,
+    Worksheet,
+)
 from .paths import data_dir
 
 
@@ -98,8 +108,64 @@ def init_db() -> None:
                 PRIMARY KEY (profile_id, skill, subskill),
                 FOREIGN KEY(profile_id) REFERENCES profiles(id) ON DELETE CASCADE
             );
+
+            CREATE TABLE IF NOT EXISTS books (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                title TEXT NOT NULL,
+                source TEXT NOT NULL,
+                pdf_filename TEXT NOT NULL,
+                created_at TEXT NOT NULL
+            );
+
+            CREATE TABLE IF NOT EXISTS exercise_candidates (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                book_id INTEGER NOT NULL,
+                location TEXT NOT NULL,
+                text TEXT NOT NULL,
+                status TEXT NOT NULL DEFAULT 'new',
+                created_at TEXT NOT NULL,
+                FOREIGN KEY(book_id) REFERENCES books(id) ON DELETE CASCADE
+            );
+
+            CREATE TABLE IF NOT EXISTS question_templates (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                book_id INTEGER,
+                skill TEXT NOT NULL,
+                subskill TEXT NOT NULL,
+                label TEXT NOT NULL,
+                prompt_template TEXT NOT NULL,
+                answer_expr TEXT NOT NULL,
+                constraint_expr TEXT NOT NULL DEFAULT '',
+                explanation_template TEXT NOT NULL,
+                min_level INTEGER NOT NULL DEFAULT 1,
+                max_level INTEGER NOT NULL DEFAULT 3,
+                choice_spread REAL NOT NULL DEFAULT 4.0,
+                active INTEGER NOT NULL DEFAULT 1,
+                created_at TEXT NOT NULL,
+                FOREIGN KEY(book_id) REFERENCES books(id) ON DELETE SET NULL
+            );
+
+            CREATE TABLE IF NOT EXISTS template_vars (
+                template_id INTEGER NOT NULL,
+                name TEXT NOT NULL,
+                kind TEXT NOT NULL,
+                min_value REAL NOT NULL,
+                max_value REAL NOT NULL,
+                step REAL NOT NULL DEFAULT 1,
+                PRIMARY KEY (template_id, name),
+                FOREIGN KEY(template_id) REFERENCES question_templates(id) ON DELETE CASCADE
+            );
             """
         )
+        _ensure_column(conn, "question_templates", "constraint_expr", "TEXT NOT NULL DEFAULT ''")
+
+
+def _ensure_column(conn: sqlite3.Connection, table: str, column: str, ddl: str) -> None:
+    rows = conn.execute(f"PRAGMA table_info({table})").fetchall()
+    existing = {r["name"] for r in rows}
+    if column in existing:
+        return
+    conn.execute(f"ALTER TABLE {table} ADD COLUMN {column} {ddl}")
 
 
 def list_profiles() -> list[Profile]:
@@ -338,6 +404,179 @@ def list_subskill_progress(profile_id: int, skill: str | None = None) -> list[Su
             int(r["current_streak"]),
             int(r["best_streak"]),
             bool(r["mastered"]),
+        )
+        for r in rows
+    ]
+
+
+def create_book(title: str, source: str, pdf_filename: str, created_at: str) -> Book:
+    with connect() as conn:
+        cur = conn.execute(
+            "INSERT INTO books (title, source, pdf_filename, created_at) VALUES (?, ?, ?, ?)",
+            (title, source, pdf_filename, created_at),
+        )
+        book_id = int(cur.lastrowid)
+    return Book(book_id, title, source, pdf_filename)
+
+
+def list_books() -> list[Book]:
+    with connect() as conn:
+        rows = conn.execute("SELECT id, title, source, pdf_filename FROM books ORDER BY id DESC").fetchall()
+    return [Book(int(r["id"]), r["title"], r["source"], r["pdf_filename"]) for r in rows]
+
+
+def add_exercise_candidate(book_id: int, location: str, text: str, status: str, created_at: str) -> int:
+    with connect() as conn:
+        cur = conn.execute(
+            """
+            INSERT INTO exercise_candidates (book_id, location, text, status, created_at)
+            VALUES (?, ?, ?, ?, ?)
+            """,
+            (book_id, location, text, status, created_at),
+        )
+        return int(cur.lastrowid)
+
+
+def list_exercise_candidates(book_id: int, status: str = "new", limit: int = 200) -> list[ExerciseCandidate]:
+    limit = max(1, int(limit))
+    with connect() as conn:
+        rows = conn.execute(
+            """
+            SELECT id, book_id, location, text, status
+            FROM exercise_candidates
+            WHERE book_id = ? AND status = ?
+            ORDER BY id ASC
+            LIMIT ?
+            """,
+            (book_id, status, limit),
+        ).fetchall()
+    return [
+        ExerciseCandidate(int(r["id"]), int(r["book_id"]), r["location"], r["text"], r["status"]) for r in rows
+    ]
+
+
+def create_question_template(
+    *,
+    book_id: int | None,
+    skill: str,
+    subskill: str,
+    label: str,
+    prompt_template: str,
+    answer_expr: str,
+    constraint_expr: str,
+    explanation_template: str,
+    min_level: int,
+    max_level: int,
+    choice_spread: float,
+    active: bool,
+    created_at: str,
+) -> int:
+    with connect() as conn:
+        cur = conn.execute(
+            """
+            INSERT INTO question_templates
+            (book_id, skill, subskill, label, prompt_template, answer_expr, constraint_expr, explanation_template,
+             min_level, max_level, choice_spread, active, created_at)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            """,
+            (
+                book_id,
+                skill,
+                subskill,
+                label,
+                prompt_template,
+                answer_expr,
+                constraint_expr,
+                explanation_template,
+                int(min_level),
+                int(max_level),
+                float(choice_spread),
+                int(bool(active)),
+                created_at,
+            ),
+        )
+        return int(cur.lastrowid)
+
+
+def add_template_var(
+    template_id: int, name: str, kind: str, min_value: float, max_value: float, step: float
+) -> None:
+    if kind not in {"int", "float"}:
+        raise ValueError("kind must be 'int' or 'float'")
+    with connect() as conn:
+        conn.execute(
+            """
+            INSERT INTO template_vars (template_id, name, kind, min_value, max_value, step)
+            VALUES (?, ?, ?, ?, ?, ?)
+            """,
+            (template_id, name, kind, float(min_value), float(max_value), float(step)),
+        )
+
+
+def list_question_templates(skill: str, level: int) -> list[QuestionTemplate]:
+    level = int(level)
+    with connect() as conn:
+        rows = conn.execute(
+            """
+            SELECT id, book_id, skill, subskill, label, prompt_template, answer_expr, constraint_expr, explanation_template,
+                   min_level, max_level, choice_spread, active
+            FROM question_templates
+            WHERE active = 1 AND skill = ? AND ? BETWEEN min_level AND max_level
+            ORDER BY id DESC
+            """,
+            (skill, level),
+        ).fetchall()
+    return [
+        QuestionTemplate(
+            int(r["id"]),
+            int(r["book_id"]) if r["book_id"] is not None else None,
+            r["skill"],
+            r["subskill"],
+            r["label"],
+            r["prompt_template"],
+            r["answer_expr"],
+            r["constraint_expr"],
+            r["explanation_template"],
+            int(r["min_level"]),
+            int(r["max_level"]),
+            float(r["choice_spread"]),
+            bool(r["active"]),
+        )
+        for r in rows
+    ]
+
+
+def delete_templates_by_identity(*, skill: str, subskill: str, label: str) -> int:
+    with connect() as conn:
+        cur = conn.execute(
+            """
+            DELETE FROM question_templates
+            WHERE skill = ? AND subskill = ? AND label = ?
+            """,
+            (skill, subskill, label),
+        )
+        return int(cur.rowcount)
+
+
+def list_template_vars(template_id: int) -> list[TemplateVar]:
+    with connect() as conn:
+        rows = conn.execute(
+            """
+            SELECT template_id, name, kind, min_value, max_value, step
+            FROM template_vars
+            WHERE template_id = ?
+            ORDER BY name ASC
+            """,
+            (int(template_id),),
+        ).fetchall()
+    return [
+        TemplateVar(
+            int(r["template_id"]),
+            r["name"],
+            r["kind"],
+            float(r["min_value"]),
+            float(r["max_value"]),
+            float(r["step"]),
         )
         for r in rows
     ]

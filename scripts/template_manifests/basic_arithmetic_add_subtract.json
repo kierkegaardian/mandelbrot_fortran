@@ -1,0 +1,33 @@
+[
+  {
+    "skill": "add_subtract",
+    "subskill": "Single-digit addition",
+    "label": "Add two numbers",
+    "prompt_template": "{A} + {B} = ?",
+    "answer_expr": "A + B",
+    "explanation_template": "Add {A} and {B}.",
+    "min_level": 1,
+    "max_level": 1,
+    "choice_spread": 4.0,
+    "vars": [
+      { "name": "A", "kind": "int", "min": 0, "max": 10, "step": 1 },
+      { "name": "B", "kind": "int", "min": 0, "max": 10, "step": 1 }
+    ]
+  },
+  {
+    "skill": "add_subtract",
+    "subskill": "Single-digit subtraction",
+    "label": "Subtract two numbers",
+    "prompt_template": "{A} - {B} = ?",
+    "answer_expr": "A - B",
+    "constraint_expr": "A >= B",
+    "explanation_template": "Subtract {B} from {A}.",
+    "min_level": 1,
+    "max_level": 1,
+    "choice_spread": 4.0,
+    "vars": [
+      { "name": "A", "kind": "int", "min": 0, "max": 10, "step": 1 },
+      { "name": "B", "kind": "int", "min": 0, "max": 10, "step": 1 }
+    ]
+  }
+]
