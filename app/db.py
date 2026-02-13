@@ -130,6 +130,7 @@ def init_db() -> None:
             CREATE TABLE IF NOT EXISTS question_templates (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 book_id INTEGER,
+                external_id TEXT,
                 skill TEXT NOT NULL,
                 subskill TEXT NOT NULL,
                 label TEXT NOT NULL,
@@ -157,7 +158,52 @@ def init_db() -> None:
             );
             """
         )
+        _run_migrations(conn)
+
+
+def _run_migrations(conn: sqlite3.Connection) -> None:
+    conn.execute(
+        """
+        CREATE TABLE IF NOT EXISTS schema_version (
+            id INTEGER PRIMARY KEY CHECK(id = 1),
+            version INTEGER NOT NULL
+        );
+        """
+    )
+    row = conn.execute("SELECT version FROM schema_version WHERE id = 1").fetchone()
+    if row is None:
+        conn.execute("INSERT INTO schema_version (id, version) VALUES (1, 0)")
+        version = 0
+    else:
+        version = int(row["version"])
+
+    # v1: ensure constraint_expr exists
+    if version < 1:
         _ensure_column(conn, "question_templates", "constraint_expr", "TEXT NOT NULL DEFAULT ''")
+        conn.execute("UPDATE schema_version SET version = 1 WHERE id = 1")
+        version = 1
+
+    # v2: ensure external_id exists
+    if version < 2:
+        _ensure_column(conn, "question_templates", "external_id", "TEXT")
+        _ensure_external_id_unique_index(conn)
+        conn.execute("UPDATE schema_version SET version = 2 WHERE id = 1")
+        version = 2
+
+    # Always ensure indexes exist (idempotent).
+    _ensure_external_id_unique_index(conn)
+
+
+def _ensure_external_id_unique_index(conn: sqlite3.Connection) -> None:
+    # Enforce uniqueness without requiring ALTER TABLE to add a UNIQUE column.
+    # Multiple NULL values are allowed; empty strings should be avoided by the loader.
+    conn.execute(
+        """
+        CREATE UNIQUE INDEX IF NOT EXISTS idx_question_templates_external_id
+        ON question_templates(external_id)
+        WHERE external_id IS NOT NULL;
+        """
+    )
 
 
 def _ensure_column(conn: sqlite3.Connection, table: str, column: str, ddl: str) -> None:
@@ -458,6 +504,7 @@ def list_exercise_candidates(book_id: int, status: str = "new", limit: int = 200
 def create_question_template(
     *,
     book_id: int | None,
+    external_id: str | None,
     skill: str,
     subskill: str,
     label: str,
@@ -475,12 +522,13 @@ def create_question_template(
         cur = conn.execute(
             """
             INSERT INTO question_templates
-            (book_id, skill, subskill, label, prompt_template, answer_expr, constraint_expr, explanation_template,
+            (book_id, external_id, skill, subskill, label, prompt_template, answer_expr, constraint_expr, explanation_template,
              min_level, max_level, choice_spread, active, created_at)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             """,
             (
                 book_id,
+                external_id,
                 skill,
                 subskill,
                 label,
@@ -518,7 +566,7 @@ def list_question_templates(skill: str, level: int) -> list[QuestionTemplate]:
     with connect() as conn:
         rows = conn.execute(
             """
-            SELECT id, book_id, skill, subskill, label, prompt_template, answer_expr, constraint_expr, explanation_template,
+            SELECT id, book_id, external_id, skill, subskill, label, prompt_template, answer_expr, constraint_expr, explanation_template,
                    min_level, max_level, choice_spread, active
             FROM question_templates
             WHERE active = 1 AND skill = ? AND ? BETWEEN min_level AND max_level
@@ -530,6 +578,7 @@ def list_question_templates(skill: str, level: int) -> list[QuestionTemplate]:
         QuestionTemplate(
             int(r["id"]),
             int(r["book_id"]) if r["book_id"] is not None else None,
+            r["external_id"],
             r["skill"],
             r["subskill"],
             r["label"],
@@ -555,6 +604,12 @@ def delete_templates_by_identity(*, skill: str, subskill: str, label: str) -> in
             """,
             (skill, subskill, label),
         )
+        return int(cur.rowcount)
+
+
+def delete_template_by_external_id(external_id: str) -> int:
+    with connect() as conn:
+        cur = conn.execute("DELETE FROM question_templates WHERE external_id = ?", (external_id,))
         return int(cur.rowcount)
 
 

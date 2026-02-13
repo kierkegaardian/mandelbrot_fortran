@@ -78,6 +78,7 @@ class ExerciseCandidate:
 class QuestionTemplate:
     id: int
     book_id: Optional[int]
+    external_id: Optional[str]
     skill: str
     subskill: str
     label: str

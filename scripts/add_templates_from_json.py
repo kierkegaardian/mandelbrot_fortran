@@ -33,7 +33,10 @@ def main() -> None:
     created = 0
     replaced = 0
     for item in raw:
-        if not args.no_replace:
+        external_id = str(item.get("external_id") or "").strip()
+        if external_id:
+            replaced += db.delete_template_by_external_id(external_id)
+        elif not args.no_replace:
             replaced += db.delete_templates_by_identity(
                 skill=str(item["skill"]),
                 subskill=str(item.get("subskill", "core")),
@@ -41,6 +44,7 @@ def main() -> None:
             )
         template_id = db.create_question_template(
             book_id=(int(args.book_id) if int(args.book_id) > 0 else None),
+            external_id=external_id or None,
             skill=str(item["skill"]),
             subskill=str(item.get("subskill", "core")),
             label=str(item.get("label", "")) or str(item["skill"]),

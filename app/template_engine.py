@@ -67,32 +67,62 @@ def _sample_var(var: TemplateVar, *, rng: random.Random) -> float:
 
 
 def _format_numeric(value: float) -> str:
-    rounded = round(float(value), 6)
+    rounded = round(float(value), 3)
     if abs(rounded - round(rounded)) < 1e-9:
         return str(int(round(rounded)))
-    text = f"{rounded:.6f}".rstrip("0").rstrip(".")
+    text = f"{rounded:.3f}".rstrip("0").rstrip(".")
     return text
 
 
 def _int_choice_set(correct: int, *, spread: int, rng: random.Random) -> list[str]:
-    choices = {int(correct)}
+    correct = int(correct)
+    spread = max(1, int(spread))
+    choices: set[int] = {correct}
+
+    deltas = [d for d in range(-spread, spread + 1) if d != 0]
+    rng.shuffle(deltas)
+    for d in deltas:
+        if len(choices) >= 4:
+            break
+        choices.add(correct + d)
+
+    # Deterministic fallback to guarantee termination.
+    step = spread + 1
     while len(choices) < 4:
-        delta = rng.randint(-spread, spread)
-        if delta == 0:
-            continue
-        choices.add(int(correct) + int(delta))
+        choices.add(correct + step)
+        if len(choices) >= 4:
+            break
+        choices.add(correct - step)
+        step += 1
+
     ordered = list(choices)
     rng.shuffle(ordered)
     return [str(c) for c in ordered]
 
 
 def _float_choice_set(correct: float, *, spread: float, rng: random.Random) -> list[str]:
-    choices = {float(correct)}
-    while len(choices) < 4:
+    correct = float(correct)
+    spread = max(0.25, float(spread))
+    choices: set[float] = {round(correct, 3)}
+
+    for _ in range(200):
+        if len(choices) >= 4:
+            break
         delta = rng.uniform(-spread, spread)
-        if abs(delta) < 1e-12:
+        if abs(delta) < 1e-9:
             continue
         choices.add(round(correct + delta, 3))
+
+    # Deterministic fallback to guarantee termination.
+    step = spread / 3.0
+    n = 1
+    while len(choices) < 4:
+        choices.add(round(correct + n * step, 3))
+        if len(choices) >= 4:
+            break
+        choices.add(round(correct - n * step, 3))
+        n += 1
+
     ordered = list(choices)
     rng.shuffle(ordered)
     return [_format_numeric(c) for c in ordered]
