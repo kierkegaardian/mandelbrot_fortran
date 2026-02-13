@@ -6,11 +6,11 @@ from . import db
 from .template_engine import instantiate_template, mc_choices
 
 
-def try_generate_from_templates(skill: str, level: int, question_type: str, *, rng: random.Random):
+def try_generate_from_templates(skill: str, level: int, question_type: str, *, rng: random.Random, subskill: str | None = None):
     # Local import to avoid circular dependency with quiz_engine.
     from .quiz_engine import Question
 
-    templates = db.list_question_templates(skill, level)
+    templates = db.list_question_templates(skill, level, subskill=subskill)
     if not templates:
         return None
     # Try a few templates; constraints or eval errors should not crash the app.

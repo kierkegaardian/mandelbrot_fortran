@@ -11,7 +11,7 @@ from .quiz_answers import is_correct_answer
 from .quiz_engine import QUESTION_TYPES, Question, generate_question
 from .curriculum import curriculum_pdf_path, get_curriculum_for_skill
 from .quiz_visuals import render_quiz_visual
-from .skill_graph import SKILLS, SUBSKILL_STREAK_TO_MASTER, skills_in_track, track_names
+from .skill_graph import SKILLS, SUBSKILL_STREAK_TO_MASTER, skills_in_track, subskills_for, track_names
 from .time_utils import now_iso
 from .ui_explain import ExplanationPanel
 from .ui_widgets import int_spinbox
@@ -25,6 +25,7 @@ class QuizPanel:
 
         self.skill_var = tk.StringVar(value="counting")
         self.track_var = tk.StringVar(value="All")
+        self.subskill_var = tk.StringVar(value="Any")
         self.type_var = tk.StringVar(value="both")
         self.num_var = tk.IntVar(value=5)
         self.level_var = tk.IntVar(value=1)
@@ -61,6 +62,16 @@ class QuizPanel:
         )
         self.skill_combo.pack(fill=tk.X, pady=(0, 8))
         self.skill_combo.bind("<<ComboboxSelected>>", lambda _e: self._on_skill_change())
+
+        ttk.Label(frame, text="Subskill (optional)").pack(anchor=tk.W)
+        self.subskill_combo = ttk.Combobox(
+            frame,
+            textvariable=self.subskill_var,
+            values=["Any"],
+            state="readonly",
+            width=24,
+        )
+        self.subskill_combo.pack(fill=tk.X, pady=(0, 8))
         ttk.Label(frame, text="Curriculum source:").pack(anchor=tk.W)
         self.curriculum_label = ttk.Label(frame, text="No source mapped", foreground="#4f6b7a")
         self.curriculum_label.pack(anchor=tk.W, pady=(0, 4))
@@ -84,6 +95,7 @@ class QuizPanel:
         self.explain.set_explanation(QUIZ_EXPLANATION)
         self.explain.frame.pack(fill=tk.X, pady=(12, 0))
         self._update_curriculum_label()
+        self._refresh_subskills()
         self._apply_track_filter()
 
     def _build_view(self) -> None:
@@ -142,6 +154,7 @@ class QuizPanel:
         elif self.skill_var.get() not in values:
             self.skill_var.set(values[0] if values else "counting")
         self.skill_combo.config(values=values if values else ["counting"])
+        self._refresh_subskills()
 
     def _on_track_change(self) -> None:
         self._apply_track_filter()
@@ -149,6 +162,39 @@ class QuizPanel:
 
     def _on_skill_change(self) -> None:
         self._update_curriculum_label()
+        self._refresh_subskills()
+
+    def _refresh_subskills(self) -> None:
+        skill = self.skill_var.get()
+        options = ["Any", *subskills_for(skill)]
+        if self.subskill_var.get() not in options:
+            self.subskill_var.set("Any")
+        self.subskill_combo.config(values=options)
+
+    def apply_preset(
+        self,
+        *,
+        track: str | None = None,
+        skill: str | None = None,
+        subskill: str | None = None,
+        num_questions: int | None = None,
+        level: int | None = None,
+        question_type: str | None = None,
+    ) -> None:
+        if track is not None:
+            self.track_var.set(track)
+        self._apply_track_filter()
+        if skill is not None:
+            self.skill_var.set(skill)
+        self._on_skill_change()
+        if subskill is not None:
+            self.subskill_var.set(subskill)
+        if num_questions is not None:
+            self.num_var.set(int(num_questions))
+        if level is not None:
+            self.level_var.set(int(level))
+        if question_type is not None:
+            self.type_var.set(str(question_type))
 
     def start_quiz(self) -> None:
         profile = self._profile_getter()
@@ -156,11 +202,12 @@ class QuizPanel:
             messagebox.showerror("No profile", "Please select a profile first.")
             return
         self._questions = []
+        chosen_subskill = None if self.subskill_var.get() == "Any" else self.subskill_var.get()
         for _ in range(self.num_var.get()):
             q_type = self.type_var.get()
             if q_type == "both":
                 q_type = "mc" if _ % 2 == 0 else "typed"
-            q = generate_question(self.skill_var.get(), self.level_var.get(), q_type)
+            q = generate_question(self.skill_var.get(), self.level_var.get(), q_type, subskill=chosen_subskill)
             self._questions.append(q)
         self._index = 0
         self._score = 0

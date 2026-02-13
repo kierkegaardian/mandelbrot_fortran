@@ -267,18 +267,20 @@ def _division_choices(quotient: int, remainder: int, divisor: int) -> list[str]:
     return ordered
 
 
-def generate_question(skill: str, level: int, question_type: str) -> Question:
+def generate_question(skill: str, level: int, question_type: str, *, subskill: str | None = None) -> Question:
     if question_type not in QUESTION_TYPES:
         raise ValueError("Unknown question type")
 
     if skill == "mixed":
         skill = random.choice(SKILLS)
+        subskill = None
 
     templated = try_generate_from_templates(
         skill,
         level,
         question_type if question_type != "both" else "typed",
         rng=random,
+        subskill=subskill,
     )
     if templated is not None:
         if question_type == "both":

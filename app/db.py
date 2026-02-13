@@ -425,7 +425,7 @@ def list_subskill_progress(profile_id: int, skill: str | None = None) -> list[Su
         if skill is None:
             rows = conn.execute(
                 """
-                SELECT profile_id, skill, subskill, current_streak, best_streak, mastered
+                SELECT profile_id, skill, subskill, current_streak, best_streak, mastered, updated_at
                 FROM skill_subskill_progress
                 WHERE profile_id = ?
                 ORDER BY skill ASC, subskill ASC
@@ -435,7 +435,7 @@ def list_subskill_progress(profile_id: int, skill: str | None = None) -> list[Su
         else:
             rows = conn.execute(
                 """
-                SELECT profile_id, skill, subskill, current_streak, best_streak, mastered
+                SELECT profile_id, skill, subskill, current_streak, best_streak, mastered, updated_at
                 FROM skill_subskill_progress
                 WHERE profile_id = ? AND skill = ?
                 ORDER BY subskill ASC
@@ -450,6 +450,7 @@ def list_subskill_progress(profile_id: int, skill: str | None = None) -> list[Su
             int(r["current_streak"]),
             int(r["best_streak"]),
             bool(r["mastered"]),
+            r["updated_at"],
         )
         for r in rows
     ]
@@ -561,19 +562,31 @@ def add_template_var(
         )
 
 
-def list_question_templates(skill: str, level: int) -> list[QuestionTemplate]:
+def list_question_templates(skill: str, level: int, subskill: str | None = None) -> list[QuestionTemplate]:
     level = int(level)
     with connect() as conn:
-        rows = conn.execute(
-            """
-            SELECT id, book_id, external_id, skill, subskill, label, prompt_template, answer_expr, constraint_expr, explanation_template,
-                   min_level, max_level, choice_spread, active
-            FROM question_templates
-            WHERE active = 1 AND skill = ? AND ? BETWEEN min_level AND max_level
-            ORDER BY id DESC
-            """,
-            (skill, level),
-        ).fetchall()
+        if subskill is None:
+            rows = conn.execute(
+                """
+                SELECT id, book_id, external_id, skill, subskill, label, prompt_template, answer_expr, constraint_expr, explanation_template,
+                       min_level, max_level, choice_spread, active
+                FROM question_templates
+                WHERE active = 1 AND skill = ? AND ? BETWEEN min_level AND max_level
+                ORDER BY id DESC
+                """,
+                (skill, level),
+            ).fetchall()
+        else:
+            rows = conn.execute(
+                """
+                SELECT id, book_id, external_id, skill, subskill, label, prompt_template, answer_expr, constraint_expr, explanation_template,
+                       min_level, max_level, choice_spread, active
+                FROM question_templates
+                WHERE active = 1 AND skill = ? AND subskill = ? AND ? BETWEEN min_level AND max_level
+                ORDER BY id DESC
+                """,
+                (skill, subskill, level),
+            ).fetchall()
     return [
         QuestionTemplate(
             int(r["id"]),

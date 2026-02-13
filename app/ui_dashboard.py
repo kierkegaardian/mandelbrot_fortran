@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from datetime import datetime, timezone
 import tkinter as tk
 from tkinter import ttk
 
@@ -14,10 +15,12 @@ from .skill_graph import (
 
 
 class DashboardPanel:
-    def __init__(self, controls_parent: tk.Widget, view_parent: tk.Widget, profile_getter) -> None:
+    def __init__(self, controls_parent: tk.Widget, view_parent: tk.Widget, profile_getter, quiz_launcher=None) -> None:
         self.controls_frame = ttk.Frame(controls_parent)
         self.view_frame = ttk.Frame(view_parent)
         self._profile_getter = profile_getter
+        self._quiz_launcher = quiz_launcher
+        self._daily_target: tuple[str, str] | None = None
 
         self._build_controls()
         self._build_view()
@@ -32,6 +35,8 @@ class DashboardPanel:
             wraplength=260,
         ).pack(anchor=tk.W, pady=(0, 8))
         ttk.Button(frame, text="Refresh", command=self.render).pack(anchor=tk.W)
+        self.daily_btn = ttk.Button(frame, text="Start Daily Review", command=self._start_daily_review)
+        self.daily_btn.pack(anchor=tk.W, pady=(8, 0))
 
     def _build_view(self) -> None:
         header = ttk.Frame(self.view_frame)
@@ -84,18 +89,30 @@ class DashboardPanel:
         ttk.Label(self.view_frame, textvariable=self.subskill_var, foreground="#4f6b7a", wraplength=520).pack(
             anchor=tk.W, padx=10, pady=(0, 10)
         )
+        self.daily_var = tk.StringVar(value="Daily review: —")
+        ttk.Label(self.view_frame, textvariable=self.daily_var, foreground="#2f6f3e", wraplength=520).pack(
+            anchor=tk.W, padx=10, pady=(0, 10)
+        )
+
+    def _start_daily_review(self) -> None:
+        if self._quiz_launcher is None or self._daily_target is None:
+            return
+        skill, subskill = self._daily_target
+        self._quiz_launcher(skill, subskill)
 
     def render(self) -> None:
         profile = self._profile_getter()
         if profile is None:
             self.summary_var.set("No profile selected.")
             self.reco_var.set("Recommended next: —")
+            self.daily_var.set("Daily review: —")
             for skill, row in self.progress_rows.items():
                 row["progress_var"].set(0)
                 row["percent_var"].set("0%")
                 row["mastery_var"].set("Not started")
             for label, var in self.tile_vars.items():
                 var.set(f"{label}: 0")
+            self.daily_btn.state(["disabled"])
             return
         attempts = db.list_attempts(profile.id)
         stats = {skill: {"score": 0, "total": 0, "attempts": 0} for skill in SKILL_ORDER}
@@ -158,6 +175,57 @@ class DashboardPanel:
         else:
             self.reco_var.set("Recommended next: Mixed review")
             self.subskill_var.set("")
+
+        self._render_daily_review(profile.id, mastery_map, stats, recommendations)
+
+    def _render_daily_review(
+        self, profile_id: int, mastery_map: dict[str, str], stats: dict[str, dict], recommendations: list[str]
+    ) -> None:
+        now = datetime.now(timezone.utc)
+        started = {skill for skill in SKILL_ORDER if int(stats.get(skill, {}).get("attempts", 0)) > 0}
+        solid = {skill for skill in SKILL_ORDER if mastery_map.get(skill) in {"Proficient", "Mastered"}}
+        candidate_skills = started | solid | set(recommendations)
+        if not candidate_skills:
+            candidate_skills = {"counting"}
+
+        progress = {
+            (item.skill, item.subskill): item for item in db.list_subskill_progress(profile_id)
+        }
+
+        due: list[tuple[int, int, str, str, str]] = []
+        # tuple: (priority, age_days, skill, subskill, status_text)
+        for skill in SKILL_ORDER:
+            if skill not in candidate_skills:
+                continue
+            for subskill in subskills_for(skill):
+                item = progress.get((skill, subskill))
+                if item is None:
+                    due.append((0, 9999, skill, subskill, "new"))
+                    continue
+                try:
+                    updated = datetime.fromisoformat(item.updated_at)
+                except ValueError:
+                    continue
+                age_days = int((now - updated).total_seconds() // 86400)
+                if item.mastered and age_days >= 30:
+                    due.append((1, age_days, skill, subskill, f"{age_days}d ago"))
+                elif (not item.mastered) and age_days >= 7:
+                    due.append((2, age_days, skill, subskill, f"{age_days}d ago"))
+
+        if not due:
+            self._daily_target = None
+            self.daily_var.set("Daily review: all caught up")
+            self.daily_btn.state(["disabled"])
+            return
+
+        due.sort(key=lambda t: (t[0], -t[1], SKILL_ORDER.index(t[2])))
+        _priority, _age, skill, subskill, status = due[0]
+        self._daily_target = (skill, subskill)
+        self.daily_var.set(f"Daily review: {SKILL_LABELS.get(skill, skill)} – {subskill} ({status})")
+        if self._quiz_launcher is None:
+            self.daily_btn.state(["disabled"])
+        else:
+            self.daily_btn.state(["!disabled"])
 
 
 def _streak_graph(current: int, target: int) -> str:

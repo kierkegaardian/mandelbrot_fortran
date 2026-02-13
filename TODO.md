@@ -1,20 +1,28 @@
 # TODO
 
 - Add optional server sync so profiles, quizzes, and progress can persist across devices.
-- Research and add randomized word problem templates per skill (story problems).
+- Build story-problem “wrappers” on top of the template bank (word problems).
+
+## Status (Implemented)
+- Skill tracks + prerequisite-based recommendations.
+- Student dashboard with progress bars + mastery labels.
+- Subskill mastery via consecutive-correct streaks (with a simple badge/streak UI).
+- Curriculum PDF linking per skill (local PDFs).
+- Parameterized question template bank (SQLite) with constraints + safe eval.
+- PDF ingestion helper (`pdftotext`) to extract exercise candidates.
 
 ## Roadmap: Foundations to Pre-Algebra
-- [ ] Number sense: subitizing, counting, place value (ones/tens/hundreds/thousands).
-- [ ] Addition/subtraction strategies: number line, regrouping/borrowing, estimation.
-- [ ] Multiplication/division: arrays, equal groups, fact families, long division.
-- [ ] Fractions: part-whole, equivalent fractions, compare/order, mixed numbers.
-- [ ] Decimals + money: tenths/hundredths, money models, making change.
+- [x] Number sense: counting (in-app); place value (next).
+- [x] Addition/subtraction practice (in-app); strategies (next).
+- [x] Multiplication/division (in-app); long division (in-app).
+- [x] Fractions (in-app).
+- [x] Decimals + money (money mode in-app).
 - [ ] Measurement: length, area, volume, time, temperature, unit conversion.
-- [ ] Geometry basics: shapes, symmetry, perimeter/area, angle intuition.
-- [ ] Data & graphs: bar/line/pictographs, averages, simple probability.
-- [ ] Ratios & percents: rate/ratio tables, percent of a number, scaling.
-- [ ] Integers & coordinates: negatives, number line, basic coordinate plane.
-- [ ] Order of operations + simple variables: evaluate expressions, one-step equations.
+- [x] Geometry basics: area of shapes (in-app); symmetry/angles (next).
+- [x] Data & graphs: mean + basic probability + percent (in-app); graphs (next).
+- [x] Ratios & percents (in-app).
+- [x] Integers & coordinates: integers (in-app); coordinate plane (next).
+- [x] Order of operations + simple variables: order of ops + linear equations (in-app); variables intro (next).
 
 ## Roadmap: Pre-Algebra -> High School Calculus + Statistics
 ### Pre-Algebra
@@ -57,9 +65,20 @@
 - [ ] Correlation/regression; interpreting results.
 
 ## Roadmap: Student Dashboard (Progress + Recommendations)
-- [ ] Define mastery model per skill (attempts, accuracy, streaks, time, and recent trend).
-- [ ] Choose visual design (skill map, progress bars, or radar chart).
+- [ ] Define mastery model per skill (attempts, accuracy, streaks, time, recent trend).
+- [x] Choose visual design (progress bars + tiles).
 - [ ] Build progress data pipeline (quiz attempts + worksheet completions).
-- [ ] Add per-skill mastery levels (e.g., Beginner/Developing/Proficient/Mastered).
-- [ ] Recommendation engine: pick next skills based on prerequisites + mastery gaps.
-- [ ] Student profile view: summary of strengths, weak spots, and next practice set.
+- [x] Add per-skill mastery levels (Needs work/Developing/Proficient/Mastered).
+- [x] Recommendation engine: prerequisites + mastery gaps (basic).
+- [x] Student profile view: strengths/weak spots + next practice suggestion (basic).
+
+## Roadmap: Daily Review (Spaced Practice)
+- [x] Show a “Daily review” target on the Dashboard.
+- [x] One-click start daily review quiz.
+- [ ] Tune spaced review thresholds and selection logic.
+- [ ] Add “daily goal” history (track completion streak per day).
+
+## Roadmap: Template Bank QA
+- [ ] Template dry-run tool (generate N variants per template; report failures).
+- [ ] External IDs for templates everywhere (manifest + UI tooling).
+- [ ] Subskill-targeted quiz presets for parent assignments.

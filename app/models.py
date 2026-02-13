@@ -55,6 +55,7 @@ class SubskillProgress:
     current_streak: int
     best_streak: int
     mastered: bool
+    updated_at: str
 
 
 @dataclass(frozen=True)
