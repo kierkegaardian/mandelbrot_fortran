@@ -72,6 +72,37 @@
 - [x] Recommendation engine: prerequisites + mastery gaps (basic).
 - [x] Student profile view: strengths/weak spots + next practice suggestion (basic).
 
+## Roadmap: Prerequisite Logic (Soft Graph)
+- [ ] Convert prerequisite graph to soft edges with weights (`required_for_readiness` vs `helpful_background`).
+- [ ] Keep all skills unlocked; recommendations are score-based only (no hard locks).
+- [ ] Add recommendation scoring using prereq mastery + subskill coverage + recent performance.
+- [ ] Add monthly graph tuning workflow from real learner performance data.
+
+## Roadmap: Blended Practice (Prereq Spacing)
+- [ ] Add blended quiz composition policy:
+  current target + weak prerequisites + spaced-review maintenance.
+- [ ] Start with configurable defaults (`60/25/15`) and tune by outcome.
+- [ ] Adaptive ratio tuning:
+  increase prereq share when target accuracy is low; taper when stable.
+- [ ] Enforce a maintenance floor so mastered prerequisites still reappear periodically.
+
+## Roadmap: Free Mode (Guided Random)
+- [ ] Add "Free Mode" quiz path in UI (alongside focused skill mode).
+- [ ] Guided-random sampling across:
+  current level, next-level preview, weak prerequisites, and maintenance review.
+- [ ] Add per-question labels (`Core`, `Preview`, `Prereq`, `Review`) for learner clarity.
+- [ ] Connect Free Mode outcomes back into mastery and recommendation scoring.
+
+## Roadmap: Exercise Modes (Intuition vs Expression vs Word)
+- [ ] Add template `mode` taxonomy for each exercise:
+  `intuition`, `expression`, `word`.
+- [ ] Keep subskill tags consistent across all modes so mastery is shared.
+- [ ] Add stage-based default mix:
+  early (`45/40/15`), developing (`30/45/25`), near-mastery (`20/40/40`).
+- [ ] Add mode-balancing logic:
+  if word-problem accuracy lags expression accuracy, increase `word` share.
+- [ ] Add parent controls to override mode mix per assignment or quiz set.
+
 ## Roadmap: Daily Review (Spaced Practice)
 - [x] Show a “Daily review” target on the Dashboard.
 - [x] One-click start daily review quiz.

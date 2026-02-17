@@ -36,6 +36,18 @@ Note: Keep all code files under 300 lines by splitting into modules.
 - Results show **score + explanations** for mistakes.
 - Printable worksheets render a clean layout with light color accents and a separate answer key.
 
+### Exercise Mode Strategy
+- Every question template should be tagged with a `mode`:
+  `intuition`, `expression`, or `word`.
+- Mastery should remain subskill-centric, independent of mode.
+  Example: `add_subtract / regrouping` can be practiced through visuals, symbols, or stories, but contributes to one mastery record.
+- Quiz composition should use weighted mode blending by mastery stage:
+  early (`45/40/15` intuition/expression/word),
+  developing (`30/45/25`),
+  near-mastery (`20/40/40`).
+- If transfer lags (word-problem accuracy lower than expression accuracy), automatically increase word-problem share until gap narrows.
+- Free Mode should preserve mode labels per question (`Core`, `Preview`, `Prereq`, `Review`) plus mode (`intuition`/`expression`/`word`) for analytics.
+
 ## UI Flow
 1. **Profile Picker** on launch.
 2. **Main Tabs**: Fractals, Arithmetic, Quizzes, Parent.
