@@ -101,3 +101,20 @@ class TemplateVar:
     min_value: float
     max_value: float
     step: float
+
+
+@dataclass(frozen=True)
+class Assignment:
+    id: int
+    profile_id: int
+    skill: str
+    subskill: Optional[str]
+    target_type: str
+    target_value: float
+    level: int
+    num_questions: int
+    question_type: str
+    active: bool
+    notes: str
+    created_at: str
+    completed_at: Optional[str]

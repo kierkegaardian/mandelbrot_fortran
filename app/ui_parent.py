@@ -7,6 +7,7 @@ from . import db
 from .explanations import PARENT_EXPLANATION
 from .parent_worksheets import WorksheetSection
 from .quiz_engine import SKILLS
+from .skill_graph import SKILL_LABELS, subskills_for
 from .time_utils import now_iso
 from .ui_explain import ExplanationPanel
 from .ui_widgets import int_spinbox
@@ -29,15 +30,18 @@ class ParentPanel:
         self.profile_tab = ttk.Frame(self.tabs)
         self.quiz_tab = ttk.Frame(self.tabs)
         self.grades_tab = ttk.Frame(self.tabs)
+        self.assignments_tab = ttk.Frame(self.tabs)
         self.worksheets_tab = ttk.Frame(self.tabs)
         self.tabs.add(self.profile_tab, text="Profiles")
         self.tabs.add(self.quiz_tab, text="Quiz Sets")
         self.tabs.add(self.grades_tab, text="Grades")
+        self.tabs.add(self.assignments_tab, text="Assignments")
         self.tabs.add(self.worksheets_tab, text="Worksheets")
 
         self._build_profiles_tab()
         self._build_quiz_tab()
         self._build_grades_tab()
+        self._build_assignments_tab()
         self.worksheets = WorksheetSection(self.worksheets_tab, self._profile_getter)
         self._refresh_profiles()
         self._refresh_quiz_sets()
@@ -123,12 +127,84 @@ class ParentPanel:
 
         self._refresh_profiles_for_grades()
 
+    def _build_assignments_tab(self) -> None:
+        ttk.Label(self.assignments_tab, text="Student").pack(anchor=tk.W, padx=10, pady=(8, 0))
+        self.assignment_profile = tk.StringVar(value="")
+        self.assignment_profile_combo = ttk.Combobox(
+            self.assignments_tab, textvariable=self.assignment_profile, values=[], state="readonly"
+        )
+        self.assignment_profile_combo.pack(fill=tk.X, padx=10, pady=(0, 6))
+        self.assignment_profile_combo.bind("<<ComboboxSelected>>", lambda _e: self._refresh_assignments())
+
+        form = ttk.Frame(self.assignments_tab)
+        form.pack(fill=tk.X, padx=10, pady=(4, 6))
+        ttk.Label(form, text="Skill").grid(row=0, column=0, sticky=tk.W)
+        self.assignment_skill = tk.StringVar(value="counting")
+        skill_combo = ttk.Combobox(form, textvariable=self.assignment_skill, values=SKILLS, state="readonly")
+        skill_combo.grid(row=0, column=1, sticky=tk.EW, pady=2)
+        skill_combo.bind("<<ComboboxSelected>>", lambda _e: self._refresh_assignment_subskills())
+
+        ttk.Label(form, text="Subskill").grid(row=1, column=0, sticky=tk.W)
+        self.assignment_subskill = tk.StringVar(value="Any")
+        self.assignment_subskill_combo = ttk.Combobox(
+            form, textvariable=self.assignment_subskill, values=["Any"], state="readonly"
+        )
+        self.assignment_subskill_combo.grid(row=1, column=1, sticky=tk.EW, pady=2)
+
+        ttk.Label(form, text="Target Type").grid(row=2, column=0, sticky=tk.W)
+        self.assignment_target_type = tk.StringVar(value="quiz_score_pct")
+        ttk.Combobox(
+            form,
+            textvariable=self.assignment_target_type,
+            values=["quiz_score_pct", "subskill_mastered"],
+            state="readonly",
+        ).grid(row=2, column=1, sticky=tk.EW, pady=2)
+
+        ttk.Label(form, text="Target Value").grid(row=3, column=0, sticky=tk.W)
+        self.assignment_target_value = tk.IntVar(value=80)
+        int_spinbox(form, self.assignment_target_value, 1, 100).grid(row=3, column=1, sticky=tk.W, pady=2)
+
+        ttk.Label(form, text="Quiz Level").grid(row=4, column=0, sticky=tk.W)
+        self.assignment_level = tk.IntVar(value=1)
+        int_spinbox(form, self.assignment_level, 1, 3).grid(row=4, column=1, sticky=tk.W, pady=2)
+
+        ttk.Label(form, text="Questions").grid(row=5, column=0, sticky=tk.W)
+        self.assignment_questions = tk.IntVar(value=5)
+        int_spinbox(form, self.assignment_questions, 3, 20).grid(row=5, column=1, sticky=tk.W, pady=2)
+
+        ttk.Label(form, text="Quiz Type").grid(row=6, column=0, sticky=tk.W)
+        self.assignment_question_type = tk.StringVar(value="both")
+        ttk.Combobox(
+            form, textvariable=self.assignment_question_type, values=["mc", "typed", "both"], state="readonly"
+        ).grid(row=6, column=1, sticky=tk.EW, pady=2)
+
+        ttk.Label(form, text="Notes").grid(row=7, column=0, sticky=tk.W)
+        self.assignment_notes = ttk.Entry(form)
+        self.assignment_notes.grid(row=7, column=1, sticky=tk.EW, pady=2)
+        form.columnconfigure(1, weight=1)
+
+        btns = ttk.Frame(self.assignments_tab)
+        btns.pack(fill=tk.X, padx=10, pady=(0, 4))
+        ttk.Button(btns, text="Create Assignment", command=self._create_assignment).pack(side=tk.LEFT)
+        ttk.Button(btns, text="Refresh", command=self._refresh_assignments).pack(side=tk.LEFT, padx=6)
+        ttk.Button(btns, text="Mark Complete", command=self._complete_assignment).pack(side=tk.LEFT)
+
+        ttk.Label(self.assignments_tab, text="Active Assignments").pack(anchor=tk.W, padx=10, pady=(6, 0))
+        self.assignments_active_list = tk.Listbox(self.assignments_tab, height=6)
+        self.assignments_active_list.pack(fill=tk.X, padx=10, pady=4)
+
+        ttk.Label(self.assignments_tab, text="Completed Assignments").pack(anchor=tk.W, padx=10, pady=(6, 0))
+        self.assignments_done_list = tk.Listbox(self.assignments_tab, height=5)
+        self.assignments_done_list.pack(fill=tk.BOTH, expand=True, padx=10, pady=(4, 8))
+        self._refresh_assignment_subskills()
+
     def _refresh_profiles(self) -> None:
         self._profiles = db.list_profiles()
         self.profile_list.delete(0, tk.END)
         for profile in self._profiles:
             self.profile_list.insert(tk.END, f"{profile.name} ({profile.role})")
         self._refresh_profiles_for_grades()
+        self._refresh_profiles_for_assignments()
 
     def _add_profile(self) -> None:
         name = self.profile_name.get().strip()
@@ -257,6 +333,77 @@ class ParentPanel:
         self._profile_map = {p.name: p for p in profiles}
         self.profile_combo.configure(values=labels)
 
+    def _refresh_profiles_for_assignments(self) -> None:
+        if not hasattr(self, "assignment_profile_combo"):
+            return
+        profiles = [p for p in db.list_profiles() if p.role == "child"]
+        labels = [p.name for p in profiles]
+        self._assignment_profile_map = {p.name: p for p in profiles}
+        self.assignment_profile_combo.configure(values=labels)
+        if labels and self.assignment_profile.get() not in self._assignment_profile_map:
+            self.assignment_profile.set(labels[0])
+        self._refresh_assignments()
+
+    def _refresh_assignment_subskills(self) -> None:
+        skill = self.assignment_skill.get()
+        options = ["Any", *subskills_for(skill)]
+        if self.assignment_subskill.get() not in options:
+            self.assignment_subskill.set("Any")
+        self.assignment_subskill_combo.configure(values=options)
+
+    def _create_assignment(self) -> None:
+        profile = self._assignment_profile_map.get(self.assignment_profile.get())
+        if profile is None:
+            messagebox.showerror("Missing student", "Choose a student profile first.")
+            return
+        target_type = self.assignment_target_type.get().strip()
+        target_value = float(self.assignment_target_value.get())
+        subskill = None if self.assignment_subskill.get() == "Any" else self.assignment_subskill.get()
+        if target_type == "subskill_mastered" and not subskill:
+            messagebox.showerror("Missing subskill", "Subskill-mastered assignments require a subskill.")
+            return
+        db.create_assignment(
+            profile_id=profile.id,
+            skill=self.assignment_skill.get().strip(),
+            subskill=subskill,
+            target_type=target_type,
+            target_value=target_value,
+            level=int(self.assignment_level.get()),
+            num_questions=int(self.assignment_questions.get()),
+            question_type=self.assignment_question_type.get().strip(),
+            notes=self.assignment_notes.get().strip(),
+            created_at=now_iso(),
+        )
+        self.assignment_notes.delete(0, tk.END)
+        self._refresh_assignments()
+
+    def _refresh_assignments(self) -> None:
+        if not hasattr(self, "assignments_active_list"):
+            return
+        self.assignments_active_list.delete(0, tk.END)
+        self.assignments_done_list.delete(0, tk.END)
+        profile = self._assignment_profile_map.get(self.assignment_profile.get())
+        if profile is None:
+            return
+        self._active_assignments = db.list_assignments(profile.id, active_only=True)
+        self._done_assignments = db.list_assignments(profile.id, active_only=False)
+        for a in self._active_assignments:
+            self.assignments_active_list.insert(tk.END, _assignment_label(a))
+        for a in self._done_assignments[:40]:
+            self.assignments_done_list.insert(tk.END, _assignment_label(a))
+
+    def _complete_assignment(self) -> None:
+        profile = self._assignment_profile_map.get(self.assignment_profile.get())
+        if profile is None:
+            return
+        sel = self.assignments_active_list.curselection()
+        if not sel:
+            messagebox.showerror("Select assignment", "Choose an active assignment to complete.")
+            return
+        assignment = self._active_assignments[sel[0]]
+        db.set_assignment_active(assignment.id, False, completed_at=now_iso())
+        self._refresh_assignments()
+
     def _refresh_grades(self) -> None:
         name = self.grades_profile.get()
         profile = self._profile_map.get(name)
@@ -268,3 +415,17 @@ class ParentPanel:
             self.grades_list.insert(
                 tk.END, f"{attempt.created_at[:10]} | {attempt.skill} | {attempt.score}/{attempt.num_questions}"
             )
+
+
+def _assignment_label(assignment) -> str:
+    skill = SKILL_LABELS.get(assignment.skill, assignment.skill)
+    target = assignment.target_type
+    if target == "quiz_score_pct":
+        target_text = f"score >= {assignment.target_value:.0f}%"
+    elif target == "subskill_mastered":
+        target_text = "master subskill"
+    else:
+        target_text = target
+    sub = f" [{assignment.subskill}]" if assignment.subskill else ""
+    done = f" (done {assignment.completed_at[:10]})" if assignment.completed_at else ""
+    return f"#{assignment.id} {skill}{sub} | {target_text}{done}"

@@ -297,6 +297,7 @@ class QuizPanel:
         profile = self._profile_getter()
         if profile is None:
             return
+        completed_at = now_iso()
         attempt_id = db.create_attempt(
             profile_id=profile.id,
             quiz_set_id=None,
@@ -305,7 +306,7 @@ class QuizPanel:
             num_questions=len(self._questions),
             level=self.level_var.get(),
             score=self._score,
-            created_at=now_iso(),
+            created_at=completed_at,
         )
         for question, answer, correct in self._answers:
             subskill = _subskill_for_question(question)
@@ -314,7 +315,7 @@ class QuizPanel:
                 question.skill,
                 subskill,
                 correct,
-                now_iso(),
+                completed_at,
                 SUBSKILL_STREAK_TO_MASTER,
             )
             db.add_question_result(
@@ -326,8 +327,11 @@ class QuizPanel:
                 correct,
                 question.explanation,
             )
+        completed_assignments = db.evaluate_assignments_for_attempt(profile.id, attempt_id, completed_at)
 
         summary = f"Score: {self._score} / {len(self._questions)}\n\n"
+        if completed_assignments > 0:
+            summary += f"Assignments completed: {completed_assignments}\n\n"
         summary += "Mistake explanations:\n"
         for question, answer, correct in self._answers:
             if correct:

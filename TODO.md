@@ -81,4 +81,11 @@
 ## Roadmap: Template Bank QA
 - [x] Template dry-run tool (generate N variants per template; report failures).
 - [ ] External IDs for templates everywhere (manifest + UI tooling).
-- [ ] Subskill-targeted quiz presets for parent assignments.
+- [x] Subskill-targeted quiz presets for parent assignments.
+
+## Roadmap: Parent Assignments
+- [x] Add assignment model/table (skill/subskill target + quiz preset fields).
+- [x] Parent UI to create, list, and complete assignments.
+- [x] Student dashboard card for next active assignment + one-click start.
+- [x] Auto-complete assignments after quiz attempts (score or subskill mastery targets).
+- [ ] Add assignment history filters and richer completion analytics.

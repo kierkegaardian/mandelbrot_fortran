@@ -48,7 +48,13 @@ class AppShell:
         self.arithmetic = ArithmeticPanel(self.notebook, self.view_stack)
         self.quiz = QuizPanel(self.notebook, self.view_stack, self.get_profile)
         self.parent = ParentPanel(self.notebook, self.view_stack, self.get_profile)
-        self.dashboard = DashboardPanel(self.notebook, self.view_stack, self.get_profile, self.launch_daily_review)
+        self.dashboard = DashboardPanel(
+            self.notebook,
+            self.view_stack,
+            self.get_profile,
+            self.launch_daily_review,
+            self.launch_assignment_quiz,
+        )
 
         self._modules = [
             ("Fractals", self.fractal),
@@ -87,5 +93,24 @@ class AppShell:
             num_questions=5,
             level=1,
             question_type="both",
+        )
+        self.quiz.start_quiz()
+
+    def launch_assignment_quiz(
+        self,
+        skill: str,
+        subskill: str | None,
+        level: int,
+        num_questions: int,
+        question_type: str,
+    ) -> None:
+        self.notebook.select(self.quiz.controls_frame)
+        self.quiz.apply_preset(
+            track="All",
+            skill=skill,
+            subskill=subskill,
+            num_questions=num_questions,
+            level=level,
+            question_type=question_type,
         )
         self.quiz.start_quiz()

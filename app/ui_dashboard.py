@@ -15,12 +15,21 @@ from .skill_graph import (
 
 
 class DashboardPanel:
-    def __init__(self, controls_parent: tk.Widget, view_parent: tk.Widget, profile_getter, quiz_launcher=None) -> None:
+    def __init__(
+        self,
+        controls_parent: tk.Widget,
+        view_parent: tk.Widget,
+        profile_getter,
+        quiz_launcher=None,
+        assignment_launcher=None,
+    ) -> None:
         self.controls_frame = ttk.Frame(controls_parent)
         self.view_frame = ttk.Frame(view_parent)
         self._profile_getter = profile_getter
         self._quiz_launcher = quiz_launcher
+        self._assignment_launcher = assignment_launcher
         self._daily_target: tuple[str, str] | None = None
+        self._assignment_target = None
 
         self._build_controls()
         self._build_view()
@@ -37,6 +46,8 @@ class DashboardPanel:
         ttk.Button(frame, text="Refresh", command=self.render).pack(anchor=tk.W)
         self.daily_btn = ttk.Button(frame, text="Start Daily Review", command=self._start_daily_review)
         self.daily_btn.pack(anchor=tk.W, pady=(8, 0))
+        self.assignment_btn = ttk.Button(frame, text="Start Assignment", command=self._start_assignment)
+        self.assignment_btn.pack(anchor=tk.W, pady=(8, 0))
 
     def _build_view(self) -> None:
         header = ttk.Frame(self.view_frame)
@@ -93,6 +104,10 @@ class DashboardPanel:
         ttk.Label(self.view_frame, textvariable=self.daily_var, foreground="#2f6f3e", wraplength=520).pack(
             anchor=tk.W, padx=10, pady=(0, 10)
         )
+        self.assignment_var = tk.StringVar(value="Assignment: —")
+        ttk.Label(self.view_frame, textvariable=self.assignment_var, foreground="#7a4f2e", wraplength=520).pack(
+            anchor=tk.W, padx=10, pady=(0, 10)
+        )
 
     def _start_daily_review(self) -> None:
         if self._quiz_launcher is None or self._daily_target is None:
@@ -100,12 +115,24 @@ class DashboardPanel:
         skill, subskill = self._daily_target
         self._quiz_launcher(skill, subskill)
 
+    def _start_assignment(self) -> None:
+        if self._assignment_launcher is None or self._assignment_target is None:
+            return
+        self._assignment_launcher(
+            self._assignment_target.skill,
+            self._assignment_target.subskill,
+            self._assignment_target.level,
+            self._assignment_target.num_questions,
+            self._assignment_target.question_type,
+        )
+
     def render(self) -> None:
         profile = self._profile_getter()
         if profile is None:
             self.summary_var.set("No profile selected.")
             self.reco_var.set("Recommended next: —")
             self.daily_var.set("Daily review: —")
+            self.assignment_var.set("Assignment: —")
             for skill, row in self.progress_rows.items():
                 row["progress_var"].set(0)
                 row["percent_var"].set("0%")
@@ -113,6 +140,7 @@ class DashboardPanel:
             for label, var in self.tile_vars.items():
                 var.set(f"{label}: 0")
             self.daily_btn.state(["disabled"])
+            self.assignment_btn.state(["disabled"])
             return
         attempts = db.list_attempts(profile.id)
         stats = {skill: {"score": 0, "total": 0, "attempts": 0} for skill in SKILL_ORDER}
@@ -177,6 +205,7 @@ class DashboardPanel:
             self.subskill_var.set("")
 
         self._render_daily_review(profile.id, mastery_map, stats, recommendations)
+        self._render_assignment(profile.id)
 
     def _render_daily_review(
         self, profile_id: int, mastery_map: dict[str, str], stats: dict[str, dict], recommendations: list[str]
@@ -226,6 +255,29 @@ class DashboardPanel:
             self.daily_btn.state(["disabled"])
         else:
             self.daily_btn.state(["!disabled"])
+
+    def _render_assignment(self, profile_id: int) -> None:
+        assignment = db.get_next_active_assignment(profile_id)
+        self._assignment_target = assignment
+        if assignment is None:
+            self.assignment_var.set("Assignment: none active")
+            self.assignment_btn.state(["disabled"])
+            return
+        target = assignment.target_type
+        if target == "quiz_score_pct":
+            target_text = f"score >= {assignment.target_value:.0f}%"
+        elif target == "subskill_mastered":
+            target_text = "master subskill"
+        else:
+            target_text = target
+        detail = f"{SKILL_LABELS.get(assignment.skill, assignment.skill)}"
+        if assignment.subskill:
+            detail += f" – {assignment.subskill}"
+        self.assignment_var.set(f"Assignment: {detail} ({target_text})")
+        if self._assignment_launcher is None:
+            self.assignment_btn.state(["disabled"])
+        else:
+            self.assignment_btn.state(["!disabled"])
 
 
 def _streak_graph(current: int, target: int) -> str:

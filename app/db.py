@@ -5,6 +5,7 @@ from dataclasses import dataclass
 from typing import Optional
 
 from .models import (
+    Assignment,
     Book,
     ExerciseCandidate,
     Profile,
@@ -156,6 +157,23 @@ def init_db() -> None:
                 PRIMARY KEY (template_id, name),
                 FOREIGN KEY(template_id) REFERENCES question_templates(id) ON DELETE CASCADE
             );
+
+            CREATE TABLE IF NOT EXISTS assignments (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                profile_id INTEGER NOT NULL,
+                skill TEXT NOT NULL,
+                subskill TEXT,
+                target_type TEXT NOT NULL,
+                target_value REAL NOT NULL DEFAULT 0,
+                level INTEGER NOT NULL DEFAULT 1,
+                num_questions INTEGER NOT NULL DEFAULT 5,
+                question_type TEXT NOT NULL DEFAULT 'both',
+                active INTEGER NOT NULL DEFAULT 1,
+                notes TEXT NOT NULL DEFAULT '',
+                created_at TEXT NOT NULL,
+                completed_at TEXT,
+                FOREIGN KEY(profile_id) REFERENCES profiles(id) ON DELETE CASCADE
+            );
             """
         )
         _run_migrations(conn)
@@ -189,6 +207,31 @@ def _run_migrations(conn: sqlite3.Connection) -> None:
         _ensure_external_id_unique_index(conn)
         conn.execute("UPDATE schema_version SET version = 2 WHERE id = 1")
         version = 2
+
+    # v3: assignments table
+    if version < 3:
+        conn.execute(
+            """
+            CREATE TABLE IF NOT EXISTS assignments (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                profile_id INTEGER NOT NULL,
+                skill TEXT NOT NULL,
+                subskill TEXT,
+                target_type TEXT NOT NULL,
+                target_value REAL NOT NULL DEFAULT 0,
+                level INTEGER NOT NULL DEFAULT 1,
+                num_questions INTEGER NOT NULL DEFAULT 5,
+                question_type TEXT NOT NULL DEFAULT 'both',
+                active INTEGER NOT NULL DEFAULT 1,
+                notes TEXT NOT NULL DEFAULT '',
+                created_at TEXT NOT NULL,
+                completed_at TEXT,
+                FOREIGN KEY(profile_id) REFERENCES profiles(id) ON DELETE CASCADE
+            );
+            """
+        )
+        conn.execute("UPDATE schema_version SET version = 3 WHERE id = 1")
+        version = 3
 
     # Always ensure indexes exist (idempotent).
     _ensure_external_id_unique_index(conn)
@@ -722,4 +765,165 @@ def create_worksheet(
         level,
         file_path,
         created_at,
+    )
+
+
+def create_assignment(
+    profile_id: int,
+    skill: str,
+    subskill: str | None,
+    target_type: str,
+    target_value: float,
+    level: int,
+    num_questions: int,
+    question_type: str,
+    notes: str,
+    created_at: str,
+) -> int:
+    with connect() as conn:
+        cur = conn.execute(
+            """
+            INSERT INTO assignments
+            (profile_id, skill, subskill, target_type, target_value, level, num_questions, question_type, notes, created_at)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            """,
+            (
+                int(profile_id),
+                skill,
+                subskill,
+                target_type,
+                float(target_value),
+                int(level),
+                int(num_questions),
+                question_type,
+                notes,
+                created_at,
+            ),
+        )
+        return int(cur.lastrowid)
+
+
+def list_assignments(profile_id: int, active_only: bool | None = True) -> list[Assignment]:
+    with connect() as conn:
+        if active_only is None:
+            rows = conn.execute(
+                """
+                SELECT id, profile_id, skill, subskill, target_type, target_value, level, num_questions, question_type,
+                       active, notes, created_at, completed_at
+                FROM assignments
+                WHERE profile_id = ?
+                ORDER BY active DESC, created_at DESC, id DESC
+                """,
+                (int(profile_id),),
+            ).fetchall()
+        elif active_only:
+            rows = conn.execute(
+                """
+                SELECT id, profile_id, skill, subskill, target_type, target_value, level, num_questions, question_type,
+                       active, notes, created_at, completed_at
+                FROM assignments
+                WHERE profile_id = ? AND active = 1
+                ORDER BY created_at ASC, id ASC
+                """,
+                (int(profile_id),),
+            ).fetchall()
+        else:
+            rows = conn.execute(
+                """
+                SELECT id, profile_id, skill, subskill, target_type, target_value, level, num_questions, question_type,
+                       active, notes, created_at, completed_at
+                FROM assignments
+                WHERE profile_id = ? AND active = 0
+                ORDER BY completed_at DESC, id DESC
+                """,
+                (int(profile_id),),
+            ).fetchall()
+    return [_row_to_assignment(r) for r in rows]
+
+
+def set_assignment_active(assignment_id: int, active: bool, completed_at: str | None = None) -> None:
+    with connect() as conn:
+        conn.execute(
+            "UPDATE assignments SET active = ?, completed_at = ? WHERE id = ?",
+            (1 if active else 0, completed_at if not active else None, int(assignment_id)),
+        )
+
+
+def get_next_active_assignment(profile_id: int) -> Assignment | None:
+    items = list_assignments(profile_id, active_only=True)
+    return items[0] if items else None
+
+
+def evaluate_assignments_for_attempt(profile_id: int, attempt_id: int, completed_at: str) -> int:
+    completed = 0
+    with connect() as conn:
+        attempt = conn.execute(
+            """
+            SELECT id, profile_id, skill, score, num_questions
+            FROM quiz_attempts
+            WHERE id = ? AND profile_id = ?
+            """,
+            (int(attempt_id), int(profile_id)),
+        ).fetchone()
+        if attempt is None:
+            return 0
+
+        assignments = conn.execute(
+            """
+            SELECT id, skill, subskill, target_type, target_value
+            FROM assignments
+            WHERE profile_id = ? AND active = 1
+            ORDER BY created_at ASC, id ASC
+            """,
+            (int(profile_id),),
+        ).fetchall()
+
+        for item in assignments:
+            target_type = item["target_type"]
+            skill = item["skill"]
+            subskill = item["subskill"]
+            target_value = float(item["target_value"])
+            is_done = False
+            if target_type == "quiz_score_pct":
+                if skill != attempt["skill"]:
+                    continue
+                total = max(1, int(attempt["num_questions"]))
+                pct = (float(attempt["score"]) / float(total)) * 100.0
+                is_done = pct >= target_value
+            elif target_type == "subskill_mastered":
+                if not subskill:
+                    continue
+                row = conn.execute(
+                    """
+                    SELECT mastered
+                    FROM skill_subskill_progress
+                    WHERE profile_id = ? AND skill = ? AND subskill = ?
+                    """,
+                    (int(profile_id), skill, subskill),
+                ).fetchone()
+                is_done = bool(row and int(row["mastered"]) == 1)
+            if is_done:
+                conn.execute(
+                    "UPDATE assignments SET active = 0, completed_at = ? WHERE id = ?",
+                    (completed_at, int(item["id"])),
+                )
+                completed += 1
+    return completed
+
+
+def _row_to_assignment(r: sqlite3.Row) -> Assignment:
+    return Assignment(
+        id=int(r["id"]),
+        profile_id=int(r["profile_id"]),
+        skill=r["skill"],
+        subskill=r["subskill"],
+        target_type=r["target_type"],
+        target_value=float(r["target_value"]),
+        level=int(r["level"]),
+        num_questions=int(r["num_questions"]),
+        question_type=r["question_type"],
+        active=bool(r["active"]),
+        notes=r["notes"],
+        created_at=r["created_at"],
+        completed_at=r["completed_at"],
     )
