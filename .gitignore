@@ -1,8 +1,10 @@
 # Fortran build artifacts
 /build/
+/dist/
 *.o
 *.mod
 /mandelbrot_gen
+/mandelbrot_gen.exe
 
 # Generated images / outputs
 *.ppm

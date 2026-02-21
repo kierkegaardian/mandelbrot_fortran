@@ -23,6 +23,7 @@ program mandelbrot
   real(real64) :: t_zoom, log_zoom, move_step
   character(len=512) :: filename
   character(len=512) :: cmd
+  logical :: dir_ok
 
   call parse_args(cfg, cli_status)
   select case (cli_status)
@@ -50,8 +51,12 @@ program mandelbrot
       write(error_unit, *) "Zoom:", cfg%zoom_start, "->", cfg%zoom_end
       write(error_unit, *) "Output Dir:", trim(cfg%output_dir)
       
-      ! Create directory
-      call execute_command_line("mkdir -p " // trim(cfg%output_dir), wait=.true.)
+      ! Create directory safely for the current platform.
+      dir_ok = ensure_output_dir(trim(cfg%output_dir))
+      if (.not. dir_ok) then
+         write(error_unit, *) "Could not create output directory: ", trim(cfg%output_dir)
+         call c_exit(3_c_int)
+      end if
       
       do k = 1, cfg%frames
           ! Calculate zoom (logarithmic interpolation)
@@ -132,6 +137,66 @@ program mandelbrot
   deallocate(image_data)
 
 contains
+
+  logical function ensure_output_dir(path)
+    use, intrinsic :: iso_fortran_env, only: error_unit
+    character(len=*), intent(in) :: path
+    character(len=64) :: os_name
+    character(len=:), allocatable :: cmd_line
+    logical :: exists, is_windows
+    integer :: env_status, cmd_status, exit_status
+
+    ensure_output_dir = .false.
+    if (len_trim(path) == 0) return
+    if (.not. is_safe_path(path)) then
+       write(error_unit, *) "Unsafe characters in output directory path."
+       return
+    end if
+
+    inquire(file=trim(path), exist=exists)
+    if (exists) then
+       ensure_output_dir = .true.
+       return
+    end if
+
+    os_name = ""
+    call get_environment_variable("OS", os_name, status=env_status)
+    is_windows = (env_status == 0 .and. index(adjustl(os_name), "Windows") > 0)
+
+    if (is_windows) then
+       cmd_line = 'cmd /c if not exist "' // trim(path) // '" mkdir "' // trim(path) // '"'
+    else
+       cmd_line = 'mkdir -p -- "' // trim(path) // '"'
+    end if
+
+    call execute_command_line(cmd_line, wait=.true., exitstat=exit_status, cmdstat=cmd_status)
+    if (cmd_status /= 0 .or. exit_status /= 0) return
+
+    inquire(file=trim(path), exist=exists)
+    ensure_output_dir = exists
+  end function ensure_output_dir
+
+  logical function is_safe_path(path)
+    character(len=*), intent(in) :: path
+    integer :: i
+    character(len=1) :: ch
+
+    is_safe_path = .true.
+    do i = 1, len_trim(path)
+       ch = path(i:i)
+       if (iachar(ch) < 32 .or. iachar(ch) == 127) then
+          is_safe_path = .false.
+          return
+       end if
+       select case (ch)
+       case ("'", '"', "`", "$", "&", "|", ";", "<", ">", "(", ")", "!", "%", "*", "?")
+          is_safe_path = .false.
+          return
+       case default
+          continue
+       end select
+    end do
+  end function is_safe_path
 
   subroutine print_mode_info()
       select case (cfg%fractal_type)

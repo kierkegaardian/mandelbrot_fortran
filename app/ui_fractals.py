@@ -1,10 +1,13 @@
 from __future__ import annotations
 
+from concurrent.futures import Future, ThreadPoolExecutor
+import os
+from threading import Event
 import tkinter as tk
 from tkinter import messagebox, ttk
 
 from .explanations import FRACTAL_EXPLANATIONS
-from .fractal_renderer import FractalConfig, render_ppm, save_high_res
+from .fractal_renderer import FractalConfig, RenderCancelled, render_ppm, save_high_res
 from .ui_explain import ExplanationPanel
 from .ui_tooltip import ToolTip
 
@@ -33,6 +36,18 @@ class FractalPanel:
         self._preview_after_id: str | None = None
         self._final_after_id: str | None = None
         self._image_item_id: int | None = None
+        self._drag_offset_x = 0
+        self._drag_offset_y = 0
+        self._executor = ThreadPoolExecutor(max_workers=1, thread_name_prefix="fractal-render")
+        self._save_executor = ThreadPoolExecutor(max_workers=1, thread_name_prefix="fractal-save")
+        self._render_future: Future[bytes] | None = None
+        self._save_future: Future[None] | None = None
+        self._pending_render: tuple[int, FractalConfig, float] | None = None
+        self._active_cancel_event: Event | None = None
+        self._save_cancel_event: Event | None = None
+        self._latest_request_id = 0
+        self._active_request_id = 0
+        self._threads = max(1, os.cpu_count() or 1)
 
         self._build_controls()
         self._build_view()
@@ -73,7 +88,8 @@ class FractalPanel:
         btns = ttk.Frame(frame)
         btns.pack(fill=tk.X, pady=10)
         ttk.Button(btns, text="Reset View", command=self.reset_view).pack(side=tk.LEFT, expand=True)
-        ttk.Button(btns, text="Save Image", command=self.save_image).pack(side=tk.LEFT, expand=True)
+        self.save_btn = ttk.Button(btns, text="Save Image", command=self.save_image)
+        self.save_btn.pack(side=tk.LEFT, expand=True)
 
         self.explain = ExplanationPanel(frame)
         self._set_explanation()
@@ -113,6 +129,7 @@ class FractalPanel:
             julia_cy=self.julia_cy,
             smooth=self.smooth.get(),
             cyclic=self.cyclic.get(),
+            threads=self._threads,
         )
 
     def render(self, scale: float = 1.0) -> None:
@@ -124,12 +141,61 @@ class FractalPanel:
 
         w = max(10, int(self.canvas.winfo_width() * scale))
         h = max(10, int(self.canvas.winfo_height() * scale))
-        try:
-            data = render_ppm(self._current_config(w, h))
-        except Exception as exc:  # noqa: BLE001
-            messagebox.showerror("Render failed", str(exc))
+        self._enqueue_render(self._current_config(w, h), scale)
+
+    def _enqueue_render(self, config: FractalConfig, scale: float) -> None:
+        self._latest_request_id += 1
+        request_id = self._latest_request_id
+        if self._render_future is not None and not self._render_future.done():
+            self._pending_render = (request_id, config, scale)
+            if self._active_cancel_event is not None:
+                self._active_cancel_event.set()
+            return
+        self._start_render(request_id, config, scale)
+
+    def _start_render(self, request_id: int, config: FractalConfig, scale: float) -> None:
+        self._active_request_id = request_id
+        cancel_event = Event()
+        self._active_cancel_event = cancel_event
+        self._render_future = self._executor.submit(render_ppm, config, cancel_event)
+        self.canvas.after(20, lambda: self._poll_render_done(request_id, scale))
+
+    def _poll_render_done(self, request_id: int, scale: float) -> None:
+        future = self._render_future
+        if future is None:
+            return
+        if not future.done():
+            self.canvas.after(20, lambda: self._poll_render_done(request_id, scale))
+            return
+        self._handle_render_done(request_id, scale, future)
+
+    def _handle_render_done(self, request_id: int, scale: float, future: Future[bytes]) -> None:
+        self._render_future = None
+        self._active_cancel_event = None
+        if request_id != self._active_request_id:
             return
 
+        try:
+            data = future.result()
+        except RenderCancelled:
+            self._start_pending_render_if_any()
+            return
+        except Exception as exc:  # noqa: BLE001
+            messagebox.showerror("Display failed", str(exc))
+            self._start_pending_render_if_any()
+            return
+        self._display_rendered_image(data, scale)
+        self._start_pending_render_if_any()
+
+    def _start_pending_render_if_any(self) -> None:
+        pending = self._pending_render
+        self._pending_render = None
+        if pending is None:
+            return
+        request_id, config, scale = pending
+        self._start_render(request_id, config, scale)
+
+    def _display_rendered_image(self, data: bytes, scale: float) -> None:
         try:
             img = tk.PhotoImage(data=data)
             if scale < 1.0:
@@ -151,9 +217,31 @@ class FractalPanel:
         self.render(scale=1.0)
 
     def save_image(self) -> None:
+        if self._save_future is not None and not self._save_future.done():
+            messagebox.showinfo("Save in progress", "Please wait for the current save to finish.")
+            return
         config = self._current_config(1920, 1080)
+        self.save_btn.state(["disabled"])
+        cancel_event = Event()
+        self._save_cancel_event = cancel_event
+        self._save_future = self._save_executor.submit(save_high_res, config, "saved_fractal.ppm", cancel_event)
+        self.canvas.after(40, self._poll_save_done)
+
+    def _poll_save_done(self) -> None:
+        future = self._save_future
+        if future is None:
+            self.save_btn.state(["!disabled"])
+            return
+        if not future.done():
+            self.canvas.after(40, self._poll_save_done)
+            return
+        self._save_future = None
+        self._save_cancel_event = None
+        self.save_btn.state(["!disabled"])
         try:
-            save_high_res(config, "saved_fractal.ppm")
+            future.result()
+        except RenderCancelled:
+            return
         except Exception as exc:  # noqa: BLE001
             messagebox.showerror("Save failed", str(exc))
             return
@@ -168,6 +256,9 @@ class FractalPanel:
         self._dragging = True
         self._last_drag_x = event.x
         self._last_drag_y = event.y
+        self._drag_offset_x = 0
+        self._drag_offset_y = 0
+        self._cancel_render_queue()
 
     def _on_drag(self, _event: tk.Event) -> None:
         if not self._dragging:
@@ -181,14 +272,20 @@ class FractalPanel:
             return
         self._last_drag_x = event.x
         self._last_drag_y = event.y
-        self._queue_preview(scale=0.35)
-        self._queue_final(delay_ms=160)
+        self._drag_offset_x += dx
+        self._drag_offset_y += dy
+        if self._image_item_id is not None:
+            self.canvas.move(self._image_item_id, dx, dy)
 
     def _on_release(self, event: tk.Event) -> None:
         if not self._dragging:
             return
         self._dragging = False
         self._cancel_render_queue()
+        if self._image_item_id is not None:
+            self.canvas.coords(self._image_item_id, 0, 0)
+        self._drag_offset_x = 0
+        self._drag_offset_y = 0
         self.render(scale=1.0)
 
     def _on_wheel(self, event: tk.Event) -> None:
@@ -265,3 +362,13 @@ class FractalPanel:
         if self._final_after_id is not None:
             self.canvas.after_cancel(self._final_after_id)
             self._final_after_id = None
+        if self._active_cancel_event is not None:
+            self._active_cancel_event.set()
+
+    def shutdown(self) -> None:
+        if self._active_cancel_event is not None:
+            self._active_cancel_event.set()
+        if self._save_cancel_event is not None:
+            self._save_cancel_event.set()
+        self._executor.shutdown(wait=False, cancel_futures=True)
+        self._save_executor.shutdown(wait=False, cancel_futures=True)

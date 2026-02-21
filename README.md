@@ -32,6 +32,36 @@ Optional: ImageMagick for PNG conversion (`sudo pacman -S imagemagick`).
 - Run the multi‑panel desktop app: `python explorer.py`
 - The app includes Fractals, Arithmetic visuals, Quizzes, and Parent tools.
 
+## Packaging (Windows/macOS/Linux)
+
+This repo includes a PyInstaller spec and GitHub Actions workflow for cross-platform app bundles.
+
+- Spec file: `homeschool_math_visualizer.spec`
+- CI workflow: `.github/workflows/package.yml`
+- Trigger packaging:
+  - Manually via **Actions -> Package Desktop App -> Run workflow**
+  - Or by pushing a version tag like `v0.1.0`
+
+Artifacts produced by CI:
+- Linux: `HomeschoolMathVisualizer-linux.tar.gz`
+- macOS: `HomeschoolMathVisualizer-macos.tar.gz`
+- Windows: `HomeschoolMathVisualizer-windows.zip`
+
+## GitHub Releases (Tagged Builds)
+
+- Release workflow: `.github/workflows/release.yml`
+- Trigger: push a version tag (`v*`, e.g. `v0.1.0`)
+- Behavior:
+  - Builds all three OS packages
+  - Runs tests
+  - Publishes archives directly to the GitHub Release for that tag
+
+Local packaging (same machine):
+1. Build Fortran renderer first (`make OPENMP=0`).
+2. Install PyInstaller (`python -m pip install pyinstaller`).
+3. Build app bundle (`pyinstaller --noconfirm --clean homeschool_math_visualizer.spec`).
+4. Output is under `dist/HomeschoolMathVisualizer/`.
+
 ### Assets & Licensing
 
 See `assets/ASSETS_LICENSE.md` for attribution and licensing details (including OpenMoji, CC BY-SA 4.0).
