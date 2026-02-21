@@ -7,7 +7,7 @@ TARGET = mandelbrot_gen
 PPM ?= mandelbrot.ppm
 PNG ?= mandelbrot.png
 
-OPENMP ?= 0
+OPENMP ?= 1
 ifeq ($(OPENMP),1)
 FFLAGS += -fopenmp
 endif

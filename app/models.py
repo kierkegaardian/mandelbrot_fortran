@@ -19,6 +19,9 @@ class QuizSet:
     question_type: str  # "mc", "typed", or "both"
     num_questions: int
     level: int
+    mode_intuition_pct: Optional[int]
+    mode_expression_pct: Optional[int]
+    mode_word_pct: Optional[int]
 
 
 @dataclass(frozen=True)
@@ -32,6 +35,7 @@ class QuizAttempt:
     level: int
     score: int
     created_at: str
+    elapsed_seconds: Optional[float]
 
 
 @dataclass(frozen=True)
@@ -90,6 +94,7 @@ class QuestionTemplate:
     min_level: int
     max_level: int
     choice_spread: float
+    mode: str
     active: bool
 
 
@@ -114,7 +119,47 @@ class Assignment:
     level: int
     num_questions: int
     question_type: str
+    mode_intuition_pct: Optional[int]
+    mode_expression_pct: Optional[int]
+    mode_word_pct: Optional[int]
     active: bool
     notes: str
     created_at: str
     completed_at: Optional[str]
+
+
+@dataclass(frozen=True)
+class DailyGoalHistory:
+    profile_id: int
+    day_utc: str
+    completions: int
+    last_completed_at: str
+
+
+@dataclass(frozen=True)
+class HistoricalTest:
+    id: int
+    exam_code: str
+    title: str
+    exam_type: str
+    year: Optional[int]
+    pdf_path: str
+    source: str
+
+
+@dataclass(frozen=True)
+class HistoricalQuestion:
+    id: int
+    test_id: int
+    question_number: int
+    section: str
+    category: str
+    prompt: str
+    choice_a: Optional[str]
+    choice_b: Optional[str]
+    choice_c: Optional[str]
+    choice_d: Optional[str]
+    choice_e: Optional[str]
+    correct_answer: Optional[str]
+    explanation: str
+    source_page: Optional[int]

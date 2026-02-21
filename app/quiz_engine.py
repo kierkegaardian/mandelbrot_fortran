@@ -29,6 +29,13 @@ SKILLS = [
     "stats_mean",
     "stats_probability",
     "calculus_slope",
+    "pre_algebra",
+    "algebra_1",
+    "algebra_2",
+    "statistics",
+    "sat_math",
+    "psat_math",
+    "gre_quant",
 ]
 QUESTION_TYPES = ["mc", "typed", "both"]
 RIGHT_TRIANGLE_TRIPLES = [(3, 4, 5), (5, 12, 13), (6, 8, 10), (8, 15, 17), (9, 12, 15)]
@@ -43,7 +50,10 @@ class Question:
     choices: Optional[list[str]]
     visual: Optional[dict]
     template_id: Optional[int] = None
+    template_external_id: Optional[str] = None
     subskill: Optional[str] = None
+    question_label: str = "Core"
+    mode: str = "expression"
 
 
 def _level_range(level: int) -> tuple[int, int]:
@@ -267,7 +277,14 @@ def _division_choices(quotient: int, remainder: int, divisor: int) -> list[str]:
     return ordered
 
 
-def generate_question(skill: str, level: int, question_type: str, *, subskill: str | None = None) -> Question:
+def generate_question(
+    skill: str,
+    level: int,
+    question_type: str,
+    *,
+    subskill: str | None = None,
+    preferred_mode: str | None = None,
+) -> Question:
     if question_type not in QUESTION_TYPES:
         raise ValueError("Unknown question type")
 
@@ -281,12 +298,27 @@ def generate_question(skill: str, level: int, question_type: str, *, subskill: s
         question_type if question_type != "both" else "typed",
         rng=random,
         subskill=subskill,
+        mode=preferred_mode,
     )
     if templated is not None:
         if question_type == "both":
             # Let the caller alternate mc/typed; we generated typed above.
             return templated
         return templated
+
+    if preferred_mode is not None:
+        templated = try_generate_from_templates(
+            skill,
+            level,
+            question_type if question_type != "both" else "typed",
+            rng=random,
+            subskill=subskill,
+            mode=None,
+        )
+        if templated is not None:
+            if question_type == "both":
+                return templated
+            return templated
 
     if skill == "counting":
         low, high = _level_range(level)

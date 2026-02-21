@@ -13,3 +13,4 @@ This project was co-developed with an AI Agent specialized in software engineeri
 
 ## Quality
 - **Typesafety (Request):** Enforce robust, stack-appropriate typesafety in all changes (keep `implicit none` and explicit declarations).
+- **Skill UX Standard:** For every new math skill, include (1) enriched intuition content (`Mental model`, `Common mistake`, `Try this`) and (2) an optional mapped external lesson link (Khan Academy) controlled by the parent external-links setting.

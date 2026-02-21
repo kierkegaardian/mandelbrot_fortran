@@ -9,6 +9,9 @@ class Explanation:
     how_long: str
     why_short: str
     why_long: str
+    mental_model: str = ""
+    common_mistake: str = ""
+    try_this: str = ""
     history: str = ""
 
 
@@ -159,24 +162,36 @@ ARITHMETIC_MODE_EXPLANATIONS = {
         how_long="Pick an object style, then use the buttons or the number box to add or remove objects.",
         why_short="Counting matches a number to a group of objects.",
         why_long="When you can see the group, the number stops being just a symbol and starts meaning something real.",
+        mental_model="Each object is one count. Touch each once, then stop when every object is matched.",
+        common_mistake="Skipping objects or counting one object twice.",
+        try_this="Show 7 objects, then hide 2. How many are still visible without recounting from 1?",
     ),
     "add_subtract": Explanation(
         how_short="Set the two numbers and choose add or subtract.",
         how_long="Use the number boxes to set A and B. Choose add or subtract and see the groups combine or shrink.",
         why_short="Adding puts groups together; subtracting takes part away.",
         why_long="Seeing the groups merge or shrink helps your brain feel what the numbers are doing.",
+        mental_model="Addition grows a collection; subtraction removes from a collection.",
+        common_mistake="Switching subtraction order and expecting the same result.",
+        try_this="Start at 13 and subtract 5 by counting back. What number do you land on?",
     ),
     "multiply": Explanation(
         how_short="Pick rows and columns to build an array.",
         how_long="Set the number of rows and columns. The total objects show why multiplication is repeated groups.",
         why_short="Multiplication is equal groups repeated.",
         why_long="Arrays make multiplication visible: rows × columns = total.",
+        mental_model="Rows are groups, columns are items per group.",
+        common_mistake="Mixing unequal groups and still calling it multiplication.",
+        try_this="Build 4 rows of 6. Now rotate it. Why is the total unchanged?",
     ),
     "divide": Explanation(
         how_short="Choose a total and how many groups to share.",
         how_long="Set the total objects and number of groups. The objects spread out evenly to show division.",
         why_short="Division shares a total into equal groups.",
         why_long="Seeing each group fill up makes the quotient feel like a fair share.",
+        mental_model="Division asks: if we share fairly, how much per group?",
+        common_mistake="Forgetting remainders when totals do not split evenly.",
+        try_this="Share 14 into 4 groups. What is equal, and what is leftover?",
     ),
     "ratios": Explanation(
         how_short="Set A and B to compare two amounts.",
@@ -193,6 +208,9 @@ ARITHMETIC_MODE_EXPLANATIONS = {
         ),
         why_short="Fractions describe parts of a whole.",
         why_long="Circles make it easy to see how much of the whole is shaded, even for improper fractions.",
+        mental_model="Denominator sets the slice size; numerator counts selected slices.",
+        common_mistake="Comparing numerators alone when denominators differ.",
+        try_this="Which is larger: 3/8 or 1/2? Explain using equal-size slices.",
     ),
     "long_addition": Explanation(
         how_short="Type two numbers to see them stacked with carries.",
@@ -229,18 +247,27 @@ ARITHMETIC_MODE_EXPLANATIONS = {
         how_long="Build signed arithmetic expressions and watch values on a number line, where values left are negative and right are positive.",
         why_short="Negative values are the same arithmetic rules with values below zero.",
         why_long="Keeping sign and magnitude explicit prevents confusion and helps students reason with subtraction and addition.",
+        mental_model="Use a number line: right is greater, left is smaller.",
+        common_mistake="Treating minus sign as decoration instead of direction.",
+        try_this="Start at -3 and add +7. Where do you end up on the line?",
     ),
     "order_of_operations": Explanation(
         how_short="Change the expression and see the operation order visually.",
         how_long="Parentheses are resolved first, then multiplication and division, then addition and subtraction.",
         why_short="Operator precedence makes answers consistent.",
         why_long="A clear order keeps students from getting different answers for the same expression.",
+        mental_model="Resolve chunks: parentheses first, then multiply/divide, then add/subtract.",
+        common_mistake="Computing strictly left-to-right for every expression.",
+        try_this="Evaluate 3 + 2 * 5 two ways and explain why only one is valid.",
     ),
     "algebra_linear": Explanation(
         how_short="Set an equation and watch operations isolate x.",
         how_long="Use inverse steps on both sides to keep the equation balanced while removing constants and coefficients.",
         why_short="A balance stays true when both sides change equally.",
         why_long="If every operation is mirrored on both sides, the final x value is mathematically valid.",
+        mental_model="Think of a scale: whatever you do to one side, do to the other.",
+        common_mistake="Applying an operation to only one side of the equation.",
+        try_this="Solve 2x + 5 = 17 with two mirrored steps.",
     ),
     "geometry_area": Explanation(
         how_short="Pick rectangles or right triangles and compare unit area.",

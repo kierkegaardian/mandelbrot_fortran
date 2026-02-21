@@ -10,14 +10,16 @@ from .quiz_engine import SKILLS
 from .skill_graph import SKILL_LABELS, subskills_for
 from .time_utils import now_iso
 from .ui_explain import ExplanationPanel
+from .ui_settings import load_ui_settings, save_show_external_links
 from .ui_widgets import int_spinbox
 
 
 class ParentPanel:
-    def __init__(self, controls_parent: tk.Widget, view_parent: tk.Widget, profile_getter) -> None:
+    def __init__(self, controls_parent: tk.Widget, view_parent: tk.Widget, profile_getter, quiz_set_launcher=None) -> None:
         self.controls_frame = ttk.Frame(controls_parent)
         self.view_frame = ttk.Frame(view_parent)
         self._profile_getter = profile_getter
+        self._quiz_set_launcher = quiz_set_launcher
 
         self._build_controls()
         self._build_view()
@@ -73,12 +75,26 @@ class ParentPanel:
         form.columnconfigure(1, weight=1)
         ttk.Button(self.profile_tab, text="Add Profile", command=self._add_profile).pack(pady=6)
         ttk.Button(self.profile_tab, text="Delete Selected", command=self._delete_profile).pack(pady=2)
+        settings = load_ui_settings()
+        self.show_links_var = tk.BooleanVar(value=settings.show_external_links)
+        ttk.Checkbutton(
+            self.profile_tab,
+            text="Show external learning links (internet)",
+            variable=self.show_links_var,
+            command=self._toggle_external_links,
+        ).pack(anchor=tk.W, padx=10, pady=(8, 4))
 
     def _build_quiz_tab(self) -> None:
         self.quiz_list = tk.Listbox(self.quiz_tab, height=6)
         self.quiz_list.pack(fill=tk.X, padx=10, pady=6)
         self.quiz_list.bind("<<ListboxSelect>>", lambda _e: self._load_quiz_set())
-        ttk.Button(self.quiz_tab, text="Refresh", command=self._refresh_quiz_sets).pack(pady=(0, 8))
+        actions = ttk.Frame(self.quiz_tab)
+        actions.pack(fill=tk.X, padx=10, pady=(0, 8))
+        ttk.Button(actions, text="Refresh", command=self._refresh_quiz_sets).pack(side=tk.LEFT)
+        self.start_quiz_set_btn = ttk.Button(actions, text="Start Selected Quiz Set", command=self._start_quiz_set)
+        self.start_quiz_set_btn.pack(side=tk.LEFT, padx=(6, 0))
+        if self._quiz_set_launcher is None:
+            self.start_quiz_set_btn.state(["disabled"])
 
         form = ttk.Frame(self.quiz_tab)
         form.pack(fill=tk.X, padx=10)
@@ -108,6 +124,20 @@ class ParentPanel:
         ttk.Label(form, text="Level").grid(row=4, column=0, sticky=tk.W)
         self.quiz_level = tk.IntVar(value=1)
         int_spinbox(form, self.quiz_level, 1, 3).grid(row=4, column=1, sticky=tk.W)
+
+        self.quiz_mode_override = tk.BooleanVar(value=False)
+        ttk.Checkbutton(form, text="Override mode mix", variable=self.quiz_mode_override).grid(
+            row=5, column=0, columnspan=2, sticky=tk.W, pady=(4, 2)
+        )
+        mode_row = ttk.Frame(form)
+        mode_row.grid(row=6, column=0, columnspan=2, sticky=tk.W, pady=(0, 4))
+        ttk.Label(mode_row, text="I/E/W").pack(side=tk.LEFT)
+        self.quiz_mode_intuition = tk.IntVar(value=30)
+        self.quiz_mode_expression = tk.IntVar(value=45)
+        self.quiz_mode_word = tk.IntVar(value=25)
+        int_spinbox(mode_row, self.quiz_mode_intuition, 0, 100, width=4).pack(side=tk.LEFT, padx=(6, 2))
+        int_spinbox(mode_row, self.quiz_mode_expression, 0, 100, width=4).pack(side=tk.LEFT, padx=2)
+        int_spinbox(mode_row, self.quiz_mode_word, 0, 100, width=4).pack(side=tk.LEFT, padx=2)
 
         form.columnconfigure(1, weight=1)
         ttk.Button(self.quiz_tab, text="Save Quiz Set", command=self._add_quiz_set).pack(pady=6)
@@ -161,7 +191,7 @@ class ParentPanel:
         ).grid(row=2, column=1, sticky=tk.EW, pady=2)
 
         ttk.Label(form, text="Target Value").grid(row=3, column=0, sticky=tk.W)
-        self.assignment_target_value = tk.IntVar(value=80)
+        self.assignment_target_value = tk.IntVar(value=100)
         int_spinbox(form, self.assignment_target_value, 1, 100).grid(row=3, column=1, sticky=tk.W, pady=2)
 
         ttk.Label(form, text="Quiz Level").grid(row=4, column=0, sticky=tk.W)
@@ -178,9 +208,23 @@ class ParentPanel:
             form, textvariable=self.assignment_question_type, values=["mc", "typed", "both"], state="readonly"
         ).grid(row=6, column=1, sticky=tk.EW, pady=2)
 
-        ttk.Label(form, text="Notes").grid(row=7, column=0, sticky=tk.W)
+        self.assignment_mode_override = tk.BooleanVar(value=False)
+        ttk.Checkbutton(form, text="Override mode mix", variable=self.assignment_mode_override).grid(
+            row=7, column=0, columnspan=2, sticky=tk.W, pady=(4, 2)
+        )
+        mode_row = ttk.Frame(form)
+        mode_row.grid(row=8, column=0, columnspan=2, sticky=tk.W, pady=(0, 2))
+        ttk.Label(mode_row, text="I/E/W").pack(side=tk.LEFT)
+        self.assignment_mode_intuition = tk.IntVar(value=30)
+        self.assignment_mode_expression = tk.IntVar(value=45)
+        self.assignment_mode_word = tk.IntVar(value=25)
+        int_spinbox(mode_row, self.assignment_mode_intuition, 0, 100, width=4).pack(side=tk.LEFT, padx=(6, 2))
+        int_spinbox(mode_row, self.assignment_mode_expression, 0, 100, width=4).pack(side=tk.LEFT, padx=2)
+        int_spinbox(mode_row, self.assignment_mode_word, 0, 100, width=4).pack(side=tk.LEFT, padx=2)
+
+        ttk.Label(form, text="Notes").grid(row=9, column=0, sticky=tk.W)
         self.assignment_notes = ttk.Entry(form)
-        self.assignment_notes.grid(row=7, column=1, sticky=tk.EW, pady=2)
+        self.assignment_notes.grid(row=9, column=1, sticky=tk.EW, pady=2)
         form.columnconfigure(1, weight=1)
 
         btns = ttk.Frame(self.assignments_tab)
@@ -188,6 +232,62 @@ class ParentPanel:
         ttk.Button(btns, text="Create Assignment", command=self._create_assignment).pack(side=tk.LEFT)
         ttk.Button(btns, text="Refresh", command=self._refresh_assignments).pack(side=tk.LEFT, padx=6)
         ttk.Button(btns, text="Mark Complete", command=self._complete_assignment).pack(side=tk.LEFT)
+
+        filters = ttk.Frame(self.assignments_tab)
+        filters.pack(fill=tk.X, padx=10, pady=(2, 4))
+        ttk.Label(filters, text="Filter Skill").grid(row=0, column=0, sticky=tk.W)
+        self.assignment_filter_skill = tk.StringVar(value="All")
+        skill_filter_combo = ttk.Combobox(
+            filters,
+            textvariable=self.assignment_filter_skill,
+            values=["All", *SKILLS],
+            state="readonly",
+            width=18,
+        )
+        skill_filter_combo.grid(row=0, column=1, sticky=tk.W, padx=(6, 8))
+        skill_filter_combo.bind("<<ComboboxSelected>>", lambda _e: self._refresh_assignments())
+
+        ttk.Label(filters, text="Filter Target").grid(row=0, column=2, sticky=tk.W)
+        self.assignment_filter_target = tk.StringVar(value="All")
+        target_filter_combo = ttk.Combobox(
+            filters,
+            textvariable=self.assignment_filter_target,
+            values=["All", "quiz_score_pct", "subskill_mastered"],
+            state="readonly",
+            width=16,
+        )
+        target_filter_combo.grid(row=0, column=3, sticky=tk.W, padx=(6, 8))
+        target_filter_combo.bind("<<ComboboxSelected>>", lambda _e: self._refresh_assignments())
+
+        ttk.Label(filters, text="Done Limit").grid(row=0, column=4, sticky=tk.W)
+        self.assignment_done_limit = tk.IntVar(value=40)
+        int_spinbox(
+            filters,
+            self.assignment_done_limit,
+            5,
+            200,
+            width=5,
+            command=self._refresh_assignments,
+        ).grid(row=0, column=5, sticky=tk.W, padx=(6, 8))
+
+        ttk.Label(filters, text="Analytics Days").grid(row=0, column=6, sticky=tk.W)
+        self.assignment_recent_days = tk.IntVar(value=30)
+        int_spinbox(
+            filters,
+            self.assignment_recent_days,
+            7,
+            365,
+            width=5,
+            command=self._refresh_assignments,
+        ).grid(row=0, column=7, sticky=tk.W, padx=(6, 0))
+
+        self.assignment_analytics_var = tk.StringVar(value="Assignments analytics: —")
+        ttk.Label(
+            self.assignments_tab,
+            textvariable=self.assignment_analytics_var,
+            foreground="#5b6f84",
+            wraplength=560,
+        ).pack(anchor=tk.W, padx=10, pady=(2, 4))
 
         ttk.Label(self.assignments_tab, text="Active Assignments").pack(anchor=tk.W, padx=10, pady=(6, 0))
         self.assignments_active_list = tk.Listbox(self.assignments_tab, height=6)
@@ -205,6 +305,9 @@ class ParentPanel:
             self.profile_list.insert(tk.END, f"{profile.name} ({profile.role})")
         self._refresh_profiles_for_grades()
         self._refresh_profiles_for_assignments()
+
+    def _toggle_external_links(self) -> None:
+        save_show_external_links(self.show_links_var.get())
 
     def _add_profile(self) -> None:
         name = self.profile_name.get().strip()
@@ -229,8 +332,36 @@ class ParentPanel:
         self._quiz_sets = db.list_quiz_sets()
         self.quiz_list.delete(0, tk.END)
         for qset in self._quiz_sets:
-            self.quiz_list.insert(tk.END, f"{qset.name} ({qset.skill}, {qset.num_questions}q)")
+            mix = ""
+            if (
+                qset.mode_intuition_pct is not None
+                and qset.mode_expression_pct is not None
+                and qset.mode_word_pct is not None
+            ):
+                mix = (
+                    f" | I/E/W "
+                    f"{qset.mode_intuition_pct}/{qset.mode_expression_pct}/{qset.mode_word_pct}"
+                )
+            self.quiz_list.insert(tk.END, f"{qset.name} ({qset.skill}, {qset.num_questions}q){mix}")
         self.worksheets.refresh_quiz_sets()
+
+    def _start_quiz_set(self) -> None:
+        if self._quiz_set_launcher is None:
+            return
+        selection = self.quiz_list.curselection()
+        if not selection:
+            messagebox.showerror("Select a quiz", "Choose a quiz set to start.")
+            return
+        qset = self._quiz_sets[selection[0]]
+        self._quiz_set_launcher(
+            qset.skill,
+            qset.num_questions,
+            qset.level,
+            qset.question_type,
+            qset.mode_intuition_pct,
+            qset.mode_expression_pct,
+            qset.mode_word_pct,
+        )
     def _add_quiz_set(self) -> None:
         name = self.quiz_name.get().strip()
         if not name:
@@ -243,6 +374,12 @@ class ParentPanel:
             int(self.quiz_num.get()),
             int(self.quiz_level.get()),
             now_iso(),
+            *_mode_mix_or_none(
+                self.quiz_mode_override.get(),
+                self.quiz_mode_intuition.get(),
+                self.quiz_mode_expression.get(),
+                self.quiz_mode_word.get(),
+            ),
         )
         self.quiz_name.delete(0, tk.END)
         self._refresh_quiz_sets()
@@ -304,6 +441,16 @@ class ParentPanel:
         self.quiz_type.set(qset.question_type)
         self.quiz_num.set(qset.num_questions)
         self.quiz_level.set(qset.level)
+        has_override = (
+            qset.mode_intuition_pct is not None
+            and qset.mode_expression_pct is not None
+            and qset.mode_word_pct is not None
+        )
+        self.quiz_mode_override.set(has_override)
+        if has_override:
+            self.quiz_mode_intuition.set(int(qset.mode_intuition_pct))
+            self.quiz_mode_expression.set(int(qset.mode_expression_pct))
+            self.quiz_mode_word.set(int(qset.mode_word_pct))
 
     def _update_quiz_set(self) -> None:
         selection = self.quiz_list.curselection()
@@ -322,6 +469,12 @@ class ParentPanel:
             self.quiz_type.get(),
             int(self.quiz_num.get()),
             int(self.quiz_level.get()),
+            *_mode_mix_or_none(
+                self.quiz_mode_override.get(),
+                self.quiz_mode_intuition.get(),
+                self.quiz_mode_expression.get(),
+                self.quiz_mode_word.get(),
+            ),
         )
         self._refresh_quiz_sets()
 
@@ -362,6 +515,12 @@ class ParentPanel:
         if target_type == "subskill_mastered" and not subskill:
             messagebox.showerror("Missing subskill", "Subskill-mastered assignments require a subskill.")
             return
+        mode_mix = _mode_mix_or_none(
+            self.assignment_mode_override.get(),
+            self.assignment_mode_intuition.get(),
+            self.assignment_mode_expression.get(),
+            self.assignment_mode_word.get(),
+        )
         db.create_assignment(
             profile_id=profile.id,
             skill=self.assignment_skill.get().strip(),
@@ -371,6 +530,9 @@ class ParentPanel:
             level=int(self.assignment_level.get()),
             num_questions=int(self.assignment_questions.get()),
             question_type=self.assignment_question_type.get().strip(),
+            mode_intuition_pct=mode_mix[0],
+            mode_expression_pct=mode_mix[1],
+            mode_word_pct=mode_mix[2],
             notes=self.assignment_notes.get().strip(),
             created_at=now_iso(),
         )
@@ -384,13 +546,43 @@ class ParentPanel:
         self.assignments_done_list.delete(0, tk.END)
         profile = self._assignment_profile_map.get(self.assignment_profile.get())
         if profile is None:
+            self.assignment_analytics_var.set("Assignments analytics: —")
             return
-        self._active_assignments = db.list_assignments(profile.id, active_only=True)
-        self._done_assignments = db.list_assignments(profile.id, active_only=False)
+        skill_filter = None if self.assignment_filter_skill.get() == "All" else self.assignment_filter_skill.get()
+        target_filter = None if self.assignment_filter_target.get() == "All" else self.assignment_filter_target.get()
+        done_limit = int(self.assignment_done_limit.get())
+        self._active_assignments = db.list_assignments(
+            profile.id,
+            active_only=True,
+            skill=skill_filter,
+            target_type=target_filter,
+        )
+        self._done_assignments = db.list_assignments(
+            profile.id,
+            active_only=False,
+            skill=skill_filter,
+            target_type=target_filter,
+            limit=done_limit,
+        )
         for a in self._active_assignments:
             self.assignments_active_list.insert(tk.END, _assignment_label(a))
-        for a in self._done_assignments[:40]:
+        for a in self._done_assignments:
             self.assignments_done_list.insert(tk.END, _assignment_label(a))
+        analytics = db.assignment_completion_analytics(profile.id, recent_days=int(self.assignment_recent_days.get()))
+        avg_hours = analytics.get("avg_completion_hours")
+        avg_text = "n/a" if avg_hours is None else f"{(float(avg_hours) / 24.0):.1f}d avg complete"
+        top = analytics.get("top_completed_skills", [])
+        if top:
+            top_text = ", ".join(f"{SKILL_LABELS.get(skill, skill)} ({count})" for skill, count in top)
+        else:
+            top_text = "none yet"
+        self.assignment_analytics_var.set(
+            "Assignments analytics: "
+            f"active {analytics.get('active_count', 0)} | "
+            f"completed {analytics.get('completed_count', 0)} | "
+            f"completed {analytics.get('completed_recent_count', 0)} in {int(self.assignment_recent_days.get())}d | "
+            f"{avg_text} | top: {top_text}"
+        )
 
     def _complete_assignment(self) -> None:
         profile = self._assignment_profile_map.get(self.assignment_profile.get())
@@ -421,11 +613,41 @@ def _assignment_label(assignment) -> str:
     skill = SKILL_LABELS.get(assignment.skill, assignment.skill)
     target = assignment.target_type
     if target == "quiz_score_pct":
-        target_text = f"score >= {assignment.target_value:.0f}%"
+        target_text = "score = 100%"
     elif target == "subskill_mastered":
         target_text = "master subskill"
     else:
         target_text = target
     sub = f" [{assignment.subskill}]" if assignment.subskill else ""
+    mix = ""
+    if (
+        assignment.mode_intuition_pct is not None
+        and assignment.mode_expression_pct is not None
+        and assignment.mode_word_pct is not None
+    ):
+        mix = f" | I/E/W {assignment.mode_intuition_pct}/{assignment.mode_expression_pct}/{assignment.mode_word_pct}"
     done = f" (done {assignment.completed_at[:10]})" if assignment.completed_at else ""
-    return f"#{assignment.id} {skill}{sub} | {target_text}{done}"
+    return f"#{assignment.id} {skill}{sub} | {target_text}{mix}{done}"
+
+
+def _mode_mix_or_none(enabled: bool, intuition: int, expression: int, word: int) -> tuple[int | None, int | None, int | None]:
+    if not enabled:
+        return (None, None, None)
+    values = [max(0, int(intuition)), max(0, int(expression)), max(0, int(word))]
+    total = sum(values)
+    if total <= 0:
+        return (30, 45, 25)
+    scaled = [round((float(v) / float(total)) * 100.0) for v in values]
+    drift = 100 - sum(scaled)
+    idx = 0
+    order = [1, 0, 2]
+    while drift != 0:
+        target = order[idx % len(order)]
+        if drift > 0:
+            scaled[target] += 1
+            drift -= 1
+        elif scaled[target] > 0:
+            scaled[target] -= 1
+            drift += 1
+        idx += 1
+    return (scaled[0], scaled[1], scaled[2])

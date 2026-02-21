@@ -1,5 +1,6 @@
 [
   {
+    "external_id": "math.add_subtract.single_digit_add.v1",
     "skill": "add_subtract",
     "subskill": "Single-digit addition",
     "label": "Add two numbers",
@@ -15,6 +16,7 @@
     ]
   },
   {
+    "external_id": "math.add_subtract.single_digit_subtract.v1",
     "skill": "add_subtract",
     "subskill": "Single-digit subtraction",
     "label": "Subtract two numbers",

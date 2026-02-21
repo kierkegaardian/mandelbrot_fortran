@@ -1,0 +1,1742 @@
+[
+  {
+    "external_id": "khan.pull.v1.percent.previous_height.v1",
+    "skill": "stats_percent",
+    "subskill": "Khan percent reverse",
+    "label": "Percent reverse change",
+    "mode": "expression",
+    "prompt_template": "A student's current score is {current} and that is {pct}% higher than the previous score. What was the previous score?",
+    "answer_expr": "current / (1 + pct/100)",
+    "constraint_expr": "(100 + pct) != 0",
+    "explanation_template": "Current is (100% + increase) of previous, so previous = current / (1 + pct/100).",
+    "min_level": 1,
+    "max_level": 4,
+    "choice_spread": 8.0,
+    "vars": [
+      {
+        "name": "current",
+        "kind": "int",
+        "min": 120,
+        "max": 400,
+        "step": 2
+      },
+      {
+        "name": "pct",
+        "kind": "int",
+        "min": 5,
+        "max": 80,
+        "step": 5
+      }
+    ],
+    "active": true
+  },
+  {
+    "external_id": "khan.pull.v1.percent.more_less.v1",
+    "skill": "stats_percent",
+    "subskill": "Khan percent change",
+    "label": "Percent difference amount",
+    "mode": "expression",
+    "prompt_template": "A bottle has {base} mL. The smaller bottle has {pct}% less. How many fewer mL does the smaller bottle have?",
+    "answer_expr": "base * pct / 100",
+    "constraint_expr": "",
+    "explanation_template": "Percent difference is base * pct/100.",
+    "min_level": 1,
+    "max_level": 4,
+    "choice_spread": 7.0,
+    "vars": [
+      {
+        "name": "base",
+        "kind": "int",
+        "min": 20,
+        "max": 250,
+        "step": 5
+      },
+      {
+        "name": "pct",
+        "kind": "int",
+        "min": 5,
+        "max": 90,
+        "step": 5
+      }
+    ],
+    "active": true
+  },
+  {
+    "external_id": "khan.pull.v1.percent.previous_height.v2",
+    "skill": "stats_percent",
+    "subskill": "Khan percent reverse",
+    "label": "Percent reverse change",
+    "mode": "expression",
+    "prompt_template": "A student's current score is {current} and that is {pct}% higher than the previous score. What was the previous score?",
+    "answer_expr": "current / (1 + pct/100)",
+    "constraint_expr": "(100 + pct) != 0",
+    "explanation_template": "Current is (100% + increase) of previous, so previous = current / (1 + pct/100).",
+    "min_level": 1,
+    "max_level": 4,
+    "choice_spread": 8.0,
+    "vars": [
+      {
+        "name": "current",
+        "kind": "int",
+        "min": 120,
+        "max": 400,
+        "step": 2
+      },
+      {
+        "name": "pct",
+        "kind": "int",
+        "min": 5,
+        "max": 80,
+        "step": 5
+      }
+    ],
+    "active": true
+  },
+  {
+    "external_id": "khan.pull.v1.percent.more_less.v2",
+    "skill": "stats_percent",
+    "subskill": "Khan percent change",
+    "label": "Percent difference amount",
+    "mode": "expression",
+    "prompt_template": "A bottle has {base} mL. The smaller bottle has {pct}% less. How many fewer mL does the smaller bottle have?",
+    "answer_expr": "base * pct / 100",
+    "constraint_expr": "",
+    "explanation_template": "Percent difference is base * pct/100.",
+    "min_level": 1,
+    "max_level": 4,
+    "choice_spread": 7.0,
+    "vars": [
+      {
+        "name": "base",
+        "kind": "int",
+        "min": 20,
+        "max": 250,
+        "step": 5
+      },
+      {
+        "name": "pct",
+        "kind": "int",
+        "min": 5,
+        "max": 90,
+        "step": 5
+      }
+    ],
+    "active": true
+  },
+  {
+    "external_id": "khan.pull.v1.percent.previous_height.v3",
+    "skill": "stats_percent",
+    "subskill": "Khan percent reverse",
+    "label": "Percent reverse change",
+    "mode": "expression",
+    "prompt_template": "A student's current score is {current} and that is {pct}% higher than the previous score. What was the previous score?",
+    "answer_expr": "current / (1 + pct/100)",
+    "constraint_expr": "(100 + pct) != 0",
+    "explanation_template": "Current is (100% + increase) of previous, so previous = current / (1 + pct/100).",
+    "min_level": 1,
+    "max_level": 4,
+    "choice_spread": 8.0,
+    "vars": [
+      {
+        "name": "current",
+        "kind": "int",
+        "min": 120,
+        "max": 400,
+        "step": 2
+      },
+      {
+        "name": "pct",
+        "kind": "int",
+        "min": 5,
+        "max": 80,
+        "step": 5
+      }
+    ],
+    "active": true
+  },
+  {
+    "external_id": "khan.pull.v1.percent.more_less.v3",
+    "skill": "stats_percent",
+    "subskill": "Khan percent change",
+    "label": "Percent difference amount",
+    "mode": "expression",
+    "prompt_template": "A bottle has {base} mL. The smaller bottle has {pct}% less. How many fewer mL does the smaller bottle have?",
+    "answer_expr": "base * pct / 100",
+    "constraint_expr": "",
+    "explanation_template": "Percent difference is base * pct/100.",
+    "min_level": 1,
+    "max_level": 4,
+    "choice_spread": 7.0,
+    "vars": [
+      {
+        "name": "base",
+        "kind": "int",
+        "min": 20,
+        "max": 250,
+        "step": 5
+      },
+      {
+        "name": "pct",
+        "kind": "int",
+        "min": 5,
+        "max": 90,
+        "step": 5
+      }
+    ],
+    "active": true
+  },
+  {
+    "external_id": "khan.pull.v1.percent.previous_height.v4",
+    "skill": "stats_percent",
+    "subskill": "Khan percent reverse",
+    "label": "Percent reverse change",
+    "mode": "expression",
+    "prompt_template": "A student's current score is {current} and that is {pct}% higher than the previous score. What was the previous score?",
+    "answer_expr": "current / (1 + pct/100)",
+    "constraint_expr": "(100 + pct) != 0",
+    "explanation_template": "Current is (100% + increase) of previous, so previous = current / (1 + pct/100).",
+    "min_level": 1,
+    "max_level": 4,
+    "choice_spread": 8.0,
+    "vars": [
+      {
+        "name": "current",
+        "kind": "int",
+        "min": 120,
+        "max": 400,
+        "step": 2
+      },
+      {
+        "name": "pct",
+        "kind": "int",
+        "min": 5,
+        "max": 80,
+        "step": 5
+      }
+    ],
+    "active": true
+  },
+  {
+    "external_id": "khan.pull.v1.percent.more_less.v4",
+    "skill": "stats_percent",
+    "subskill": "Khan percent change",
+    "label": "Percent difference amount",
+    "mode": "expression",
+    "prompt_template": "A bottle has {base} mL. The smaller bottle has {pct}% less. How many fewer mL does the smaller bottle have?",
+    "answer_expr": "base * pct / 100",
+    "constraint_expr": "",
+    "explanation_template": "Percent difference is base * pct/100.",
+    "min_level": 1,
+    "max_level": 4,
+    "choice_spread": 7.0,
+    "vars": [
+      {
+        "name": "base",
+        "kind": "int",
+        "min": 20,
+        "max": 250,
+        "step": 5
+      },
+      {
+        "name": "pct",
+        "kind": "int",
+        "min": 5,
+        "max": 90,
+        "step": 5
+      }
+    ],
+    "active": true
+  },
+  {
+    "external_id": "khan.pull.v1.percent.previous_height.v5",
+    "skill": "stats_percent",
+    "subskill": "Khan percent reverse",
+    "label": "Percent reverse change",
+    "mode": "expression",
+    "prompt_template": "A student's current score is {current} and that is {pct}% higher than the previous score. What was the previous score?",
+    "answer_expr": "current / (1 + pct/100)",
+    "constraint_expr": "(100 + pct) != 0",
+    "explanation_template": "Current is (100% + increase) of previous, so previous = current / (1 + pct/100).",
+    "min_level": 1,
+    "max_level": 4,
+    "choice_spread": 8.0,
+    "vars": [
+      {
+        "name": "current",
+        "kind": "int",
+        "min": 120,
+        "max": 400,
+        "step": 2
+      },
+      {
+        "name": "pct",
+        "kind": "int",
+        "min": 5,
+        "max": 80,
+        "step": 5
+      }
+    ],
+    "active": true
+  },
+  {
+    "external_id": "khan.pull.v1.percent.more_less.v5",
+    "skill": "stats_percent",
+    "subskill": "Khan percent change",
+    "label": "Percent difference amount",
+    "mode": "expression",
+    "prompt_template": "A bottle has {base} mL. The smaller bottle has {pct}% less. How many fewer mL does the smaller bottle have?",
+    "answer_expr": "base * pct / 100",
+    "constraint_expr": "",
+    "explanation_template": "Percent difference is base * pct/100.",
+    "min_level": 1,
+    "max_level": 4,
+    "choice_spread": 7.0,
+    "vars": [
+      {
+        "name": "base",
+        "kind": "int",
+        "min": 20,
+        "max": 250,
+        "step": 5
+      },
+      {
+        "name": "pct",
+        "kind": "int",
+        "min": 5,
+        "max": 90,
+        "step": 5
+      }
+    ],
+    "active": true
+  },
+  {
+    "external_id": "khan.pull.v1.percent.previous_height.v6",
+    "skill": "stats_percent",
+    "subskill": "Khan percent reverse",
+    "label": "Percent reverse change",
+    "mode": "expression",
+    "prompt_template": "A student's current score is {current} and that is {pct}% higher than the previous score. What was the previous score?",
+    "answer_expr": "current / (1 + pct/100)",
+    "constraint_expr": "(100 + pct) != 0",
+    "explanation_template": "Current is (100% + increase) of previous, so previous = current / (1 + pct/100).",
+    "min_level": 1,
+    "max_level": 4,
+    "choice_spread": 8.0,
+    "vars": [
+      {
+        "name": "current",
+        "kind": "int",
+        "min": 120,
+        "max": 400,
+        "step": 2
+      },
+      {
+        "name": "pct",
+        "kind": "int",
+        "min": 5,
+        "max": 80,
+        "step": 5
+      }
+    ],
+    "active": true
+  },
+  {
+    "external_id": "khan.pull.v1.percent.more_less.v6",
+    "skill": "stats_percent",
+    "subskill": "Khan percent change",
+    "label": "Percent difference amount",
+    "mode": "expression",
+    "prompt_template": "A bottle has {base} mL. The smaller bottle has {pct}% less. How many fewer mL does the smaller bottle have?",
+    "answer_expr": "base * pct / 100",
+    "constraint_expr": "",
+    "explanation_template": "Percent difference is base * pct/100.",
+    "min_level": 1,
+    "max_level": 4,
+    "choice_spread": 7.0,
+    "vars": [
+      {
+        "name": "base",
+        "kind": "int",
+        "min": 20,
+        "max": 250,
+        "step": 5
+      },
+      {
+        "name": "pct",
+        "kind": "int",
+        "min": 5,
+        "max": 90,
+        "step": 5
+      }
+    ],
+    "active": true
+  },
+  {
+    "external_id": "khan.pull.v1.percent.previous_height.v7",
+    "skill": "stats_percent",
+    "subskill": "Khan percent reverse",
+    "label": "Percent reverse change",
+    "mode": "expression",
+    "prompt_template": "A student's current score is {current} and that is {pct}% higher than the previous score. What was the previous score?",
+    "answer_expr": "current / (1 + pct/100)",
+    "constraint_expr": "(100 + pct) != 0",
+    "explanation_template": "Current is (100% + increase) of previous, so previous = current / (1 + pct/100).",
+    "min_level": 1,
+    "max_level": 4,
+    "choice_spread": 8.0,
+    "vars": [
+      {
+        "name": "current",
+        "kind": "int",
+        "min": 120,
+        "max": 400,
+        "step": 2
+      },
+      {
+        "name": "pct",
+        "kind": "int",
+        "min": 5,
+        "max": 80,
+        "step": 5
+      }
+    ],
+    "active": true
+  },
+  {
+    "external_id": "khan.pull.v1.percent.more_less.v7",
+    "skill": "stats_percent",
+    "subskill": "Khan percent change",
+    "label": "Percent difference amount",
+    "mode": "expression",
+    "prompt_template": "A bottle has {base} mL. The smaller bottle has {pct}% less. How many fewer mL does the smaller bottle have?",
+    "answer_expr": "base * pct / 100",
+    "constraint_expr": "",
+    "explanation_template": "Percent difference is base * pct/100.",
+    "min_level": 1,
+    "max_level": 4,
+    "choice_spread": 7.0,
+    "vars": [
+      {
+        "name": "base",
+        "kind": "int",
+        "min": 20,
+        "max": 250,
+        "step": 5
+      },
+      {
+        "name": "pct",
+        "kind": "int",
+        "min": 5,
+        "max": 90,
+        "step": 5
+      }
+    ],
+    "active": true
+  },
+  {
+    "external_id": "khan.pull.v1.percent.previous_height.v8",
+    "skill": "stats_percent",
+    "subskill": "Khan percent reverse",
+    "label": "Percent reverse change",
+    "mode": "expression",
+    "prompt_template": "A student's current score is {current} and that is {pct}% higher than the previous score. What was the previous score?",
+    "answer_expr": "current / (1 + pct/100)",
+    "constraint_expr": "(100 + pct) != 0",
+    "explanation_template": "Current is (100% + increase) of previous, so previous = current / (1 + pct/100).",
+    "min_level": 1,
+    "max_level": 4,
+    "choice_spread": 8.0,
+    "vars": [
+      {
+        "name": "current",
+        "kind": "int",
+        "min": 120,
+        "max": 400,
+        "step": 2
+      },
+      {
+        "name": "pct",
+        "kind": "int",
+        "min": 5,
+        "max": 80,
+        "step": 5
+      }
+    ],
+    "active": true
+  },
+  {
+    "external_id": "khan.pull.v1.percent.more_less.v8",
+    "skill": "stats_percent",
+    "subskill": "Khan percent change",
+    "label": "Percent difference amount",
+    "mode": "expression",
+    "prompt_template": "A bottle has {base} mL. The smaller bottle has {pct}% less. How many fewer mL does the smaller bottle have?",
+    "answer_expr": "base * pct / 100",
+    "constraint_expr": "",
+    "explanation_template": "Percent difference is base * pct/100.",
+    "min_level": 1,
+    "max_level": 4,
+    "choice_spread": 7.0,
+    "vars": [
+      {
+        "name": "base",
+        "kind": "int",
+        "min": 20,
+        "max": 250,
+        "step": 5
+      },
+      {
+        "name": "pct",
+        "kind": "int",
+        "min": 5,
+        "max": 90,
+        "step": 5
+      }
+    ],
+    "active": true
+  },
+  {
+    "external_id": "khan.pull.v1.slope.two_points.v1",
+    "skill": "calculus_slope",
+    "subskill": "Khan slope from points",
+    "label": "Slope from two points",
+    "mode": "expression",
+    "prompt_template": "Find the slope of the line through ({x1}, {y1}) and ({x2}, {y2}).",
+    "answer_expr": "(y2 - y1) / (x2 - x1)",
+    "constraint_expr": "x2 != x1",
+    "explanation_template": "Use slope = (y2 - y1)/(x2 - x1).",
+    "min_level": 1,
+    "max_level": 4,
+    "choice_spread": 5.0,
+    "vars": [
+      {
+        "name": "x1",
+        "kind": "int",
+        "min": -8,
+        "max": 5,
+        "step": 1
+      },
+      {
+        "name": "y1",
+        "kind": "int",
+        "min": -10,
+        "max": 10,
+        "step": 1
+      },
+      {
+        "name": "x2",
+        "kind": "int",
+        "min": -4,
+        "max": 10,
+        "step": 1
+      },
+      {
+        "name": "y2",
+        "kind": "int",
+        "min": -10,
+        "max": 12,
+        "step": 1
+      }
+    ],
+    "active": true
+  },
+  {
+    "external_id": "khan.pull.v1.slope.two_points.v2",
+    "skill": "calculus_slope",
+    "subskill": "Khan slope from points",
+    "label": "Slope from two points",
+    "mode": "expression",
+    "prompt_template": "Find the slope of the line through ({x1}, {y1}) and ({x2}, {y2}).",
+    "answer_expr": "(y2 - y1) / (x2 - x1)",
+    "constraint_expr": "x2 != x1",
+    "explanation_template": "Use slope = (y2 - y1)/(x2 - x1).",
+    "min_level": 1,
+    "max_level": 4,
+    "choice_spread": 5.0,
+    "vars": [
+      {
+        "name": "x1",
+        "kind": "int",
+        "min": -8,
+        "max": 5,
+        "step": 1
+      },
+      {
+        "name": "y1",
+        "kind": "int",
+        "min": -10,
+        "max": 10,
+        "step": 1
+      },
+      {
+        "name": "x2",
+        "kind": "int",
+        "min": -4,
+        "max": 10,
+        "step": 1
+      },
+      {
+        "name": "y2",
+        "kind": "int",
+        "min": -10,
+        "max": 12,
+        "step": 1
+      }
+    ],
+    "active": true
+  },
+  {
+    "external_id": "khan.pull.v1.slope.two_points.v3",
+    "skill": "calculus_slope",
+    "subskill": "Khan slope from points",
+    "label": "Slope from two points",
+    "mode": "expression",
+    "prompt_template": "Find the slope of the line through ({x1}, {y1}) and ({x2}, {y2}).",
+    "answer_expr": "(y2 - y1) / (x2 - x1)",
+    "constraint_expr": "x2 != x1",
+    "explanation_template": "Use slope = (y2 - y1)/(x2 - x1).",
+    "min_level": 1,
+    "max_level": 4,
+    "choice_spread": 5.0,
+    "vars": [
+      {
+        "name": "x1",
+        "kind": "int",
+        "min": -8,
+        "max": 5,
+        "step": 1
+      },
+      {
+        "name": "y1",
+        "kind": "int",
+        "min": -10,
+        "max": 10,
+        "step": 1
+      },
+      {
+        "name": "x2",
+        "kind": "int",
+        "min": -4,
+        "max": 10,
+        "step": 1
+      },
+      {
+        "name": "y2",
+        "kind": "int",
+        "min": -10,
+        "max": 12,
+        "step": 1
+      }
+    ],
+    "active": true
+  },
+  {
+    "external_id": "khan.pull.v1.slope.two_points.v4",
+    "skill": "calculus_slope",
+    "subskill": "Khan slope from points",
+    "label": "Slope from two points",
+    "mode": "expression",
+    "prompt_template": "Find the slope of the line through ({x1}, {y1}) and ({x2}, {y2}).",
+    "answer_expr": "(y2 - y1) / (x2 - x1)",
+    "constraint_expr": "x2 != x1",
+    "explanation_template": "Use slope = (y2 - y1)/(x2 - x1).",
+    "min_level": 1,
+    "max_level": 4,
+    "choice_spread": 5.0,
+    "vars": [
+      {
+        "name": "x1",
+        "kind": "int",
+        "min": -8,
+        "max": 5,
+        "step": 1
+      },
+      {
+        "name": "y1",
+        "kind": "int",
+        "min": -10,
+        "max": 10,
+        "step": 1
+      },
+      {
+        "name": "x2",
+        "kind": "int",
+        "min": -4,
+        "max": 10,
+        "step": 1
+      },
+      {
+        "name": "y2",
+        "kind": "int",
+        "min": -10,
+        "max": 12,
+        "step": 1
+      }
+    ],
+    "active": true
+  },
+  {
+    "external_id": "khan.pull.v1.slope.two_points.v5",
+    "skill": "calculus_slope",
+    "subskill": "Khan slope from points",
+    "label": "Slope from two points",
+    "mode": "expression",
+    "prompt_template": "Find the slope of the line through ({x1}, {y1}) and ({x2}, {y2}).",
+    "answer_expr": "(y2 - y1) / (x2 - x1)",
+    "constraint_expr": "x2 != x1",
+    "explanation_template": "Use slope = (y2 - y1)/(x2 - x1).",
+    "min_level": 1,
+    "max_level": 4,
+    "choice_spread": 5.0,
+    "vars": [
+      {
+        "name": "x1",
+        "kind": "int",
+        "min": -8,
+        "max": 5,
+        "step": 1
+      },
+      {
+        "name": "y1",
+        "kind": "int",
+        "min": -10,
+        "max": 10,
+        "step": 1
+      },
+      {
+        "name": "x2",
+        "kind": "int",
+        "min": -4,
+        "max": 10,
+        "step": 1
+      },
+      {
+        "name": "y2",
+        "kind": "int",
+        "min": -10,
+        "max": 12,
+        "step": 1
+      }
+    ],
+    "active": true
+  },
+  {
+    "external_id": "khan.pull.v1.slope.two_points.v6",
+    "skill": "calculus_slope",
+    "subskill": "Khan slope from points",
+    "label": "Slope from two points",
+    "mode": "expression",
+    "prompt_template": "Find the slope of the line through ({x1}, {y1}) and ({x2}, {y2}).",
+    "answer_expr": "(y2 - y1) / (x2 - x1)",
+    "constraint_expr": "x2 != x1",
+    "explanation_template": "Use slope = (y2 - y1)/(x2 - x1).",
+    "min_level": 1,
+    "max_level": 4,
+    "choice_spread": 5.0,
+    "vars": [
+      {
+        "name": "x1",
+        "kind": "int",
+        "min": -8,
+        "max": 5,
+        "step": 1
+      },
+      {
+        "name": "y1",
+        "kind": "int",
+        "min": -10,
+        "max": 10,
+        "step": 1
+      },
+      {
+        "name": "x2",
+        "kind": "int",
+        "min": -4,
+        "max": 10,
+        "step": 1
+      },
+      {
+        "name": "y2",
+        "kind": "int",
+        "min": -10,
+        "max": 12,
+        "step": 1
+      }
+    ],
+    "active": true
+  },
+  {
+    "external_id": "khan.pull.v1.area.rectangle.v1",
+    "skill": "geometry_area",
+    "subskill": "Khan rectangles",
+    "label": "Area of rectangle",
+    "mode": "expression",
+    "prompt_template": "What is the area of a rectangle with side lengths {w} and {h}?",
+    "answer_expr": "w * h",
+    "constraint_expr": "",
+    "explanation_template": "Area of a rectangle is width * height.",
+    "min_level": 1,
+    "max_level": 4,
+    "choice_spread": 12.0,
+    "vars": [
+      {
+        "name": "w",
+        "kind": "int",
+        "min": 2,
+        "max": 24,
+        "step": 1
+      },
+      {
+        "name": "h",
+        "kind": "int",
+        "min": 2,
+        "max": 18,
+        "step": 1
+      }
+    ],
+    "active": true
+  },
+  {
+    "external_id": "khan.pull.v1.area.rectangle.v2",
+    "skill": "geometry_area",
+    "subskill": "Khan rectangles",
+    "label": "Area of rectangle",
+    "mode": "expression",
+    "prompt_template": "What is the area of a rectangle with side lengths {w} and {h}?",
+    "answer_expr": "w * h",
+    "constraint_expr": "",
+    "explanation_template": "Area of a rectangle is width * height.",
+    "min_level": 1,
+    "max_level": 4,
+    "choice_spread": 12.0,
+    "vars": [
+      {
+        "name": "w",
+        "kind": "int",
+        "min": 2,
+        "max": 24,
+        "step": 1
+      },
+      {
+        "name": "h",
+        "kind": "int",
+        "min": 2,
+        "max": 18,
+        "step": 1
+      }
+    ],
+    "active": true
+  },
+  {
+    "external_id": "khan.pull.v1.area.rectangle.v3",
+    "skill": "geometry_area",
+    "subskill": "Khan rectangles",
+    "label": "Area of rectangle",
+    "mode": "expression",
+    "prompt_template": "What is the area of a rectangle with side lengths {w} and {h}?",
+    "answer_expr": "w * h",
+    "constraint_expr": "",
+    "explanation_template": "Area of a rectangle is width * height.",
+    "min_level": 1,
+    "max_level": 4,
+    "choice_spread": 12.0,
+    "vars": [
+      {
+        "name": "w",
+        "kind": "int",
+        "min": 2,
+        "max": 24,
+        "step": 1
+      },
+      {
+        "name": "h",
+        "kind": "int",
+        "min": 2,
+        "max": 18,
+        "step": 1
+      }
+    ],
+    "active": true
+  },
+  {
+    "external_id": "khan.pull.v1.area.rectangle.v4",
+    "skill": "geometry_area",
+    "subskill": "Khan rectangles",
+    "label": "Area of rectangle",
+    "mode": "expression",
+    "prompt_template": "What is the area of a rectangle with side lengths {w} and {h}?",
+    "answer_expr": "w * h",
+    "constraint_expr": "",
+    "explanation_template": "Area of a rectangle is width * height.",
+    "min_level": 1,
+    "max_level": 4,
+    "choice_spread": 12.0,
+    "vars": [
+      {
+        "name": "w",
+        "kind": "int",
+        "min": 2,
+        "max": 24,
+        "step": 1
+      },
+      {
+        "name": "h",
+        "kind": "int",
+        "min": 2,
+        "max": 18,
+        "step": 1
+      }
+    ],
+    "active": true
+  },
+  {
+    "external_id": "khan.pull.v1.area.rectangle.v5",
+    "skill": "geometry_area",
+    "subskill": "Khan rectangles",
+    "label": "Area of rectangle",
+    "mode": "expression",
+    "prompt_template": "What is the area of a rectangle with side lengths {w} and {h}?",
+    "answer_expr": "w * h",
+    "constraint_expr": "",
+    "explanation_template": "Area of a rectangle is width * height.",
+    "min_level": 1,
+    "max_level": 4,
+    "choice_spread": 12.0,
+    "vars": [
+      {
+        "name": "w",
+        "kind": "int",
+        "min": 2,
+        "max": 24,
+        "step": 1
+      },
+      {
+        "name": "h",
+        "kind": "int",
+        "min": 2,
+        "max": 18,
+        "step": 1
+      }
+    ],
+    "active": true
+  },
+  {
+    "external_id": "khan.pull.v1.area.rectangle.v6",
+    "skill": "geometry_area",
+    "subskill": "Khan rectangles",
+    "label": "Area of rectangle",
+    "mode": "expression",
+    "prompt_template": "What is the area of a rectangle with side lengths {w} and {h}?",
+    "answer_expr": "w * h",
+    "constraint_expr": "",
+    "explanation_template": "Area of a rectangle is width * height.",
+    "min_level": 1,
+    "max_level": 4,
+    "choice_spread": 12.0,
+    "vars": [
+      {
+        "name": "w",
+        "kind": "int",
+        "min": 2,
+        "max": 24,
+        "step": 1
+      },
+      {
+        "name": "h",
+        "kind": "int",
+        "min": 2,
+        "max": 18,
+        "step": 1
+      }
+    ],
+    "active": true
+  },
+  {
+    "external_id": "khan.pull.v1.algebra.two_step.v1",
+    "skill": "algebra_linear",
+    "subskill": "Khan two-step equations",
+    "label": "Solve two-step equation",
+    "mode": "expression",
+    "prompt_template": "Solve for x: {a}x + {b} = {c}",
+    "answer_expr": "(c - b) / a",
+    "constraint_expr": "a != 0 and (c - b) % a == 0",
+    "explanation_template": "Subtract b from both sides, then divide by a.",
+    "min_level": 1,
+    "max_level": 4,
+    "choice_spread": 8.0,
+    "vars": [
+      {
+        "name": "a",
+        "kind": "int",
+        "min": 2,
+        "max": 12,
+        "step": 1
+      },
+      {
+        "name": "b",
+        "kind": "int",
+        "min": -30,
+        "max": 30,
+        "step": 1
+      },
+      {
+        "name": "c",
+        "kind": "int",
+        "min": -50,
+        "max": 50,
+        "step": 1
+      }
+    ],
+    "active": true
+  },
+  {
+    "external_id": "khan.pull.v1.algebra.two_step.v2",
+    "skill": "algebra_linear",
+    "subskill": "Khan two-step equations",
+    "label": "Solve two-step equation",
+    "mode": "expression",
+    "prompt_template": "Solve for x: {a}x + {b} = {c}",
+    "answer_expr": "(c - b) / a",
+    "constraint_expr": "a != 0 and (c - b) % a == 0",
+    "explanation_template": "Subtract b from both sides, then divide by a.",
+    "min_level": 1,
+    "max_level": 4,
+    "choice_spread": 8.0,
+    "vars": [
+      {
+        "name": "a",
+        "kind": "int",
+        "min": 2,
+        "max": 12,
+        "step": 1
+      },
+      {
+        "name": "b",
+        "kind": "int",
+        "min": -30,
+        "max": 30,
+        "step": 1
+      },
+      {
+        "name": "c",
+        "kind": "int",
+        "min": -50,
+        "max": 50,
+        "step": 1
+      }
+    ],
+    "active": true
+  },
+  {
+    "external_id": "khan.pull.v1.algebra.two_step.v3",
+    "skill": "algebra_linear",
+    "subskill": "Khan two-step equations",
+    "label": "Solve two-step equation",
+    "mode": "expression",
+    "prompt_template": "Solve for x: {a}x + {b} = {c}",
+    "answer_expr": "(c - b) / a",
+    "constraint_expr": "a != 0 and (c - b) % a == 0",
+    "explanation_template": "Subtract b from both sides, then divide by a.",
+    "min_level": 1,
+    "max_level": 4,
+    "choice_spread": 8.0,
+    "vars": [
+      {
+        "name": "a",
+        "kind": "int",
+        "min": 2,
+        "max": 12,
+        "step": 1
+      },
+      {
+        "name": "b",
+        "kind": "int",
+        "min": -30,
+        "max": 30,
+        "step": 1
+      },
+      {
+        "name": "c",
+        "kind": "int",
+        "min": -50,
+        "max": 50,
+        "step": 1
+      }
+    ],
+    "active": true
+  },
+  {
+    "external_id": "khan.pull.v1.algebra.two_step.v4",
+    "skill": "algebra_linear",
+    "subskill": "Khan two-step equations",
+    "label": "Solve two-step equation",
+    "mode": "expression",
+    "prompt_template": "Solve for x: {a}x + {b} = {c}",
+    "answer_expr": "(c - b) / a",
+    "constraint_expr": "a != 0 and (c - b) % a == 0",
+    "explanation_template": "Subtract b from both sides, then divide by a.",
+    "min_level": 1,
+    "max_level": 4,
+    "choice_spread": 8.0,
+    "vars": [
+      {
+        "name": "a",
+        "kind": "int",
+        "min": 2,
+        "max": 12,
+        "step": 1
+      },
+      {
+        "name": "b",
+        "kind": "int",
+        "min": -30,
+        "max": 30,
+        "step": 1
+      },
+      {
+        "name": "c",
+        "kind": "int",
+        "min": -50,
+        "max": 50,
+        "step": 1
+      }
+    ],
+    "active": true
+  },
+  {
+    "external_id": "khan.pull.v1.algebra.two_step.v5",
+    "skill": "algebra_linear",
+    "subskill": "Khan two-step equations",
+    "label": "Solve two-step equation",
+    "mode": "expression",
+    "prompt_template": "Solve for x: {a}x + {b} = {c}",
+    "answer_expr": "(c - b) / a",
+    "constraint_expr": "a != 0 and (c - b) % a == 0",
+    "explanation_template": "Subtract b from both sides, then divide by a.",
+    "min_level": 1,
+    "max_level": 4,
+    "choice_spread": 8.0,
+    "vars": [
+      {
+        "name": "a",
+        "kind": "int",
+        "min": 2,
+        "max": 12,
+        "step": 1
+      },
+      {
+        "name": "b",
+        "kind": "int",
+        "min": -30,
+        "max": 30,
+        "step": 1
+      },
+      {
+        "name": "c",
+        "kind": "int",
+        "min": -50,
+        "max": 50,
+        "step": 1
+      }
+    ],
+    "active": true
+  },
+  {
+    "external_id": "khan.pull.v1.algebra.two_step.v6",
+    "skill": "algebra_linear",
+    "subskill": "Khan two-step equations",
+    "label": "Solve two-step equation",
+    "mode": "expression",
+    "prompt_template": "Solve for x: {a}x + {b} = {c}",
+    "answer_expr": "(c - b) / a",
+    "constraint_expr": "a != 0 and (c - b) % a == 0",
+    "explanation_template": "Subtract b from both sides, then divide by a.",
+    "min_level": 1,
+    "max_level": 4,
+    "choice_spread": 8.0,
+    "vars": [
+      {
+        "name": "a",
+        "kind": "int",
+        "min": 2,
+        "max": 12,
+        "step": 1
+      },
+      {
+        "name": "b",
+        "kind": "int",
+        "min": -30,
+        "max": 30,
+        "step": 1
+      },
+      {
+        "name": "c",
+        "kind": "int",
+        "min": -50,
+        "max": 50,
+        "step": 1
+      }
+    ],
+    "active": true
+  },
+  {
+    "external_id": "khan.pull.v1.algebra.two_step.v7",
+    "skill": "algebra_linear",
+    "subskill": "Khan two-step equations",
+    "label": "Solve two-step equation",
+    "mode": "expression",
+    "prompt_template": "Solve for x: {a}x + {b} = {c}",
+    "answer_expr": "(c - b) / a",
+    "constraint_expr": "a != 0 and (c - b) % a == 0",
+    "explanation_template": "Subtract b from both sides, then divide by a.",
+    "min_level": 1,
+    "max_level": 4,
+    "choice_spread": 8.0,
+    "vars": [
+      {
+        "name": "a",
+        "kind": "int",
+        "min": 2,
+        "max": 12,
+        "step": 1
+      },
+      {
+        "name": "b",
+        "kind": "int",
+        "min": -30,
+        "max": 30,
+        "step": 1
+      },
+      {
+        "name": "c",
+        "kind": "int",
+        "min": -50,
+        "max": 50,
+        "step": 1
+      }
+    ],
+    "active": true
+  },
+  {
+    "external_id": "khan.pull.v1.algebra.two_step.v8",
+    "skill": "algebra_linear",
+    "subskill": "Khan two-step equations",
+    "label": "Solve two-step equation",
+    "mode": "expression",
+    "prompt_template": "Solve for x: {a}x + {b} = {c}",
+    "answer_expr": "(c - b) / a",
+    "constraint_expr": "a != 0 and (c - b) % a == 0",
+    "explanation_template": "Subtract b from both sides, then divide by a.",
+    "min_level": 1,
+    "max_level": 4,
+    "choice_spread": 8.0,
+    "vars": [
+      {
+        "name": "a",
+        "kind": "int",
+        "min": 2,
+        "max": 12,
+        "step": 1
+      },
+      {
+        "name": "b",
+        "kind": "int",
+        "min": -30,
+        "max": 30,
+        "step": 1
+      },
+      {
+        "name": "c",
+        "kind": "int",
+        "min": -50,
+        "max": 50,
+        "step": 1
+      }
+    ],
+    "active": true
+  },
+  {
+    "external_id": "khan.pull.v1.mean.five_values.v1",
+    "skill": "stats_mean",
+    "subskill": "Khan mean from display",
+    "label": "Mean of five values",
+    "mode": "expression",
+    "prompt_template": "Find the mean of the values: {a}, {b}, {c}, {d}, {e}.",
+    "answer_expr": "(a + b + c + d + e) / 5",
+    "constraint_expr": "(a + b + c + d + e) % 5 == 0",
+    "explanation_template": "Add all values and divide by 5.",
+    "min_level": 1,
+    "max_level": 4,
+    "choice_spread": 6.0,
+    "vars": [
+      {
+        "name": "a",
+        "kind": "int",
+        "min": 1,
+        "max": 30,
+        "step": 1
+      },
+      {
+        "name": "b",
+        "kind": "int",
+        "min": 1,
+        "max": 30,
+        "step": 1
+      },
+      {
+        "name": "c",
+        "kind": "int",
+        "min": 1,
+        "max": 30,
+        "step": 1
+      },
+      {
+        "name": "d",
+        "kind": "int",
+        "min": 1,
+        "max": 30,
+        "step": 1
+      },
+      {
+        "name": "e",
+        "kind": "int",
+        "min": 1,
+        "max": 30,
+        "step": 1
+      }
+    ],
+    "active": true
+  },
+  {
+    "external_id": "khan.pull.v1.mean.five_values.v2",
+    "skill": "stats_mean",
+    "subskill": "Khan mean from display",
+    "label": "Mean of five values",
+    "mode": "expression",
+    "prompt_template": "Find the mean of the values: {a}, {b}, {c}, {d}, {e}.",
+    "answer_expr": "(a + b + c + d + e) / 5",
+    "constraint_expr": "(a + b + c + d + e) % 5 == 0",
+    "explanation_template": "Add all values and divide by 5.",
+    "min_level": 1,
+    "max_level": 4,
+    "choice_spread": 6.0,
+    "vars": [
+      {
+        "name": "a",
+        "kind": "int",
+        "min": 1,
+        "max": 30,
+        "step": 1
+      },
+      {
+        "name": "b",
+        "kind": "int",
+        "min": 1,
+        "max": 30,
+        "step": 1
+      },
+      {
+        "name": "c",
+        "kind": "int",
+        "min": 1,
+        "max": 30,
+        "step": 1
+      },
+      {
+        "name": "d",
+        "kind": "int",
+        "min": 1,
+        "max": 30,
+        "step": 1
+      },
+      {
+        "name": "e",
+        "kind": "int",
+        "min": 1,
+        "max": 30,
+        "step": 1
+      }
+    ],
+    "active": true
+  },
+  {
+    "external_id": "khan.pull.v1.mean.five_values.v3",
+    "skill": "stats_mean",
+    "subskill": "Khan mean from display",
+    "label": "Mean of five values",
+    "mode": "expression",
+    "prompt_template": "Find the mean of the values: {a}, {b}, {c}, {d}, {e}.",
+    "answer_expr": "(a + b + c + d + e) / 5",
+    "constraint_expr": "(a + b + c + d + e) % 5 == 0",
+    "explanation_template": "Add all values and divide by 5.",
+    "min_level": 1,
+    "max_level": 4,
+    "choice_spread": 6.0,
+    "vars": [
+      {
+        "name": "a",
+        "kind": "int",
+        "min": 1,
+        "max": 30,
+        "step": 1
+      },
+      {
+        "name": "b",
+        "kind": "int",
+        "min": 1,
+        "max": 30,
+        "step": 1
+      },
+      {
+        "name": "c",
+        "kind": "int",
+        "min": 1,
+        "max": 30,
+        "step": 1
+      },
+      {
+        "name": "d",
+        "kind": "int",
+        "min": 1,
+        "max": 30,
+        "step": 1
+      },
+      {
+        "name": "e",
+        "kind": "int",
+        "min": 1,
+        "max": 30,
+        "step": 1
+      }
+    ],
+    "active": true
+  },
+  {
+    "external_id": "khan.pull.v1.mean.five_values.v4",
+    "skill": "stats_mean",
+    "subskill": "Khan mean from display",
+    "label": "Mean of five values",
+    "mode": "expression",
+    "prompt_template": "Find the mean of the values: {a}, {b}, {c}, {d}, {e}.",
+    "answer_expr": "(a + b + c + d + e) / 5",
+    "constraint_expr": "(a + b + c + d + e) % 5 == 0",
+    "explanation_template": "Add all values and divide by 5.",
+    "min_level": 1,
+    "max_level": 4,
+    "choice_spread": 6.0,
+    "vars": [
+      {
+        "name": "a",
+        "kind": "int",
+        "min": 1,
+        "max": 30,
+        "step": 1
+      },
+      {
+        "name": "b",
+        "kind": "int",
+        "min": 1,
+        "max": 30,
+        "step": 1
+      },
+      {
+        "name": "c",
+        "kind": "int",
+        "min": 1,
+        "max": 30,
+        "step": 1
+      },
+      {
+        "name": "d",
+        "kind": "int",
+        "min": 1,
+        "max": 30,
+        "step": 1
+      },
+      {
+        "name": "e",
+        "kind": "int",
+        "min": 1,
+        "max": 30,
+        "step": 1
+      }
+    ],
+    "active": true
+  },
+  {
+    "external_id": "khan.pull.v1.sat.linear_fee.v1",
+    "skill": "sat_math",
+    "subskill": "SAT modeling (Khan style)",
+    "label": "SAT fee model",
+    "mode": "expression",
+    "prompt_template": "An event charges a fixed fee of ${f} plus ${r} per guest. If the total bill is ${t}, how many guests attended?",
+    "answer_expr": "(t - f) / r",
+    "constraint_expr": "r != 0 and (t - f) % r == 0 and t > f",
+    "explanation_template": "Set up t = f + r*g and solve for g.",
+    "min_level": 1,
+    "max_level": 4,
+    "choice_spread": 10.0,
+    "vars": [
+      {
+        "name": "f",
+        "kind": "int",
+        "min": 10,
+        "max": 120,
+        "step": 1
+      },
+      {
+        "name": "r",
+        "kind": "int",
+        "min": 2,
+        "max": 25,
+        "step": 1
+      },
+      {
+        "name": "t",
+        "kind": "int",
+        "min": 100,
+        "max": 900,
+        "step": 1
+      }
+    ],
+    "active": true
+  },
+  {
+    "external_id": "khan.pull.v1.sat.linear_fee.v2",
+    "skill": "sat_math",
+    "subskill": "SAT modeling (Khan style)",
+    "label": "SAT fee model",
+    "mode": "expression",
+    "prompt_template": "An event charges a fixed fee of ${f} plus ${r} per guest. If the total bill is ${t}, how many guests attended?",
+    "answer_expr": "(t - f) / r",
+    "constraint_expr": "r != 0 and (t - f) % r == 0 and t > f",
+    "explanation_template": "Set up t = f + r*g and solve for g.",
+    "min_level": 1,
+    "max_level": 4,
+    "choice_spread": 10.0,
+    "vars": [
+      {
+        "name": "f",
+        "kind": "int",
+        "min": 10,
+        "max": 120,
+        "step": 1
+      },
+      {
+        "name": "r",
+        "kind": "int",
+        "min": 2,
+        "max": 25,
+        "step": 1
+      },
+      {
+        "name": "t",
+        "kind": "int",
+        "min": 100,
+        "max": 900,
+        "step": 1
+      }
+    ],
+    "active": true
+  },
+  {
+    "external_id": "khan.pull.v1.sat.linear_fee.v3",
+    "skill": "sat_math",
+    "subskill": "SAT modeling (Khan style)",
+    "label": "SAT fee model",
+    "mode": "expression",
+    "prompt_template": "An event charges a fixed fee of ${f} plus ${r} per guest. If the total bill is ${t}, how many guests attended?",
+    "answer_expr": "(t - f) / r",
+    "constraint_expr": "r != 0 and (t - f) % r == 0 and t > f",
+    "explanation_template": "Set up t = f + r*g and solve for g.",
+    "min_level": 1,
+    "max_level": 4,
+    "choice_spread": 10.0,
+    "vars": [
+      {
+        "name": "f",
+        "kind": "int",
+        "min": 10,
+        "max": 120,
+        "step": 1
+      },
+      {
+        "name": "r",
+        "kind": "int",
+        "min": 2,
+        "max": 25,
+        "step": 1
+      },
+      {
+        "name": "t",
+        "kind": "int",
+        "min": 100,
+        "max": 900,
+        "step": 1
+      }
+    ],
+    "active": true
+  },
+  {
+    "external_id": "khan.pull.v1.sat.linear_fee.v4",
+    "skill": "sat_math",
+    "subskill": "SAT modeling (Khan style)",
+    "label": "SAT fee model",
+    "mode": "expression",
+    "prompt_template": "An event charges a fixed fee of ${f} plus ${r} per guest. If the total bill is ${t}, how many guests attended?",
+    "answer_expr": "(t - f) / r",
+    "constraint_expr": "r != 0 and (t - f) % r == 0 and t > f",
+    "explanation_template": "Set up t = f + r*g and solve for g.",
+    "min_level": 1,
+    "max_level": 4,
+    "choice_spread": 10.0,
+    "vars": [
+      {
+        "name": "f",
+        "kind": "int",
+        "min": 10,
+        "max": 120,
+        "step": 1
+      },
+      {
+        "name": "r",
+        "kind": "int",
+        "min": 2,
+        "max": 25,
+        "step": 1
+      },
+      {
+        "name": "t",
+        "kind": "int",
+        "min": 100,
+        "max": 900,
+        "step": 1
+      }
+    ],
+    "active": true
+  },
+  {
+    "external_id": "khan.pull.v1.gre.percent_change.v1",
+    "skill": "gre_quant",
+    "subskill": "GRE percent reasoning",
+    "label": "GRE percent change",
+    "mode": "expression",
+    "prompt_template": "A quantity increases from {old} to {new}. What is the percent increase?",
+    "answer_expr": "(new - old) * 100 / old",
+    "constraint_expr": "old > 0 and new > old",
+    "explanation_template": "Percent increase = (new - old)/old * 100.",
+    "min_level": 1,
+    "max_level": 4,
+    "choice_spread": 9.0,
+    "vars": [
+      {
+        "name": "old",
+        "kind": "int",
+        "min": 20,
+        "max": 300,
+        "step": 1
+      },
+      {
+        "name": "new",
+        "kind": "int",
+        "min": 25,
+        "max": 500,
+        "step": 1
+      }
+    ],
+    "active": true
+  },
+  {
+    "external_id": "khan.pull.v1.gre.percent_change.v2",
+    "skill": "gre_quant",
+    "subskill": "GRE percent reasoning",
+    "label": "GRE percent change",
+    "mode": "expression",
+    "prompt_template": "A quantity increases from {old} to {new}. What is the percent increase?",
+    "answer_expr": "(new - old) * 100 / old",
+    "constraint_expr": "old > 0 and new > old",
+    "explanation_template": "Percent increase = (new - old)/old * 100.",
+    "min_level": 1,
+    "max_level": 4,
+    "choice_spread": 9.0,
+    "vars": [
+      {
+        "name": "old",
+        "kind": "int",
+        "min": 20,
+        "max": 300,
+        "step": 1
+      },
+      {
+        "name": "new",
+        "kind": "int",
+        "min": 25,
+        "max": 500,
+        "step": 1
+      }
+    ],
+    "active": true
+  },
+  {
+    "external_id": "khan.pull.v1.gre.percent_change.v3",
+    "skill": "gre_quant",
+    "subskill": "GRE percent reasoning",
+    "label": "GRE percent change",
+    "mode": "expression",
+    "prompt_template": "A quantity increases from {old} to {new}. What is the percent increase?",
+    "answer_expr": "(new - old) * 100 / old",
+    "constraint_expr": "old > 0 and new > old",
+    "explanation_template": "Percent increase = (new - old)/old * 100.",
+    "min_level": 1,
+    "max_level": 4,
+    "choice_spread": 9.0,
+    "vars": [
+      {
+        "name": "old",
+        "kind": "int",
+        "min": 20,
+        "max": 300,
+        "step": 1
+      },
+      {
+        "name": "new",
+        "kind": "int",
+        "min": 25,
+        "max": 500,
+        "step": 1
+      }
+    ],
+    "active": true
+  },
+  {
+    "external_id": "khan.pull.v1.gre.percent_change.v4",
+    "skill": "gre_quant",
+    "subskill": "GRE percent reasoning",
+    "label": "GRE percent change",
+    "mode": "expression",
+    "prompt_template": "A quantity increases from {old} to {new}. What is the percent increase?",
+    "answer_expr": "(new - old) * 100 / old",
+    "constraint_expr": "old > 0 and new > old",
+    "explanation_template": "Percent increase = (new - old)/old * 100.",
+    "min_level": 1,
+    "max_level": 4,
+    "choice_spread": 9.0,
+    "vars": [
+      {
+        "name": "old",
+        "kind": "int",
+        "min": 20,
+        "max": 300,
+        "step": 1
+      },
+      {
+        "name": "new",
+        "kind": "int",
+        "min": 25,
+        "max": 500,
+        "step": 1
+      }
+    ],
+    "active": true
+  }
+]

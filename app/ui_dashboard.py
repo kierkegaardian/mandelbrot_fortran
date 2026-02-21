@@ -5,11 +5,12 @@ import tkinter as tk
 from tkinter import ttk
 
 from . import db
+from .learning_engine import build_skill_stats, recommend_next_skills_soft
 from .skill_graph import (
     SKILL_LABELS,
     SKILL_ORDER,
+    SKILL_PREREQUISITE_WEIGHTS,
     SUBSKILL_STREAK_TO_MASTER,
-    recommend_next_skills,
     subskills_for,
 )
 
@@ -124,6 +125,9 @@ class DashboardPanel:
             self._assignment_target.level,
             self._assignment_target.num_questions,
             self._assignment_target.question_type,
+            self._assignment_target.mode_intuition_pct,
+            self._assignment_target.mode_expression_pct,
+            self._assignment_target.mode_word_pct,
         )
 
     def render(self) -> None:
@@ -143,23 +147,24 @@ class DashboardPanel:
             self.assignment_btn.state(["disabled"])
             return
         attempts = db.list_attempts(profile.id)
-        stats = {skill: {"score": 0, "total": 0, "attempts": 0} for skill in SKILL_ORDER}
-        for attempt in attempts:
-            skill = attempt.skill
-            if skill not in stats:
-                stats[skill] = {"score": 0, "total": 0, "attempts": 0}
-            stats[skill]["score"] += attempt.score
-            stats[skill]["total"] += attempt.num_questions
-            stats[skill]["attempts"] += 1
+        skill_stats = build_skill_stats(attempts, tuple(SKILL_ORDER))
+        activity = db.skill_progress_pipeline(profile.id)
+        stats = {
+            skill: {"score": item.correct_questions, "total": item.total_questions, "attempts": item.attempts}
+            for skill, item in skill_stats.items()
+        }
+        subskill_coverage = _subskill_coverage_by_skill(profile.id)
 
         mastery_map: dict[str, str] = {}
         counts = {label: 0 for label in self.tile_vars}
         for skill in SKILL_ORDER:
-            data = stats.get(skill, {"score": 0, "total": 0, "attempts": 0})
-            attempts_count = data["attempts"]
-            total = data["total"]
-            avg = (data["score"] / total * 100) if total else 0
-            mastery = _mastery_label(attempts_count, avg)
+            item = skill_stats.get(skill)
+            if item is None:
+                avg = 0.0
+                mastery = "Not started"
+            else:
+                avg = item.weighted_accuracy
+                mastery = item.mastery
             mastery_map[skill] = mastery
             if mastery in counts:
                 counts[mastery] += 1
@@ -173,8 +178,17 @@ class DashboardPanel:
             var.set(f"{label}: {counts.get(label, 0)}")
 
         completed = sum(1 for s in SKILL_ORDER if mastery_map.get(s) == "Mastered")
-        self.summary_var.set(f"{profile.name}: {completed}/{len(SKILL_ORDER)} skills mastered")
-        recommendations = recommend_next_skills(mastery_map)
+        total_questions = sum(item.get("questions", 0) for item in activity.values())
+        total_worksheets = sum(item.get("worksheets", 0) for item in activity.values())
+        self.summary_var.set(
+            f"{profile.name}: {completed}/{len(SKILL_ORDER)} mastered • {total_questions} quiz Qs • {total_worksheets} worksheets"
+        )
+        recommendations = recommend_next_skills_soft(
+            tuple(SKILL_ORDER),
+            SKILL_PREREQUISITE_WEIGHTS,
+            skill_stats,
+            subskill_coverage=subskill_coverage,
+        )
         if recommendations:
             labels = [SKILL_LABELS.get(skill, skill) for skill in recommendations]
             self.reco_var.set(f"Recommended next: {', '.join(labels)}")
@@ -233,24 +247,33 @@ class DashboardPanel:
                     continue
                 try:
                     updated = datetime.fromisoformat(item.updated_at)
-                except ValueError:
+                except (ValueError, TypeError):
                     continue
+                if updated.tzinfo is None:
+                    updated = updated.replace(tzinfo=timezone.utc)
                 age_days = int((now - updated).total_seconds() // 86400)
-                if item.mastered and age_days >= 30:
-                    due.append((1, age_days, skill, subskill, f"{age_days}d ago"))
-                elif (not item.mastered) and age_days >= 7:
-                    due.append((2, age_days, skill, subskill, f"{age_days}d ago"))
+                if item.mastered and age_days >= 21:
+                    due.append((3, age_days, skill, subskill, f"maintenance {age_days}d"))
+                elif (not item.mastered) and item.current_streak <= 0 and age_days >= 3:
+                    due.append((1, age_days, skill, subskill, f"rebuild {age_days}d"))
+                elif (not item.mastered) and item.current_streak < SUBSKILL_STREAK_TO_MASTER and age_days >= 5:
+                    due.append((2, age_days, skill, subskill, f"streak {age_days}d"))
+                elif (not item.mastered) and age_days >= 10:
+                    due.append((3, age_days, skill, subskill, f"stale {age_days}d"))
+
+        today_count, streak = db.daily_goal_status(profile_id)
+        goal_text = f"Goal streak: {streak} day(s), today: {today_count} review(s)"
 
         if not due:
             self._daily_target = None
-            self.daily_var.set("Daily review: all caught up")
+            self.daily_var.set(f"Daily review: all caught up • {goal_text}")
             self.daily_btn.state(["disabled"])
             return
 
         due.sort(key=lambda t: (t[0], -t[1], SKILL_ORDER.index(t[2])))
         _priority, _age, skill, subskill, status = due[0]
         self._daily_target = (skill, subskill)
-        self.daily_var.set(f"Daily review: {SKILL_LABELS.get(skill, skill)} – {subskill} ({status})")
+        self.daily_var.set(f"Daily review: {SKILL_LABELS.get(skill, skill)} – {subskill} ({status}) • {goal_text}")
         if self._quiz_launcher is None:
             self.daily_btn.state(["disabled"])
         else:
@@ -265,7 +288,7 @@ class DashboardPanel:
             return
         target = assignment.target_type
         if target == "quiz_score_pct":
-            target_text = f"score >= {assignment.target_value:.0f}%"
+            target_text = "score = 100%"
         elif target == "subskill_mastered":
             target_text = "master subskill"
         else:
@@ -285,13 +308,17 @@ def _streak_graph(current: int, target: int) -> str:
     return ("🔥" * blocks) + ("⬜" * (target - blocks))
 
 
-def _mastery_label(attempts: int, avg: float) -> str:
-    if attempts == 0:
-        return "Not started"
-    if avg >= 90:
-        return "Mastered"
-    if avg >= 75:
-        return "Proficient"
-    if avg >= 60:
-        return "Developing"
-    return "Needs work"
+def _subskill_coverage_by_skill(profile_id: int) -> dict[str, float]:
+    progress = db.list_subskill_progress(profile_id)
+    by_skill: dict[str, dict[str, int]] = {}
+    for item in progress:
+        if item.skill not in by_skill:
+            by_skill[item.skill] = {"mastered": 0, "total": 0}
+        by_skill[item.skill]["total"] += 1
+        if item.mastered:
+            by_skill[item.skill]["mastered"] += 1
+    coverage: dict[str, float] = {}
+    for skill, counts in by_skill.items():
+        total = max(1, counts["total"])
+        coverage[skill] = float(counts["mastered"]) / float(total)
+    return coverage

@@ -15,6 +15,9 @@ class ExplanationPanel:
         self._why_short = tk.StringVar(value="")
         self._how_long = ""
         self._why_long = ""
+        self._mental_model = ""
+        self._common_mistake = ""
+        self._try_this = ""
         self._history = ""
         self._show_more = tk.BooleanVar(value=False)
         self._detail_window: tk.Toplevel | None = None
@@ -54,6 +57,9 @@ class ExplanationPanel:
         self._why_short.set(explanation.why_short)
         self._how_long = explanation.how_long
         self._why_long = explanation.why_long
+        self._mental_model = explanation.mental_model
+        self._common_mistake = explanation.common_mistake
+        self._try_this = explanation.try_this
         self._history = explanation.history
         if self._show_more.get():
             self._update_more()
@@ -76,6 +82,12 @@ class ExplanationPanel:
         target.delete("1.0", tk.END)
         self._insert_section(target, "How to use", self._how_long)
         self._insert_section(target, "Why it works", self._why_long)
+        if self._mental_model:
+            self._insert_section(target, "Mental model", self._mental_model)
+        if self._common_mistake:
+            self._insert_section(target, "Common mistake", self._common_mistake)
+        if self._try_this:
+            self._insert_section(target, "Try this", self._try_this)
         if self._history:
             self._insert_section(target, "History", self._history)
 

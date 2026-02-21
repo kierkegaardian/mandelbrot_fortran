@@ -21,6 +21,11 @@ def main() -> None:
         action="store_true",
         help="Do not delete existing templates with the same (skill, subskill, label) before inserting.",
     )
+    parser.add_argument(
+        "--require-external-id",
+        action="store_true",
+        help="Fail if a manifest item does not include external_id.",
+    )
     args = parser.parse_args()
 
     db.init_db()
@@ -32,8 +37,13 @@ def main() -> None:
 
     created = 0
     replaced = 0
+    missing_external_id = 0
     for item in raw:
         external_id = str(item.get("external_id") or "").strip()
+        if not external_id:
+            missing_external_id += 1
+            if args.require_external_id:
+                raise SystemExit("Manifest item missing required external_id.")
         if external_id:
             replaced += db.delete_template_by_external_id(external_id)
         elif not args.no_replace:
@@ -48,6 +58,7 @@ def main() -> None:
             skill=str(item["skill"]),
             subskill=str(item.get("subskill", "core")),
             label=str(item.get("label", "")) or str(item["skill"]),
+            mode=str(item.get("mode", "expression")),
             prompt_template=str(item["prompt_template"]),
             answer_expr=str(item["answer_expr"]),
             constraint_expr=str(item.get("constraint_expr", "")),
@@ -69,7 +80,10 @@ def main() -> None:
             )
         created += 1
 
-    print(f"templates_created={created} templates_replaced={replaced}")
+    print(
+        f"templates_created={created} templates_replaced={replaced} "
+        f"missing_external_id={missing_external_id}"
+    )
 
 
 if __name__ == "__main__":

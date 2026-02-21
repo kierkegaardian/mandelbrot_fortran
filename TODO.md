@@ -1,7 +1,6 @@
 # TODO
 
 - Add optional server sync so profiles, quizzes, and progress can persist across devices.
-- Build story-problem “wrappers” on top of the template bank (word problems).
 
 ## Status (Implemented)
 - Skill tracks + prerequisite-based recommendations.
@@ -10,6 +9,7 @@
 - Curriculum PDF linking per skill (local PDFs).
 - Parameterized question template bank (SQLite) with constraints + safe eval.
 - PDF ingestion helper (`pdftotext`) to extract exercise candidates.
+- Story-problem wrappers sourced from curriculum PDFs (word mode, arithmetic/pre-algebra).
 
 ## Roadmap: Foundations to Pre-Algebra
 - [x] Number sense: counting (in-app); place value (next).
@@ -65,17 +65,17 @@
 - [ ] Correlation/regression; interpreting results.
 
 ## Roadmap: Student Dashboard (Progress + Recommendations)
-- [ ] Define mastery model per skill (attempts, accuracy, streaks, time, recent trend).
+- [x] Define mastery model per skill (attempts, accuracy, streaks, time, recent trend).
 - [x] Choose visual design (progress bars + tiles).
-- [ ] Build progress data pipeline (quiz attempts + worksheet completions).
+- [x] Build progress data pipeline (quiz attempts + worksheet completions).
 - [x] Add per-skill mastery levels (Needs work/Developing/Proficient/Mastered).
 - [x] Recommendation engine: prerequisites + mastery gaps (basic).
 - [x] Student profile view: strengths/weak spots + next practice suggestion (basic).
 
 ## Roadmap: Prerequisite Logic (Soft Graph)
-- [ ] Convert prerequisite graph to soft edges with weights (`required_for_readiness` vs `helpful_background`).
-- [ ] Keep all skills unlocked; recommendations are score-based only (no hard locks).
-- [ ] Add recommendation scoring using prereq mastery + subskill coverage + recent performance.
+- [x] Convert prerequisite graph to soft edges with weights (`required_for_readiness` vs `helpful_background`).
+- [x] Keep all skills unlocked; recommendations are score-based only (no hard locks).
+- [x] Add recommendation scoring using prereq mastery + subskill coverage + recent performance.
 - [ ] Add monthly graph tuning workflow from real learner performance data.
 
 ## Roadmap: Blended Practice (Prereq Spacing)
@@ -84,39 +84,46 @@
 - [ ] Start with configurable defaults (`60/25/15`) and tune by outcome.
 - [ ] Adaptive ratio tuning:
   increase prereq share when target accuracy is low; taper when stable.
-- [ ] Enforce a maintenance floor so mastered prerequisites still reappear periodically.
+- [x] Enforce a maintenance floor so mastered prerequisites still reappear periodically.
 
 ## Roadmap: Free Mode (Guided Random)
-- [ ] Add "Free Mode" quiz path in UI (alongside focused skill mode).
-- [ ] Guided-random sampling across:
+- [x] Add "Free Mode" quiz path in UI (alongside focused skill mode).
+- [x] Guided-random sampling across:
   current level, next-level preview, weak prerequisites, and maintenance review.
-- [ ] Add per-question labels (`Core`, `Preview`, `Prereq`, `Review`) for learner clarity.
-- [ ] Connect Free Mode outcomes back into mastery and recommendation scoring.
+- [x] Add per-question labels (`Core`, `Preview`, `Prereq`, `Review`) for learner clarity.
+- [x] Connect Free Mode outcomes back into mastery and recommendation scoring.
 
 ## Roadmap: Exercise Modes (Intuition vs Expression vs Word)
-- [ ] Add template `mode` taxonomy for each exercise:
+- [x] Add template `mode` taxonomy for each exercise:
   `intuition`, `expression`, `word`.
-- [ ] Keep subskill tags consistent across all modes so mastery is shared.
-- [ ] Add stage-based default mix:
+- [x] Keep subskill tags consistent across all modes so mastery is shared.
+- [x] Add stage-based default mix:
   early (`45/40/15`), developing (`30/45/25`), near-mastery (`20/40/40`).
-- [ ] Add mode-balancing logic:
+- [x] Add mode-balancing logic:
   if word-problem accuracy lags expression accuracy, increase `word` share.
-- [ ] Add parent controls to override mode mix per assignment or quiz set.
+- [x] Add parent controls to override mode mix per assignment or quiz set.
 
 ## Roadmap: Daily Review (Spaced Practice)
 - [x] Show a “Daily review” target on the Dashboard.
 - [x] One-click start daily review quiz.
-- [ ] Tune spaced review thresholds and selection logic.
-- [ ] Add “daily goal” history (track completion streak per day).
+- [x] Tune spaced review thresholds and selection logic.
+- [x] Add “daily goal” history (track completion streak per day).
 
 ## Roadmap: Template Bank QA
 - [x] Template dry-run tool (generate N variants per template; report failures).
-- [ ] External IDs for templates everywhere (manifest + UI tooling).
+- [x] Optional Fortran verifier mode for arithmetic/algebra templates (Python cross-check).
+- [x] External IDs for templates everywhere (manifest + UI tooling).
 - [x] Subskill-targeted quiz presets for parent assignments.
+
+## Roadmap: Historical SAT/GRE Archive
+- [x] Historical test/question ingestion into local DB.
+- [x] Dedicated answer-key ingestion pipeline.
+- [x] Coverage report script for SAT/GRE by year (1980s->current) with missing-year gaps.
+- [ ] Expand SAT/GRE corpus to include 1980s/1990s year-by-year coverage.
 
 ## Roadmap: Parent Assignments
 - [x] Add assignment model/table (skill/subskill target + quiz preset fields).
 - [x] Parent UI to create, list, and complete assignments.
 - [x] Student dashboard card for next active assignment + one-click start.
 - [x] Auto-complete assignments after quiz attempts (score or subskill mastery targets).
-- [ ] Add assignment history filters and richer completion analytics.
+- [x] Add assignment history filters and richer completion analytics.

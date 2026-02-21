@@ -26,10 +26,40 @@ SKILL_LABELS = {
     "stats_mean": "Mean",
     "stats_probability": "Probability",
     "calculus_slope": "Slope",
+    "pre_algebra": "Pre-Algebra Foundations",
+    "algebra_1": "Algebra 1",
+    "algebra_2": "Algebra 2",
+    "statistics": "Statistics",
+    "sat_math": "SAT Math Focus",
+    "psat_math": "PSAT Math Focus",
+    "gre_quant": "GRE Quant Focus",
     "mixed": "Mixed Review",
 }
 
 SKILL_ORDER = list(SKILLS)
+
+ARITHMETIC_SKILLS: tuple[str, ...] = (
+    "counting",
+    "add_subtract",
+    "multiply",
+    "divide",
+    "ratios",
+    "fractions",
+    "long_addition",
+    "long_subtraction",
+    "long_multiplication",
+    "long_division",
+    "money",
+    "integers",
+    "order_of_operations",
+    "algebra_linear",
+    "geometry_area",
+    "trig_right_triangle",
+    "stats_percent",
+    "stats_mean",
+    "stats_probability",
+    "calculus_slope",
+)
 
 SKILL_TRACKS: dict[str, tuple[str, ...]] = {
     "Arithmetic": (
@@ -66,6 +96,17 @@ SKILL_TRACKS: dict[str, tuple[str, ...]] = {
     "Calculus": (
         "calculus_slope",
     ),
+    "Foundations to Algebra 2": (
+        "pre_algebra",
+        "algebra_1",
+        "algebra_2",
+        "statistics",
+    ),
+    "Test Prep": (
+        "sat_math",
+        "psat_math",
+        "gre_quant",
+    ),
 }
 
 SKILL_TRACK_ORDER = [
@@ -76,29 +117,86 @@ SKILL_TRACK_ORDER = [
     "Pre-Calculus & Trig",
     "Statistics / Probability",
     "Calculus",
+    "Foundations to Algebra 2",
+    "Test Prep",
 ]
 
-SKILL_PREREQUISITES: dict[str, tuple[str, ...]] = {
+PREREQ_REQUIRED = "required_for_readiness"
+PREREQ_HELPFUL = "helpful_background"
+
+SKILL_PREREQUISITE_EDGES: dict[str, tuple[tuple[str, str, float], ...]] = {
     "counting": (),
-    "add_subtract": ("counting",),
-    "multiply": ("add_subtract",),
-    "divide": ("add_subtract",),
-    "ratios": ("divide",),
-    "fractions": ("add_subtract", "divide"),
-    "long_addition": ("add_subtract",),
-    "long_subtraction": ("add_subtract",),
-    "long_multiplication": ("multiply",),
-    "long_division": ("divide", "long_subtraction"),
-    "money": ("add_subtract",),
-    "integers": ("add_subtract",),
-    "order_of_operations": ("integers",),
-    "algebra_linear": ("order_of_operations",),
-    "geometry_area": ("long_multiplication",),
-    "trig_right_triangle": ("geometry_area",),
-    "stats_percent": ("multiply", "divide", "fractions"),
-    "stats_mean": ("stats_percent",),
-    "stats_probability": ("stats_percent", "stats_mean"),
-    "calculus_slope": ("order_of_operations", "algebra_linear"),
+    "add_subtract": (("counting", PREREQ_REQUIRED, 1.0),),
+    "multiply": (("add_subtract", PREREQ_REQUIRED, 1.0),),
+    "divide": (("add_subtract", PREREQ_REQUIRED, 1.0),),
+    "ratios": (("divide", PREREQ_REQUIRED, 1.0), ("fractions", PREREQ_HELPFUL, 0.55)),
+    "fractions": (("add_subtract", PREREQ_REQUIRED, 1.0), ("divide", PREREQ_REQUIRED, 1.0)),
+    "long_addition": (("add_subtract", PREREQ_REQUIRED, 1.0),),
+    "long_subtraction": (("add_subtract", PREREQ_REQUIRED, 1.0),),
+    "long_multiplication": (("multiply", PREREQ_REQUIRED, 1.0),),
+    "long_division": (("divide", PREREQ_REQUIRED, 1.0), ("long_subtraction", PREREQ_HELPFUL, 0.6)),
+    "money": (("add_subtract", PREREQ_REQUIRED, 1.0),),
+    "integers": (("add_subtract", PREREQ_REQUIRED, 1.0),),
+    "order_of_operations": (("integers", PREREQ_REQUIRED, 1.0), ("multiply", PREREQ_HELPFUL, 0.6)),
+    "algebra_linear": (("order_of_operations", PREREQ_REQUIRED, 1.0), ("integers", PREREQ_HELPFUL, 0.6)),
+    "geometry_area": (("long_multiplication", PREREQ_REQUIRED, 1.0), ("fractions", PREREQ_HELPFUL, 0.5)),
+    "trig_right_triangle": (("geometry_area", PREREQ_REQUIRED, 1.0), ("algebra_linear", PREREQ_HELPFUL, 0.45)),
+    "stats_percent": (
+        ("multiply", PREREQ_REQUIRED, 1.0),
+        ("divide", PREREQ_REQUIRED, 1.0),
+        ("fractions", PREREQ_HELPFUL, 0.7),
+    ),
+    "stats_mean": (("stats_percent", PREREQ_REQUIRED, 1.0),),
+    "stats_probability": (("stats_percent", PREREQ_REQUIRED, 1.0), ("stats_mean", PREREQ_HELPFUL, 0.6)),
+    "calculus_slope": (
+        ("order_of_operations", PREREQ_REQUIRED, 1.0),
+        ("algebra_linear", PREREQ_REQUIRED, 1.0),
+        ("geometry_area", PREREQ_HELPFUL, 0.4),
+    ),
+    "pre_algebra": (
+        ("integers", PREREQ_REQUIRED, 1.0),
+        ("order_of_operations", PREREQ_REQUIRED, 1.0),
+        ("fractions", PREREQ_HELPFUL, 0.6),
+    ),
+    "algebra_1": (
+        ("pre_algebra", PREREQ_REQUIRED, 1.0),
+        ("algebra_linear", PREREQ_HELPFUL, 0.7),
+    ),
+    "algebra_2": (
+        ("algebra_1", PREREQ_REQUIRED, 1.0),
+        ("calculus_slope", PREREQ_HELPFUL, 0.6),
+        ("geometry_area", PREREQ_HELPFUL, 0.4),
+    ),
+    "statistics": (
+        ("stats_percent", PREREQ_REQUIRED, 1.0),
+        ("stats_mean", PREREQ_REQUIRED, 1.0),
+        ("stats_probability", PREREQ_HELPFUL, 0.7),
+    ),
+    "sat_math": (
+        ("algebra_1", PREREQ_REQUIRED, 1.0),
+        ("algebra_2", PREREQ_REQUIRED, 1.0),
+        ("geometry_area", PREREQ_REQUIRED, 1.0),
+        ("statistics", PREREQ_REQUIRED, 1.0),
+    ),
+    "psat_math": (
+        ("algebra_1", PREREQ_REQUIRED, 1.0),
+        ("geometry_area", PREREQ_REQUIRED, 1.0),
+        ("statistics", PREREQ_REQUIRED, 1.0),
+    ),
+    "gre_quant": (
+        ("algebra_2", PREREQ_REQUIRED, 1.0),
+        ("statistics", PREREQ_REQUIRED, 1.0),
+        ("geometry_area", PREREQ_HELPFUL, 0.6),
+        ("ratios", PREREQ_HELPFUL, 0.45),
+    ),
+}
+
+SKILL_PREREQUISITE_WEIGHTS: dict[str, tuple[tuple[str, float], ...]] = {
+    skill: tuple((edge[0], float(edge[2])) for edge in edges) for skill, edges in SKILL_PREREQUISITE_EDGES.items()
+}
+
+SKILL_PREREQUISITES: dict[str, tuple[str, ...]] = {
+    skill: tuple(edge[0] for edge in edges) for skill, edges in SKILL_PREREQUISITE_EDGES.items()
 }
 
 SKILL_SUBSKILLS: dict[str, tuple[str, ...]] = {
@@ -209,6 +307,41 @@ SKILL_SUBSKILLS: dict[str, tuple[str, ...]] = {
         "Rise over run",
         "Point-to-point comparison",
         "Positive vs negative slope",
+    ),
+    "pre_algebra": (
+        "Integer and fraction fluency",
+        "Order of operations",
+        "Ratios and rates",
+    ),
+    "algebra_1": (
+        "Linear equations and inequalities",
+        "Slope/intercept interpretation",
+        "Modeling with equations",
+    ),
+    "algebra_2": (
+        "Quadratic-style algebraic manipulation",
+        "Exponents and radicals",
+        "Function and expression structure",
+    ),
+    "statistics": (
+        "Percent and proportion analysis",
+        "Mean/center interpretation",
+        "Probability model setup",
+    ),
+    "sat_math": (
+        "Problem translation under time pressure",
+        "Multi-step mixed-domain solving",
+        "Answer checking and elimination",
+    ),
+    "psat_math": (
+        "Algebra and geometry fundamentals",
+        "Word-to-equation translation",
+        "Calculator and no-calculator discipline",
+    ),
+    "gre_quant": (
+        "Quantitative comparison logic",
+        "Algebra + arithmetic integration",
+        "Data/probability interpretation",
     ),
 }
 

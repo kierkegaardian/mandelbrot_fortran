@@ -1,15 +1,41 @@
 from __future__ import annotations
 
+import socket
 import tkinter as tk
 from tkinter import ttk
+import webbrowser
 
 from .arithmetic_render import render_arithmetic
 from .arithmetic_draw import cell_positions
 from .explanations import ARITHMETIC_MODE_EXPLANATIONS
 from .openmoji_assets import openmoji_paths
-from .skill_graph import SKILLS, skills_in_track, track_names
+from .skill_graph import ARITHMETIC_SKILLS, SKILL_LABELS, skills_in_track, track_names
 from .ui_explain import ExplanationPanel
+from .ui_settings import load_ui_settings
 from .ui_widgets import int_spinbox
+
+KHAN_URL_BY_SKILL = {
+    "counting": "https://www.khanacademy.org/math/cc-kindergarten-math/cc-kindergarten-counting-and-cardinality",
+    "add_subtract": "https://www.khanacademy.org/math/cc-2nd-grade-math/cc-2nd-add-subtract-100",
+    "multiply": "https://www.khanacademy.org/math/cc-third-grade-math/imp-mult-div",
+    "divide": "https://www.khanacademy.org/math/cc-third-grade-math/imp-mult-div",
+    "ratios": "https://www.khanacademy.org/math/cc-seventh-grade-math/cc-7th-ratios-proportional-relationships",
+    "fractions": "https://www.khanacademy.org/math/cc-fourth-grade-math/imp-fractions-2",
+    "long_addition": "https://www.khanacademy.org/math/cc-fourth-grade-math/imp-add-sub-multi-digit",
+    "long_subtraction": "https://www.khanacademy.org/math/cc-fourth-grade-math/imp-add-sub-multi-digit",
+    "long_multiplication": "https://www.khanacademy.org/math/cc-fifth-grade-math/imp-multi-digit-arithmetic",
+    "long_division": "https://www.khanacademy.org/math/cc-fifth-grade-math/imp-multi-digit-arithmetic",
+    "money": "https://www.khanacademy.org/math/cc-2nd-grade-math/cc-2nd-money",
+    "integers": "https://www.khanacademy.org/math/pre-algebra/pre-algebra-negative-numbers",
+    "order_of_operations": "https://www.khanacademy.org/math/pre-algebra/pre-algebra-exponents-radicals",
+    "algebra_linear": "https://www.khanacademy.org/math/algebra-basics/alg-basics-solving-equations-and-inequalities",
+    "geometry_area": "https://www.khanacademy.org/math/basic-geo/basic-geo-area-and-perimeter",
+    "trig_right_triangle": "https://www.khanacademy.org/math/trigonometry/trig-equations-and-identities",
+    "stats_percent": "https://www.khanacademy.org/math/pre-algebra/pre-algebra-ratios-rates",
+    "stats_mean": "https://www.khanacademy.org/math/statistics-probability/summarizing-quantitative-data",
+    "stats_probability": "https://www.khanacademy.org/math/statistics-probability/probability-library",
+    "calculus_slope": "https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:forms-of-linear-equations",
+}
 
 
 class ArithmeticPanel:
@@ -21,6 +47,8 @@ class ArithmeticPanel:
         self.track_var = tk.StringVar(value="All")
         self.object_style_var = tk.StringVar(value="Circles")
         self.expression_var = tk.StringVar(value="")
+        self.practice_var = tk.StringVar(value="You are practicing: Counting")
+        self.lesson_var = tk.StringVar(value="")
         self._openmoji_images: dict[str, tk.PhotoImage] = {}
         self._openmoji_scaled: dict[tuple[str, str, int], tk.PhotoImage] = {}
 
@@ -96,7 +124,7 @@ class ArithmeticPanel:
         self._skill_combo = ttk.Combobox(
             frame,
             textvariable=self.skill_var,
-            values=SKILLS,
+            values=ARITHMETIC_SKILLS,
             state="readonly",
         )
         self._skill_combo.pack(fill=tk.X, pady=(0, 8))
@@ -144,10 +172,16 @@ class ArithmeticPanel:
         self.explain = ExplanationPanel(frame)
         self.explain.set_explanation(ARITHMETIC_MODE_EXPLANATIONS["counting"])
         self.explain.frame.pack(fill=tk.X, pady=(12, 0))
+        self.lesson_btn = ttk.Button(frame, text="Watch lesson (online)", command=self._open_lesson)
+        self.lesson_btn.pack(anchor=tk.W, pady=(10, 2))
+        ttk.Label(frame, textvariable=self.lesson_var, wraplength=260, foreground="#4f6b7a").pack(anchor=tk.W)
         self._apply_track_filter()
         self._on_skill_change()
 
     def _build_view(self) -> None:
+        ttk.Label(self.view_frame, textvariable=self.practice_var, font=("Helvetica", 10, "bold")).pack(
+            anchor=tk.W, padx=8, pady=(8, 0)
+        )
         ttk.Label(self.view_frame, textvariable=self.expression_var, font=("Helvetica", 13, "bold")).pack(pady=(8, 4))
         self.canvas = tk.Canvas(self.view_frame, bg="#f7f7f7")
         self.canvas.pack(fill=tk.BOTH, expand=True)
@@ -392,8 +426,9 @@ class ArithmeticPanel:
     def _apply_track_filter(self) -> None:
         track = self.track_var.get()
         skills = list(skills_in_track(track))
+        skills = [skill for skill in skills if skill in ARITHMETIC_SKILLS]
         if not skills:
-            skills = list(SKILLS)
+            skills = list(ARITHMETIC_SKILLS)
         if self.skill_var.get() not in skills:
             self.skill_var.set(skills[0])
         self._skill_combo.config(values=skills)
@@ -427,7 +462,13 @@ class ArithmeticPanel:
             "calculus_slope": self.slope_frame,
         }
         self._show_frame(frames[skill])
+        track = self.track_var.get()
+        if track == "All":
+            self.practice_var.set(f"You are practicing: {SKILL_LABELS.get(skill, skill)}")
+        else:
+            self.practice_var.set(f"You are practicing: {SKILL_LABELS.get(skill, skill)} ({track})")
         self.explain.set_explanation(ARITHMETIC_MODE_EXPLANATIONS[skill])
+        self._update_lesson_link(skill)
         self.render()
 
     def _nudge(self, var: tk.IntVar, delta: int) -> None:
@@ -478,3 +519,35 @@ class ArithmeticPanel:
         if self.canvas is None:
             return
         render_arithmetic(self)
+
+    def _update_lesson_link(self, skill: str) -> None:
+        settings = load_ui_settings()
+        url = KHAN_URL_BY_SKILL.get(skill, "")
+        if not settings.show_external_links:
+            self.lesson_btn.state(["disabled"])
+            self.lesson_var.set("External links are disabled in Parent settings.")
+            return
+        if not url:
+            self.lesson_btn.state(["disabled"])
+            self.lesson_var.set("No lesson link mapped for this skill yet.")
+            return
+        self.lesson_btn.state(["!disabled"])
+        self.lesson_var.set("Opens a mapped Khan Academy lesson/unit in your browser (requires internet).")
+
+    def _open_lesson(self) -> None:
+        skill = self.skill_var.get()
+        url = KHAN_URL_BY_SKILL.get(skill, "")
+        if not url:
+            return
+        if not _can_reach_khan():
+            self.lesson_var.set("Could not reach khanacademy.org. Check internet and try again.")
+            return
+        webbrowser.open(url)
+
+
+def _can_reach_khan(timeout: float = 1.2) -> bool:
+    try:
+        with socket.create_connection(("www.khanacademy.org", 443), timeout=timeout):
+            return True
+    except OSError:
+        return False
