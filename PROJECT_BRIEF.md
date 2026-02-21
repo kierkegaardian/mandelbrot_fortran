@@ -1,4 +1,4 @@
-# Project Brief: Homeschool Math Visualizer
+# Project Brief: MandelQuest
 
 ## 1) User Profile
 - You are a homeschool parent building a learning tool for kids who open the app on their laptops to play and study.

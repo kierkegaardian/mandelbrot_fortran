@@ -1,4 +1,4 @@
-# Technical Record: Homeschool Math Visualizer
+# Technical Record: MandelQuest
 
 ## System Overview
 A desktop learning app that combines a Fortran fractal renderer with a Python (Tkinter) multi‑panel GUI. The app adds arithmetic visualizations, quiz creation, grading, and printable worksheets, while keeping the existing fractal explorer.

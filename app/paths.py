@@ -2,9 +2,11 @@ from __future__ import annotations
 
 import os
 from pathlib import Path
+import shutil
 import sys
 
-APP_DIR_NAME = "HomeschoolMathVisualizer"
+APP_DIR_NAME = "MandelQuest"
+LEGACY_APP_DIR_NAMES = ("HomeschoolMathVisualizer",)
 
 
 def _is_frozen() -> bool:
@@ -32,12 +34,40 @@ def _user_data_root() -> Path:
     return base / APP_DIR_NAME
 
 
+def _legacy_user_data_roots() -> tuple[Path, ...]:
+    if not _is_frozen():
+        return ()
+    if sys.platform.startswith("win"):
+        base = Path(os.environ.get("APPDATA", Path.home() / "AppData" / "Roaming"))
+    elif sys.platform == "darwin":
+        base = Path.home() / "Library" / "Application Support"
+    else:
+        base = Path(os.environ.get("XDG_DATA_HOME", Path.home() / ".local" / "share"))
+    return tuple(base / name for name in LEGACY_APP_DIR_NAMES)
+
+
+def _migrate_legacy_data_if_needed(target: Path) -> None:
+    if target.exists():
+        return
+    for legacy in _legacy_user_data_roots():
+        if not legacy.exists():
+            continue
+        target.parent.mkdir(parents=True, exist_ok=True)
+        try:
+            shutil.copytree(legacy, target)
+        except Exception:
+            # Non-fatal: app will create a fresh data dir if migration fails.
+            pass
+        return
+
+
 def repo_root() -> Path:
     return _bundle_root()
 
 
 def data_dir() -> Path:
     path = _user_data_root()
+    _migrate_legacy_data_if_needed(path)
     path.mkdir(parents=True, exist_ok=True)
     return path
 

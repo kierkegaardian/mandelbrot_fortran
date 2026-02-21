@@ -1,4 +1,4 @@
-# Fortran Mandelbrot Generator
+# MandelQuest
 
 Project brief: see `PROJECT_BRIEF.md`  
 Technical notes: see `TECHNICAL.md`
@@ -36,16 +36,16 @@ Optional: ImageMagick for PNG conversion (`sudo pacman -S imagemagick`).
 
 This repo includes a PyInstaller spec and GitHub Actions workflow for cross-platform app bundles.
 
-- Spec file: `homeschool_math_visualizer.spec`
+- Spec file: `mandelquest.spec`
 - CI workflow: `.github/workflows/package.yml`
 - Trigger packaging:
-  - Manually via **Actions -> Package Desktop App -> Run workflow**
+  - Manually via **Actions -> Package MandelQuest -> Run workflow**
   - Or by pushing a version tag like `v0.1.0`
 
 Artifacts produced by CI:
-- Linux: `HomeschoolMathVisualizer-linux.tar.gz`
-- macOS: `HomeschoolMathVisualizer-macos.tar.gz`
-- Windows: `HomeschoolMathVisualizer-windows.zip`
+- Linux: `MandelQuest-linux.tar.gz`
+- macOS: `MandelQuest-macos.tar.gz`
+- Windows: `MandelQuest-windows.zip`
 
 ## GitHub Releases (Tagged Builds)
 
@@ -59,8 +59,8 @@ Artifacts produced by CI:
 Local packaging (same machine):
 1. Build Fortran renderer first (`make OPENMP=0`).
 2. Install PyInstaller (`python -m pip install pyinstaller`).
-3. Build app bundle (`pyinstaller --noconfirm --clean homeschool_math_visualizer.spec`).
-4. Output is under `dist/HomeschoolMathVisualizer/`.
+3. Build app bundle (`pyinstaller --noconfirm --clean mandelquest.spec`).
+4. Output is under `dist/MandelQuest/`.
 
 ### Assets & Licensing
 

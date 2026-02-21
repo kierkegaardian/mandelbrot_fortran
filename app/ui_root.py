@@ -15,7 +15,7 @@ class AppShell:
         self.root = root
         self.profile = profile
 
-        self.root.title("Homeschool Math Visualizer")
+        self.root.title("MandelQuest")
         self.root.geometry("1200x720")
 
         self._build_header()
@@ -47,7 +47,7 @@ class AppShell:
         self.fractal = FractalPanel(self.notebook, self.view_stack)
         self.arithmetic = ArithmeticPanel(self.notebook, self.view_stack)
         self.quiz = QuizPanel(self.notebook, self.view_stack, self.get_profile)
-        self.parent = ParentPanel(self.notebook, self.view_stack, self.get_profile)
+        self.parent = ParentPanel(self.notebook, self.view_stack, self.get_profile, self.launch_quiz_set)
         self.dashboard = DashboardPanel(
             self.notebook,
             self.view_stack,
@@ -58,7 +58,7 @@ class AppShell:
 
         self._modules = [
             ("Fractals", self.fractal),
-            ("Arithmetic", self.arithmetic),
+            ("Math Skills", self.arithmetic),
             ("Quizzes", self.quiz),
             ("Parent", self.parent),
             ("Dashboard", self.dashboard),
@@ -93,6 +93,7 @@ class AppShell:
             num_questions=5,
             level=1,
             question_type="both",
+            launch_context="daily_review",
         )
         self.quiz.start_quiz()
 
@@ -103,8 +104,14 @@ class AppShell:
         level: int,
         num_questions: int,
         question_type: str,
+        mode_intuition_pct: int | None = None,
+        mode_expression_pct: int | None = None,
+        mode_word_pct: int | None = None,
     ) -> None:
         self.notebook.select(self.quiz.controls_frame)
+        mode_mix = None
+        if mode_intuition_pct is not None and mode_expression_pct is not None and mode_word_pct is not None:
+            mode_mix = (int(mode_intuition_pct), int(mode_expression_pct), int(mode_word_pct))
         self.quiz.apply_preset(
             track="All",
             skill=skill,
@@ -112,5 +119,39 @@ class AppShell:
             num_questions=num_questions,
             level=level,
             question_type=question_type,
+            strategy="learning_blend",
+            mode_mix_override=mode_mix,
+            launch_context="assignment",
         )
         self.quiz.start_quiz()
+
+    def launch_quiz_set(
+        self,
+        skill: str,
+        num_questions: int,
+        level: int,
+        question_type: str,
+        mode_intuition_pct: int | None = None,
+        mode_expression_pct: int | None = None,
+        mode_word_pct: int | None = None,
+    ) -> None:
+        self.notebook.select(self.quiz.controls_frame)
+        mode_mix = None
+        if mode_intuition_pct is not None and mode_expression_pct is not None and mode_word_pct is not None:
+            mode_mix = (int(mode_intuition_pct), int(mode_expression_pct), int(mode_word_pct))
+        self.quiz.apply_preset(
+            track="All",
+            skill=skill,
+            subskill="Any",
+            num_questions=num_questions,
+            level=level,
+            question_type=question_type,
+            strategy="focused",
+            mode_mix_override=mode_mix,
+            launch_context="quiz_set",
+        )
+        self.quiz.start_quiz()
+
+    def shutdown(self) -> None:
+        if hasattr(self.fractal, "shutdown"):
+            self.fractal.shutdown()

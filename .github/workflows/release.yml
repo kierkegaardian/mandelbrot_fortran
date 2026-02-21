@@ -1,4 +1,4 @@
-name: Release Desktop App
+name: Release MandelQuest
 
 on:
   workflow_dispatch:
@@ -87,33 +87,33 @@ jobs:
         run: python -m unittest discover -s tests -q
 
       - name: Build PyInstaller bundle
-        run: pyinstaller --noconfirm --clean homeschool_math_visualizer.spec
+        run: pyinstaller --noconfirm --clean mandelquest.spec
 
       - name: Create archive (Linux/macOS)
         if: runner.os != 'Windows'
         run: |
           cd dist
-          tar -czf "HomeschoolMathVisualizer-${{ matrix.artifact_suffix }}.tar.gz" HomeschoolMathVisualizer
+          tar -czf "MandelQuest-${{ matrix.artifact_suffix }}.tar.gz" MandelQuest
 
       - name: Create archive (Windows)
         if: runner.os == 'Windows'
         shell: pwsh
         run: |
-          Compress-Archive -Path "dist/HomeschoolMathVisualizer/*" -DestinationPath "dist/HomeschoolMathVisualizer-${{ matrix.artifact_suffix }}.zip" -Force
+          Compress-Archive -Path "dist/MandelQuest/*" -DestinationPath "dist/MandelQuest-${{ matrix.artifact_suffix }}.zip" -Force
 
       - name: Upload release artifact (Linux/macOS)
         if: runner.os != 'Windows'
         uses: actions/upload-artifact@v4
         with:
           name: release-${{ matrix.artifact_suffix }}
-          path: dist/HomeschoolMathVisualizer-${{ matrix.artifact_suffix }}.tar.gz
+          path: dist/MandelQuest-${{ matrix.artifact_suffix }}.tar.gz
 
       - name: Upload release artifact (Windows)
         if: runner.os == 'Windows'
         uses: actions/upload-artifact@v4
         with:
           name: release-${{ matrix.artifact_suffix }}
-          path: dist/HomeschoolMathVisualizer-${{ matrix.artifact_suffix }}.zip
+          path: dist/MandelQuest-${{ matrix.artifact_suffix }}.zip
 
   publish:
     runs-on: ubuntu-latest
