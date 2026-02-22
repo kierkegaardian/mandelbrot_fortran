@@ -29,12 +29,16 @@ KHAN_URL_BY_SKILL = {
     "integers": "https://www.khanacademy.org/math/pre-algebra/pre-algebra-negative-numbers",
     "order_of_operations": "https://www.khanacademy.org/math/pre-algebra/pre-algebra-exponents-radicals",
     "algebra_linear": "https://www.khanacademy.org/math/algebra-basics/alg-basics-solving-equations-and-inequalities",
+    "algebra_2": "https://www.khanacademy.org/math/algebra2",
     "geometry_area": "https://www.khanacademy.org/math/basic-geo/basic-geo-area-and-perimeter",
     "trig_right_triangle": "https://www.khanacademy.org/math/trigonometry/trig-equations-and-identities",
     "stats_percent": "https://www.khanacademy.org/math/pre-algebra/pre-algebra-ratios-rates",
     "stats_mean": "https://www.khanacademy.org/math/statistics-probability/summarizing-quantitative-data",
     "stats_probability": "https://www.khanacademy.org/math/statistics-probability/probability-library",
-    "calculus_slope": "https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:forms-of-linear-equations",
+    "calculus_1": "https://www.khanacademy.org/math/ap-calculus-ab",
+    "calculus_2": "https://www.khanacademy.org/math/ap-calculus-bc",
+    "calculus_3": "https://www.khanacademy.org/math/multivariable-calculus",
+    "calculus_slope": "https://www.khanacademy.org/math/ap-calculus-ab/ab-differentiation-1-new/ab-2-1/e/derivative-at-a-point-as-slope-of-tangent-line",
 }
 
 
@@ -459,6 +463,7 @@ class ArithmeticPanel:
             "stats_percent": self.percent_frame,
             "stats_mean": self.mean_frame,
             "stats_probability": self.prob_frame,
+            "calculus_1": self.slope_frame,
             "calculus_slope": self.slope_frame,
         }
         self._show_frame(frames[skill])

@@ -25,7 +25,10 @@ SKILL_LABELS = {
     "stats_percent": "Percent",
     "stats_mean": "Mean",
     "stats_probability": "Probability",
-    "calculus_slope": "Slope",
+    "calculus_1": "Calculus I",
+    "calculus_2": "Calculus II",
+    "calculus_3": "Calculus III",
+    "calculus_slope": "Calculus I (Legacy)",
     "pre_algebra": "Pre-Algebra Foundations",
     "algebra_1": "Algebra 1",
     "algebra_2": "Algebra 2",
@@ -58,7 +61,7 @@ ARITHMETIC_SKILLS: tuple[str, ...] = (
     "stats_percent",
     "stats_mean",
     "stats_probability",
-    "calculus_slope",
+    "calculus_1",
 )
 
 SKILL_TRACKS: dict[str, tuple[str, ...]] = {
@@ -78,9 +81,12 @@ SKILL_TRACKS: dict[str, tuple[str, ...]] = {
     "Pre-Algebra": (
         "integers",
         "order_of_operations",
+        "pre_algebra",
     ),
     "Algebra": (
         "algebra_linear",
+        "algebra_1",
+        "algebra_2",
     ),
     "Geometry": (
         "geometry_area",
@@ -92,15 +98,12 @@ SKILL_TRACKS: dict[str, tuple[str, ...]] = {
         "stats_percent",
         "stats_mean",
         "stats_probability",
+        "statistics",
     ),
     "Calculus": (
-        "calculus_slope",
-    ),
-    "Foundations to Algebra 2": (
-        "pre_algebra",
-        "algebra_1",
-        "algebra_2",
-        "statistics",
+        "calculus_1",
+        "calculus_2",
+        "calculus_3",
     ),
     "Test Prep": (
         "sat_math",
@@ -117,7 +120,6 @@ SKILL_TRACK_ORDER = [
     "Pre-Calculus & Trig",
     "Statistics / Probability",
     "Calculus",
-    "Foundations to Algebra 2",
     "Test Prep",
 ]
 
@@ -148,11 +150,6 @@ SKILL_PREREQUISITE_EDGES: dict[str, tuple[tuple[str, str, float], ...]] = {
     ),
     "stats_mean": (("stats_percent", PREREQ_REQUIRED, 1.0),),
     "stats_probability": (("stats_percent", PREREQ_REQUIRED, 1.0), ("stats_mean", PREREQ_HELPFUL, 0.6)),
-    "calculus_slope": (
-        ("order_of_operations", PREREQ_REQUIRED, 1.0),
-        ("algebra_linear", PREREQ_REQUIRED, 1.0),
-        ("geometry_area", PREREQ_HELPFUL, 0.4),
-    ),
     "pre_algebra": (
         ("integers", PREREQ_REQUIRED, 1.0),
         ("order_of_operations", PREREQ_REQUIRED, 1.0),
@@ -164,8 +161,21 @@ SKILL_PREREQUISITE_EDGES: dict[str, tuple[tuple[str, str, float], ...]] = {
     ),
     "algebra_2": (
         ("algebra_1", PREREQ_REQUIRED, 1.0),
-        ("calculus_slope", PREREQ_HELPFUL, 0.6),
+        ("algebra_linear", PREREQ_HELPFUL, 0.65),
         ("geometry_area", PREREQ_HELPFUL, 0.4),
+    ),
+    "calculus_1": (
+        ("algebra_2", PREREQ_REQUIRED, 1.0),
+        ("trig_right_triangle", PREREQ_HELPFUL, 0.5),
+        ("statistics", PREREQ_HELPFUL, 0.3),
+    ),
+    "calculus_2": (
+        ("calculus_1", PREREQ_REQUIRED, 1.0),
+        ("algebra_2", PREREQ_HELPFUL, 0.5),
+    ),
+    "calculus_3": (
+        ("calculus_2", PREREQ_REQUIRED, 1.0),
+        ("trig_right_triangle", PREREQ_HELPFUL, 0.55),
     ),
     "statistics": (
         ("stats_percent", PREREQ_REQUIRED, 1.0),
@@ -304,9 +314,12 @@ SKILL_SUBSKILLS: dict[str, tuple[str, ...]] = {
         "Fraction and decimal reduction",
     ),
     "calculus_slope": (
-        "Rise over run",
-        "Point-to-point comparison",
-        "Positive vs negative slope",
+        "Average rate of change between points",
+        "Slope from graph/table/equation",
+        "Tangent slope as derivative at a point",
+        "Estimating derivative from nearby values",
+        "Derivative sign and behavior (increasing/decreasing)",
+        "Linear approximation from tangent line",
     ),
     "pre_algebra": (
         "Integer and fraction fluency",
@@ -319,9 +332,14 @@ SKILL_SUBSKILLS: dict[str, tuple[str, ...]] = {
         "Modeling with equations",
     ),
     "algebra_2": (
-        "Quadratic-style algebraic manipulation",
-        "Exponents and radicals",
-        "Function and expression structure",
+        "Factor quadratics (including common factors)",
+        "Solve quadratics by factoring",
+        "Solve quadratics with the quadratic formula",
+        "Complete the square and vertex form",
+        "Polynomial operations and structure",
+        "Exponential growth/decay models",
+        "Logarithmic functions and graph transformations",
+        "Function transformations and composition",
     ),
     "statistics": (
         "Percent and proportion analysis",
@@ -342,6 +360,30 @@ SKILL_SUBSKILLS: dict[str, tuple[str, ...]] = {
         "Quantitative comparison logic",
         "Algebra + arithmetic integration",
         "Data/probability interpretation",
+    ),
+    "calculus_1": (
+        "Limits and continuity intuition",
+        "Average vs instantaneous rate of change",
+        "Derivative rules and notation",
+        "Derivative from graphs and tables",
+        "Applications of derivatives (optimization and related rates)",
+        "Basic antiderivatives and accumulation",
+    ),
+    "calculus_2": (
+        "Definite integral as signed area",
+        "Substitution and integration by parts",
+        "Area between curves and volume setup",
+        "Differential equations (separable first-order)",
+        "Sequences and infinite series basics",
+        "Convergence tests and power series intuition",
+    ),
+    "calculus_3": (
+        "Vectors in 2D/3D and geometric meaning",
+        "Partial derivatives and gradients",
+        "Chain rule in multivariable settings",
+        "Double and triple integral setup",
+        "Coordinate changes (polar/cylindrical/spherical)",
+        "Vector fields and flux/circulation concepts",
     ),
 }
 

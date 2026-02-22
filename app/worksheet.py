@@ -38,6 +38,7 @@ def generate_custom_worksheet(
         "long_subtraction",
         "long_multiplication",
         "long_division",
+        "calculus_1",
         "calculus_slope",
     }
     for spec in topics:

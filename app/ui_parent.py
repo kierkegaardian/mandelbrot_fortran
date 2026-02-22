@@ -406,7 +406,9 @@ class ParentPanel:
             ("Percent and Ratios", "stats_percent"),
             ("Averages", "stats_mean"),
             ("Probabilities", "stats_probability"),
-            ("Slope and Rates", "calculus_slope"),
+            ("Calculus I Foundations", "calculus_1"),
+            ("Calculus II Integrals and Series", "calculus_2"),
+            ("Calculus III Multivariable", "calculus_3"),
         ]
         added = 0
         for name, skill in defaults:

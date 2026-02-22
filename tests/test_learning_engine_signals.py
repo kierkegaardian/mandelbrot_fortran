@@ -7,6 +7,8 @@ from app.learning_engine import (
     build_blended_plan,
     build_free_mode_plan,
     build_skill_stats,
+    frontier_skills,
+    recommend_next_skill_paths,
     recommend_next_skills_soft,
 )
 from app.models import QuizAttempt
@@ -41,6 +43,29 @@ class LearningEngineSignalTests(unittest.TestCase):
         )
         self.assertEqual(recommended, ["skill_b"])
 
+    def test_branch_recommendation_includes_reason_and_unlock_signal(self) -> None:
+        stats = {
+            "foundation": SkillStats("foundation", 4, 40, 36, 90.0, 90.0, 1, 1, 7.0, 1.0, "Proficient"),
+            "branch_a": SkillStats("branch_a", 0, 0, 0, 0.0, 0.0, 0, 0, None, 0.0, "Not started"),
+            "branch_b": SkillStats("branch_b", 0, 0, 0, 0.0, 0.0, 0, 0, None, 0.0, "Not started"),
+            "capstone": SkillStats("capstone", 0, 0, 0, 0.0, 0.0, 0, 0, None, 0.0, "Not started"),
+        }
+        recommendations = recommend_next_skill_paths(
+            ("foundation", "branch_a", "branch_b", "capstone"),
+            {
+                "foundation": (),
+                "branch_a": (("foundation", 1.0),),
+                "branch_b": (("foundation", 1.0),),
+                "capstone": (("branch_a", 1.0), ("branch_b", 1.0)),
+            },
+            stats,
+            subskill_coverage={"branch_a": 0.9, "branch_b": 0.1},
+            limit=1,
+        )
+        self.assertEqual(recommendations[0].skill, "branch_b")
+        self.assertTrue(any(reason.startswith("Builds on Foundation") for reason in recommendations[0].reasons))
+        self.assertTrue(any(reason.startswith("Unlocks ") for reason in recommendations[0].reasons))
+
     def test_blend_policy_enforces_review_floor_when_pool_exists(self) -> None:
         stats = {
             "target": SkillStats("target", 2, 20, 14, 70.0, 70.0, 0, 0, 9.0, -2.0, "Developing"),
@@ -74,6 +99,26 @@ class LearningEngineSignalTests(unittest.TestCase):
         self.assertIn("Preview", labels)
         self.assertIn("Prereq", labels)
         self.assertIn("Review", labels)
+
+    def test_frontier_skills_prefers_branch_ready_nodes(self) -> None:
+        stats = {
+            "counting": SkillStats("counting", 3, 30, 30, 98.0, 100.0, 3, 3, 6.0, 1.0, "Mastered"),
+            "add_subtract": SkillStats("add_subtract", 3, 30, 27, 90.0, 90.0, 1, 1, 7.0, 1.0, "Proficient"),
+            "multiply": SkillStats("multiply", 0, 0, 0, 0.0, 0.0, 0, 0, None, 0.0, "Not started"),
+            "divide": SkillStats("divide", 0, 0, 0, 0.0, 0.0, 0, 0, None, 0.0, "Not started"),
+        }
+        frontier = frontier_skills(
+            ("counting", "add_subtract", "multiply", "divide"),
+            {
+                "counting": (),
+                "add_subtract": (("counting", 1.0),),
+                "multiply": (("add_subtract", 1.0),),
+                "divide": (("add_subtract", 1.0),),
+            },
+            stats,
+        )
+        self.assertEqual(frontier[0], "multiply")
+        self.assertIn("divide", frontier)
 
 
 if __name__ == "__main__":

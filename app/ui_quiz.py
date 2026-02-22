@@ -19,6 +19,7 @@ from .learning_engine import (
     build_skill_stats,
     default_mode_mix_for_stage,
     normalize_mode_mix,
+    recommend_next_skill_paths,
     recommend_next_skills_soft,
 )
 from .quiz_answers import is_correct_answer
@@ -29,6 +30,7 @@ from .paths import data_dir, worksheets_dir
 from .quiz_visuals import render_quiz_visual
 from .skill_graph import (
     SKILLS,
+    SKILL_LABELS,
     SKILL_ORDER,
     SKILL_PREREQUISITE_WEIGHTS,
     SUBSKILL_STREAK_TO_MASTER,
@@ -830,6 +832,19 @@ class QuizPanel:
             summary += "Retake required: mastery completion needs 100% on a quiz attempt.\n\n"
         if completed_assignments > 0:
             summary += f"Assignments completed: {completed_assignments}\n\n"
+        branch_recommendations = recommend_next_skill_paths(
+            tuple(SKILL_ORDER),
+            SKILL_PREREQUISITE_WEIGHTS,
+            build_skill_stats(db.list_attempts(profile.id), tuple(SKILL_ORDER)),
+            subskill_coverage=_subskill_coverage_by_skill(profile.id),
+            limit=3,
+        )
+        if branch_recommendations:
+            summary += "Suggested next paths:\n"
+            for item in branch_recommendations:
+                reason = item.reasons[0] if item.reasons else "Strong next step."
+                summary += f"- {SKILL_LABELS.get(item.skill, item.skill)}: {reason}\n"
+            summary += "\n"
         summary += "Mistake explanations:\n"
         for question, answer, correct in self._answers:
             if correct:

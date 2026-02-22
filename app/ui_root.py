@@ -8,6 +8,7 @@ from .ui_dashboard import DashboardPanel
 from .ui_fractals import FractalPanel
 from .ui_parent import ParentPanel
 from .ui_quiz import QuizPanel
+from .ui_skill_map import SkillMapPanel
 
 
 class AppShell:
@@ -55,6 +56,12 @@ class AppShell:
             self.launch_daily_review,
             self.launch_assignment_quiz,
         )
+        self.skill_map = SkillMapPanel(
+            self.notebook,
+            self.view_stack,
+            self.get_profile,
+            self.launch_skill_map_quiz,
+        )
 
         self._modules = [
             ("Fractals", self.fractal),
@@ -62,6 +69,7 @@ class AppShell:
             ("Quizzes", self.quiz),
             ("Parent", self.parent),
             ("Dashboard", self.dashboard),
+            ("Skill Map", self.skill_map),
         ]
 
         for name, module in self._modules:
@@ -149,6 +157,20 @@ class AppShell:
             strategy="focused",
             mode_mix_override=mode_mix,
             launch_context="quiz_set",
+        )
+        self.quiz.start_quiz()
+
+    def launch_skill_map_quiz(self, skill: str) -> None:
+        self.notebook.select(self.quiz.controls_frame)
+        self.quiz.apply_preset(
+            track="All",
+            skill=skill,
+            subskill="Any",
+            num_questions=5,
+            level=1,
+            question_type="both",
+            strategy="learning_blend",
+            launch_context="skill_map",
         )
         self.quiz.start_quiz()
 

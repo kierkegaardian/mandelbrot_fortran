@@ -28,7 +28,9 @@ SKILLS = [
     "stats_percent",
     "stats_mean",
     "stats_probability",
-    "calculus_slope",
+    "calculus_1",
+    "calculus_2",
+    "calculus_3",
     "pre_algebra",
     "algebra_1",
     "algebra_2",
@@ -37,6 +39,9 @@ SKILLS = [
     "psat_math",
     "gre_quant",
 ]
+LEGACY_SKILL_ALIASES = {
+    "calculus_slope": "calculus_1",
+}
 QUESTION_TYPES = ["mc", "typed", "both"]
 RIGHT_TRIANGLE_TRIPLES = [(3, 4, 5), (5, 12, 13), (6, 8, 10), (8, 15, 17), (9, 12, 15)]
 
@@ -251,6 +256,41 @@ def _slope_line_points(level: int) -> tuple[int, int, int, int, int]:
     return x1, y1, x2, y2, slope
 
 
+def _canonical_skill_name(skill: str) -> str:
+    return LEGACY_SKILL_ALIASES.get(skill, skill)
+
+
+def _poly_term(coeff: int, power: int) -> str:
+    if coeff == 0:
+        return ""
+    if power == 0:
+        return str(coeff)
+    magnitude = abs(coeff)
+    coeff_text = "" if magnitude == 1 else str(magnitude)
+    if power == 1:
+        base = f"{coeff_text}x"
+    else:
+        base = f"{coeff_text}x^{power}"
+    if coeff < 0:
+        return f"-{base}"
+    return base
+
+
+def _join_terms(terms: list[str]) -> str:
+    out: list[str] = []
+    for term in terms:
+        if not term:
+            continue
+        if not out:
+            out.append(term)
+            continue
+        if term.startswith("-"):
+            out.append(f"- {term[1:]}")
+        else:
+            out.append(f"+ {term}")
+    return " ".join(out) if out else "0"
+
+
 def _format_probability_as_fraction(numer: int, denom: int) -> str:
     g = math.gcd(numer, denom)
     return _fraction_string(numer // g, denom // g)
@@ -291,6 +331,8 @@ def generate_question(
     if skill == "mixed":
         skill = random.choice(SKILLS)
         subskill = None
+
+    skill = _canonical_skill_name(skill)
 
     templated = try_generate_from_templates(
         skill,
@@ -558,13 +600,64 @@ def generate_question(
         choices = _ratio_choice_set(favorable, total) if question_type == "mc" else None
         return Question(skill, prompt, answer, explanation, choices, None)
 
-    if skill == "calculus_slope":
+    if skill == "calculus_1":
         x1, y1, x2, y2, slope = _slope_line_points(level)
         prompt = f"Find the slope of the line through ({x1}, {y1}) and ({x2}, {y2})."
         answer = slope
-        explanation = "Slope is rise over run: (y2 - y1)/(x2 - x1)."
+        explanation = "Calculus I starts with rate of change: slope is rise over run, (y2 - y1)/(x2 - x1)."
         choices = _signed_choice_set(answer, spread=4) if question_type == "mc" else None
         visual = {"kind": "slope", "x1": x1, "y1": y1, "x2": x2, "y2": y2}
         return Question(skill, prompt, str(answer), explanation, choices, visual)
+
+    if skill == "calculus_2":
+        if level <= 1:
+            m = random.randint(1, 4)
+            b = random.randint(0, 6)
+            a = random.randint(0, 2)
+            c = random.randint(a + 1, a + 4)
+        elif level == 2:
+            m = random.choice([n for n in range(-5, 6) if n != 0])
+            b = random.randint(-8, 8)
+            a = random.randint(-2, 2)
+            c = random.randint(a + 1, a + 4)
+        else:
+            m = random.choice([n for n in range(-6, 7) if n != 0])
+            b = random.randint(-10, 10)
+            a = random.randint(-3, 3)
+            c = random.randint(a + 2, a + 5)
+        integrand = _join_terms([_poly_term(m, 1), _poly_term(b, 0)])
+        answer = (0.5 * m * ((c * c) - (a * a))) + (b * (c - a))
+        prompt = f"Compute the definite integral: ∫[{a} to {c}] ({integrand}) dx"
+        explanation = "Use antiderivatives term-by-term and evaluate upper minus lower bounds."
+        choices = _float_choice_set(answer, spread=6.0) if question_type == "mc" else None
+        return Question(skill, prompt, _format_numeric(answer), explanation, choices, None)
+
+    if skill == "calculus_3":
+        if level <= 1:
+            a = random.randint(1, 4)
+            b = random.randint(-3, 3)
+            c = random.randint(1, 4)
+        elif level == 2:
+            a = random.choice([n for n in range(-5, 6) if n != 0])
+            b = random.randint(-5, 5)
+            c = random.choice([n for n in range(-5, 6) if n != 0])
+        else:
+            a = random.choice([n for n in range(-6, 7) if n != 0])
+            b = random.randint(-7, 7)
+            c = random.choice([n for n in range(-6, 7) if n != 0])
+        x0 = random.randint(-3, 3)
+        y0 = random.randint(-3, 3)
+        xy_term = ""
+        if b != 0:
+            xy_term = ("-" if b < 0 else "") + ("" if abs(b) == 1 else str(abs(b))) + "xy"
+        y2_term = ""
+        if c != 0:
+            y2_term = ("-" if c < 0 else "") + ("" if abs(c) == 1 else str(abs(c))) + "y^2"
+        expression = _join_terms([_poly_term(a, 2), xy_term, y2_term])
+        answer = (2 * a * x0) + (b * y0)
+        prompt = f"For f(x,y) = {expression}, find ∂f/∂x at ({x0}, {y0})."
+        explanation = "Treat y as constant when taking ∂/∂x, then substitute the point."
+        choices = _signed_choice_set(answer, spread=8) if question_type == "mc" else None
+        return Question(skill, prompt, str(answer), explanation, choices, None)
 
     raise ValueError("Unknown skill")

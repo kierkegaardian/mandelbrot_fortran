@@ -370,6 +370,18 @@ def _run_migrations(conn: sqlite3.Connection) -> None:
         conn.execute("UPDATE schema_version SET version = 8 WHERE id = 1")
         version = 8
 
+    # v9: migrate legacy calculus_slope skill ids to calculus_1
+    if version < 9:
+        _rewrite_skill_id(conn, "quiz_sets", "skill", "calculus_slope", "calculus_1")
+        _rewrite_skill_id(conn, "quiz_attempts", "skill", "calculus_slope", "calculus_1")
+        _rewrite_skill_id(conn, "quiz_questions", "skill", "calculus_slope", "calculus_1")
+        _rewrite_skill_id(conn, "worksheets", "skill", "calculus_slope", "calculus_1")
+        _rewrite_skill_id(conn, "question_templates", "skill", "calculus_slope", "calculus_1")
+        _rewrite_skill_id(conn, "assignments", "skill", "calculus_slope", "calculus_1")
+        _rewrite_skill_id(conn, "skill_subskill_progress", "skill", "calculus_slope", "calculus_1")
+        conn.execute("UPDATE schema_version SET version = 9 WHERE id = 1")
+        version = 9
+
     # Always ensure indexes exist (idempotent).
     _ensure_external_id_unique_index(conn)
     _ensure_historical_indexes(conn)
@@ -408,6 +420,19 @@ def _ensure_column(conn: sqlite3.Connection, table: str, column: str, ddl: str) 
     if column in existing:
         return
     conn.execute(f"ALTER TABLE {table} ADD COLUMN {column} {ddl}")
+
+
+def _rewrite_skill_id(
+    conn: sqlite3.Connection,
+    table: str,
+    column: str,
+    old_skill: str,
+    new_skill: str,
+) -> None:
+    conn.execute(
+        f"UPDATE {table} SET {column} = ? WHERE {column} = ?",
+        (new_skill, old_skill),
+    )
 
 
 def list_profiles() -> list[Profile]:

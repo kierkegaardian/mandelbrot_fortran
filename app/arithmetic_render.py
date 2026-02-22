@@ -336,7 +336,7 @@ def render_arithmetic(panel) -> None:
         canvas.create_text(14, 18, text=f"Successes: {success}", anchor=tk.W, fill="#2f6f3e")
         canvas.create_text(14, 34, text=f"Total outcomes: {total}", anchor=tk.W, fill="#2f6f3e")
         return
-    if skill == "calculus_slope":
+    if skill in {"calculus_1", "calculus_slope"}:
         x1 = panel.slope_x1_var.get()
         y1 = panel.slope_y1_var.get()
         x2 = panel.slope_x2_var.get()

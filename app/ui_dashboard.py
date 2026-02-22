@@ -5,7 +5,7 @@ import tkinter as tk
 from tkinter import ttk
 
 from . import db
-from .learning_engine import build_skill_stats, recommend_next_skills_soft
+from .learning_engine import build_skill_stats, recommend_next_skill_paths
 from .skill_graph import (
     SKILL_LABELS,
     SKILL_ORDER,
@@ -97,6 +97,10 @@ class DashboardPanel:
         ttk.Label(self.view_frame, textvariable=self.reco_var, foreground="#2d5d7c").pack(
             anchor=tk.W, padx=10, pady=(6, 10)
         )
+        self.reco_detail_var = tk.StringVar(value="")
+        ttk.Label(self.view_frame, textvariable=self.reco_detail_var, foreground="#4f6b7a", wraplength=520).pack(
+            anchor=tk.W, padx=10, pady=(0, 10)
+        )
         self.subskill_var = tk.StringVar(value="")
         ttk.Label(self.view_frame, textvariable=self.subskill_var, foreground="#4f6b7a", wraplength=520).pack(
             anchor=tk.W, padx=10, pady=(0, 10)
@@ -135,6 +139,7 @@ class DashboardPanel:
         if profile is None:
             self.summary_var.set("No profile selected.")
             self.reco_var.set("Recommended next: —")
+            self.reco_detail_var.set("")
             self.daily_var.set("Daily review: —")
             self.assignment_var.set("Assignment: —")
             for skill, row in self.progress_rows.items():
@@ -183,15 +188,22 @@ class DashboardPanel:
         self.summary_var.set(
             f"{profile.name}: {completed}/{len(SKILL_ORDER)} mastered • {total_questions} quiz Qs • {total_worksheets} worksheets"
         )
-        recommendations = recommend_next_skills_soft(
+        branch_recommendations = recommend_next_skill_paths(
             tuple(SKILL_ORDER),
             SKILL_PREREQUISITE_WEIGHTS,
             skill_stats,
             subskill_coverage=subskill_coverage,
         )
+        recommendations = [item.skill for item in branch_recommendations]
         if recommendations:
             labels = [SKILL_LABELS.get(skill, skill) for skill in recommendations]
             self.reco_var.set(f"Recommended next: {', '.join(labels)}")
+            reason_lines: list[str] = []
+            for item in branch_recommendations[:3]:
+                label = SKILL_LABELS.get(item.skill, item.skill)
+                reason = item.reasons[0] if item.reasons else "Strong next step."
+                reason_lines.append(f"{label}: {reason}")
+            self.reco_detail_var.set("Branch paths: " + " | ".join(reason_lines))
             top_recommendation = recommendations[0]
             subskills = subskills_for(top_recommendation)
             progress = {
@@ -216,6 +228,7 @@ class DashboardPanel:
                 self.subskill_var.set("")
         else:
             self.reco_var.set("Recommended next: Mixed review")
+            self.reco_detail_var.set("")
             self.subskill_var.set("")
 
         self._render_daily_review(profile.id, mastery_map, stats, recommendations)

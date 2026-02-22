@@ -15,6 +15,10 @@ MASTERY_LEVEL = {
     "Not started": 0.0,
 }
 
+LEGACY_SKILL_ALIASES = {
+    "calculus_slope": "calculus_1",
+}
+
 
 @dataclass(frozen=True)
 class SkillStats:
@@ -35,6 +39,13 @@ class SkillStats:
 class PlanItem:
     skill: str
     label: str
+
+
+@dataclass(frozen=True)
+class BranchRecommendation:
+    skill: str
+    score: float
+    reasons: tuple[str, ...]
 
 
 @dataclass(frozen=True)
@@ -61,8 +72,12 @@ class ModeMix:
 
 def build_skill_stats(attempts: list[QuizAttempt], skill_order: tuple[str, ...], recent_window: int = 5) -> dict[str, SkillStats]:
     grouped: dict[str, list[QuizAttempt]] = defaultdict(list)
+    available = set(skill_order)
     for attempt in attempts:
-        grouped[attempt.skill].append(attempt)
+        skill = LEGACY_SKILL_ALIASES.get(attempt.skill, attempt.skill)
+        if skill not in available:
+            continue
+        grouped[skill].append(attempt)
 
     stats: dict[str, SkillStats] = {}
     for skill in skill_order:
@@ -78,6 +93,23 @@ def recommend_next_skills_soft(
     subskill_coverage: dict[str, float] | None = None,
     limit: int = 3,
 ) -> list[str]:
+    recommendations = recommend_next_skill_paths(
+        skill_order,
+        prerequisites,
+        stats,
+        subskill_coverage=subskill_coverage,
+        limit=limit,
+    )
+    return [item.skill for item in recommendations]
+
+
+def recommend_next_skill_paths(
+    skill_order: tuple[str, ...],
+    prerequisites: dict[str, tuple[object, ...]],
+    stats: dict[str, SkillStats],
+    subskill_coverage: dict[str, float] | None = None,
+    limit: int = 3,
+) -> list[BranchRecommendation]:
     limit = max(1, int(limit))
     retake_required = [
         skill
@@ -92,9 +124,13 @@ def recommend_next_skills_soft(
                 skill_order.index(s),
             )
         )
-        return retake_required[:limit]
+        return [
+            BranchRecommendation(skill=s, score=10_000.0, reasons=("Finish a clean attempt (100%) to lock mastery.",))
+            for s in retake_required[:limit]
+        ]
 
-    candidates: list[tuple[float, str]] = []
+    dependents = _dependents_map(skill_order, prerequisites)
+    candidates: list[BranchRecommendation] = []
     for idx, skill in enumerate(skill_order):
         item = stats.get(skill)
         if item is None:
@@ -114,15 +150,61 @@ def recommend_next_skills_soft(
         coverage_score = _coverage_gap_bonus(skill, subskill_coverage)
         recent_performance = max(0.0, 85.0 - item.recent_accuracy) * 0.25
         downward_trend = max(0.0, -item.recent_trend) * 0.35
-        # Soft graph: all skills stay eligible; prereq readiness nudges score.
-        score = status_score + prereq_weight + coverage_score + recent_performance + downward_trend - (idx * 0.2)
-        candidates.append((score, skill))
+        unlock_bonus = _unlock_bonus(skill, dependents, stats)
+        frontier_bias = 8.0 if _is_frontier_candidate(skill, prerequisites, stats) else -12.0
+        # Soft graph: all skills stay eligible; frontier nodes and unlock power are boosted.
+        score = (
+            status_score
+            + prereq_weight
+            + coverage_score
+            + recent_performance
+            + downward_trend
+            + unlock_bonus
+            + frontier_bias
+            - (idx * 0.03)
+        )
+        reasons = _recommendation_reasons(
+            skill,
+            prerequisites,
+            dependents,
+            stats,
+            subskill_coverage,
+        )
+        candidates.append(BranchRecommendation(skill=skill, score=score, reasons=reasons))
 
     if not candidates:
-        return list(skill_order[:limit])
+        return [
+            BranchRecommendation(skill=s, score=0.0, reasons=("Start here to build momentum.",))
+            for s in skill_order[:limit]
+        ]
 
-    candidates.sort(key=lambda row: (-row[0], skill_order.index(row[1])))
-    return [skill for _score, skill in candidates[:limit]]
+    candidates.sort(key=lambda row: (-row.score, skill_order.index(row.skill)))
+    return candidates[:limit]
+
+
+def frontier_skills(
+    skill_order: tuple[str, ...],
+    prerequisites: dict[str, tuple[object, ...]],
+    stats: dict[str, SkillStats],
+    subskill_coverage: dict[str, float] | None = None,
+) -> list[str]:
+    ranked = recommend_next_skill_paths(
+        skill_order,
+        prerequisites,
+        stats,
+        subskill_coverage=subskill_coverage,
+        limit=max(1, len(skill_order)),
+    )
+    rank_lookup = {item.skill: idx for idx, item in enumerate(ranked)}
+    frontier: list[str] = []
+    for skill in skill_order:
+        item = stats.get(skill)
+        if item is not None and item.mastery == "Mastered":
+            continue
+        if _is_frontier_candidate(skill, prerequisites, stats):
+            frontier.append(skill)
+    frontier.sort(key=lambda skill: (rank_lookup.get(skill, len(skill_order)), skill_order.index(skill)))
+    return frontier
 
 
 def pick_blend_policy(target_stats: SkillStats | None) -> BlendPolicy:
@@ -286,7 +368,7 @@ def build_free_mode_plan(
             break
     review_count = max(0, total - core_count - preview_count - prereq_count)
 
-    preview_skill = _next_preview_skill(target_skill, skill_order, stats)
+    preview_skill = _next_preview_skill(target_skill, skill_order, prerequisites, stats)
     prereq_pool = [edge[0] for edge in _prereq_edges(target_skill, prerequisites)]
     prereq_pool.sort(key=lambda s: (_mastery_rank(stats.get(s)), skill_order.index(s)))
 
@@ -511,7 +593,23 @@ def _empty_skill_stats(skill: str) -> SkillStats:
     )
 
 
-def _next_preview_skill(target_skill: str, skill_order: tuple[str, ...], stats: dict[str, SkillStats]) -> str | None:
+def _next_preview_skill(
+    target_skill: str,
+    skill_order: tuple[str, ...],
+    prerequisites: dict[str, tuple[object, ...]],
+    stats: dict[str, SkillStats],
+) -> str | None:
+    branch_candidates = recommend_next_skill_paths(
+        skill_order,
+        prerequisites,
+        stats,
+        subskill_coverage=None,
+        limit=max(1, len(skill_order)),
+    )
+    for item in branch_candidates:
+        if item.skill != target_skill:
+            return item.skill
+
     if target_skill not in skill_order:
         for skill in skill_order:
             if skill != target_skill:
@@ -532,3 +630,133 @@ def _next_preview_skill(target_skill: str, skill_order: tuple[str, ...], stats: 
         if skill != target_skill:
             return skill
     return None
+
+
+def _dependents_map(
+    skill_order: tuple[str, ...],
+    prerequisites: dict[str, tuple[object, ...]],
+) -> dict[str, tuple[str, ...]]:
+    dependents: dict[str, list[str]] = {skill: [] for skill in skill_order}
+    for skill in skill_order:
+        for prereq, _weight in _prereq_edges(skill, prerequisites):
+            if prereq not in dependents:
+                dependents[prereq] = []
+            dependents[prereq].append(skill)
+    return {skill: tuple(nodes) for skill, nodes in dependents.items()}
+
+
+def _unlock_bonus(skill: str, dependents: dict[str, tuple[str, ...]], stats: dict[str, SkillStats]) -> float:
+    children = dependents.get(skill, ())
+    if not children:
+        return 0.0
+    unmastered = 0
+    for child in children:
+        state = stats.get(child)
+        if state is None or state.mastery != "Mastered":
+            unmastered += 1
+    return min(12.0, float(unmastered) * 2.5)
+
+
+def _is_frontier_candidate(
+    skill: str,
+    prerequisites: dict[str, tuple[object, ...]],
+    stats: dict[str, SkillStats],
+) -> bool:
+    item = stats.get(skill)
+    if item is not None and item.attempts > 0 and item.mastery != "Mastered":
+        return True
+    prereqs = _prereq_edges(skill, prerequisites)
+    if not prereqs:
+        return True
+    ratio = _prereq_mastery_ratio(skill, prerequisites, stats)
+    mastered_foundation = False
+    for prereq, _weight in prereqs:
+        prereq_item = stats.get(prereq)
+        if prereq_item is not None and prereq_item.mastery in {"Proficient", "Mastered"}:
+            mastered_foundation = True
+            break
+    return ratio >= 0.45 or mastered_foundation
+
+
+def _prereq_mastery_ratio(skill: str, prerequisites: dict[str, tuple[object, ...]], stats: dict[str, SkillStats]) -> float:
+    prereqs = _prereq_edges(skill, prerequisites)
+    if not prereqs:
+        return 1.0
+    total_weight = 0.0
+    achieved = 0.0
+    for prereq, weight in prereqs:
+        total_weight += weight
+        stat = stats.get(prereq)
+        if stat is None:
+            continue
+        achieved += (MASTERY_LEVEL.get(stat.mastery, 0.0) / 3.0) * weight
+    if total_weight <= 0.0:
+        return 0.0
+    return achieved / total_weight
+
+
+def _recommendation_reasons(
+    skill: str,
+    prerequisites: dict[str, tuple[object, ...]],
+    dependents: dict[str, tuple[str, ...]],
+    stats: dict[str, SkillStats],
+    subskill_coverage: dict[str, float] | None,
+) -> tuple[str, ...]:
+    reasons: list[str] = []
+    prereq = _strongest_mastered_prereq(skill, prerequisites, stats)
+    if prereq is not None:
+        reasons.append(f"Builds on {_skill_title(prereq)}.")
+
+    if subskill_coverage is not None:
+        coverage = subskill_coverage.get(skill)
+        if coverage is None or float(coverage) < 0.55:
+            reasons.append("Fixes weak subskill coverage.")
+
+    unlocks = _count_unmastered_dependents(skill, dependents, stats)
+    if unlocks > 0:
+        unit = "skill" if unlocks == 1 else "skills"
+        reasons.append(f"Unlocks {unlocks} follow-up {unit}.")
+
+    item = stats.get(skill)
+    if item is not None and item.attempts > 0 and item.recent_accuracy < 75.0:
+        reasons.append("Stabilizes recent performance.")
+
+    if not reasons:
+        reasons.append("Strong next step from your current progress.")
+    return tuple(reasons[:3])
+
+
+def _strongest_mastered_prereq(
+    skill: str,
+    prerequisites: dict[str, tuple[object, ...]],
+    stats: dict[str, SkillStats],
+) -> str | None:
+    best_skill: str | None = None
+    best_weight = -1.0
+    for prereq, weight in _prereq_edges(skill, prerequisites):
+        item = stats.get(prereq)
+        if item is None:
+            continue
+        if item.mastery not in {"Proficient", "Mastered"}:
+            continue
+        if weight > best_weight:
+            best_weight = weight
+            best_skill = prereq
+    return best_skill
+
+
+def _count_unmastered_dependents(
+    skill: str,
+    dependents: dict[str, tuple[str, ...]],
+    stats: dict[str, SkillStats],
+) -> int:
+    count = 0
+    for child in dependents.get(skill, ()):
+        item = stats.get(child)
+        if item is None or item.mastery != "Mastered":
+            count += 1
+    return count
+
+
+def _skill_title(skill: str) -> str:
+    return " ".join(part.capitalize() for part in skill.replace("-", "_").split("_") if part)
