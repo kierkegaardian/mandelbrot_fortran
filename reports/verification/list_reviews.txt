@@ -1,0 +1,11 @@
+[list_dir result for /home/user/projects/mandelbrot_fortran/reviews - verbatim tool output]
+
+- /home/user/projects/mandelbrot_fortran/reviews/
+  - code_review.md
+  - gemini/
+    - latest.md
+    - per_file_review.md
+    - targeted_per_file_review.md
+  - historical_coverage_report.md
+  - recovered_antigravity_mandelquest.md
+  - todo.md

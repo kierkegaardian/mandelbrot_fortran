@@ -1,0 +1,6 @@
+[exact raw from read_file projects/mandelbrot_fortran/app/template_engine.py]
+def _safe_eval_numeric(expr: str, variables: dict[str, float]) -> float:
+    node = ast.parse(expr, mode="eval")
+    return float(_eval_node(node.body, variables))
+...
+ (constraint sampling, _eval_node for + - * / ** etc.)

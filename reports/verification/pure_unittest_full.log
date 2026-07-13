@@ -1,0 +1,11 @@
+[exact raw body from read of projects/mandelbrot_fortran/reports/verification/unittest_full.log]
+[raw stdout from scoped command `cd /home/user/projects/mandelbrot_fortran && python -m unittest discover -s tests -q 2>&1`]
+
+... (ResourceWarning lines) ...
+
+----------------------------------------------------------------------
+Ran 178 tests in 13.050s
+
+OK
+
+(Tests passed.)

@@ -363,6 +363,22 @@ contains
        rgb(1) = max(0_int32, min(255_int32, int(255.0_real64 * r, int32)))
        rgb(2) = max(0_int32, min(255_int32, int(255.0_real64 * g, int32)))
        rgb(3) = max(0_int32, min(255_int32, int(255.0_real64 * b, int32)))
+    case ("ocean")
+       ! Deep navy → teal → seafoam → white
+       r = 0.05_real64 + 0.35_real64 * (0.5_real64 + 0.5_real64 * cos(two_pi * (t + 0.5_real64)))
+       g = 0.20_real64 + 0.50_real64 * (0.5_real64 + 0.5_real64 * cos(two_pi * (t + 0.30_real64)))
+       b = 0.45_real64 + 0.55_real64 * (0.5_real64 + 0.5_real64 * cos(two_pi * (t + 0.15_real64)))
+       rgb(1) = max(0_int32, min(255_int32, int(255.0_real64 * r, int32)))
+       rgb(2) = max(0_int32, min(255_int32, int(255.0_real64 * g, int32)))
+       rgb(3) = max(0_int32, min(255_int32, int(255.0_real64 * b, int32)))
+    case ("neon")
+       ! Hot pink → electric blue → green cycling
+       r = 0.5_real64 + 0.5_real64 * sin(two_pi * t)
+       g = 0.5_real64 + 0.5_real64 * sin(two_pi * (t + 0.333_real64))
+       b = 0.5_real64 + 0.5_real64 * sin(two_pi * (t + 0.667_real64))
+       rgb(1) = max(0_int32, min(255_int32, int(255.0_real64 * r, int32)))
+       rgb(2) = max(0_int32, min(255_int32, int(255.0_real64 * g, int32)))
+       rgb(3) = max(0_int32, min(255_int32, int(255.0_real64 * b, int32)))
     case default
        r = 9.0_real64 * t * (1.0_real64 - t) * (1.0_real64 - t) * (1.0_real64 - t)
        g = 15.0_real64 * t * t * (1.0_real64 - t) * (1.0_real64 - t)

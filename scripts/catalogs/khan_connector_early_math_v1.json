@@ -1,0 +1,190 @@
+{
+  "version": 1,
+  "pulled_on": "2026-04-17",
+  "group_count": 13,
+  "template_count": 65,
+  "groups": [
+    {
+      "query": "arithmetic equivalent fractions",
+      "title": "Equivalent fractions",
+      "assignable_url": "https://www.khanacademy.org/math/cc-third-grade-math/equivalent-fractions-and-comparing-fractions/imp-equivalent-fractions/e/equivalent-fraction?utm_campaign=teacher_assign_tool&utm_medium=referral&utm_source=chatgpt",
+      "pulled_on": "2026-04-17",
+      "pulled_via": "khan-academy-connector",
+      "external_ids": [
+        "khan.connector.early_math.fractions.equivalent.01.v1",
+        "khan.connector.early_math.fractions.equivalent.02.v1",
+        "khan.connector.early_math.fractions.equivalent.03.v1",
+        "khan.connector.early_math.fractions.equivalent.04.v1",
+        "khan.connector.early_math.fractions.equivalent.05.v1"
+      ]
+    },
+    {
+      "query": "pre algebra two-step equations",
+      "title": "Two-step equations",
+      "assignable_url": "https://www.khanacademy.org/math/cc-seventh-grade-math/cc-7th-variables-expressions/cc-7th-2-step-equations-intro/e/linear_equations_2?utm_campaign=teacher_assign_tool&utm_medium=referral&utm_source=chatgpt",
+      "pulled_on": "2026-04-17",
+      "pulled_via": "khan-academy-connector",
+      "external_ids": [
+        "khan.connector.early_math.pre_algebra.two_step.01.v1",
+        "khan.connector.early_math.pre_algebra.two_step.02.v1",
+        "khan.connector.early_math.pre_algebra.two_step.03.v1",
+        "khan.connector.early_math.pre_algebra.two_step.04.v1",
+        "khan.connector.early_math.pre_algebra.two_step.05.v1"
+      ]
+    },
+    {
+      "query": "metric conversions word problems arithmetic",
+      "title": "Convert units word problems (metrics)",
+      "assignable_url": "https://www.khanacademy.org/math/cc-fifth-grade-math/imp-measurement-and-data-3/converting-metric-units-word-problems/e/convert-units-word-problems--metrics-?utm_campaign=teacher_assign_tool&utm_medium=referral&utm_source=chatgpt",
+      "pulled_on": "2026-04-17",
+      "pulled_via": "khan-academy-connector",
+      "external_ids": [
+        "khan.connector.early_math.measurement.metric.01.v1",
+        "khan.connector.early_math.measurement.metric.02.v1",
+        "khan.connector.early_math.measurement.metric.03.v1",
+        "khan.connector.early_math.measurement.metric.04.v1",
+        "khan.connector.early_math.measurement.metric.05.v1"
+      ]
+    },
+    {
+      "query": "addition subtraction word problems",
+      "title": "Addition word problems within 100",
+      "assignable_url": "https://www.khanacademy.org/math/cc-2nd-grade-math/cc-2nd-add-subtract-100/cc-2nd-add-sub-100-word-problems/e/addition-and-subtraction-word-problems-within-100--level-1?utm_campaign=teacher_assign_tool&utm_medium=referral&utm_source=chatgpt",
+      "pulled_on": "2026-04-17",
+      "pulled_via": "khan-academy-connector",
+      "external_ids": [
+        "khan.connector.early_math.add_subtract.word.01.v1",
+        "khan.connector.early_math.add_subtract.word.02.v1",
+        "khan.connector.early_math.add_subtract.word.03.v1",
+        "khan.connector.early_math.add_subtract.word.04.v1",
+        "khan.connector.early_math.add_subtract.word.05.v1"
+      ]
+    },
+    {
+      "query": "money word problems",
+      "title": "Convert money word problems",
+      "assignable_url": "https://www.khanacademy.org/math/cc-fourth-grade-math/imp-measurement-and-data-2/imp-money-word-problems/e/measuring-and-converting-money-word-problems?utm_campaign=teacher_assign_tool&utm_medium=referral&utm_source=chatgpt",
+      "pulled_on": "2026-04-17",
+      "pulled_via": "khan-academy-connector",
+      "external_ids": [
+        "khan.connector.early_math.money.change.01.v1",
+        "khan.connector.early_math.money.change.02.v1",
+        "khan.connector.early_math.money.change.03.v1",
+        "khan.connector.early_math.money.change.04.v1",
+        "khan.connector.early_math.money.change.05.v1"
+      ]
+    },
+    {
+      "query": "multi digit addition",
+      "title": "Multi-digit addition",
+      "assignable_url": "https://www.khanacademy.org/math/cc-fourth-grade-math/imp-addition-and-subtraction-2/imp-adding-multi-digit-numbers/e/multi-digit-addition?utm_campaign=teacher_assign_tool&utm_medium=referral&utm_source=chatgpt",
+      "pulled_on": "2026-04-17",
+      "pulled_via": "khan-academy-connector",
+      "external_ids": [
+        "khan.connector.early_math.long_addition.multi_digit.01.v1",
+        "khan.connector.early_math.long_addition.multi_digit.02.v1",
+        "khan.connector.early_math.long_addition.multi_digit.03.v1",
+        "khan.connector.early_math.long_addition.multi_digit.04.v1",
+        "khan.connector.early_math.long_addition.multi_digit.05.v1"
+      ]
+    },
+    {
+      "query": "multi digit subtraction",
+      "title": "Multi-digit subtraction",
+      "assignable_url": "https://www.khanacademy.org/math/cc-fourth-grade-math/imp-addition-and-subtraction-2/imp-subtracting-multi-digit-numbers/e/multi-digit-subtraction?utm_campaign=teacher_assign_tool&utm_medium=referral&utm_source=chatgpt",
+      "pulled_on": "2026-04-17",
+      "pulled_via": "khan-academy-connector",
+      "external_ids": [
+        "khan.connector.early_math.long_subtraction.multi_digit.01.v1",
+        "khan.connector.early_math.long_subtraction.multi_digit.02.v1",
+        "khan.connector.early_math.long_subtraction.multi_digit.03.v1",
+        "khan.connector.early_math.long_subtraction.multi_digit.04.v1",
+        "khan.connector.early_math.long_subtraction.multi_digit.05.v1"
+      ]
+    },
+    {
+      "query": "solve multiplication word problems",
+      "title": "Solve multiplication word problems",
+      "assignable_url": "https://www.khanacademy.org/math/3rd-grade-illustrative-mathematics/x0d15758a763061cf:represent-and-interpret-data/x0d15758a763061cf:more-factors-more-problems/e/solve-multiplication-word-problems?utm_campaign=teacher_assign_tool&utm_medium=referral&utm_source=chatgpt",
+      "pulled_on": "2026-04-17",
+      "pulled_via": "khan-academy-connector",
+      "external_ids": [
+        "khan.connector.early_math.multiply.word.01.v1",
+        "khan.connector.early_math.multiply.word.02.v1",
+        "khan.connector.early_math.multiply.word.03.v1",
+        "khan.connector.early_math.multiply.word.04.v1",
+        "khan.connector.early_math.multiply.word.05.v1"
+      ]
+    },
+    {
+      "query": "multiply by 2 digit numbers",
+      "title": "Multiply 2-digit numbers",
+      "assignable_url": "https://www.khanacademy.org/math/cc-fourth-grade-math/multiplying-by-2-digit-numbers/multiply-2-digit-numbers-with-partial-products/e/multiplication_3?utm_campaign=teacher_assign_tool&utm_medium=referral&utm_source=chatgpt",
+      "pulled_on": "2026-04-17",
+      "pulled_via": "khan-academy-connector",
+      "external_ids": [
+        "khan.connector.early_math.long_multiplication.two_digit.01.v1",
+        "khan.connector.early_math.long_multiplication.two_digit.02.v1",
+        "khan.connector.early_math.long_multiplication.two_digit.03.v1",
+        "khan.connector.early_math.long_multiplication.two_digit.04.v1",
+        "khan.connector.early_math.long_multiplication.two_digit.05.v1"
+      ]
+    },
+    {
+      "query": "unit rates word problems",
+      "title": "Rate problems",
+      "assignable_url": "https://www.khanacademy.org/math/cc-sixth-grade-math/x0267d782:cc-6th-rates-and-percentages/cc-6th-rates/e/rate_problems_0.5?utm_campaign=teacher_assign_tool&utm_medium=referral&utm_source=chatgpt",
+      "pulled_on": "2026-04-17",
+      "pulled_via": "khan-academy-connector",
+      "external_ids": [
+        "khan.connector.early_math.ratios.rates.01.v1",
+        "khan.connector.early_math.ratios.rates.02.v1",
+        "khan.connector.early_math.ratios.rates.03.v1",
+        "khan.connector.early_math.ratios.rates.04.v1",
+        "khan.connector.early_math.ratios.rates.05.v1"
+      ]
+    },
+    {
+      "query": "expanded form",
+      "title": "Decimals in expanded form",
+      "assignable_url": "https://www.khanacademy.org/math/cc-fifth-grade-math/imp-place-value-and-decimals/imp-decimals-in-expanded-form/e/writing-and-interpreting-decimals?utm_campaign=teacher_assign_tool&utm_medium=referral&utm_source=chatgpt",
+      "pulled_on": "2026-04-17",
+      "pulled_via": "khan-academy-connector",
+      "external_ids": [
+        "khan.connector.early_math.place_value.expanded.01.v1",
+        "khan.connector.early_math.place_value.expanded.02.v1",
+        "khan.connector.early_math.place_value.expanded.03.v1",
+        "khan.connector.early_math.place_value.expanded.04.v1",
+        "khan.connector.early_math.place_value.expanded.05.v1"
+      ]
+    },
+    {
+      "query": "converting fractions to decimals",
+      "title": "Converting fractions to decimals",
+      "assignable_url": "https://www.khanacademy.org/math/cc-seventh-grade-math/cc-7th-fractions-decimals/cc-7th-fracs-to-decimals/e/converting_fractions_to_decimals?utm_campaign=teacher_assign_tool&utm_medium=referral&utm_source=chatgpt",
+      "pulled_on": "2026-04-17",
+      "pulled_via": "khan-academy-connector",
+      "external_ids": [
+        "khan.connector.early_math.fractions.to_decimal.01.v1",
+        "khan.connector.early_math.fractions.to_decimal.02.v1",
+        "khan.connector.early_math.fractions.to_decimal.03.v1",
+        "khan.connector.early_math.fractions.to_decimal.04.v1",
+        "khan.connector.early_math.fractions.to_decimal.05.v1"
+      ]
+    },
+    {
+      "query": "order of operations exponents",
+      "title": "Order of operations with fractions and exponents",
+      "assignable_url": "https://www.khanacademy.org/math/cc-sixth-grade-math/x0267d782:cc-6th-exponents-and-order-of-operations/x0267d782:more-on-order-of-operations/e/evaluating-numerical-expressions-with-exponents?utm_campaign=teacher_assign_tool&utm_medium=referral&utm_source=chatgpt",
+      "pulled_on": "2026-04-17",
+      "pulled_via": "khan-academy-connector",
+      "external_ids": [
+        "khan.connector.early_math.order_of_operations.exponents.01.v1",
+        "khan.connector.early_math.order_of_operations.exponents.02.v1",
+        "khan.connector.early_math.order_of_operations.exponents.03.v1",
+        "khan.connector.early_math.order_of_operations.exponents.04.v1",
+        "khan.connector.early_math.order_of_operations.exponents.05.v1"
+      ]
+    }
+  ]
+}

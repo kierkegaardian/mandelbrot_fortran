@@ -1,0 +1,1969 @@
+[
+  {
+    "external_id": "khan.early_math.add.single.v1",
+    "skill": "add_subtract",
+    "subskill": "Single-digit addition",
+    "label": "Single-digit sum",
+    "mode": "expression",
+    "prompt_template": "{a} + {b} = ?",
+    "answer_expr": "a + b",
+    "constraint_expr": "",
+    "explanation_template": "Single-digit addition combines two small groups.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 6.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "a",
+        "min": 1,
+        "max": 9,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "b",
+        "min": 1,
+        "max": 9,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.add.single.v2",
+    "skill": "add_subtract",
+    "subskill": "Single-digit addition",
+    "label": "Addition count on",
+    "mode": "expression",
+    "prompt_template": "What is {a} + {b}?",
+    "answer_expr": "a + b",
+    "constraint_expr": "",
+    "explanation_template": "Count on from the first addend by the second addend.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 6.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "a",
+        "min": 1,
+        "max": 9,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "b",
+        "min": 1,
+        "max": 9,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.sub.single.v1",
+    "skill": "add_subtract",
+    "subskill": "Single-digit subtraction",
+    "label": "Single-digit difference",
+    "mode": "expression",
+    "prompt_template": "{a} - {b} = ?",
+    "answer_expr": "a - b",
+    "constraint_expr": "a > b",
+    "explanation_template": "Subtraction removes part of a group.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 6.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "a",
+        "min": 2,
+        "max": 9,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "b",
+        "min": 1,
+        "max": 8,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.sub.single.v2",
+    "skill": "add_subtract",
+    "subskill": "Single-digit subtraction",
+    "label": "Count back",
+    "mode": "expression",
+    "prompt_template": "If you count back {b} from {a}, where do you land?",
+    "answer_expr": "a - b",
+    "constraint_expr": "a > b",
+    "explanation_template": "Counting back models subtraction on a number line.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 6.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "a",
+        "min": 2,
+        "max": 9,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "b",
+        "min": 1,
+        "max": 8,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.add.carry.v1",
+    "skill": "add_subtract",
+    "subskill": "Borrowing and carrying basics",
+    "label": "Carry in addition",
+    "mode": "expression",
+    "prompt_template": "{a} + {b} = ?",
+    "answer_expr": "a + b",
+    "constraint_expr": "(a % 10) + (b % 10) >= 10",
+    "explanation_template": "When a column reaches 10, regroup 10 ones as 1 ten.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 20.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "a",
+        "min": 15,
+        "max": 89,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "b",
+        "min": 15,
+        "max": 89,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.sub.borrow.v2",
+    "skill": "add_subtract",
+    "subskill": "Borrowing and carrying basics",
+    "label": "Borrow in subtraction",
+    "mode": "expression",
+    "prompt_template": "{a} - {b} = ?",
+    "answer_expr": "a - b",
+    "constraint_expr": "a > b and (a % 10) < (b % 10)",
+    "explanation_template": "Borrowing trades 1 ten for 10 ones so the subtraction can happen.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 20.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "a",
+        "min": 31,
+        "max": 98,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "b",
+        "min": 12,
+        "max": 89,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.add.word.v1",
+    "skill": "add_subtract",
+    "subskill": "Word problems",
+    "label": "Join story",
+    "mode": "word",
+    "prompt_template": "A shelf had {a} books. {b} more were added. How many books are there now?",
+    "answer_expr": "a + b",
+    "constraint_expr": "",
+    "explanation_template": "This story joins two amounts into one total.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 18.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "a",
+        "min": 5,
+        "max": 45,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "b",
+        "min": 3,
+        "max": 30,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.add.word.v2",
+    "skill": "add_subtract",
+    "subskill": "Word problems",
+    "label": "Difference story",
+    "mode": "expression",
+    "prompt_template": "A class had {a} pencils and used {b}. How many pencils are left?",
+    "answer_expr": "a - b",
+    "constraint_expr": "a > b",
+    "explanation_template": "This story removes part of the starting amount.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 18.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "a",
+        "min": 15,
+        "max": 60,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "b",
+        "min": 4,
+        "max": 25,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.add.word.v3",
+    "skill": "add_subtract",
+    "subskill": "Word problems",
+    "label": "Total with difference",
+    "mode": "expression",
+    "prompt_template": "There were {a} apples in one basket and {b} in another. How many apples altogether?",
+    "answer_expr": "a + b",
+    "constraint_expr": "",
+    "explanation_template": "Add the two basket counts to get the total.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 18.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "a",
+        "min": 8,
+        "max": 40,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "b",
+        "min": 7,
+        "max": 35,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.add.missing.v1",
+    "skill": "add_subtract",
+    "subskill": "Missing addends",
+    "label": "Missing addend",
+    "mode": "expression",
+    "prompt_template": "{a} + x = {total}. What is x?",
+    "answer_expr": "total - a",
+    "constraint_expr": "total > a",
+    "explanation_template": "Find the missing part by subtracting the known addend from the total.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 14.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "a",
+        "min": 3,
+        "max": 30,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "total",
+        "min": 8,
+        "max": 50,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.add.missing.v2",
+    "skill": "add_subtract",
+    "subskill": "Missing addends",
+    "label": "Missing addend with total",
+    "mode": "expression",
+    "prompt_template": "What number must be added to {a} to make {total}?",
+    "answer_expr": "total - a",
+    "constraint_expr": "total > a",
+    "explanation_template": "A missing addend is the amount needed to reach the target total.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 14.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "a",
+        "min": 4,
+        "max": 35,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "total",
+        "min": 9,
+        "max": 60,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.add.regroup.v1",
+    "skill": "add_subtract",
+    "subskill": "Multi-digit regrouping",
+    "label": "Regrouping sum",
+    "mode": "expression",
+    "prompt_template": "{a} + {b} = ?",
+    "answer_expr": "a + b",
+    "constraint_expr": "((a % 10) + (b % 10) >= 10) or (((a // 10) % 10) + ((b // 10) % 10) >= 10)",
+    "explanation_template": "Regroup tens or hundreds when a column reaches 10 or more.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 60.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "a",
+        "min": 125,
+        "max": 689,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "b",
+        "min": 125,
+        "max": 489,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.add.regroup.v2",
+    "skill": "add_subtract",
+    "subskill": "Multi-digit regrouping",
+    "label": "Regrouping difference",
+    "mode": "expression",
+    "prompt_template": "{a} - {b} = ?",
+    "answer_expr": "a - b",
+    "constraint_expr": "a > b and (((a % 10) < (b % 10)) or (((a // 10) % 10) < ((b // 10) % 10)))",
+    "explanation_template": "Regroup from the next place when the current place is too small to subtract.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 60.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "a",
+        "min": 350,
+        "max": 980,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "b",
+        "min": 111,
+        "max": 689,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "ray.early_math.add.regroup.word.v1",
+    "skill": "add_subtract",
+    "subskill": "Multi-digit regrouping",
+    "label": "Regrouping word problem",
+    "mode": "word",
+    "prompt_template": "A library had {a} pages copied on Monday and {b} on Tuesday. How many pages were copied in all?",
+    "answer_expr": "a + b",
+    "constraint_expr": "((a % 10) + (b % 10) >= 10) or (((a // 10) % 10) + ((b // 10) % 10) >= 10)",
+    "explanation_template": "Add the two multi-digit amounts and regroup where needed.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 60.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "a",
+        "min": 125,
+        "max": 689,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "b",
+        "min": 125,
+        "max": 489,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.multiply.repeated.v1",
+    "skill": "multiply",
+    "subskill": "Repeated addition",
+    "label": "Repeated sum",
+    "mode": "expression",
+    "prompt_template": "What is {groups} groups of {size}?",
+    "answer_expr": "groups * size",
+    "constraint_expr": "",
+    "explanation_template": "Repeated addition can be compressed into multiplication.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 6.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "groups",
+        "min": 2,
+        "max": 9,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "size",
+        "min": 2,
+        "max": 9,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.multiply.repeated.v2",
+    "skill": "multiply",
+    "subskill": "Repeated addition",
+    "label": "Add equal groups",
+    "mode": "expression",
+    "prompt_template": "Add {size} + {size} + {size} + {size}. What is the total?",
+    "answer_expr": "size * 4",
+    "constraint_expr": "",
+    "explanation_template": "Four equal addends make 4 groups of the same size.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 6.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "size",
+        "min": 2,
+        "max": 9,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.multiply.tables.v1",
+    "skill": "multiply",
+    "subskill": "Times tables",
+    "label": "Fact fluency",
+    "mode": "expression",
+    "prompt_template": "{a} x {b} = ?",
+    "answer_expr": "a * b",
+    "constraint_expr": "",
+    "explanation_template": "A multiplication fact gives the total for equal groups.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 6.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "a",
+        "min": 2,
+        "max": 12,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "b",
+        "min": 2,
+        "max": 12,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.multiply.tables.v2",
+    "skill": "multiply",
+    "subskill": "Times tables",
+    "label": "Missing factor",
+    "mode": "expression",
+    "prompt_template": "{a} x x = {product}. What is x?",
+    "answer_expr": "product / a",
+    "constraint_expr": "product % a == 0 and product / a >= 2 and product / a <= 12",
+    "explanation_template": "Use the fact family in reverse to find the missing factor.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 5.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "a",
+        "min": 2,
+        "max": 12,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "product",
+        "min": 12,
+        "max": 120,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.multiply.array.v1",
+    "skill": "multiply",
+    "subskill": "Array and grid models",
+    "label": "Rows and columns",
+    "mode": "expression",
+    "prompt_template": "An array has {rows} rows and {cols} columns. How many objects are in the array?",
+    "answer_expr": "rows * cols",
+    "constraint_expr": "",
+    "explanation_template": "Rows times columns gives the total in the array.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 6.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "rows",
+        "min": 2,
+        "max": 10,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "cols",
+        "min": 2,
+        "max": 10,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.multiply.array.v2",
+    "skill": "multiply",
+    "subskill": "Array and grid models",
+    "label": "Rectangle grid",
+    "mode": "expression",
+    "prompt_template": "A grid has {rows} rows of {cols} squares. How many squares are there?",
+    "answer_expr": "rows * cols",
+    "constraint_expr": "",
+    "explanation_template": "Each row has the same number of squares, so multiply rows by columns.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 6.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "rows",
+        "min": 2,
+        "max": 10,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "cols",
+        "min": 2,
+        "max": 10,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.multiply.facts.v1",
+    "skill": "multiply",
+    "subskill": "Simple product facts",
+    "label": "Product fact",
+    "mode": "expression",
+    "prompt_template": "What is {a} x {b}?",
+    "answer_expr": "a * b",
+    "constraint_expr": "",
+    "explanation_template": "The product is the total after grouping equally.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 6.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "a",
+        "min": 2,
+        "max": 12,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "b",
+        "min": 2,
+        "max": 12,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.multiply.facts.v2",
+    "skill": "multiply",
+    "subskill": "Simple product facts",
+    "label": "Complete fact family",
+    "mode": "expression",
+    "prompt_template": "What number times {b} equals {product}?",
+    "answer_expr": "product / b",
+    "constraint_expr": "product % b == 0 and product / b >= 2 and product / b <= 12",
+    "explanation_template": "Division checks the multiplication fact.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 6.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "b",
+        "min": 2,
+        "max": 12,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "product",
+        "min": 12,
+        "max": 120,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.multiply.compare.v1",
+    "skill": "multiply",
+    "subskill": "Multiplicative comparison and estimation",
+    "label": "Times as many",
+    "mode": "expression",
+    "prompt_template": "A box holds {base} marbles. Another box has {times} times as many. How many marbles are in the second box?",
+    "answer_expr": "base * times",
+    "constraint_expr": "",
+    "explanation_template": "Times as many means multiply the original amount by the scale factor.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 20.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "base",
+        "min": 2,
+        "max": 15,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "times",
+        "min": 2,
+        "max": 9,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.multiply.compare.v2",
+    "skill": "multiply",
+    "subskill": "Multiplicative comparison and estimation",
+    "label": "Round then estimate",
+    "mode": "expression",
+    "prompt_template": "Estimate {tens} x {ones} by using {rounded} x {ones}. What estimate do you get?",
+    "answer_expr": "rounded * ones",
+    "constraint_expr": "(tens - rounded <= 4 and tens - rounded >= 0) or (rounded - tens <= 5 and rounded - tens >= 0)",
+    "explanation_template": "Round first, then multiply the easier numbers.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 20.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "tens",
+        "min": 21,
+        "max": 89,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "rounded",
+        "min": 20,
+        "max": 90,
+        "step": 10,
+        "kind": "int"
+      },
+      {
+        "name": "ones",
+        "min": 2,
+        "max": 9,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "ray.early_math.multiply.compare.word.v1",
+    "skill": "multiply",
+    "subskill": "Multiplicative comparison and estimation",
+    "label": "Comparison story",
+    "mode": "word",
+    "prompt_template": "One crate has {base} jars. A truck carries {times} times as many jars as one crate. How many jars does the truck carry?",
+    "answer_expr": "base * times",
+    "constraint_expr": "",
+    "explanation_template": "Multiply the single-crate amount by the comparison factor.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 20.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "base",
+        "min": 3,
+        "max": 18,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "times",
+        "min": 2,
+        "max": 6,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.divide.share.v1",
+    "skill": "divide",
+    "subskill": "Equal sharing",
+    "label": "Fair share",
+    "mode": "expression",
+    "prompt_template": "{total} objects are shared equally among {groups} groups. How many are in each group?",
+    "answer_expr": "total / groups",
+    "constraint_expr": "total % groups == 0",
+    "explanation_template": "Equal sharing means divide the total by the number of groups.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 8.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "total",
+        "min": 12,
+        "max": 96,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "groups",
+        "min": 2,
+        "max": 12,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.divide.share.v2",
+    "skill": "divide",
+    "subskill": "Equal sharing",
+    "label": "Per group count",
+    "mode": "expression",
+    "prompt_template": "If {total} stickers are split evenly into {groups} piles, how many stickers are in each pile?",
+    "answer_expr": "total / groups",
+    "constraint_expr": "total % groups == 0",
+    "explanation_template": "Division finds the amount in each equal pile.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 8.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "total",
+        "min": 18,
+        "max": 108,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "groups",
+        "min": 2,
+        "max": 12,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.divide.repeat.v1",
+    "skill": "divide",
+    "subskill": "Division as repeated subtraction",
+    "label": "Subtract equal groups",
+    "mode": "expression",
+    "prompt_template": "How many times can you subtract {group} from {total} before reaching 0?",
+    "answer_expr": "total / group",
+    "constraint_expr": "total % group == 0",
+    "explanation_template": "Each subtraction removes one full group.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 8.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "total",
+        "min": 12,
+        "max": 96,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "group",
+        "min": 2,
+        "max": 12,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.divide.repeat.v2",
+    "skill": "divide",
+    "subskill": "Division as repeated subtraction",
+    "label": "Repeated subtraction count",
+    "mode": "expression",
+    "prompt_template": "If you keep taking away {group} from {total}, how many full subtractions happen?",
+    "answer_expr": "total / group",
+    "constraint_expr": "total % group == 0",
+    "explanation_template": "The number of subtractions matches the quotient.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 8.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "total",
+        "min": 15,
+        "max": 90,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "group",
+        "min": 2,
+        "max": 10,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.divide.remainder.v1",
+    "skill": "divide",
+    "subskill": "Remainders",
+    "label": "Find remainder",
+    "mode": "expression",
+    "prompt_template": "What is the remainder when {total} is divided by {group}?",
+    "answer_expr": "total % group",
+    "constraint_expr": "total % group != 0",
+    "explanation_template": "The remainder is what is left after the largest possible equal groups.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 4.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "total",
+        "min": 13,
+        "max": 99,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "group",
+        "min": 2,
+        "max": 12,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.divide.remainder.v2",
+    "skill": "divide",
+    "subskill": "Remainders",
+    "label": "Find whole groups",
+    "mode": "expression",
+    "prompt_template": "How many full groups of {group} can you make from {total}?",
+    "answer_expr": "total // group",
+    "constraint_expr": "total % group != 0",
+    "explanation_template": "The quotient counts only the complete groups.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 6.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "total",
+        "min": 13,
+        "max": 99,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "group",
+        "min": 2,
+        "max": 12,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "ray.early_math.divide.remainder.word.v1",
+    "skill": "divide",
+    "subskill": "Remainders",
+    "label": "Leftover story",
+    "mode": "word",
+    "prompt_template": "{total} stickers are shared equally among {group} students. How many stickers are left over?",
+    "answer_expr": "total % group",
+    "constraint_expr": "total % group != 0",
+    "explanation_template": "The leftover stickers are the remainder after making equal groups.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 4.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "total",
+        "min": 13,
+        "max": 99,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "group",
+        "min": 2,
+        "max": 12,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.divide.inverse.v1",
+    "skill": "divide",
+    "subskill": "Inverse thinking",
+    "label": "Missing factor from quotient",
+    "mode": "expression",
+    "prompt_template": "{group} x ? = {total}. What is the missing number?",
+    "answer_expr": "total / group",
+    "constraint_expr": "total % group == 0",
+    "explanation_template": "Use multiplication and division as inverse operations.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 8.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "total",
+        "min": 12,
+        "max": 108,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "group",
+        "min": 2,
+        "max": 12,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.divide.inverse.v2",
+    "skill": "divide",
+    "subskill": "Inverse thinking",
+    "label": "Division check",
+    "mode": "expression",
+    "prompt_template": "If {total} / {group} = x, what is x?",
+    "answer_expr": "total / group",
+    "constraint_expr": "total % group == 0",
+    "explanation_template": "Division undoes multiplication by the same factor.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 8.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "total",
+        "min": 12,
+        "max": 108,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "group",
+        "min": 2,
+        "max": 12,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.divide.interpret.v1",
+    "skill": "divide",
+    "subskill": "Remainder interpretation and estimation",
+    "label": "Estimate quotient",
+    "mode": "expression",
+    "prompt_template": "About how many groups of {group} fit in {estimate_total} if you use {rounded_total} instead?",
+    "answer_expr": "rounded_total / group",
+    "constraint_expr": "rounded_total % group == 0 and ((estimate_total - rounded_total <= 5 and estimate_total - rounded_total >= 0) or (rounded_total - estimate_total <= 5 and rounded_total - estimate_total >= 0))",
+    "explanation_template": "Estimate division with a nearby friendly multiple.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 6.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "estimate_total",
+        "min": 35,
+        "max": 95,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "rounded_total",
+        "min": 30,
+        "max": 100,
+        "step": 10,
+        "kind": "int"
+      },
+      {
+        "name": "group",
+        "min": 2,
+        "max": 10,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.divide.interpret.v2",
+    "skill": "divide",
+    "subskill": "Remainder interpretation and estimation",
+    "label": "Estimate with friendly total",
+    "mode": "expression",
+    "prompt_template": "Use {rounded_total} / {group} to estimate {estimate_total} / {group}. What estimate do you get?",
+    "answer_expr": "rounded_total / group",
+    "constraint_expr": "rounded_total % group == 0 and ((estimate_total - rounded_total <= 5 and estimate_total - rounded_total >= 0) or (rounded_total - estimate_total <= 5 and rounded_total - estimate_total >= 0))",
+    "explanation_template": "A nearby multiple of the divisor gives a quick estimate for the quotient.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 6.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "estimate_total",
+        "min": 35,
+        "max": 95,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "rounded_total",
+        "min": 30,
+        "max": 100,
+        "step": 10,
+        "kind": "int"
+      },
+      {
+        "name": "group",
+        "min": 2,
+        "max": 10,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "ray.early_math.divide.interpret.word.v1",
+    "skill": "divide",
+    "subskill": "Remainder interpretation and estimation",
+    "label": "Remainder story",
+    "mode": "word",
+    "prompt_template": "{total} apples are packed into bags of {group}. How many full bags can be made?",
+    "answer_expr": "total // group",
+    "constraint_expr": "total % group != 0",
+    "explanation_template": "The number of full bags is the whole-number quotient.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 6.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "total",
+        "min": 13,
+        "max": 99,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "group",
+        "min": 2,
+        "max": 12,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.long_add.v1",
+    "skill": "long_addition",
+    "subskill": "Column alignment",
+    "label": "Column alignment",
+    "mode": "expression",
+    "prompt_template": "Line up the digits and add: {a} + {b}",
+    "answer_expr": "a + b",
+    "constraint_expr": "",
+    "explanation_template": "Aligned columns keep ones with ones and tens with tens.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 60.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "a",
+        "min": 123,
+        "max": 789,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "b",
+        "min": 111,
+        "max": 689,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.long_add.v2",
+    "skill": "long_addition",
+    "subskill": "Column alignment",
+    "label": "Column alignment variation",
+    "mode": "expression",
+    "prompt_template": "Line up the digits and add: {a} + {b}",
+    "answer_expr": "a + b",
+    "constraint_expr": "",
+    "explanation_template": "Aligned columns keep ones with ones and tens with tens.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 60.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "a",
+        "min": 123,
+        "max": 789,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "b",
+        "min": 111,
+        "max": 689,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.long_add_carry.v1",
+    "skill": "long_addition",
+    "subskill": "Carry handling",
+    "label": "Carry handling",
+    "mode": "expression",
+    "prompt_template": "Add and show the carried value: {a} + {b}",
+    "answer_expr": "a + b",
+    "constraint_expr": "((a % 10) + (b % 10) >= 10)",
+    "explanation_template": "A carry appears when a column totals 10 or more.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 60.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "a",
+        "min": 145,
+        "max": 789,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "b",
+        "min": 155,
+        "max": 689,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.long_add_carry.v2",
+    "skill": "long_addition",
+    "subskill": "Carry handling",
+    "label": "Carry handling variation",
+    "mode": "expression",
+    "prompt_template": "Add and show the carried value: {a} + {b}",
+    "answer_expr": "a + b",
+    "constraint_expr": "((a % 10) + (b % 10) >= 10)",
+    "explanation_template": "A carry appears when a column totals 10 or more.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 60.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "a",
+        "min": 145,
+        "max": 789,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "b",
+        "min": 155,
+        "max": 689,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.long_add_accuracy.v1",
+    "skill": "long_addition",
+    "subskill": "Multi-digit accuracy",
+    "label": "Multi-digit accuracy",
+    "mode": "expression",
+    "prompt_template": "Find the sum: {a} + {b}",
+    "answer_expr": "a + b",
+    "constraint_expr": "",
+    "explanation_template": "Work one place-value column at a time.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 60.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "a",
+        "min": 234,
+        "max": 899,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "b",
+        "min": 101,
+        "max": 799,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.long_add_accuracy.v2",
+    "skill": "long_addition",
+    "subskill": "Multi-digit accuracy",
+    "label": "Multi-digit accuracy variation",
+    "mode": "expression",
+    "prompt_template": "Work out the sum: {a} + {b}",
+    "answer_expr": "a + b",
+    "constraint_expr": "",
+    "explanation_template": "Work one place-value column at a time.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 60.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "a",
+        "min": 234,
+        "max": 899,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "b",
+        "min": 101,
+        "max": 799,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.long_add_place.v1",
+    "skill": "long_addition",
+    "subskill": "Place-value structure",
+    "label": "Place-value structure",
+    "mode": "expression",
+    "prompt_template": "What is {a} + {b}?",
+    "answer_expr": "a + b",
+    "constraint_expr": "",
+    "explanation_template": "Think of the addends as hundreds, tens, and ones being combined.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 60.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "a",
+        "min": 305,
+        "max": 860,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "b",
+        "min": 120,
+        "max": 690,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.long_add_place.v2",
+    "skill": "long_addition",
+    "subskill": "Place-value structure",
+    "label": "Place-value structure variation",
+    "mode": "expression",
+    "prompt_template": "Calculate {a} + {b}?",
+    "answer_expr": "a + b",
+    "constraint_expr": "",
+    "explanation_template": "Think of the addends as hundreds, tens, and ones being combined.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 60.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "a",
+        "min": 305,
+        "max": 860,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "b",
+        "min": 120,
+        "max": 690,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.long_sub_borrow.v1",
+    "skill": "long_subtraction",
+    "subskill": "Borrowing",
+    "label": "Borrowing",
+    "mode": "expression",
+    "prompt_template": "Subtract with regrouping: {a} - {b}",
+    "answer_expr": "a - b",
+    "constraint_expr": "a > b and (a % 10) < (b % 10)",
+    "explanation_template": "Borrowing trades one larger unit for 10 smaller units.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 60.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "a",
+        "min": 301,
+        "max": 950,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "b",
+        "min": 112,
+        "max": 789,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.long_sub_borrow.v2",
+    "skill": "long_subtraction",
+    "subskill": "Borrowing",
+    "label": "Borrowing variation",
+    "mode": "expression",
+    "prompt_template": "Subtract with regrouping: {a} - {b}",
+    "answer_expr": "a - b",
+    "constraint_expr": "a > b and (a % 10) < (b % 10)",
+    "explanation_template": "Borrowing trades one larger unit for 10 smaller units.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 60.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "a",
+        "min": 301,
+        "max": 950,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "b",
+        "min": 112,
+        "max": 789,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.long_sub_align.v1",
+    "skill": "long_subtraction",
+    "subskill": "Column alignment",
+    "label": "Column alignment",
+    "mode": "expression",
+    "prompt_template": "Find the difference: {a} - {b}",
+    "answer_expr": "a - b",
+    "constraint_expr": "a > b",
+    "explanation_template": "Keep each place in the correct column before subtracting.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 60.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "a",
+        "min": 350,
+        "max": 980,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "b",
+        "min": 101,
+        "max": 649,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.long_sub_align.v2",
+    "skill": "long_subtraction",
+    "subskill": "Column alignment",
+    "label": "Column alignment variation",
+    "mode": "expression",
+    "prompt_template": "Work out the difference: {a} - {b}",
+    "answer_expr": "a - b",
+    "constraint_expr": "a > b",
+    "explanation_template": "Keep each place in the correct column before subtracting.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 60.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "a",
+        "min": 350,
+        "max": 980,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "b",
+        "min": 101,
+        "max": 649,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.long_sub_zero.v1",
+    "skill": "long_subtraction",
+    "subskill": "Crossing zero safely",
+    "label": "Crossing zero safely",
+    "mode": "expression",
+    "prompt_template": "Subtract carefully: {a} - {b}",
+    "answer_expr": "a - b",
+    "constraint_expr": "a > b and a % 10 == 0",
+    "explanation_template": "Zeros can still lend value after regrouping from the left.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 60.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "a",
+        "min": 400,
+        "max": 900,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "b",
+        "min": 101,
+        "max": 389,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.long_sub_zero.v2",
+    "skill": "long_subtraction",
+    "subskill": "Crossing zero safely",
+    "label": "Crossing zero safely variation",
+    "mode": "expression",
+    "prompt_template": "Subtract carefully: {a} - {b}",
+    "answer_expr": "a - b",
+    "constraint_expr": "a > b and a % 10 == 0",
+    "explanation_template": "Zeros can still lend value after regrouping from the left.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 60.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "a",
+        "min": 400,
+        "max": 900,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "b",
+        "min": 101,
+        "max": 389,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.long_mul_partial.v1",
+    "skill": "long_multiplication",
+    "subskill": "Partial products",
+    "label": "Partial products",
+    "mode": "expression",
+    "prompt_template": "Find the product: {a} x {b}",
+    "answer_expr": "a * b",
+    "constraint_expr": "",
+    "explanation_template": "Each row is a partial product from one place-value part.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 120.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "a",
+        "min": 12,
+        "max": 99,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "b",
+        "min": 12,
+        "max": 39,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.long_mul_partial.v2",
+    "skill": "long_multiplication",
+    "subskill": "Partial products",
+    "label": "Partial products variation",
+    "mode": "expression",
+    "prompt_template": "Work out the product: {a} x {b}",
+    "answer_expr": "a * b",
+    "constraint_expr": "",
+    "explanation_template": "Each row is a partial product from one place-value part.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 120.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "a",
+        "min": 12,
+        "max": 99,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "b",
+        "min": 12,
+        "max": 39,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.long_mul_place.v1",
+    "skill": "long_multiplication",
+    "subskill": "Place-value breakdown",
+    "label": "Place-value breakdown",
+    "mode": "expression",
+    "prompt_template": "Multiply {a} by {b}.",
+    "answer_expr": "a * b",
+    "constraint_expr": "",
+    "explanation_template": "Split the factors into tens and ones mentally as you multiply.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 120.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "a",
+        "min": 14,
+        "max": 98,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "b",
+        "min": 11,
+        "max": 29,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.long_mul_place.v2",
+    "skill": "long_multiplication",
+    "subskill": "Place-value breakdown",
+    "label": "Place-value breakdown variation",
+    "mode": "expression",
+    "prompt_template": "Multiply {a} by {b}.",
+    "answer_expr": "a * b",
+    "constraint_expr": "",
+    "explanation_template": "Split the factors into tens and ones mentally as you multiply.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 120.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "a",
+        "min": 14,
+        "max": 98,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "b",
+        "min": 11,
+        "max": 29,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.long_mul_two_digit.v1",
+    "skill": "long_multiplication",
+    "subskill": "Two-digit multiplies",
+    "label": "Two-digit multiplies",
+    "mode": "expression",
+    "prompt_template": "What is {a} x {b}?",
+    "answer_expr": "a * b",
+    "constraint_expr": "",
+    "explanation_template": "Estimate first, then combine the partial products.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 120.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "a",
+        "min": 15,
+        "max": 96,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "b",
+        "min": 12,
+        "max": 48,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.long_mul_two_digit.v2",
+    "skill": "long_multiplication",
+    "subskill": "Two-digit multiplies",
+    "label": "Two-digit multiplies variation",
+    "mode": "expression",
+    "prompt_template": "Calculate {a} x {b}?",
+    "answer_expr": "a * b",
+    "constraint_expr": "",
+    "explanation_template": "Estimate first, then combine the partial products.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 120.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "a",
+        "min": 15,
+        "max": 96,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "b",
+        "min": 12,
+        "max": 48,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.long_div_layout.v1",
+    "skill": "long_division",
+    "subskill": "Division layout",
+    "label": "Division layout",
+    "mode": "expression",
+    "prompt_template": "Compute {dividend} / {divisor}. Use the whole-number quotient only.",
+    "answer_expr": "dividend // divisor",
+    "constraint_expr": "dividend % divisor == 0",
+    "explanation_template": "Place the quotient above the matching place-value column.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 8.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "dividend",
+        "min": 120,
+        "max": 980,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "divisor",
+        "min": 2,
+        "max": 12,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.long_div_layout.v2",
+    "skill": "long_division",
+    "subskill": "Division layout",
+    "label": "Division layout variation",
+    "mode": "expression",
+    "prompt_template": "Find {dividend} / {divisor}. Use the whole-number quotient only.",
+    "answer_expr": "dividend // divisor",
+    "constraint_expr": "dividend % divisor == 0",
+    "explanation_template": "Place the quotient above the matching place-value column.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 8.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "dividend",
+        "min": 120,
+        "max": 980,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "divisor",
+        "min": 2,
+        "max": 12,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.long_div_estimate.v1",
+    "skill": "long_division",
+    "subskill": "Quotient estimation",
+    "label": "Quotient estimation",
+    "mode": "expression",
+    "prompt_template": "About how many times does {divisor} fit into {dividend}?",
+    "answer_expr": "dividend // divisor",
+    "constraint_expr": "dividend % divisor == 0",
+    "explanation_template": "Estimate the quotient digit before subtracting.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 8.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "dividend",
+        "min": 120,
+        "max": 980,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "divisor",
+        "min": 2,
+        "max": 12,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.long_div_estimate.v2",
+    "skill": "long_division",
+    "subskill": "Quotient estimation",
+    "label": "Quotient estimation variation",
+    "mode": "expression",
+    "prompt_template": "About how many times does {divisor} fit into {dividend}?",
+    "answer_expr": "dividend // divisor",
+    "constraint_expr": "dividend % divisor == 0",
+    "explanation_template": "Estimate the quotient digit before subtracting.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 8.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "dividend",
+        "min": 120,
+        "max": 980,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "divisor",
+        "min": 2,
+        "max": 12,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.long_div_remainder.v1",
+    "skill": "long_division",
+    "subskill": "Remainder handling",
+    "label": "Remainder handling",
+    "mode": "expression",
+    "prompt_template": "What remainder is left when {dividend} is divided by {divisor}?",
+    "answer_expr": "dividend % divisor",
+    "constraint_expr": "dividend % divisor != 0",
+    "explanation_template": "The remainder must be smaller than the divisor.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 4.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "dividend",
+        "min": 121,
+        "max": 999,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "divisor",
+        "min": 2,
+        "max": 12,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.long_div_remainder.v2",
+    "skill": "long_division",
+    "subskill": "Remainder handling",
+    "label": "Remainder handling variation",
+    "mode": "expression",
+    "prompt_template": "What remainder is left when {dividend} is divided by {divisor}?",
+    "answer_expr": "dividend % divisor",
+    "constraint_expr": "dividend % divisor != 0",
+    "explanation_template": "The remainder must be smaller than the divisor.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 4.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "dividend",
+        "min": 121,
+        "max": 999,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "divisor",
+        "min": 2,
+        "max": 12,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  }
+]

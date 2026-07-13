@@ -1,0 +1,14 @@
+[list_dir exact raw body on projects/mandelquest-sync]
+- /home/user/projects/mandelquest-sync/
+  - AGENTS.md
+  - app/
+    - __init__.py
+    - main.py
+    - schemas.py
+    - storage.py
+  - CLAUDE.md
+  - docker-compose.yml
+  - Dockerfile
+  - GEMINI.md
+  - README.md
+  - requirements.txt

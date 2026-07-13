@@ -1,0 +1,730 @@
+[
+  {
+    "external_id": "khan.early_math.ratio.language.v1",
+    "skill": "ratios",
+    "subskill": "Ratio language (to:of)",
+    "label": "Scale ratio",
+    "mode": "expression",
+    "prompt_template": "For every {a} red beads there are {b} blue beads. If the pattern is repeated {scale} times, how many blue beads are there?",
+    "answer_expr": "b * scale",
+    "constraint_expr": "",
+    "explanation_template": "Equivalent ratio groups scale both parts by the same factor.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 10.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "a",
+        "min": 1,
+        "max": 8,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "b",
+        "min": 1,
+        "max": 9,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "scale",
+        "min": 2,
+        "max": 6,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.ratio.language.v2",
+    "skill": "ratios",
+    "subskill": "Ratio language (to:of)",
+    "label": "Total from ratio",
+    "mode": "expression",
+    "prompt_template": "One batch uses a ratio of {a}:{b}. How many total parts are in {scale} batches?",
+    "answer_expr": "(a + b) * scale",
+    "constraint_expr": "",
+    "explanation_template": "Add the two parts of one batch, then scale the batch count.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 10.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "a",
+        "min": 1,
+        "max": 8,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "b",
+        "min": 1,
+        "max": 9,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "scale",
+        "min": 2,
+        "max": 6,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "ray.early_math.ratio.language.word.v1",
+    "skill": "ratios",
+    "subskill": "Ratio language (to:of)",
+    "label": "Recipe story",
+    "mode": "word",
+    "prompt_template": "A recipe uses {a} cups of juice for every {b} cups of water. If the recipe is made {scale} times, how many cups of water are needed?",
+    "answer_expr": "b * scale",
+    "constraint_expr": "",
+    "explanation_template": "Keep the two parts of the ratio in the same order and scale both together.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 8.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "a",
+        "min": 1,
+        "max": 6,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "b",
+        "min": 1,
+        "max": 8,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "scale",
+        "min": 2,
+        "max": 5,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.ratio.equivalent.v1",
+    "skill": "ratios",
+    "subskill": "Equivalent ratios",
+    "label": "Missing term",
+    "mode": "expression",
+    "prompt_template": "Scale the ratio {a}:{b} by {scale}. What is the new first number?",
+    "answer_expr": "a * scale",
+    "constraint_expr": "",
+    "explanation_template": "Equivalent ratios multiply both parts by the same factor.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 8.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "a",
+        "min": 1,
+        "max": 9,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "b",
+        "min": 2,
+        "max": 12,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "scale",
+        "min": 2,
+        "max": 6,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.ratio.equivalent.v2",
+    "skill": "ratios",
+    "subskill": "Equivalent ratios",
+    "label": "Missing denominator",
+    "mode": "expression",
+    "prompt_template": "Scale the ratio {a}:{b} by {scale}. What is the new second number?",
+    "answer_expr": "b * scale",
+    "constraint_expr": "",
+    "explanation_template": "Scale the denominator by the same factor as the numerator.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 8.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "a",
+        "min": 1,
+        "max": 9,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "b",
+        "min": 2,
+        "max": 12,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "scale",
+        "min": 2,
+        "max": 6,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "ray.early_math.ratio.equivalent.word.v1",
+    "skill": "ratios",
+    "subskill": "Equivalent ratios",
+    "label": "Group scaling story",
+    "mode": "word",
+    "prompt_template": "A map uses a scale of {a} inches to {b} miles. If the scale factor is repeated {scale} times, how many miles match the new map length?",
+    "answer_expr": "b * scale",
+    "constraint_expr": "",
+    "explanation_template": "Equivalent ratios keep the same comparison after scaling.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 8.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "a",
+        "min": 1,
+        "max": 5,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "b",
+        "min": 2,
+        "max": 12,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "scale",
+        "min": 2,
+        "max": 5,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.ratio.fractional.v1",
+    "skill": "ratios",
+    "subskill": "Fractional comparison",
+    "label": "Part of whole denominator",
+    "mode": "expression",
+    "prompt_template": "If a class ratio is {a}:{b}, how many total parts are in the whole ratio?",
+    "answer_expr": "a + b",
+    "constraint_expr": "",
+    "explanation_template": "A part-to-whole fraction uses the total parts in the denominator.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 6.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "a",
+        "min": 1,
+        "max": 8,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "b",
+        "min": 1,
+        "max": 9,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.ratio.fractional.v2",
+    "skill": "ratios",
+    "subskill": "Fractional comparison",
+    "label": "Part count from ratio",
+    "mode": "expression",
+    "prompt_template": "In a ratio of {a}:{b}, how many parts belong to the second quantity?",
+    "answer_expr": "b",
+    "constraint_expr": "",
+    "explanation_template": "The second number in the ratio names the second quantity's share.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 5.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "a",
+        "min": 1,
+        "max": 8,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "b",
+        "min": 1,
+        "max": 9,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.ratio.unit_rate.v1",
+    "skill": "ratios",
+    "subskill": "Unit rates and proportional relationships",
+    "label": "Find unit rate",
+    "mode": "expression",
+    "prompt_template": "{total} miles are driven in {hours} hours. How many miles per hour is that?",
+    "answer_expr": "total / hours",
+    "constraint_expr": "total % hours == 0",
+    "explanation_template": "A unit rate tells the amount for 1 unit of the second quantity.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 8.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "total",
+        "min": 12,
+        "max": 120,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "hours",
+        "min": 2,
+        "max": 12,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.ratio.unit_rate.v2",
+    "skill": "ratios",
+    "subskill": "Unit rates and proportional relationships",
+    "label": "Scale proportional pair",
+    "mode": "expression",
+    "prompt_template": "If {a} notebooks cost ${b}, how much do {scale} equal groups of {a} notebooks cost?",
+    "answer_expr": "b * scale",
+    "constraint_expr": "",
+    "explanation_template": "A proportional relationship scales both quantities by the same factor.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 10.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "a",
+        "min": 1,
+        "max": 8,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "b",
+        "min": 2,
+        "max": 16,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "scale",
+        "min": 2,
+        "max": 6,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "openstax.early_math.ratio.unit_rate.word.v1",
+    "skill": "ratios",
+    "subskill": "Unit rates and proportional relationships",
+    "label": "Rate story",
+    "mode": "word",
+    "prompt_template": "A bike travels {total} miles in {hours} hours. At the same rate, how many miles does it travel in 1 hour?",
+    "answer_expr": "total / hours",
+    "constraint_expr": "total % hours == 0",
+    "explanation_template": "Find the per-1 amount before scaling to any other value.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 8.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "total",
+        "min": 18,
+        "max": 144,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "hours",
+        "min": 2,
+        "max": 12,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.fraction.unit.v1",
+    "skill": "fractions",
+    "subskill": "Unit fractions",
+    "label": "Denominator from slices",
+    "mode": "expression",
+    "prompt_template": "A whole is split into {d} equal parts. One part is what unit fraction denominator?",
+    "answer_expr": "d",
+    "constraint_expr": "",
+    "explanation_template": "A unit fraction uses 1 piece out of d equal pieces.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 4.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "d",
+        "min": 2,
+        "max": 12,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.fraction.unit.v2",
+    "skill": "fractions",
+    "subskill": "Unit fractions",
+    "label": "Pieces in whole",
+    "mode": "expression",
+    "prompt_template": "How many unit fractions of size 1/{d} make one whole?",
+    "answer_expr": "d",
+    "constraint_expr": "",
+    "explanation_template": "d copies of 1/d make a whole.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 4.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "d",
+        "min": 2,
+        "max": 12,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.fraction.equivalent.v1",
+    "skill": "fractions",
+    "subskill": "Equivalent fractions",
+    "label": "Missing numerator",
+    "mode": "expression",
+    "prompt_template": "Scale the fraction {a}/{b} by {scale}. What is the new numerator?",
+    "answer_expr": "a * scale",
+    "constraint_expr": "",
+    "explanation_template": "Multiply numerator and denominator by the same factor.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 5.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "a",
+        "min": 1,
+        "max": 6,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "b",
+        "min": 2,
+        "max": 10,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "scale",
+        "min": 2,
+        "max": 5,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.fraction.equivalent.v2",
+    "skill": "fractions",
+    "subskill": "Equivalent fractions",
+    "label": "Missing denominator",
+    "mode": "expression",
+    "prompt_template": "Scale the fraction {a}/{b} by {scale}. What is the new denominator?",
+    "answer_expr": "b * scale",
+    "constraint_expr": "",
+    "explanation_template": "The denominator scales by the same factor as the numerator.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 5.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "a",
+        "min": 1,
+        "max": 6,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "b",
+        "min": 2,
+        "max": 10,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "scale",
+        "min": 2,
+        "max": 5,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.fraction.shaded.v1",
+    "skill": "fractions",
+    "subskill": "Shaded region meaning",
+    "label": "Count shaded parts",
+    "mode": "expression",
+    "prompt_template": "A shape is split into {d} equal parts and {n} are shaded. How many parts are shaded?",
+    "answer_expr": "n",
+    "constraint_expr": "d > n",
+    "explanation_template": "The numerator counts the selected equal parts.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 4.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "d",
+        "min": 2,
+        "max": 12,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "n",
+        "min": 1,
+        "max": 10,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.fraction.shaded.v2",
+    "skill": "fractions",
+    "subskill": "Shaded region meaning",
+    "label": "Count total parts",
+    "mode": "expression",
+    "prompt_template": "A model shows {n} shaded parts out of {d} equal parts. How many equal parts make the whole?",
+    "answer_expr": "d",
+    "constraint_expr": "d > n",
+    "explanation_template": "The denominator tells how many equal parts make the whole.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 4.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "d",
+        "min": 2,
+        "max": 12,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "n",
+        "min": 1,
+        "max": 10,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.fraction.decimal.v1",
+    "skill": "fractions",
+    "subskill": "Fraction to decimal",
+    "label": "Fraction to decimal",
+    "mode": "expression",
+    "prompt_template": "Write {n}/{d} as a decimal.",
+    "answer_expr": "n / d",
+    "constraint_expr": "d > n and (d == 2 or d == 4 or d == 5 or d == 8 or d == 10)",
+    "explanation_template": "A fraction becomes a decimal by dividing the numerator by the denominator.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 1.5,
+    "active": true,
+    "vars": [
+      {
+        "name": "d",
+        "min": 2,
+        "max": 10,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "n",
+        "min": 1,
+        "max": 9,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.fraction.decimal.v2",
+    "skill": "fractions",
+    "subskill": "Fraction to decimal",
+    "label": "Benchmark fraction decimal",
+    "mode": "expression",
+    "prompt_template": "What decimal is equal to {n}/{d}?",
+    "answer_expr": "n / d",
+    "constraint_expr": "d > n and (d == 2 or d == 4 or d == 5 or d == 8 or d == 10)",
+    "explanation_template": "Use place value to rewrite the fraction as tenths or hundredths when you can.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 1.5,
+    "active": true,
+    "vars": [
+      {
+        "name": "d",
+        "min": 2,
+        "max": 10,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "n",
+        "min": 1,
+        "max": 9,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.fraction.compare.v1",
+    "skill": "fractions",
+    "subskill": "Compare fractions and mixed numbers",
+    "label": "Larger numerator",
+    "mode": "expression",
+    "prompt_template": "Which is larger, {a}/{d} or {b}/{d}? Enter the numerator of the larger fraction.",
+    "answer_expr": "b",
+    "constraint_expr": "d > b and b > a",
+    "explanation_template": "With a common denominator, the larger numerator gives the larger fraction.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 4.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "a",
+        "min": 1,
+        "max": 7,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "b",
+        "min": 2,
+        "max": 8,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "d",
+        "min": 3,
+        "max": 10,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.fraction.compare.v2",
+    "skill": "fractions",
+    "subskill": "Compare fractions and mixed numbers",
+    "label": "Larger whole part",
+    "mode": "expression",
+    "prompt_template": "Which mixed number is larger: {w1} {n1}/{d} or {w2} {n2}/{d}? Enter the whole-number part of the larger mixed number.",
+    "answer_expr": "w2",
+    "constraint_expr": "w2 > w1 and d > n1 and d > n2",
+    "explanation_template": "Compare whole numbers first when mixed numbers share the same fraction size.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 3.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "w1",
+        "min": 1,
+        "max": 3,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "w2",
+        "min": 2,
+        "max": 5,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "n1",
+        "min": 1,
+        "max": 5,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "n2",
+        "min": 1,
+        "max": 5,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "d",
+        "min": 6,
+        "max": 10,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  }
+]

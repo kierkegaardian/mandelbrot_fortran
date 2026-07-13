@@ -49,6 +49,7 @@ class Worksheet:
     level: int
     file_path: str
     created_at: str
+    archived_at: Optional[str] = None
 
 
 @dataclass(frozen=True)
@@ -137,6 +138,14 @@ class DailyGoalHistory:
 
 
 @dataclass(frozen=True)
+class SchoolYearTarget:
+    profile_id: int
+    grade: int
+    stretch_enabled: bool
+    updated_at: str
+
+
+@dataclass(frozen=True)
 class HistoricalTest:
     id: int
     exam_code: str
@@ -163,3 +172,99 @@ class HistoricalQuestion:
     correct_answer: Optional[str]
     explanation: str
     source_page: Optional[int]
+
+
+@dataclass(frozen=True)
+class ScaffoldStep:
+    prompt: str
+    expected_answer: str
+    hint: str
+
+
+@dataclass(frozen=True)
+class SummerProgram:
+    id: int
+    profile_id: int
+    lane: str
+    start_date: str
+    end_date: str
+    days_per_week: int
+    minutes_per_session: int
+    status: str
+    finish_definition: str
+    placement_recommendation: Optional[str]
+    placement_review_status: str
+    placement_reviewed_at: Optional[str]
+    student_age_years: Optional[int]
+    created_at: str
+    updated_at: str
+
+
+@dataclass(frozen=True)
+class SummerProgramTask:
+    id: int
+    program_id: int
+    unit_code: str
+    task_kind: str
+    skill: str
+    subskill: Optional[str]
+    sequence_index: int
+    status: str
+    target_score_pct: Optional[float]
+    scheduled_date: str
+    notes_json: str
+
+
+@dataclass(frozen=True)
+class SummerAssessmentRun:
+    id: int
+    program_id: int
+    assessment_type: str
+    score_pct: float
+    passed: bool
+    strand_results_json: str
+    completed_at: str
+
+
+@dataclass(frozen=True)
+class SummerProgramReviewState:
+    current_lane: str
+    recommended_lane: Optional[str]
+    review_status: str
+    weak_strands: tuple[str, ...]
+    age_gate_note: Optional[str]
+    latest_placement_score_pct: Optional[float]
+
+
+@dataclass(frozen=True)
+class SummerProgramBlockSummary:
+    reason: Optional[str]
+    task_id: Optional[int]
+    unit_code: Optional[str]
+    task_kind: Optional[str]
+    score_pct: Optional[float]
+    required_score_pct: Optional[float]
+    weak_strands: tuple[str, ...]
+    next_action: Optional[str]
+
+
+@dataclass(frozen=True)
+class SummerProgramStatusSummary:
+    program_id: int
+    current_lane: str
+    recommended_lane: Optional[str]
+    review_status: str
+    weak_strands: tuple[str, ...]
+    current_blocker: Optional[str]
+    next_action: Optional[str]
+    pace_label: str
+    finish_state: str
+    launchable: bool
+    catch_up_note: Optional[str]
+    projected_finish_date: Optional[str]
+    projected_finish_note: Optional[str]
+    remediation_note: Optional[str]
+    remediation_focus: tuple[str, ...]
+    current_task: Optional[SummerProgramTask]
+    review_state: SummerProgramReviewState
+    block_summary: SummerProgramBlockSummary

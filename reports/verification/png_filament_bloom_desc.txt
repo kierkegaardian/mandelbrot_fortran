@@ -1,0 +1,5 @@
+
+
+Dramatic "bloom" of orange and cyan filaments and spirals exploding from structures on a deep maroon background. Bright glowing hotspots and highly organic yet mathematical filament details. High visual engagement and beauty — a canonical example of the desired finished aesthetic for pairing with math content.
+
+Read via read_file(..., format="image").

@@ -1,0 +1,24 @@
+          iter = 0
+          do while ((abs(z) <= 2.0_real64) .and. (iter < cfg%max_iter))
+             select case (cfg%fractal_type)
+             case (TYPE_BURNINGSHIP)
+                z = cmplx(abs(real(z)), abs(aimag(z)), kind=real64)**2 + c
+             case (TYPE_TRICORN)
+                z = conjg(z)**2 + c
+             case (TYPE_MULTIBROT)
+                z = z**cfg%power + c
+             case (TYPE_CELTIC)
+                ! Celtic: |Re(z^2)| + i*Im(z^2) + c
+                ! z*z gives z^2.
+                z = cmplx(abs(real(z*z)), aimag(z*z), kind=real64) + c
+             case (TYPE_PERPENDICULAR)
+                ! Perpendicular: (Re(z) + i|Im(z)|)^2 + c
+                z = cmplx(real(z), abs(aimag(z)), kind=real64)**2 + c
+             case default
+                z = z*z + c
+             end select
+             iter = iter + 1
+          end do
+
+          call color_pixel(iter, cfg%max_iter, cfg%palette, cfg%smooth, cfg%cyclic, cfg%cycle_freq, z, image_data(:, i, j))
+(Exact from read_file at mandelbrot.f90:260; shows rune iteration and escape logic)

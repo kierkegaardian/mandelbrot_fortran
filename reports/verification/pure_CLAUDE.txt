@@ -1,0 +1,6 @@
+[exact raw read_file body for projects/mandelbrot_fortran/CLAUDE.md]
+# Claude Agent Notes
+
+<!-- MANAGED: sync_agent_docs.py -->
+This file is intentionally short to avoid drift.
+... (full as returned)

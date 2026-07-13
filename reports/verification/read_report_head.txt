@@ -1,0 +1,32 @@
+
+
+# MandelQuest Math Deep-Dive Review: Multi-Layer Fractal + Curriculum "Runes", and What We're Doing Wrong
+
+**Date**: 2026-06-24  
+**Repo**: /home/user/projects/mandelbrot_fortran (MandelQuest)  
+**Goal**: Obsessive, thorough inspection modeled exactly after the affirmbeat review to understand how best to help create MandelQuest content (math lessons, fractal explorations, quizzes, "quests", worksheets, curriculum) wherein a model (LLM) can help get the math correct with **multiple layers** (fractal computation, visual rendering, curriculum/educational, quiz/practice, UI interaction, parent vs student) and help write the **runes** (mathematical expressions, iteration rules like z²+c, parameter sets, problem generators, formulas, curriculum sequences, content templates).  
+**Scope**: Entire /home/user/projects/mandelbrot_fortran/ tree (src/*.f90 full, app/*.py all major + generators, tests/*, scripts/*, data/*, docs/*, root PNGs + explorer.py + Makefile + *.md + mandelquest.spec + reviews/ + TODO + code_review.md), plus prod snapshot at /home/user/.local/share/mandelquest-prod/source/, mandelquest-sync/, ~/.local paths. **No code changes made**. Visual assets (mandelbrot.png etc.) treated as canonical targets for "beautiful, clear, engaging fractal visualizations combined with calm math practice".
+
+This report is the primary self-contained deliverable. Exhaustive and detailed.
+
+## 1. Inspection Summary (AC Coverage + Discipline)
+
+Exhaustive static + dynamic inspection using tools:
+
+- **list_dir** (dozens): /home/user/projects (initial), /home/user/projects/mandelbrot_fortran (full root + app/, src/, tests/, scripts/, data/, reviews/, docs/, worksheets/, video_test/, assets/), /home/user/projects/mandelquest-sync, /home/user/.local/share (mandelquest-prod + state + config + icons), ~/.local/share/mandelquest-prod/source/app etc, subpaths repeatedly.
+- **read_file** (50+ files, full/partial + images): plan.md, affirmbeat report (style model), all orientation (README.md, PROJECT_BRIEF.md, TECHNICAL.md, TECHNICAL_SPEC.md, AGENTS.md, CLAUDE.md, CONTINUITY.md, TODO.md + prod/source equivalents), src/mandelbrot.f90 (full), cli.f90 (full), ppm_writer.f90 (full), app/fractal_renderer.py (full), app/main.py, app/ui_fractals.py + ui_fractal_controls.py + ui_fractal_canvas.py, app/quiz_engine.py (large), app/curriculum.py, app/skill_graph.py, app/models.py (full), app/learning_engine.py, app/summer_program*.py (defs, quiz, schedule, program), app/story_wrapper.py, app/quiz_content.py, app/db.py (large), app/question_bank.py, app/template_engine.py (full), app/explanations.py, app/quiz_answers.py, multiple *_generators.py (pre_algebra, algebra_1/2, arithmetic_*), app/arithmetic_render.py + draw*, ui_*.py (quiz, arithmetic, parent, dashboard, root), worksheet*.py, parent_worksheets.py, sync_*.py (service, store, payloads etc), explorer.py, paths.py, content_audit.py, early_math_*, mandelquest.spec, Makefile, reviews/code_review.md + others, data/curriculum_index.json + khan_*, scripts/* (template_*, generate_*, ingest_*), tests/test_fractal_renderer_stack.py + test_summer* + test_quiz* + test_learning* + many, prod/source/app/ equivalents for contrast (older fractal_renderer, quiz_engine), PNGs via multimodal (5 root +), video_test/*.ppm metadata.
+- **grep** (repeated, targeted patterns + path limits + globs): "mandelbrot|fractal|iteration|escape|z\*\*|z\*z|abs\(z\)|max_iter|smooth|julia|color_pixel|template|prompt_template|answer_expr|constraint_expr|instantiate|_safe_eval|generator|subskill|mode.*(intuition|expression|word)|layer|precision|color|runes|quiz|curriculum|summer|scaffold|mastery|escape|iter" (across src/, app/, tests/, scripts/, data/); multiple passes.
+- **Dynamic runs + capture to SCRATCH** (per plan): ./mandelbrot_gen --help (full), python -m py_compile key modules (OK), python -m unittest discover -s tests -q (Ran 178 tests OK in ~16s; warnings noted but no failures), python -m app.main --smoke-test (OK), file/ls on PNGs/PPMs/video_test, sqlite schema + template count (1133), make -n equiv via ls, asset inspection.
+- **Images**: read_file on mandelbrot.png, julia_swirl.png, filament_bloom.png, mandelbrot_beauty.png, mandelbrot_sunset.png (multimodal visual descriptions captured); PPMs via file/head.
+- **Other**: prod snapshot ls/read (older April state lacking full summer_*), mandelquest-sync README/app, desktop entry, ~/.local paths, affirmation report for exact style (findings-first, exhaustive citations, >=10 wrongs, recs, verification evidence sections).
+
+**Tool counts (documented)**: >20 list_dir, >50 read_file (many full + image), >10 grep (high match counts e.g. 83+ in src alone, thousands in templates), 10+ terminal cmds with SCRATCH capture, 178 unit tests + smoke. All AC files + patterns covered.
+
+Key high-level architecture (cross-referenced below):
+- **Fortran core** (src/mandelbrot.f90:271): z = z*z + c (and 6 variants), escape while abs(z) <= 2.0_real64, max_iter, smooth_iter = iter + 1 - log(log |z|)/log(2), color_pixel palettes.
+- **Python fractal bridge** (app/fractal_renderer.py:131): FractalConfig dataclass + subprocess to mandelbrot_gen binary (PPM bytes or high-res file).
+- **Education runes + layers**: Templates in SQLite (prompt_template, answer_expr, constraint_expr, explanation_template) + native *_generators.py; Question model with subskill/mode/scaffold; quiz_engine dispatches template first then generator; curriculum_index.json + skill_graph + learning_engine (mastery/streaks) + story_wrapper (word mode) + explanations (mental_model etc) + summer_program (lanes, units, TASK_CYCLE lesson/practice/checkpoint + placement/exit) + UI tabs (fractal + arithmetic visuals + quiz + parent).
+- **Data/sync/pack**: db.py (profiles, subskill_progress, question_templates ~1133 rows, summer_*), paths.py, sync_* (separate repo, profiles/attempts only), mandelquest.spec bundles Fortran binary + assets.
+- **Visuals/UI**: Tkinter progressive (canvas tiers), arithmetic draw (icons/shapes/bars for intuition), worksheets HTML, prod snapshot older.
+
+## 2. Full Architecture Deep Dive

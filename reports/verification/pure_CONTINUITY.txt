@@ -1,0 +1,6 @@
+[exact raw read_file body for projects/mandelbrot_fortran/CONTINUITY.md]
+# MandelQuest Continuity
+Last updated: 2026-04-26
+## Current Product Direction
+MandelQuest is now primarily a summer math learning app with a calmer child-first flow. The Mandelbrot/fractal viewer should remain a bonus exploration feature, not the opening screen or the core progress model.
+... (full as returned)

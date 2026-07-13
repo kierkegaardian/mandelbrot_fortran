@@ -1,0 +1,4 @@
+[raw from read_file on mandelbrot.png with format=image]
+
+The image is a high-detail Mandelbrot set: large black cardioid and bulbs on deep dark red/black background with bright orange-red glowing filaments showing intricate self-similar boundary detail. Calm yet engaging visualization ideal for pairing with math explanations and calm practice.
+(Style: beautiful, clear, engaging fractal visualizations combined with calm math practice.)

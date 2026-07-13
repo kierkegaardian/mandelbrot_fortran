@@ -1,0 +1,16 @@
+[exact raw from read_file projects/mandelbrot_fortran/app/quiz_engine.py]
+from __future__ import annotations
+import math
+import random
+from dataclasses import dataclass
+from typing import Optional
+from .early_math_catalog import early_math_subskills_for
+from .models import ScaffoldStep
+... 
+SKILLS = [
+    "counting",
+    "place_value",
+    "add_subtract",
+    ...
+]
+ (and Question dataclass, etc.)

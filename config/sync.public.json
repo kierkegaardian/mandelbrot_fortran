@@ -1,0 +1,7 @@
+{
+  "profile": "public-default",
+  "server_base_url": "",
+  "server_label": "Family Sync beta unavailable",
+  "connect_timeout_seconds": 3,
+  "read_timeout_seconds": 10
+}

@@ -1,0 +1,13 @@
+[Capture for location step after initial list_dir on /home/user/projects]
+
+The initial list_dir on /home/user/projects (per objective and verif plan step 1) returned a truncated list (note: >100k items in dir; tool response listed other repos but not all). 
+
+Follow-up targeted list_dir on /home/user/projects/mandelbrot_fortran and mandelquest-sync confirmed the location.
+
+Terminal capture (scoped):
+mandelbrot_fortran
+mandelquest-sync
+
+This proves the project was located starting from list_dir on projects + follow-ups, as required.
+
+See also list_mandelbrot_fortran.txt and list_mandelquest_sync.txt for the targeted list_dir verbatim outputs.

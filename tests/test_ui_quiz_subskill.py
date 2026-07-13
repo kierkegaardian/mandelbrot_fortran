@@ -7,67 +7,32 @@ from app.ui_quiz import _subskill_for_question
 
 
 class SubskillMappingTests(unittest.TestCase):
-    def test_same_template_stable_across_labels(self) -> None:
-        core = Question(
-            skill="add_subtract",
-            prompt="8 + 5 = ?",
-            correct_answer="13",
+    def test_explicit_subskill_is_used_for_mastery(self) -> None:
+        question = Question(
+            skill="calculus_1",
+            prompt="Find the slope of the line through (1, 2) and (3, 6).",
+            correct_answer="2",
             explanation="",
             choices=None,
             visual=None,
-            template_id=42,
+            subskill="Average rate of change between two points",
             question_label="Core",
             mode="expression",
         )
-        prereq = Question(
-            skill="add_subtract",
-            prompt="Story context (src): text\nQuestion: 8 + 5 = ?",
-            correct_answer="13",
-            explanation="",
-            choices=None,
-            visual=None,
-            template_id=42,
-            question_label="Prereq",
-            mode="word",
-        )
-        review = Question(
-            skill="add_subtract",
-            prompt="Story context (src): other text\nQuestion: 8 + 5 = ?",
-            correct_answer="13",
-            explanation="",
-            choices=None,
-            visual=None,
-            template_id=42,
-            question_label="Review",
-            mode="word",
-        )
-        self.assertEqual(_subskill_for_question(core), _subskill_for_question(prereq))
-        self.assertEqual(_subskill_for_question(prereq), _subskill_for_question(review))
+        self.assertEqual(_subskill_for_question(question), "Average rate of change between two points")
 
-    def test_non_template_wrapper_and_plain_prompt_map_same(self) -> None:
-        wrapped = Question(
-            skill="add_subtract",
-            prompt="Story context (source): A child has 8 apples and gets 5 more.\nQuestion: 8 + 5 = ?",
-            correct_answer="13",
-            explanation="",
-            choices=None,
-            visual=None,
-            template_id=None,
-            question_label="Core",
-            mode="word",
-        )
-        plain = Question(
+    def test_missing_subskill_stays_untracked(self) -> None:
+        question = Question(
             skill="add_subtract",
             prompt="8 + 5 = ?",
             correct_answer="13",
             explanation="",
             choices=None,
             visual=None,
-            template_id=None,
-            question_label="Review",
+            question_label="Core",
             mode="expression",
         )
-        self.assertEqual(_subskill_for_question(wrapped), _subskill_for_question(plain))
+        self.assertIsNone(_subskill_for_question(question))
 
 
 if __name__ == "__main__":

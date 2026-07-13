@@ -1,0 +1,36 @@
+
+
+from __future__ import annotations
+
+from dataclasses import dataclass
+from pathlib import Path
+import json
+
+from .paths import data_dir
+
+
+@dataclass(frozen=True)
+class CurriculumEntry:
+    skill: str
+    label: str
+    topics: tuple[str, ...]
+    pdf: str
+    source: str
+
+def _load_curriculum() -> list[CurriculumEntry]:
+    path = data_dir() / "curriculum_index.json"
+    if not path.exists():
+        return []
+    raw = json.loads(path.read_text(encoding="utf-8"))
+    entries: list[CurriculumEntry] = []
+    for item in raw:
+        entries.append(
+            CurriculumEntry(
+                skill=str(item.get("skill", "")),
+                label=str(item.get("label", "")),
+                topics=tuple(str(topic) for topic in item.get("topics", [])),
+                pdf=str(item.get("pdf", "")),
+                source=str(item.get("source", "")),
+            )
+        )
+    return entries

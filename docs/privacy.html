@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MandelQuest Math | Privacy and local data</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="shell">
+    <header class="site-header">
+      <a class="brand" href="index.html">MandelQuest<small>Privacy and local data</small></a>
+      <nav class="nav">
+        <a href="index.html">Home</a>
+        <a href="coverage.html">Coverage</a>
+        <a href="support.html">Support</a>
+      </nav>
+    </header>
+
+    <section class="panel">
+      <h1>Privacy and local-data policy</h1>
+      <p class="lede">MandelQuest is designed around local-first family use. Core learning flows do not require an account, cloud sync, or always-on internet access.</p>
+    </section>
+
+    <section class="section grid grid-2">
+      <article class="card">
+        <h3>What the app stores locally</h3>
+        <ul class="checklist">
+          <li>Profiles and parent-role information</li>
+          <li>Parent PIN settings and lockout state</li>
+          <li>Quiz attempts, question history, and progress</li>
+          <li>Assignments and worksheet records</li>
+          <li>UI settings such as offline mode and accessibility presets</li>
+        </ul>
+      </article>
+      <article class="card">
+        <h3>What the app does not require</h3>
+        <ul class="checklist">
+          <li>No login account for core use</li>
+          <li>No required cloud sync</li>
+          <li>No always-on outbound network connection</li>
+          <li>No ads or ad-tracking workflow in core learning paths</li>
+        </ul>
+      </article>
+    </section>
+
+    <section class="panel">
+      <h2 class="section-title">Family Sync (Beta)</h2>
+      <p>Family Sync is an experimental, operator-configured beta. It is off by default, public builds include no sync server, and a parent cannot enable it unless the install has a machine-local configuration for a compatible server. Core learning remains available in local-only mode.</p>
+      <div class="grid grid-2">
+        <div class="note">
+          <strong>Sent after opt-in:</strong> profile names and roles; quiz sets; assignments and notes; completed quiz attempt scores and timing; full question history including prompts, correct answers, learner answers, correctness, and explanations; plus sync identifiers, timestamps, and deletion markers.
+        </div>
+        <div class="note">
+          <strong>Kept on this device:</strong> parent PIN and lockout data; UI and offline settings; local PDFs; worksheet files and records; Summer Program state; school-year targets; derived progress tables; and in-progress quiz resume state.
+        </div>
+      </div>
+      <p class="muted">The family or operator running the configured beta server is responsible for that server's access, retention, backups, and deletion policy. Back up local data before testing sync.</p>
+    </section>
+
+    <section class="panel">
+      <h2 class="section-title">Where data lives</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Environment</th>
+            <th>Default data location</th>
+            <th>What is stored there</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Development run</td>
+            <td><code>data/</code> in the repository</td>
+            <td><code>app.db</code>, <code>ui_settings.json</code>, generated worksheets, cached support files</td>
+          </tr>
+          <tr>
+            <td>Windows packaged app</td>
+            <td><code>%APPDATA%\MandelQuest</code></td>
+            <td>Same local database and worksheet outputs</td>
+          </tr>
+          <tr>
+            <td>macOS packaged app</td>
+            <td><code>~/Library/Application Support/MandelQuest</code></td>
+            <td>Same local database and worksheet outputs</td>
+          </tr>
+          <tr>
+            <td>Linux packaged app</td>
+            <td><code>${XDG_DATA_HOME:-~/.local/share}/MandelQuest</code></td>
+            <td>Same local database and worksheet outputs</td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="muted">Advanced testing or managed installs can override the data path with <code>MANDELQUEST_DATA_DIR</code>.</p>
+    </section>
+
+    <section class="section grid grid-2">
+      <article class="card">
+        <h3>Optional internet-linked actions</h3>
+        <p>External lesson links can open Khan Academy pages in a browser, but these links are optional and disabled by default.</p>
+        <p>Parents can also enforce offline mode, which disables those web launches entirely.</p>
+      </article>
+      <article class="card">
+        <h3>Historical PDF tools</h3>
+        <p>SAT, PSAT, GRE, and curriculum PDF features read local PDF files already on the machine. They do not require cloud processing.</p>
+      </article>
+    </section>
+
+    <section class="panel">
+      <h2 class="section-title">Backup and deletion</h2>
+      <div class="grid grid-2">
+        <div class="note">
+          <strong>Backup:</strong> close the app, then copy the local data directory, especially <code>app.db</code> and <code>worksheets/</code>, to another location.
+        </div>
+        <div class="note">
+          <strong>Delete local data:</strong> remove the MandelQuest data directory for your platform. This removes local profiles, progress, settings, and worksheet records stored by the app.
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2 class="section-title">Beta feedback and testimonials</h2>
+      <p>Written testimonials or recorded beta reactions are always opt-in. If public quotes are requested, ask for clear permission before reuse.</p>
+      <div class="button-row">
+        <a class="button" href="support.html">Open support guide</a>
+        <a class="button" href="homeschool-beta.html">See beta expectations</a>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <p>Questions about install paths or backups? Start with the <a href="support.html">support guide</a>.</p>
+    </footer>
+  </div>
+</body>
+</html>

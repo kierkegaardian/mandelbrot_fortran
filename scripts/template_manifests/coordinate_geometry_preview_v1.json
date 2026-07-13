@@ -1,0 +1,206 @@
+[
+  {
+    "external_id": "coordinate_geometry_preview.v1.midpoint.expression",
+    "skill": "geometry_area",
+    "subskill": "Coordinate geometry distance and midpoint",
+    "label": "Midpoint y-coordinate",
+    "mode": "expression",
+    "prompt_template": "Find the midpoint y-coordinate for the segment from ({x1}, {y1}) to ({x2}, {y2}).",
+    "answer_expr": "(y1 + y2) / 2",
+    "constraint_expr": "(y1 + y2) % 2 == 0",
+    "explanation_template": "A midpoint averages the endpoint coordinates.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 10.0,
+    "active": true,
+    "vars": [
+      {"name": "x1", "kind": "int", "min": 0, "max": 12, "step": 1},
+      {"name": "y1", "kind": "int", "min": 0, "max": 12, "step": 1},
+      {"name": "x2", "kind": "int", "min": 2, "max": 18, "step": 1},
+      {"name": "y2", "kind": "int", "min": 2, "max": 18, "step": 1}
+    ]
+  },
+  {
+    "external_id": "coordinate_geometry_preview.v1.midpoint.word",
+    "skill": "geometry_area",
+    "subskill": "Coordinate geometry distance and midpoint",
+    "label": "Map midpoint x-coordinate",
+    "mode": "word",
+    "prompt_template": "A map path starts at ({x1}, {y1}) and ends at ({x2}, {y2}). What is the midpoint x-coordinate?",
+    "answer_expr": "(x1 + x2) / 2",
+    "constraint_expr": "(x1 + x2) % 2 == 0",
+    "explanation_template": "The midpoint's x-coordinate is the average of the endpoint x-values.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 10.0,
+    "active": true,
+    "vars": [
+      {"name": "x1", "kind": "int", "min": 0, "max": 12, "step": 1},
+      {"name": "y1", "kind": "int", "min": 0, "max": 12, "step": 1},
+      {"name": "x2", "kind": "int", "min": 2, "max": 18, "step": 1},
+      {"name": "y2", "kind": "int", "min": 2, "max": 18, "step": 1}
+    ]
+  },
+  {
+    "external_id": "coordinate_geometry_preview.v1.translation.expression",
+    "skill": "geometry_area",
+    "subskill": "Transformations and congruence",
+    "label": "Translated point x-coordinate",
+    "mode": "expression",
+    "prompt_template": "Point ({x}, {y}) is translated right {dx} and up {dy}. What is the new x-coordinate?",
+    "answer_expr": "x + dx",
+    "constraint_expr": "",
+    "explanation_template": "A translation slides every point the same amount without changing the shape.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 10.0,
+    "active": true,
+    "vars": [
+      {"name": "x", "kind": "int", "min": 0, "max": 12, "step": 1},
+      {"name": "y", "kind": "int", "min": 0, "max": 12, "step": 1},
+      {"name": "dx", "kind": "int", "min": 1, "max": 8, "step": 1},
+      {"name": "dy", "kind": "int", "min": 1, "max": 8, "step": 1}
+    ]
+  },
+  {
+    "external_id": "coordinate_geometry_preview.v1.translation.word",
+    "skill": "geometry_area",
+    "subskill": "Transformations and congruence",
+    "label": "Translated vertex y-coordinate",
+    "mode": "word",
+    "prompt_template": "A triangle vertex starts at ({x}, {y}) and slides right {dx}, up {dy}. What is the new y-coordinate?",
+    "answer_expr": "y + dy",
+    "constraint_expr": "",
+    "explanation_template": "Congruent translated shapes keep their size; only coordinates shift.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 10.0,
+    "active": true,
+    "vars": [
+      {"name": "x", "kind": "int", "min": 0, "max": 12, "step": 1},
+      {"name": "y", "kind": "int", "min": 0, "max": 12, "step": 1},
+      {"name": "dx", "kind": "int", "min": 1, "max": 8, "step": 1},
+      {"name": "dy", "kind": "int", "min": 1, "max": 8, "step": 1}
+    ]
+  },
+  {
+    "external_id": "coordinate_geometry_preview.v1.similarity.expression",
+    "skill": "geometry_area",
+    "subskill": "Similarity and scale factor",
+    "label": "Scaled side length",
+    "mode": "expression",
+    "prompt_template": "A side length {side} is scaled by factor {scale}. What is the new side length?",
+    "answer_expr": "side * scale",
+    "constraint_expr": "",
+    "explanation_template": "Similar figures multiply corresponding lengths by the same scale factor.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 16.0,
+    "active": true,
+    "vars": [
+      {"name": "side", "kind": "int", "min": 2, "max": 18, "step": 1},
+      {"name": "scale", "kind": "int", "min": 2, "max": 5, "step": 1}
+    ]
+  },
+  {
+    "external_id": "coordinate_geometry_preview.v1.similarity.word",
+    "skill": "geometry_area",
+    "subskill": "Similarity and scale factor",
+    "label": "Model scale side length",
+    "mode": "word",
+    "prompt_template": "A model side is {side} cm. The real object is scale factor {scale}. What is the real side length?",
+    "answer_expr": "side * scale",
+    "constraint_expr": "",
+    "explanation_template": "A scale factor turns model lengths into matching real lengths.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 16.0,
+    "active": true,
+    "vars": [
+      {"name": "side", "kind": "int", "min": 2, "max": 18, "step": 1},
+      {"name": "scale", "kind": "int", "min": 2, "max": 5, "step": 1}
+    ]
+  },
+  {
+    "external_id": "coordinate_geometry_preview.v1.analytic.expression",
+    "skill": "geometry_area",
+    "subskill": "Analytic geometry and coordinate proofs",
+    "label": "Horizontal segment length",
+    "mode": "expression",
+    "prompt_template": "A horizontal segment goes from ({x1}, {y}) to ({x2}, {y}). What is its length?",
+    "answer_expr": "x2 - x1",
+    "constraint_expr": "x2 > x1",
+    "explanation_template": "A horizontal segment's length is the change in x when y stays the same.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 14.0,
+    "active": true,
+    "vars": [
+      {"name": "x1", "kind": "int", "min": 0, "max": 12, "step": 1},
+      {"name": "x2", "kind": "int", "min": 2, "max": 20, "step": 1},
+      {"name": "y", "kind": "int", "min": 0, "max": 12, "step": 1}
+    ]
+  },
+  {
+    "external_id": "coordinate_geometry_preview.v1.analytic.word",
+    "skill": "geometry_area",
+    "subskill": "Analytic geometry and coordinate proofs",
+    "label": "Coordinate proof side length",
+    "mode": "word",
+    "prompt_template": "Two rectangle vertices are ({x1}, {y}) and ({x2}, {y}). What is the horizontal side length?",
+    "answer_expr": "x2 - x1",
+    "constraint_expr": "x2 > x1",
+    "explanation_template": "Coordinate proofs often prove side lengths by comparing matching coordinates.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 14.0,
+    "active": true,
+    "vars": [
+      {"name": "x1", "kind": "int", "min": 0, "max": 12, "step": 1},
+      {"name": "x2", "kind": "int", "min": 2, "max": 20, "step": 1},
+      {"name": "y", "kind": "int", "min": 0, "max": 12, "step": 1}
+    ]
+  },
+  {
+    "external_id": "coordinate_geometry_preview.v1.slope.expression",
+    "skill": "algebra_linear",
+    "subskill": "Slope from points",
+    "label": "Coordinate slope",
+    "mode": "expression",
+    "prompt_template": "Find the slope through ({x1}, {y1}) and ({x2}, {y2}).",
+    "answer_expr": "(y2 - y1) / (x2 - x1)",
+    "constraint_expr": "x2 > x1 and y2 > y1 and (y2 - y1) % (x2 - x1) == 0",
+    "explanation_template": "Slope is rise divided by run: change in y over change in x.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 6.0,
+    "active": true,
+    "vars": [
+      {"name": "x1", "kind": "int", "min": 0, "max": 8, "step": 1},
+      {"name": "y1", "kind": "int", "min": 0, "max": 20, "step": 1},
+      {"name": "x2", "kind": "int", "min": 1, "max": 10, "step": 1},
+      {"name": "y2", "kind": "int", "min": 1, "max": 30, "step": 1}
+    ]
+  },
+  {
+    "external_id": "coordinate_geometry_preview.v1.slope.word",
+    "skill": "algebra_linear",
+    "subskill": "Slope from points",
+    "label": "Ramp slope from coordinates",
+    "mode": "word",
+    "prompt_template": "A ramp line goes from ({x1}, {y1}) to ({x2}, {y2}). What is its slope?",
+    "answer_expr": "(y2 - y1) / (x2 - x1)",
+    "constraint_expr": "x2 > x1 and y2 > y1 and (y2 - y1) % (x2 - x1) == 0",
+    "explanation_template": "A coordinate story still uses rise divided by run.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 6.0,
+    "active": true,
+    "vars": [
+      {"name": "x1", "kind": "int", "min": 0, "max": 8, "step": 1},
+      {"name": "y1", "kind": "int", "min": 0, "max": 20, "step": 1},
+      {"name": "x2", "kind": "int", "min": 1, "max": 10, "step": 1},
+      {"name": "y2", "kind": "int", "min": 1, "max": 30, "step": 1}
+    ]
+  }
+]

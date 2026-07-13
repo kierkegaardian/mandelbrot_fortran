@@ -2,9 +2,6 @@ name: Package MandelQuest
 
 on:
   workflow_dispatch:
-  push:
-    tags:
-      - "v*"
 
 jobs:
   build:
@@ -12,17 +9,49 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - os: ubuntu-latest
+          - os: ubuntu-22.04
             artifact_suffix: linux
-          - os: macos-latest
+          - os: macos-13
             artifact_suffix: macos
-          - os: windows-latest
+          - os: windows-2022
             artifact_suffix: windows
     runs-on: ${{ matrix.os }}
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Check repo for private deployment markers
+        run: |
+          python - <<'PY'
+          import re
+          import subprocess
+          import sys
+          from pathlib import Path
+
+          tracked = subprocess.check_output(["git", "ls-files"], text=True).splitlines()
+          excluded = {".gitignore"}
+          patterns = [
+              re.compile(r"192" + r"\.168" + r"\.1" + r"\.184"),
+              re.compile("internal" + "server", re.IGNORECASE),
+              re.compile("sync" + r"\." + "internal", re.IGNORECASE),
+              re.compile(r"(^|[^A-Za-z0-9_])" + r"\." + "env" + r"([^A-Za-z0-9_]|$)"),
+          ]
+          hits = []
+          for rel in tracked:
+              if rel in excluded:
+                  continue
+              text = Path(rel).read_text(errors="ignore")
+              for pattern in patterns:
+                  if pattern.search(text):
+                      hits.append(rel)
+                      break
+          if hits:
+              print("Private deployment markers found in tracked files:", file=sys.stderr)
+              for rel in hits:
+                  print(f" - {rel}", file=sys.stderr)
+              sys.exit(1)
+          PY
 
       - name: Setup Python
         uses: actions/setup-python@v5
@@ -52,6 +81,7 @@ jobs:
           update: true
           install: >-
             mingw-w64-x86_64-gcc
+            mingw-w64-x86_64-gcc-fortran
             make
 
       - name: Build Fortran renderer (Linux/macOS)
@@ -69,8 +99,9 @@ jobs:
         shell: msys2 {0}
         run: |
           workspace="$(cygpath -u "$GITHUB_WORKSPACE")"
-          make clean OPENMP=0
-          make OPENMP=0
+          FC_BIN="x86_64-w64-mingw32-gfortran"
+          make clean OPENMP=0 FC="$FC_BIN"
+          make OPENMP=0 FC="$FC_BIN"
           if [ -f mandelbrot_gen.exe ]; then
             cp mandelbrot_gen.exe "$workspace/mandelbrot_gen.exe"
           elif [ -f mandelbrot_gen ]; then
@@ -85,6 +116,21 @@ jobs:
 
       - name: Build PyInstaller bundle
         run: pyinstaller --noconfirm --clean mandelquest.spec
+
+      - name: Smoke-test packaged app (Linux/macOS)
+        if: runner.os != 'Windows'
+        run: |
+          export MANDELQUEST_DATA_DIR="$RUNNER_TEMP/mandelquest-smoke-${{ matrix.artifact_suffix }}"
+          mkdir -p "$MANDELQUEST_DATA_DIR"
+          ./dist/MandelQuest/MandelQuest --smoke-test
+
+      - name: Smoke-test packaged app (Windows)
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          $env:MANDELQUEST_DATA_DIR = Join-Path $env:RUNNER_TEMP "mandelquest-smoke-${{ matrix.artifact_suffix }}"
+          New-Item -ItemType Directory -Path $env:MANDELQUEST_DATA_DIR -Force | Out-Null
+          & "dist/MandelQuest/MandelQuest.exe" --smoke-test
 
       - name: Create artifact archive (Linux/macOS)
         if: runner.os != 'Windows'

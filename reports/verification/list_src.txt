@@ -1,0 +1,6 @@
+[list_dir result for /home/user/projects/mandelbrot_fortran/src - verbatim tool output]
+
+- /home/user/projects/mandelbrot_fortran/src/
+  - cli.f90
+  - mandelbrot.f90
+  - ppm_writer.f90

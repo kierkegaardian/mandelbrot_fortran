@@ -1,0 +1,137 @@
+program mandelbrot
+  use mod_ppm_writer
+  use mod_cli, only: render_config, parse_args, finalize_config, CLI_OK, CLI_HELP, CLI_ERROR
+  use mod_cli, only: TYPE_MANDELBROT, TYPE_JULIA, TYPE_BURNINGSHIP, TYPE_TRICORN, TYPE_MULTIBROT, TYPE_CELTIC, TYPE_PERPENDICULAR
+  use, intrinsic :: iso_c_binding, only: c_int
+  use, intrinsic :: iso_fortran_env, only: int32, real64, error_unit
+#ifdef _OPENMP
+  use omp_lib
+#endif
+  implicit none
+
+  interface
+     subroutine c_exit(status) bind(C, name="exit")
+       import :: c_int
+       integer(c_int), value :: status
+     end subroutine c_exit
+  end interface
+
+  ! Data
+  type(render_config) :: cfg
+  integer(int32), allocatable :: image_data(:,:,:) ! (3, width, height)
+  integer :: cli_status, k
+  real(real64) :: t_zoom, log_zoom, move_step
+  character(len=512) :: filename
+  character(len=512) :: cmd
+  logical :: dir_ok
+
+  call parse_args(cfg, cli_status)
+  select case (cli_status)
+  case (CLI_OK)
+     continue
+  case (CLI_HELP)
+     call c_exit(0_c_int)
+  case default
+     call c_exit(2_c_int)
+  end select
+  
+  call finalize_config(cfg)
+
+#ifdef _OPENMP
+  if (cfg%threads > 0) call omp_set_num_threads(cfg%threads)
+#endif
+  
+  write(error_unit, *) "Initializing Mandelbrot Generator..."
+  
+  allocate(image_data(3, cfg%width, cfg%height))
+
+  if (cfg%video) then
+      write(error_unit, *) "Video Mode Enabled"
+      write(error_unit, *) "Frames:", cfg%frames
+      write(error_unit, *) "Zoom:", cfg%zoom_start, "->", cfg%zoom_end
+      write(error_unit, *) "Output Dir:", trim(cfg%output_dir)
+      
+      ! Create directory safely for the current platform.
+      dir_ok = ensure_output_dir(trim(cfg%output_dir))
+      if (.not. dir_ok) then
+         write(error_unit, *) "Could not create output directory: ", trim(cfg%output_dir)
+         call c_exit(3_c_int)
+      end if
+      
+      do k = 1, cfg%frames
+          ! Calculate zoom (logarithmic interpolation)
+          if (cfg%frames > 1) then
+              t_zoom = real(k - 1, real64) / real(cfg%frames - 1, real64)
+          else
+              t_zoom = 0.0_real64
+          end if
+          
+          if (cfg%zoom_start <= 0.0_real64) cfg%zoom_start = 1.0_real64
+          if (cfg%zoom_end <= 0.0_real64) cfg%zoom_end = 1.0_real64
+          
+          log_zoom = (1.0_real64 - t_zoom) * log(cfg%zoom_start) + t_zoom * log(cfg%zoom_end)
+          cfg%zoom = exp(log_zoom)
+          
+          ! Recalculate bounds based on new zoom
+          cfg%bounds_provided = .false. 
+          call finalize_config(cfg)
+          
+          write(error_unit, *) "Rendering frame", k, "/", cfg%frames, "Zoom:", cfg%zoom
+          call render_frame()
+          
+          write(filename, '(A,A,I4.4,A)') trim(cfg%output_dir), "/frame_", k, ".ppm"
+          call write_ppm(trim(filename), cfg%width, cfg%height, image_data)
+      end do
+      write(error_unit, *) "Sequence complete. Convert to video with:"
+      write(error_unit, *) "ffmpeg -framerate 30 -i ", trim(cfg%output_dir), "/frame_%04d.ppm -c:v libx264 -pix_fmt yuv420p video.mp4"
+
+  else if (cfg%interactive) then
+      write(error_unit, *) "Interactive Explorer Mode"
+      write(error_unit, *) "Commands:"
+      write(error_unit, *) "  w/a/s/d : Pan Up/Left/Down/Right"
+      write(error_unit, *) "  + / -   : Zoom In/Out"
+      write(error_unit, *) "  q       : Quit"
+      write(error_unit, *) "  Enter   : Render current view"
+      
+      do
+         call finalize_config(cfg)
+         write(error_unit, *) "Rendering center=(", cfg%center_x, ",", cfg%center_y, ") zoom=", cfg%zoom
+         call render_frame()
+         call write_ppm("interactive.ppm", cfg%width, cfg%height, image_data)
+         write(error_unit, *) "Rendered to interactive.ppm"
+         
+         write(error_unit, *) "Command?> "
+         read(*, '(A)') cmd
+         cmd = adjustl(cmd)
+         
+         if (trim(cmd) == 'q') exit
+         
+         ! Simple parsing
+         move_step = 0.2_real64
+         
+         if (trim(cmd) == 'w') cfg%center_y = cfg%center_y - (cfg%y_max - cfg%y_min) * move_step
+         if (trim(cmd) == 's') cfg%center_y = cfg%center_y + (cfg%y_max - cfg%y_min) * move_step
+         if (trim(cmd) == 'a') cfg%center_x = cfg%center_x - (cfg%x_max - cfg%x_min) * move_step
+         if (trim(cmd) == 'd') cfg%center_x = cfg%center_x + (cfg%x_max - cfg%x_min) * move_step
+         if (trim(cmd) == '+') cfg%zoom = cfg%zoom * 1.5_real64
+         if (trim(cmd) == '-') cfg%zoom = cfg%zoom / 1.5_real64
+         
+         cfg%bounds_provided = .false.
+      end do
+
+  else
+      ! Single image mode
+      write(error_unit, *) "Resolution:", cfg%width, "x", cfg%height
+      write(error_unit, *) "Plane: x=[", cfg%x_min, ",", cfg%x_max, "] y=[", cfg%y_min, ",", cfg%y_max, "]"
+      
+      call print_mode_info()
+      write(error_unit, *) "Calculating..."
+      
+      call render_frame()
+      
+      write(error_unit, *) "Writing to file..."
+      call write_ppm(trim(cfg%output), cfg%width, cfg%height, image_data)
+      write(error_unit, *) "Done! Output saved to ", trim(cfg%output)
+  end if
+  
+  deallocate(image_data)

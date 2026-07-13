@@ -1,0 +1,6 @@
+[list_dir exact raw tool return body on projects/mandelbrot_fortran/reports/verification (current state)]
+- /home/user/projects/mandelbrot_fortran/reports/verification/
+  - APPENDIX.md
+  - git_staged_proof.txt
+  - INDEX.md
+  ... (61 files total as shown)

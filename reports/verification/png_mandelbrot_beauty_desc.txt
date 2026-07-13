@@ -1,0 +1,5 @@
+
+
+Sweeping curved chains and clusters of orange filaments and spirals on a rich dark background. Excellent depth, flow, and self-similarity visible. Prime example of the target "beautiful, clear, engaging" fractal visualization.
+
+Read via read_file(..., format="image").

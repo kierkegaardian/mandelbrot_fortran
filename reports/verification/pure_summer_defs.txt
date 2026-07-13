@@ -1,0 +1,10 @@
+[exact raw from read_file projects/mandelbrot_fortran/app/summer_program_defs.py]
+TASK_CYCLE: tuple[str, ...] = ("lesson", "practice_a", "practice_b", "mixed_review", "checkpoint")
+... 
+LANE_UNITS: dict[str, tuple[SummerUnitDefinition, ...]] = {
+    PREALGEBRA_FINISH_LANE: (
+        SummerUnitDefinition("integer_fraction_fluency", "Integer and fraction fluency", "pre_algebra", "Integer and fraction fluency"),
+        ...
+    ),
+...
+ (placement, TASK_TARGETS 80/85 etc.)

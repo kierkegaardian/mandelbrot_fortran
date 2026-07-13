@@ -1,0 +1,52 @@
+
+
+from __future__ import annotations
+
+from dataclasses import dataclass
+from datetime import date
+import json
+
+from . import db, summer_program_schedule
+from .learning_engine import build_skill_stats, mastery_label
+from .models import (
+    SummerAssessmentRun,
+    SummerProgram,
+    SummerProgramBlockSummary,
+    SummerProgramReviewState,
+    SummerProgramStatusSummary,
+    SummerProgramTask,
+)
+from .skill_graph import SKILL_ORDER
+from .summer_program_defs import (
+    EXIT_AFTER_UNIT,
+    FOUNDATION_BRIDGE_LANE,
+    FOUNDATION_PROFICIENT_SKILLS,
+    MIDPOINT_AFTER_UNIT,
+    PLACEMENT_REVIEW_ACCEPTED,
+    PLACEMENT_REVIEW_OVERRIDDEN,
+    PLACEMENT_REVIEW_PENDING,
+    PLACEMENT_STRANDS,
+    PREALGEBRA_FINISH_LANE,
+    PREALGEBRA_GATE_SUBSKILLS,
+    TASK_CYCLE,
+    TASK_TARGETS,
+    bridge_skill_set,
+    default_end_date,
+    default_minutes_for_lane,
+    finish_definition_json,
+    is_optional_unit,
+    lane_display_name,
+    lane_required_subskills,
+    lane_units,
+    task_kind_label,
+    task_schedule_dates,
+    unit_label,
+)
+
+
+@dataclass(frozen=True)
+class SummerProgramPace:
+    label: str
+    expected_completed: int
+    completed: int
+    remaining: int

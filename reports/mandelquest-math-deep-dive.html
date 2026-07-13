@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MandelQuest Math Deep-Dive Review • HTML for Review</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Space+Grotesk:wght@500;600&amp;display=swap');
+        
+        :root {
+            --font-sans: 'Inter', system_ui, sans-serif;
+            --font-display: 'Space Grotesk', 'Inter', system_ui, sans-serif;
+        }
+        
+        body {
+            font-family: var(--font-sans);
+        }
+        
+        .display-font {
+            font-family: var(--font-display);
+        }
+
+        .section {
+            scroll-margin-top: 80px;
+        }
+
+        pre {
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+        }
+
+        .nav-link {
+            transition: all 0.1s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .nav-link:hover {
+            color: #64748b;
+            transform: translateX(2px);
+        }
+
+        .finding-card {
+            transition: transform 0.1s ease, box-shadow 0.1s ease;
+        }
+        
+        .finding-card:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.05), 0 4px 6px -4px rgb(0 0 0 / 0.05);
+        }
+
+        .code {
+            background: #0f172a;
+            color: #e2e8f0;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 0.875rem;
+        }
+
+        .toc {
+            position: sticky;
+            top: 80px;
+        }
+
+        h1, h2, h3 {
+            font-family: var(--font-display);
+            font-weight: 600;
+            letter-spacing: -0.025em;
+        }
+
+        .report-container {
+            max-width: 1080px;
+            margin: 0 auto;
+        }
+
+        .metric {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .dark .metric {
+            background: #1e2937;
+            border-color: #334155;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900">
+    <!-- Top bar -->
+    <div class="bg-white border-b border-slate-200 sticky top-0 z-50">
+        <div class="max-w-screen-xl mx-auto px-6 py-4 flex items-center justify-between">
+            <div class="flex items-center gap-x-3">
+                <div class="w-9 h-9 bg-indigo-600 text-white rounded-2xl flex items-center justify-center font-bold text-2xl tracking-tighter">M</div>
+                <div>
+                    <div class="font-semibold tracking-tight text-xl">MandelQuest</div>
+                    <div class="text-xs text-slate-500 -mt-1">Math Deep-Dive Review</div>
+                </div>
+            </div>
+            
+            <div class="flex items-center gap-x-2 text-sm">
+                <div class="px-3 py-1.5 bg-slate-100 text-slate-600 rounded-3xl text-xs font-medium flex items-center gap-x-1.5">
+                    <i class="fas fa-calendar-day"></i>
+                    <span>2026-06-24</span>
+                </div>
+                <a href="mandelquest-math-deep-dive.md" 
+                   class="px-4 py-1.5 flex items-center gap-x-2 text-sm font-medium text-slate-700 hover:text-slate-900 hover:bg-slate-100 rounded-3xl transition-colors">
+                    <i class="fas fa-file-alt"></i>
+                    <span>View Markdown</span>
+                </a>
+                <a href="verification/" 
+                   class="px-4 py-1.5 flex items-center gap-x-2 text-sm font-medium text-slate-700 hover:text-slate-900 hover:bg-slate-100 rounded-3xl transition-colors">
+                    <i class="fas fa-folder-open"></i>
+                    <span>Raw Evidence</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="max-w-screen-xl mx-auto px-6 pt-8 pb-16">
+        
+        <!-- Hero -->
+        <div class="report-container mb-10">
+            <div class="flex items-start justify-between">
+                <div>
+                    <div class="inline-flex items-center rounded-3xl bg-indigo-100 text-indigo-700 text-xs font-semibold px-3 py-1 mb-3 tracking-wider">
+                        <i class="fas fa-search mr-1.5"></i>
+                        OBSERVATIONAL REVIEW
+                    </div>
+                    <h1 class="display-font text-5xl font-semibold tracking-tighter leading-none">MandelQuest Math<br>Deep-Dive Review</h1>
+                    <p class="mt-3 max-w-md text-slate-600 text-lg">
+                        Obsessive analysis of the Fortran + Python math education system 
+                        for model-assisted authoring of correct multi-layer "runes".
+                    </p>
+                    
+                    <div class="mt-4 flex items-center gap-x-4 text-sm">
+                        <div>
+                            <span class="font-semibold text-slate-900">Repo:</span> 
+                            <span class="text-slate-600">/home/user/projects/mandelbrot_fortran</span>
+                        </div>
+                        <div class="h-3 w-px bg-slate-200"></div>
+                        <div class="text-emerald-600 font-medium flex items-center gap-x-1">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Verification complete</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="hidden lg:block text-right">
+                    <div class="text-xs text-slate-500">MODELED AFTER</div>
+                    <div class="font-semibold text-xl tracking-tight">affirmbeat review</div>
+                    <div class="text-xs mt-1 text-slate-400">long-form, layered, dense content</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick metrics -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-10 report-container">
+            <div class="metric rounded-3xl px-5 py-4">
+                <div class="text-xs font-medium text-slate-500">Files inspected</div>
+                <div class="text-3xl font-semibold tracking-tighter">50+</div>
+                <div class="text-xs text-slate-500">Fortran + Python + data + tests</div>
+            </div>
+            <div class="metric rounded-3xl px-5 py-4">
+                <div class="text-xs font-medium text-slate-500">Tests captured</div>
+                <div class="text-3xl font-semibold tracking-tighter">178</div>
+                <div class="text-xs text-emerald-600">All OK (plus focused + binary)</div>
+            </div>
+            <div class="metric rounded-3xl px-5 py-4">
+                <div class="text-xs font-medium text-slate-500">Concrete problems</div>
+                <div class="text-3xl font-semibold tracking-tighter">14</div>
+                <div class="text-xs text-slate-500">file-tied (barriers to LLM rune authoring)</div>
+            </div>
+            <div class="metric rounded-3xl px-5 py-4">
+                <div class="text-xs font-medium text-slate-500">Evidence files</div>
+                <div class="text-3xl font-semibold tracking-tighter">55+</div>
+                <div class="text-xs text-slate-500">pure bodies in reports/verification/</div>
+            </div>
+        </div>
+
+        <!-- TOC -->
+        <div class="report-container grid grid-cols-1 lg:grid-cols-12 gap-8">
+            <div class="lg:col-span-3">
+                <div class="toc bg-white border border-slate-200 rounded-3xl p-5 shadow-sm">
+                    <div class="text-xs font-bold tracking-widest text-slate-400 mb-3 px-1">CONTENTS</div>
+                    <div class="space-y-1 text-sm">
+                        <a href="#inspection" class="nav-link block px-3 py-1.5 hover:bg-slate-100 rounded-2xl flex items-center gap-x-2 text-slate-700"><i class="fas fa-search w-4 text-slate-400"></i> 1. Inspection Summary</a>
+                        <a href="#architecture" class="nav-link block px-3 py-1.5 hover:bg-slate-100 rounded-2xl flex items-center gap-x-2 text-slate-700"><i class="fas fa-sitemap w-4 text-slate-400"></i> 2. Full Architecture</a>
+                        <a href="#math" class="nav-link block px-3 py-1.5 hover:bg-slate-100 rounded-2xl flex items-center gap-x-2 text-slate-700"><i class="fas fa-square-root-variable w-4 text-slate-400"></i> 3. Math &amp; Rune Layers</a>
+                        <a href="#assets" class="nav-link block px-3 py-1.5 hover:bg-slate-100 rounded-2xl flex items-center gap-x-2 text-slate-700"><i class="fas fa-image w-4 text-slate-400"></i> 4. Canonical Visual Assets</a>
+                        <a href="#wrongs" class="nav-link block px-3 py-1.5 hover:bg-slate-100 rounded-2xl flex items-center gap-x-2 font-medium text-red-700"><i class="fas fa-exclamation-triangle w-4"></i> 5. What We're Doing Wrong</a>
+                        <a href="#recs" class="nav-link block px-3 py-1.5 hover:bg-slate-100 rounded-2xl flex items-center gap-x-2 text-emerald-700"><i class="fas fa-lightbulb w-4"></i> 6. Model Recommendations</a>
+                        <a href="#longform" class="nav-link block px-3 py-1.5 hover:bg-slate-100 rounded-2xl flex items-center gap-x-2 text-slate-700"><i class="fas fa-stream w-4 text-slate-400"></i> 7. Long-Form Analysis</a>
+                        <a href="#verification" class="nav-link block px-3 py-1.5 hover:bg-slate-100 rounded-2xl flex items-center gap-x-2 text-slate-700"><i class="fas fa-clipboard-check w-4 text-slate-400"></i> 8. Verification</a>
+                        <a href="#next" class="nav-link block px-3 py-1.5 hover:bg-slate-100 rounded-2xl flex items-center gap-x-2 text-slate-700 font-medium"><i class="fas fa-arrow-right w-4 text-slate-400"></i> Next Steps</a>
+                    </div>
+                    <div class="mt-4 pt-4 border-t text-[10px] text-slate-400 px-1">
+                        All evidence lives in <code class="text-slate-500">reports/verification/</code>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main content -->
+            <div class="lg:col-span-9 space-y-12">
+                
+                <!-- 1. Inspection -->
+                <div id="inspection" class="section">
+                    <h2 class="text-2xl font-semibold tracking-tight flex items-center gap-x-3">
+                        <span class="text-indigo-600">1.</span> Inspection Summary
+                    </h2>
+                    <div class="prose max-w-none mt-3 text-slate-700">
+                        <p>Exhaustive static + dynamic inspection using tools:</p>
+                        <ul class="text-sm space-y-1 mt-2">
+                            <li><strong>list_dir</strong> (dozens): root + full project tree + sync + prod snapshot + subpaths</li>
+                            <li><strong>read_file</strong> (50+): full Fortran sources, all major app/ modules, tests, scripts, data, PNGs (image), plan, orientations</li>
+                            <li><strong>grep</strong>: targeted patterns across src/app/tests/scripts/data</li>
+                            <li><strong>Dynamic</strong>: ./mandelbrot_gen --help, focused unittest, full test suite (178 OK)</li>
+                            <li><strong>Images</strong>: 5 canonical root PNGs analyzed via multimodal read</li>
+                        </ul>
+                        <div class="mt-3 text-xs bg-white border px-3 py-2 rounded-2xl inline-block">
+                            <strong>Tool counts:</strong> Dozens of list_dir/read/grep. All verbatim outputs written to reports/verification/. 178 tests OK.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Architecture -->
+                <div id="architecture" class="section">
+                    <h2 class="text-2xl font-semibold tracking-tight flex items-center gap-x-3">
+                        <span class="text-indigo-600">2.</span> Full Architecture Deep Dive
+                    </h2>
+                    
+                    <div class="mt-4 space-y-6">
+                        <div>
+                            <h3 class="font-semibold text-lg">2.1 Fortran Mandelbrot/Julia Engine <span class="text-xs font-normal text-slate-500">(src/*.f90)</span></h3>
+                            <div class="text-sm text-slate-600 mt-1">
+                                Primary math "rune" implementation.<br>
+                                <span class="font-mono text-xs bg-slate-100 px-1.5 py-px rounded">src/mandelbrot.f90:271</span> — 
+                                <code>do while ((abs(z) &lt;= 2.0_real64) .and. (iter &lt; cfg%max_iter))</code><br>
+                                Variants: Mandelbrot (z*z+c), Julia, Burning Ship, Tricorn, Multibrot (z**power), Celtic, Perpendicular.<br>
+                                Smooth coloring + 7 palettes (rgb, sunset, ice, fire...).
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <h3 class="font-semibold text-lg">2.2 Python Fractal Renderer + UI</h3>
+                            <div class="text-sm text-slate-600">
+                                FractalConfig + subprocess bridge to binary (<span class="font-mono text-xs">fractal_renderer.py:17</span>).<br>
+                                Progressive canvas tiers, controls, Tkinter panels. Math correctness fully delegated to Fortran.
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <h3 class="font-semibold text-lg">2.3 Education System (the layered "runes")</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm mt-2">
+                                <div class="bg-white border rounded-2xl p-4">
+                                    <div class="font-medium mb-1">Templates + Generators</div>
+                                    <div class="text-xs text-slate-600">1133 SQLite templates (prompt + answer_expr + constraint_expr) + native Python generators. Dual path with fallback.</div>
+                                </div>
+                                <div class="bg-white border rounded-2xl p-4">
+                                    <div class="font-medium mb-1">Summer Program (long-form)</div>
+                                    <div class="text-xs text-slate-600">Lanes (prealgebra_finish, foundation_bridge) • TASK_CYCLE • placement/exit assessments • optional previews.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. Math / Rune -->
+                <div id="math" class="section">
+                    <h2 class="text-2xl font-semibold tracking-tight flex items-center gap-x-3">
+                        <span class="text-indigo-600">3.</span> Current Implementation of Math / Rune Layers
+                    </h2>
+                    <div class="mt-3 text-sm leading-relaxed text-slate-700 space-y-2">
+                        <p><strong>Core runes</strong> live in two places:</p>
+                        <ul class="list-disc pl-5 space-y-1">
+                            <li>Fortran iteration rules (hard-coded z** variants, bailout 2.0, smooth log formula)</li>
+                            <li>Templates: (prompt_template, answer_expr, constraint_expr) evaluated via limited AST safe_eval</li>
+                        </ul>
+                        <p class="text-xs text-amber-700 bg-amber-50 px-3 py-1.5 rounded-xl">Key gap: no declarative source-controlled "rune catalog". Math correctness is spread across Fortran, limited Python eval, and imperative generators.</p>
+                    </div>
+                </div>
+
+                <!-- 4. Assets -->
+                <div id="assets" class="section">
+                    <h2 class="text-2xl font-semibold tracking-tight flex items-center gap-x-3">
+                        <span class="text-indigo-600">4.</span> Canonical Visual Assets
+                    </h2>
+                    <p class="text-sm text-slate-600 mt-1">The five root PNGs are the canonical target for finished output: beautiful, clear, engaging fractal visualizations combined with calm math practice.</p>
+                    
+                    <div class="mt-3 grid grid-cols-1 md:grid-cols-5 gap-2 text-xs">
+                        <div class="bg-white border p-3 rounded-2xl">
+                            <div class="font-medium">mandelbrot.png</div>
+                            <div class="text-[10px] text-slate-500">Classic cardioid + orange filaments on dark red/black. High contrast, precise.</div>
+                        </div>
+                        <div class="bg-white border p-3 rounded-2xl">
+                            <div class="font-medium">julia_swirl.png</div>
+                            <div class="text-[10px] text-slate-500">Red/orange symmetric snowflake spirals on black. Delicate and hypnotic.</div>
+                        </div>
+                        <div class="bg-white border p-3 rounded-2xl">
+                            <div class="font-medium">filament_bloom.png</div>
+                            <div class="text-[10px] text-slate-500">Explosive orange/teal bloom on maroon. Most dramatic and "engaging".</div>
+                        </div>
+                        <div class="bg-white border p-3 rounded-2xl">
+                            <div class="font-medium">mandelbrot_beauty.png</div>
+                            <div class="text-[10px] text-slate-500">Sweeping curved filaments on rich dark. Excellent flow.</div>
+                        </div>
+                        <div class="bg-white border p-3 rounded-2xl">
+                            <div class="font-medium">mandelbrot_sunset.png</div>
+                            <div class="text-[10px] text-slate-500">Warm orange seahorse on amber gradient. Calmest and most approachable.</div>
+                        </div>
+                    </div>
+                    <div class="text-xs mt-2 text-emerald-700">These set the visual bar for any model-generated content or lessons.</div>
+                </div>
+
+                <!-- 5. What We're Doing Wrong -->
+                <div id="wrongs" class="section">
+                    <h2 class="text-2xl font-semibold tracking-tight text-red-700 flex items-center gap-x-3">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <span>5. What We're Doing Wrong</span>
+                    </h2>
+                    <p class="text-sm text-red-700 mt-1">14 concrete, file-tied items focused on barriers to model-assisted authoring of correct multi-layer math content and runes.</p>
+                    
+                    <div class="mt-4 space-y-3 text-sm">
+                        <div class="finding-card bg-white border-l-4 border-red-500 p-3 rounded-r-2xl">
+                            <div><strong>1.</strong> No model entry point for runes (app/question_bank.py:23, scripts/*) — everything is manual DB/JSON insert.</div>
+                        </div>
+                        <div class="finding-card bg-white border-l-4 border-red-500 p-3 rounded-r-2xl">
+                            <div><strong>2.</strong> Runes only in opaque SQLite + generated manifests (db.py:181). No source-controlled catalog.</div>
+                        </div>
+                        <div class="finding-card bg-white border-l-4 border-red-500 p-3 rounded-r-2xl">
+                            <div><strong>3-6.</strong> Safe-eval narrow; fractal iteration hardcoded in Fortran; precision fragile; dual generator paths with silent fallback.</div>
+                        </div>
+                        <div class="finding-card bg-white border-l-4 border-red-500 p-3 rounded-r-2xl">
+                            <div><strong>7-14.</strong> Summer long-form not model-driven; layers siloed; no parent authoring layer; no rune editor/preview; story/mode not rune-aware; packaging hides surface; no asset validation; imperative generators easy to hallucinate in.</div>
+                        </div>
+                    </div>
+                    <div class="text-xs mt-3 font-medium text-red-600">Root cause: render + quiz-engine first. Rune authoring was never first-class for models.</div>
+                </div>
+
+                <!-- 6. Recommendations -->
+                <div id="recs" class="section">
+                    <h2 class="text-2xl font-semibold tracking-tight text-emerald-700 flex items-center gap-x-3">
+                        <i class="fas fa-lightbulb"></i>
+                        <span>6. Model Recommendations</span>
+                    </h2>
+                    <div class="mt-3 grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
+                        <div class="bg-white border p-3 rounded-2xl text-xs leading-tight">Make runes first-class declarative. Prompt models with schema + examples + visual targets (the 5 PNGs).</div>
+                        <div class="bg-white border p-3 rounded-2xl text-xs leading-tight">Role/layer-aware generation (parent vs student, intuition vs expression vs word).</div>
+                        <div class="bg-white border p-3 rounded-2xl text-xs leading-tight">Iterative validation loop: generate → safe_eval + Fortran cross → pedagogical critique → refine.</div>
+                        <div class="bg-white border p-3 rounded-2xl text-xs leading-tight">Expose fractal iteration as editable rune (iteration_rule, bailout, max_iter_expr).</div>
+                        <div class="bg-white border p-3 rounded-2xl text-xs leading-tight">Long-form summer/quest generation (full unit plans like affirmbeat tracks).</div>
+                        <div class="bg-white border p-3 rounded-2xl text-xs leading-tight">UI hooks in Parent tools + live preview + grounding on high-quality seeds.</div>
+                    </div>
+                </div>
+
+                <!-- 7. Long-form -->
+                <div id="longform" class="section">
+                    <h2 class="text-2xl font-semibold tracking-tight">7. Support for Long-Form Layered Experiences</h2>
+                    <div class="text-sm mt-2">
+                        Summer program is the closest analog to affirmbeat dense tracks. Strong visual + layering foundations (modes + story + explain + parent). 
+                        Weaker on continuous guided experience, integration of fractal math, and model-native rune authoring.
+                    </div>
+                </div>
+
+                <!-- 8. Verification -->
+                <div id="verification" class="section">
+                    <h2 class="text-2xl font-semibold tracking-tight">8. Verification</h2>
+                    <div class="text-sm">
+                        All plan steps executed using allowed tools. Pure bodies in <a href="verification/APPENDIX.md" class="text-indigo-600 underline">APPENDIX.md</a> + git_staged_proof.txt.
+                        Full raw evidence under reports/verification/ (55+ files).
+                    </div>
+                </div>
+
+                <!-- Conclusion -->
+                <div id="next" class="section pt-6 border-t">
+                    <h2 class="text-2xl font-semibold tracking-tight">Conclusion + Next Steps</h2>
+                    <div class="mt-3 text-sm">
+                        The project has a solid local-first, visually beautiful foundation unusually well-suited for calm multi-layer math experiences.
+                    </div>
+                    
+                    <div class="mt-4">
+                        <div class="font-medium mb-1 text-xs tracking-wider">IMMEDIATE NEXT STEPS (analysis only)</div>
+                        <ol class="list-decimal pl-5 space-y-1 text-sm">
+                            <li>Expose local "rune writer" CLI/UI entry (schema + seeds + asset examples + layer context).</li>
+                            <li>Add declarative rune files (data/runes/ or manifests); unify consumers.</li>
+                            <li>Instrument callable validation (safe_eval + pedagogical + Fortran cross).</li>
+                            <li>Pilot one summer preview unit or fractal-integrated lesson with model + human review.</li>
+                            <li>Surface iteration rules + fractal params into explanations/curriculum.</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="pt-8 text-xs text-center text-slate-400 border-t mt-10">
+                    This HTML version was manually produced from the authoritative Markdown report for browser-friendly review.<br>
+                    No external converters (pandoc etc.) were used. Full verbatim tool outputs and pure evidence bodies live in <code>reports/verification/</code>.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Simple active section highlighter
+        const sections = document.querySelectorAll('.section');
+        const navLinks = document.querySelectorAll('.nav-link');
+        
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (scrollY >= sectionTop - 120) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('text-indigo-700', 'font-medium');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('text-indigo-700', 'font-medium');
+                }
+            });
+        });
+        
+        // Tailwind script for any dynamic classes if needed
+        console.log('%c[MandelQuest] Nice HTML review version loaded', 'color:#64748b');
+    </script>
+</body>
+</html>

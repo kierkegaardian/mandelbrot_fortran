@@ -1,0 +1,182 @@
+[
+  {
+    "external_id": "geometry_measurement_preview.v1.perimeter_missing.expression",
+    "skill": "geometry_area",
+    "subskill": "Perimeter and missing sides",
+    "label": "Missing rectangle side",
+    "mode": "expression",
+    "prompt_template": "A rectangle has perimeter {p} and width {w}. What is its length?",
+    "answer_expr": "p / 2 - w",
+    "constraint_expr": "p % 2 == 0 and p / 2 > w",
+    "explanation_template": "Half the perimeter is length plus width, so subtract the width.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 14.0,
+    "active": true,
+    "vars": [
+      {"name": "p", "kind": "int", "min": 20, "max": 100, "step": 2},
+      {"name": "w", "kind": "int", "min": 2, "max": 20, "step": 1}
+    ]
+  },
+  {
+    "external_id": "geometry_measurement_preview.v1.perimeter_missing.word",
+    "skill": "geometry_area",
+    "subskill": "Perimeter and missing sides",
+    "label": "Garden perimeter",
+    "mode": "word",
+    "prompt_template": "A garden is {l} ft long and {w} ft wide. What is its perimeter?",
+    "answer_expr": "2 * (l + w)",
+    "constraint_expr": "",
+    "explanation_template": "Perimeter is the distance around: two lengths plus two widths.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 20.0,
+    "active": true,
+    "vars": [
+      {"name": "l", "kind": "int", "min": 4, "max": 30, "step": 1},
+      {"name": "w", "kind": "int", "min": 3, "max": 18, "step": 1}
+    ]
+  },
+  {
+    "external_id": "geometry_measurement_preview.v1.triangle_area.expression",
+    "skill": "geometry_area",
+    "subskill": "Area of triangles and parallelograms",
+    "label": "Triangle area",
+    "mode": "expression",
+    "prompt_template": "What is the area of a triangle with base {b} and height {h}?",
+    "answer_expr": "b * h / 2",
+    "constraint_expr": "(b * h) % 2 == 0",
+    "explanation_template": "A triangle has half the area of a matching parallelogram.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 20.0,
+    "active": true,
+    "vars": [
+      {"name": "b", "kind": "int", "min": 4, "max": 24, "step": 1},
+      {"name": "h", "kind": "int", "min": 3, "max": 18, "step": 1}
+    ]
+  },
+  {
+    "external_id": "geometry_measurement_preview.v1.parallelogram_area.word",
+    "skill": "geometry_area",
+    "subskill": "Area of triangles and parallelograms",
+    "label": "Parallelogram area story",
+    "mode": "word",
+    "prompt_template": "A parallelogram has base {b} and height {h}. What is its area?",
+    "answer_expr": "b * h",
+    "constraint_expr": "",
+    "explanation_template": "Parallelogram area is base times height.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 20.0,
+    "active": true,
+    "vars": [
+      {"name": "b", "kind": "int", "min": 4, "max": 24, "step": 1},
+      {"name": "h", "kind": "int", "min": 3, "max": 18, "step": 1}
+    ]
+  },
+  {
+    "external_id": "geometry_measurement_preview.v1.circle_circumference.expression",
+    "skill": "geometry_area",
+    "subskill": "Circumference and area of circles",
+    "label": "Circumference from radius",
+    "mode": "expression",
+    "prompt_template": "Using pi = 3.14, what is the circumference of a circle with radius {r}?",
+    "answer_expr": "2 * 3.14 * r",
+    "constraint_expr": "",
+    "explanation_template": "Circumference is the distance around: 2 times pi times radius.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 30.0,
+    "active": true,
+    "vars": [{"name": "r", "kind": "int", "min": 2, "max": 12, "step": 1}]
+  },
+  {
+    "external_id": "geometry_measurement_preview.v1.circle_circumference.word",
+    "skill": "geometry_area",
+    "subskill": "Circumference and area of circles",
+    "label": "Circular rug circumference",
+    "mode": "word",
+    "prompt_template": "A circular rug has diameter {d}. Using pi = 3.14, what is its circumference?",
+    "answer_expr": "3.14 * d",
+    "constraint_expr": "",
+    "explanation_template": "When diameter is known, circumference is pi times diameter.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 30.0,
+    "active": true,
+    "vars": [{"name": "d", "kind": "int", "min": 4, "max": 24, "step": 1}]
+  },
+  {
+    "external_id": "geometry_measurement_preview.v1.volume.expression",
+    "skill": "geometry_area",
+    "subskill": "Surface area and volume",
+    "label": "Rectangular prism volume",
+    "mode": "expression",
+    "prompt_template": "What is the volume of a rectangular prism with length {l}, width {w}, and height {h}?",
+    "answer_expr": "l * w * h",
+    "constraint_expr": "",
+    "explanation_template": "Volume counts cubic units: length times width times height.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 40.0,
+    "active": true,
+    "vars": [
+      {"name": "l", "kind": "int", "min": 2, "max": 12, "step": 1},
+      {"name": "w", "kind": "int", "min": 2, "max": 10, "step": 1},
+      {"name": "h", "kind": "int", "min": 2, "max": 8, "step": 1}
+    ]
+  },
+  {
+    "external_id": "geometry_measurement_preview.v1.surface_area.word",
+    "skill": "geometry_area",
+    "subskill": "Surface area and volume",
+    "label": "Box surface area",
+    "mode": "word",
+    "prompt_template": "A box is {l} by {w} by {h}. What is its surface area?",
+    "answer_expr": "2 * (l * w + l * h + w * h)",
+    "constraint_expr": "",
+    "explanation_template": "Surface area adds the areas of all six faces.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 50.0,
+    "active": true,
+    "vars": [
+      {"name": "l", "kind": "int", "min": 2, "max": 10, "step": 1},
+      {"name": "w", "kind": "int", "min": 2, "max": 8, "step": 1},
+      {"name": "h", "kind": "int", "min": 2, "max": 6, "step": 1}
+    ]
+  },
+  {
+    "external_id": "geometry_measurement_preview.v1.pythagorean.expression",
+    "skill": "geometry_area",
+    "subskill": "Pythagorean theorem",
+    "label": "Scaled 3-4-5 hypotenuse",
+    "mode": "expression",
+    "prompt_template": "A 3-4-5 right triangle is scaled by {k}. What is the hypotenuse?",
+    "answer_expr": "5 * k",
+    "constraint_expr": "",
+    "explanation_template": "Scaling a 3-4-5 triangle multiplies every side by the same factor.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 20.0,
+    "active": true,
+    "vars": [{"name": "k", "kind": "int", "min": 2, "max": 10, "step": 1}]
+  },
+  {
+    "external_id": "geometry_measurement_preview.v1.pythagorean.word",
+    "skill": "geometry_area",
+    "subskill": "Pythagorean theorem",
+    "label": "Scaled ladder hypotenuse",
+    "mode": "word",
+    "prompt_template": "A ladder problem forms a 3-4-5 right triangle scaled by {k}. How long is the ladder?",
+    "answer_expr": "5 * k",
+    "constraint_expr": "",
+    "explanation_template": "The ladder is the hypotenuse, the longest side in the scaled 3-4-5 triangle.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 20.0,
+    "active": true,
+    "vars": [{"name": "k", "kind": "int", "min": 2, "max": 10, "step": 1}]
+  }
+]

@@ -1,0 +1,17 @@
+[exact raw from read_file projects/mandelbrot_fortran/src/mandelbrot.f90 offset 265]
+          else
+             c = cmplx(x0, y0, kind=real64)
+             z = cmplx(0.0_real64, 0.0_real64, kind=real64)
+          end if
+
+          iter = 0
+          do while ((abs(z) <= 2.0_real64) .and. (iter < cfg%max_iter))
+             select case (cfg%fractal_type)
+             case (TYPE_BURNINGSHIP)
+                z = cmplx(abs(real(z)), abs(aimag(z)), kind=real64)**2 + c
+             case (TYPE_TRICORN)
+                z = conjg(z)**2 + c
+             case (TYPE_MULTIBROT)
+                z = z**cfg%power + c
+             case (TYPE_CELTIC)
+... (exact iteration rune / escape / variants at 271+)

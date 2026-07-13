@@ -85,4 +85,13 @@ Note: Keep all code files under 300 lines by splitting into modules.
 - Add algebra/geometry/trig/calculus modules.
 - Expand printable worksheet styles.
 - Optional cloud backup for families with multiple devices.
-- Optional server-hosted profiles to sync progress across devices.
+- Add server-hosted profile/progress storage so the same family account state can be used from the kids' laptop and the parents' laptops.
+
+## Planned Optional Sync Architecture
+- Sync remains opt-in; local-only use stays the default and remains fully supported.
+- Recommended server stack: small Python API service plus PostgreSQL for multi-device family data.
+- Sync canonical entities only: profiles, quiz sets, assignments, completed quiz attempts, and question history.
+- Keep device-local state out of the first sync release: parent PIN, UI settings, offline-mode toggle, local PDF/catalog paths, worksheet files, and in-progress quiz resume state.
+- Add stable UUIDs plus `updated_at`/tombstone metadata to synced records so changes can move safely between devices.
+- Use a local outbox plus incremental pull cursor instead of direct table mirroring.
+- Treat attempts/question history as the durable learning ledger; recompute derived progress views (mastery, streaks, dashboard rollups) after sync.

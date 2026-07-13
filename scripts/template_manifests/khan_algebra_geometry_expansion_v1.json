@@ -1,0 +1,2916 @@
+[
+  {
+    "external_id": "khan.v3.algebra_1.algebra_foundations.linear_solve",
+    "skill": "algebra_1",
+    "subskill": "Algebra foundations",
+    "label": "Linear equation solve",
+    "mode": "expression",
+    "prompt_template": "Solve for x: {m}x + {b} = {c}",
+    "answer_expr": "(c-b)/m",
+    "constraint_expr": "(c-b)%m==0",
+    "explanation_template": "Subtract b, then divide by m.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 8.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "m",
+        "kind": "int",
+        "min": 1,
+        "max": 20,
+        "step": 1
+      },
+      {
+        "name": "b",
+        "kind": "int",
+        "min": -40,
+        "max": 40,
+        "step": 1
+      },
+      {
+        "name": "c",
+        "kind": "int",
+        "min": -180,
+        "max": 180,
+        "step": 1
+      }
+    ]
+  },
+  {
+    "external_id": "khan.v3.algebra_1.algebra_foundations.model_word",
+    "skill": "algebra_1",
+    "subskill": "Algebra foundations",
+    "label": "Linear model word problem",
+    "mode": "word",
+    "prompt_template": "A plan charges ${f} fee plus ${r} per unit. What is total for {n} units?",
+    "answer_expr": "f + r*n",
+    "constraint_expr": "",
+    "explanation_template": "Use total = fixed fee + rate*units.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 12.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "f",
+        "kind": "int",
+        "min": 5,
+        "max": 140,
+        "step": 1
+      },
+      {
+        "name": "r",
+        "kind": "int",
+        "min": 2,
+        "max": 30,
+        "step": 1
+      },
+      {
+        "name": "n",
+        "kind": "int",
+        "min": 2,
+        "max": 35,
+        "step": 1
+      }
+    ]
+  },
+  {
+    "external_id": "khan.v3.algebra_1.solving_equations_inequalities.linear_solve",
+    "skill": "algebra_1",
+    "subskill": "Solving equations & inequalities",
+    "label": "Linear equation solve",
+    "mode": "expression",
+    "prompt_template": "Solve for x: {m}x + {b} = {c}",
+    "answer_expr": "(c-b)/m",
+    "constraint_expr": "(c-b)%m==0",
+    "explanation_template": "Subtract b, then divide by m.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 8.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "m",
+        "kind": "int",
+        "min": 1,
+        "max": 20,
+        "step": 1
+      },
+      {
+        "name": "b",
+        "kind": "int",
+        "min": -40,
+        "max": 40,
+        "step": 1
+      },
+      {
+        "name": "c",
+        "kind": "int",
+        "min": -180,
+        "max": 180,
+        "step": 1
+      }
+    ]
+  },
+  {
+    "external_id": "khan.v3.algebra_1.solving_equations_inequalities.model_word",
+    "skill": "algebra_1",
+    "subskill": "Solving equations & inequalities",
+    "label": "Linear model word problem",
+    "mode": "word",
+    "prompt_template": "A plan charges ${f} fee plus ${r} per unit. What is total for {n} units?",
+    "answer_expr": "f + r*n",
+    "constraint_expr": "",
+    "explanation_template": "Use total = fixed fee + rate*units.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 12.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "f",
+        "kind": "int",
+        "min": 5,
+        "max": 140,
+        "step": 1
+      },
+      {
+        "name": "r",
+        "kind": "int",
+        "min": 2,
+        "max": 30,
+        "step": 1
+      },
+      {
+        "name": "n",
+        "kind": "int",
+        "min": 2,
+        "max": 35,
+        "step": 1
+      }
+    ]
+  },
+  {
+    "external_id": "khan.v3.algebra_1.working_with_units.linear_solve",
+    "skill": "algebra_1",
+    "subskill": "Working with units",
+    "label": "Linear equation solve",
+    "mode": "expression",
+    "prompt_template": "Solve for x: {m}x + {b} = {c}",
+    "answer_expr": "(c-b)/m",
+    "constraint_expr": "(c-b)%m==0",
+    "explanation_template": "Subtract b, then divide by m.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 8.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "m",
+        "kind": "int",
+        "min": 1,
+        "max": 20,
+        "step": 1
+      },
+      {
+        "name": "b",
+        "kind": "int",
+        "min": -40,
+        "max": 40,
+        "step": 1
+      },
+      {
+        "name": "c",
+        "kind": "int",
+        "min": -180,
+        "max": 180,
+        "step": 1
+      }
+    ]
+  },
+  {
+    "external_id": "khan.v3.algebra_1.working_with_units.model_word",
+    "skill": "algebra_1",
+    "subskill": "Working with units",
+    "label": "Linear model word problem",
+    "mode": "word",
+    "prompt_template": "A plan charges ${f} fee plus ${r} per unit. What is total for {n} units?",
+    "answer_expr": "f + r*n",
+    "constraint_expr": "",
+    "explanation_template": "Use total = fixed fee + rate*units.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 12.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "f",
+        "kind": "int",
+        "min": 5,
+        "max": 140,
+        "step": 1
+      },
+      {
+        "name": "r",
+        "kind": "int",
+        "min": 2,
+        "max": 30,
+        "step": 1
+      },
+      {
+        "name": "n",
+        "kind": "int",
+        "min": 2,
+        "max": 35,
+        "step": 1
+      }
+    ]
+  },
+  {
+    "external_id": "khan.v3.algebra_1.linear_equations_graphs.linear_solve",
+    "skill": "algebra_1",
+    "subskill": "Linear equations & graphs",
+    "label": "Linear equation solve",
+    "mode": "expression",
+    "prompt_template": "Solve for x: {m}x + {b} = {c}",
+    "answer_expr": "(c-b)/m",
+    "constraint_expr": "(c-b)%m==0",
+    "explanation_template": "Subtract b, then divide by m.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 8.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "m",
+        "kind": "int",
+        "min": 1,
+        "max": 20,
+        "step": 1
+      },
+      {
+        "name": "b",
+        "kind": "int",
+        "min": -40,
+        "max": 40,
+        "step": 1
+      },
+      {
+        "name": "c",
+        "kind": "int",
+        "min": -180,
+        "max": 180,
+        "step": 1
+      }
+    ]
+  },
+  {
+    "external_id": "khan.v3.algebra_1.linear_equations_graphs.model_word",
+    "skill": "algebra_1",
+    "subskill": "Linear equations & graphs",
+    "label": "Linear model word problem",
+    "mode": "word",
+    "prompt_template": "A plan charges ${f} fee plus ${r} per unit. What is total for {n} units?",
+    "answer_expr": "f + r*n",
+    "constraint_expr": "",
+    "explanation_template": "Use total = fixed fee + rate*units.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 12.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "f",
+        "kind": "int",
+        "min": 5,
+        "max": 140,
+        "step": 1
+      },
+      {
+        "name": "r",
+        "kind": "int",
+        "min": 2,
+        "max": 30,
+        "step": 1
+      },
+      {
+        "name": "n",
+        "kind": "int",
+        "min": 2,
+        "max": 35,
+        "step": 1
+      }
+    ]
+  },
+  {
+    "external_id": "khan.v3.algebra_1.forms_of_linear_equations.linear_solve",
+    "skill": "algebra_1",
+    "subskill": "Forms of linear equations",
+    "label": "Linear equation solve",
+    "mode": "expression",
+    "prompt_template": "Solve for x: {m}x + {b} = {c}",
+    "answer_expr": "(c-b)/m",
+    "constraint_expr": "(c-b)%m==0",
+    "explanation_template": "Subtract b, then divide by m.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 8.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "m",
+        "kind": "int",
+        "min": 1,
+        "max": 20,
+        "step": 1
+      },
+      {
+        "name": "b",
+        "kind": "int",
+        "min": -40,
+        "max": 40,
+        "step": 1
+      },
+      {
+        "name": "c",
+        "kind": "int",
+        "min": -180,
+        "max": 180,
+        "step": 1
+      }
+    ]
+  },
+  {
+    "external_id": "khan.v3.algebra_1.forms_of_linear_equations.model_word",
+    "skill": "algebra_1",
+    "subskill": "Forms of linear equations",
+    "label": "Linear model word problem",
+    "mode": "word",
+    "prompt_template": "A plan charges ${f} fee plus ${r} per unit. What is total for {n} units?",
+    "answer_expr": "f + r*n",
+    "constraint_expr": "",
+    "explanation_template": "Use total = fixed fee + rate*units.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 12.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "f",
+        "kind": "int",
+        "min": 5,
+        "max": 140,
+        "step": 1
+      },
+      {
+        "name": "r",
+        "kind": "int",
+        "min": 2,
+        "max": 30,
+        "step": 1
+      },
+      {
+        "name": "n",
+        "kind": "int",
+        "min": 2,
+        "max": 35,
+        "step": 1
+      }
+    ]
+  },
+  {
+    "external_id": "khan.v3.algebra_1.systems_of_equations.linear_solve",
+    "skill": "algebra_1",
+    "subskill": "Systems of equations",
+    "label": "Linear equation solve",
+    "mode": "expression",
+    "prompt_template": "Solve for x: {m}x + {b} = {c}",
+    "answer_expr": "(c-b)/m",
+    "constraint_expr": "(c-b)%m==0",
+    "explanation_template": "Subtract b, then divide by m.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 8.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "m",
+        "kind": "int",
+        "min": 1,
+        "max": 20,
+        "step": 1
+      },
+      {
+        "name": "b",
+        "kind": "int",
+        "min": -40,
+        "max": 40,
+        "step": 1
+      },
+      {
+        "name": "c",
+        "kind": "int",
+        "min": -180,
+        "max": 180,
+        "step": 1
+      }
+    ]
+  },
+  {
+    "external_id": "khan.v3.algebra_1.systems_of_equations.model_word",
+    "skill": "algebra_1",
+    "subskill": "Systems of equations",
+    "label": "Linear model word problem",
+    "mode": "word",
+    "prompt_template": "A plan charges ${f} fee plus ${r} per unit. What is total for {n} units?",
+    "answer_expr": "f + r*n",
+    "constraint_expr": "",
+    "explanation_template": "Use total = fixed fee + rate*units.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 12.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "f",
+        "kind": "int",
+        "min": 5,
+        "max": 140,
+        "step": 1
+      },
+      {
+        "name": "r",
+        "kind": "int",
+        "min": 2,
+        "max": 30,
+        "step": 1
+      },
+      {
+        "name": "n",
+        "kind": "int",
+        "min": 2,
+        "max": 35,
+        "step": 1
+      }
+    ]
+  },
+  {
+    "external_id": "khan.v3.algebra_1.inequalities_systems_graphs.linear_solve",
+    "skill": "algebra_1",
+    "subskill": "Inequalities (systems & graphs)",
+    "label": "Linear equation solve",
+    "mode": "expression",
+    "prompt_template": "Solve for x: {m}x + {b} = {c}",
+    "answer_expr": "(c-b)/m",
+    "constraint_expr": "(c-b)%m==0",
+    "explanation_template": "Subtract b, then divide by m.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 8.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "m",
+        "kind": "int",
+        "min": 1,
+        "max": 20,
+        "step": 1
+      },
+      {
+        "name": "b",
+        "kind": "int",
+        "min": -40,
+        "max": 40,
+        "step": 1
+      },
+      {
+        "name": "c",
+        "kind": "int",
+        "min": -180,
+        "max": 180,
+        "step": 1
+      }
+    ]
+  },
+  {
+    "external_id": "khan.v3.algebra_1.inequalities_systems_graphs.model_word",
+    "skill": "algebra_1",
+    "subskill": "Inequalities (systems & graphs)",
+    "label": "Linear model word problem",
+    "mode": "word",
+    "prompt_template": "A plan charges ${f} fee plus ${r} per unit. What is total for {n} units?",
+    "answer_expr": "f + r*n",
+    "constraint_expr": "",
+    "explanation_template": "Use total = fixed fee + rate*units.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 12.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "f",
+        "kind": "int",
+        "min": 5,
+        "max": 140,
+        "step": 1
+      },
+      {
+        "name": "r",
+        "kind": "int",
+        "min": 2,
+        "max": 30,
+        "step": 1
+      },
+      {
+        "name": "n",
+        "kind": "int",
+        "min": 2,
+        "max": 35,
+        "step": 1
+      }
+    ]
+  },
+  {
+    "external_id": "khan.v3.algebra_1.functions.linear_solve",
+    "skill": "algebra_1",
+    "subskill": "Functions",
+    "label": "Linear equation solve",
+    "mode": "expression",
+    "prompt_template": "Solve for x: {m}x + {b} = {c}",
+    "answer_expr": "(c-b)/m",
+    "constraint_expr": "(c-b)%m==0",
+    "explanation_template": "Subtract b, then divide by m.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 8.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "m",
+        "kind": "int",
+        "min": 1,
+        "max": 20,
+        "step": 1
+      },
+      {
+        "name": "b",
+        "kind": "int",
+        "min": -40,
+        "max": 40,
+        "step": 1
+      },
+      {
+        "name": "c",
+        "kind": "int",
+        "min": -180,
+        "max": 180,
+        "step": 1
+      }
+    ]
+  },
+  {
+    "external_id": "khan.v3.algebra_1.functions.model_word",
+    "skill": "algebra_1",
+    "subskill": "Functions",
+    "label": "Linear model word problem",
+    "mode": "word",
+    "prompt_template": "A plan charges ${f} fee plus ${r} per unit. What is total for {n} units?",
+    "answer_expr": "f + r*n",
+    "constraint_expr": "",
+    "explanation_template": "Use total = fixed fee + rate*units.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 12.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "f",
+        "kind": "int",
+        "min": 5,
+        "max": 140,
+        "step": 1
+      },
+      {
+        "name": "r",
+        "kind": "int",
+        "min": 2,
+        "max": 30,
+        "step": 1
+      },
+      {
+        "name": "n",
+        "kind": "int",
+        "min": 2,
+        "max": 35,
+        "step": 1
+      }
+    ]
+  },
+  {
+    "external_id": "khan.v3.algebra_1.sequences.arith_term",
+    "skill": "algebra_1",
+    "subskill": "Sequences",
+    "label": "Arithmetic sequence term",
+    "mode": "expression",
+    "prompt_template": "An arithmetic sequence starts at {a1} with common difference {d}. Find term {n}.",
+    "answer_expr": "a1 + (n-1)*d",
+    "constraint_expr": "",
+    "explanation_template": "Use a_n = a_1 + (n-1)d.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 8.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "a1",
+        "kind": "int",
+        "min": -20,
+        "max": 30,
+        "step": 1
+      },
+      {
+        "name": "d",
+        "kind": "int",
+        "min": -8,
+        "max": 12,
+        "step": 1
+      },
+      {
+        "name": "n",
+        "kind": "int",
+        "min": 4,
+        "max": 18,
+        "step": 1
+      }
+    ]
+  },
+  {
+    "external_id": "khan.v3.algebra_1.sequences.arith_word",
+    "skill": "algebra_1",
+    "subskill": "Sequences",
+    "label": "Step pattern",
+    "mode": "word",
+    "prompt_template": "A pattern starts at {a1} and increases by {d} each step. What is value at step {n}?",
+    "answer_expr": "a1 + (n-1)*d",
+    "constraint_expr": "",
+    "explanation_template": "Repeated addition creates an arithmetic sequence.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 8.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "a1",
+        "kind": "int",
+        "min": 5,
+        "max": 40,
+        "step": 1
+      },
+      {
+        "name": "d",
+        "kind": "int",
+        "min": 2,
+        "max": 15,
+        "step": 1
+      },
+      {
+        "name": "n",
+        "kind": "int",
+        "min": 3,
+        "max": 15,
+        "step": 1
+      }
+    ]
+  },
+  {
+    "external_id": "khan.v3.algebra_1.absolute_value_piecewise_functions.linear_solve",
+    "skill": "algebra_1",
+    "subskill": "Absolute value & piecewise functions",
+    "label": "Linear equation solve",
+    "mode": "expression",
+    "prompt_template": "Solve for x: {m}x + {b} = {c}",
+    "answer_expr": "(c-b)/m",
+    "constraint_expr": "(c-b)%m==0",
+    "explanation_template": "Subtract b, then divide by m.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 8.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "m",
+        "kind": "int",
+        "min": 1,
+        "max": 20,
+        "step": 1
+      },
+      {
+        "name": "b",
+        "kind": "int",
+        "min": -40,
+        "max": 40,
+        "step": 1
+      },
+      {
+        "name": "c",
+        "kind": "int",
+        "min": -180,
+        "max": 180,
+        "step": 1
+      }
+    ]
+  },
+  {
+    "external_id": "khan.v3.algebra_1.absolute_value_piecewise_functions.model_word",
+    "skill": "algebra_1",
+    "subskill": "Absolute value & piecewise functions",
+    "label": "Linear model word problem",
+    "mode": "word",
+    "prompt_template": "A plan charges ${f} fee plus ${r} per unit. What is total for {n} units?",
+    "answer_expr": "f + r*n",
+    "constraint_expr": "",
+    "explanation_template": "Use total = fixed fee + rate*units.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 12.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "f",
+        "kind": "int",
+        "min": 5,
+        "max": 140,
+        "step": 1
+      },
+      {
+        "name": "r",
+        "kind": "int",
+        "min": 2,
+        "max": 30,
+        "step": 1
+      },
+      {
+        "name": "n",
+        "kind": "int",
+        "min": 2,
+        "max": 35,
+        "step": 1
+      }
+    ]
+  },
+  {
+    "external_id": "khan.v3.algebra_1.exponents_radicals.linear_solve",
+    "skill": "algebra_1",
+    "subskill": "Exponents & radicals",
+    "label": "Linear equation solve",
+    "mode": "expression",
+    "prompt_template": "Solve for x: {m}x + {b} = {c}",
+    "answer_expr": "(c-b)/m",
+    "constraint_expr": "(c-b)%m==0",
+    "explanation_template": "Subtract b, then divide by m.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 8.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "m",
+        "kind": "int",
+        "min": 1,
+        "max": 20,
+        "step": 1
+      },
+      {
+        "name": "b",
+        "kind": "int",
+        "min": -40,
+        "max": 40,
+        "step": 1
+      },
+      {
+        "name": "c",
+        "kind": "int",
+        "min": -180,
+        "max": 180,
+        "step": 1
+      }
+    ]
+  },
+  {
+    "external_id": "khan.v3.algebra_1.exponents_radicals.model_word",
+    "skill": "algebra_1",
+    "subskill": "Exponents & radicals",
+    "label": "Linear model word problem",
+    "mode": "word",
+    "prompt_template": "A plan charges ${f} fee plus ${r} per unit. What is total for {n} units?",
+    "answer_expr": "f + r*n",
+    "constraint_expr": "",
+    "explanation_template": "Use total = fixed fee + rate*units.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 12.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "f",
+        "kind": "int",
+        "min": 5,
+        "max": 140,
+        "step": 1
+      },
+      {
+        "name": "r",
+        "kind": "int",
+        "min": 2,
+        "max": 30,
+        "step": 1
+      },
+      {
+        "name": "n",
+        "kind": "int",
+        "min": 2,
+        "max": 35,
+        "step": 1
+      }
+    ]
+  },
+  {
+    "external_id": "khan.v3.algebra_1.exponential_growth_decay.linear_solve",
+    "skill": "algebra_1",
+    "subskill": "Exponential growth & decay",
+    "label": "Linear equation solve",
+    "mode": "expression",
+    "prompt_template": "Solve for x: {m}x + {b} = {c}",
+    "answer_expr": "(c-b)/m",
+    "constraint_expr": "(c-b)%m==0",
+    "explanation_template": "Subtract b, then divide by m.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 8.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "m",
+        "kind": "int",
+        "min": 1,
+        "max": 20,
+        "step": 1
+      },
+      {
+        "name": "b",
+        "kind": "int",
+        "min": -40,
+        "max": 40,
+        "step": 1
+      },
+      {
+        "name": "c",
+        "kind": "int",
+        "min": -180,
+        "max": 180,
+        "step": 1
+      }
+    ]
+  },
+  {
+    "external_id": "khan.v3.algebra_1.exponential_growth_decay.model_word",
+    "skill": "algebra_1",
+    "subskill": "Exponential growth & decay",
+    "label": "Linear model word problem",
+    "mode": "word",
+    "prompt_template": "A plan charges ${f} fee plus ${r} per unit. What is total for {n} units?",
+    "answer_expr": "f + r*n",
+    "constraint_expr": "",
+    "explanation_template": "Use total = fixed fee + rate*units.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 12.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "f",
+        "kind": "int",
+        "min": 5,
+        "max": 140,
+        "step": 1
+      },
+      {
+        "name": "r",
+        "kind": "int",
+        "min": 2,
+        "max": 30,
+        "step": 1
+      },
+      {
+        "name": "n",
+        "kind": "int",
+        "min": 2,
+        "max": 35,
+        "step": 1
+      }
+    ]
+  },
+  {
+    "external_id": "khan.v3.algebra_1.quadratics_multiplying_factoring.linear_solve",
+    "skill": "algebra_1",
+    "subskill": "Quadratics: Multiplying & factoring",
+    "label": "Linear equation solve",
+    "mode": "expression",
+    "prompt_template": "Solve for x: {m}x + {b} = {c}",
+    "answer_expr": "(c-b)/m",
+    "constraint_expr": "(c-b)%m==0",
+    "explanation_template": "Subtract b, then divide by m.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 8.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "m",
+        "kind": "int",
+        "min": 1,
+        "max": 20,
+        "step": 1
+      },
+      {
+        "name": "b",
+        "kind": "int",
+        "min": -40,
+        "max": 40,
+        "step": 1
+      },
+      {
+        "name": "c",
+        "kind": "int",
+        "min": -180,
+        "max": 180,
+        "step": 1
+      }
+    ]
+  },
+  {
+    "external_id": "khan.v3.algebra_1.quadratics_multiplying_factoring.model_word",
+    "skill": "algebra_1",
+    "subskill": "Quadratics: Multiplying & factoring",
+    "label": "Linear model word problem",
+    "mode": "word",
+    "prompt_template": "A plan charges ${f} fee plus ${r} per unit. What is total for {n} units?",
+    "answer_expr": "f + r*n",
+    "constraint_expr": "",
+    "explanation_template": "Use total = fixed fee + rate*units.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 12.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "f",
+        "kind": "int",
+        "min": 5,
+        "max": 140,
+        "step": 1
+      },
+      {
+        "name": "r",
+        "kind": "int",
+        "min": 2,
+        "max": 30,
+        "step": 1
+      },
+      {
+        "name": "n",
+        "kind": "int",
+        "min": 2,
+        "max": 35,
+        "step": 1
+      }
+    ]
+  },
+  {
+    "external_id": "khan.v3.algebra_1.quadratic_functions_equations.linear_solve",
+    "skill": "algebra_1",
+    "subskill": "Quadratic functions & equations",
+    "label": "Linear equation solve",
+    "mode": "expression",
+    "prompt_template": "Solve for x: {m}x + {b} = {c}",
+    "answer_expr": "(c-b)/m",
+    "constraint_expr": "(c-b)%m==0",
+    "explanation_template": "Subtract b, then divide by m.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 8.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "m",
+        "kind": "int",
+        "min": 1,
+        "max": 20,
+        "step": 1
+      },
+      {
+        "name": "b",
+        "kind": "int",
+        "min": -40,
+        "max": 40,
+        "step": 1
+      },
+      {
+        "name": "c",
+        "kind": "int",
+        "min": -180,
+        "max": 180,
+        "step": 1
+      }
+    ]
+  },
+  {
+    "external_id": "khan.v3.algebra_1.quadratic_functions_equations.model_word",
+    "skill": "algebra_1",
+    "subskill": "Quadratic functions & equations",
+    "label": "Linear model word problem",
+    "mode": "word",
+    "prompt_template": "A plan charges ${f} fee plus ${r} per unit. What is total for {n} units?",
+    "answer_expr": "f + r*n",
+    "constraint_expr": "",
+    "explanation_template": "Use total = fixed fee + rate*units.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 12.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "f",
+        "kind": "int",
+        "min": 5,
+        "max": 140,
+        "step": 1
+      },
+      {
+        "name": "r",
+        "kind": "int",
+        "min": 2,
+        "max": 30,
+        "step": 1
+      },
+      {
+        "name": "n",
+        "kind": "int",
+        "min": 2,
+        "max": 35,
+        "step": 1
+      }
+    ]
+  },
+  {
+    "external_id": "khan.v3.algebra_1.irrational_numbers.linear_solve",
+    "skill": "algebra_1",
+    "subskill": "Irrational numbers",
+    "label": "Linear equation solve",
+    "mode": "expression",
+    "prompt_template": "Solve for x: {m}x + {b} = {c}",
+    "answer_expr": "(c-b)/m",
+    "constraint_expr": "(c-b)%m==0",
+    "explanation_template": "Subtract b, then divide by m.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 8.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "m",
+        "kind": "int",
+        "min": 1,
+        "max": 20,
+        "step": 1
+      },
+      {
+        "name": "b",
+        "kind": "int",
+        "min": -40,
+        "max": 40,
+        "step": 1
+      },
+      {
+        "name": "c",
+        "kind": "int",
+        "min": -180,
+        "max": 180,
+        "step": 1
+      }
+    ]
+  },
+  {
+    "external_id": "khan.v3.algebra_1.irrational_numbers.model_word",
+    "skill": "algebra_1",
+    "subskill": "Irrational numbers",
+    "label": "Linear model word problem",
+    "mode": "word",
+    "prompt_template": "A plan charges ${f} fee plus ${r} per unit. What is total for {n} units?",
+    "answer_expr": "f + r*n",
+    "constraint_expr": "",
+    "explanation_template": "Use total = fixed fee + rate*units.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 12.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "f",
+        "kind": "int",
+        "min": 5,
+        "max": 140,
+        "step": 1
+      },
+      {
+        "name": "r",
+        "kind": "int",
+        "min": 2,
+        "max": 30,
+        "step": 1
+      },
+      {
+        "name": "n",
+        "kind": "int",
+        "min": 2,
+        "max": 35,
+        "step": 1
+      }
+    ]
+  },
+  {
+    "external_id": "khan.v3.algebra_2.polynomial_arithmetic.linear_solve",
+    "skill": "algebra_2",
+    "subskill": "Polynomial arithmetic",
+    "label": "Linear equation solve",
+    "mode": "expression",
+    "prompt_template": "Solve for x: {m}x + {b} = {c}",
+    "answer_expr": "(c-b)/m",
+    "constraint_expr": "(c-b)%m==0",
+    "explanation_template": "Subtract b, then divide by m.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 8.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "m",
+        "kind": "int",
+        "min": 1,
+        "max": 20,
+        "step": 1
+      },
+      {
+        "name": "b",
+        "kind": "int",
+        "min": -40,
+        "max": 40,
+        "step": 1
+      },
+      {
+        "name": "c",
+        "kind": "int",
+        "min": -180,
+        "max": 180,
+        "step": 1
+      }
+    ]
+  },
+  {
+    "external_id": "khan.v3.algebra_2.polynomial_arithmetic.model_word",
+    "skill": "algebra_2",
+    "subskill": "Polynomial arithmetic",
+    "label": "Linear model word problem",
+    "mode": "word",
+    "prompt_template": "A plan charges ${f} fee plus ${r} per unit. What is total for {n} units?",
+    "answer_expr": "f + r*n",
+    "constraint_expr": "",
+    "explanation_template": "Use total = fixed fee + rate*units.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 12.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "f",
+        "kind": "int",
+        "min": 5,
+        "max": 140,
+        "step": 1
+      },
+      {
+        "name": "r",
+        "kind": "int",
+        "min": 2,
+        "max": 30,
+        "step": 1
+      },
+      {
+        "name": "n",
+        "kind": "int",
+        "min": 2,
+        "max": 35,
+        "step": 1
+      }
+    ]
+  },
+  {
+    "external_id": "khan.v3.algebra_2.complex_numbers.i_even",
+    "skill": "algebra_2",
+    "subskill": "Complex numbers",
+    "label": "Even power of i",
+    "mode": "expression",
+    "prompt_template": "Evaluate i^(2*{n}).",
+    "answer_expr": "(-1)**n",
+    "constraint_expr": "",
+    "explanation_template": "i^2=-1 and powers repeat in cycles.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 8.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "n",
+        "kind": "int",
+        "min": 1,
+        "max": 12,
+        "step": 1
+      }
+    ]
+  },
+  {
+    "external_id": "khan.v3.algebra_2.complex_numbers.i_cycle",
+    "skill": "algebra_2",
+    "subskill": "Complex numbers",
+    "label": "Power cycle",
+    "mode": "expression",
+    "prompt_template": "Evaluate i^(4*{k} + 2).",
+    "answer_expr": "-1",
+    "constraint_expr": "",
+    "explanation_template": "Every power 4k+2 equals -1.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 3.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "k",
+        "kind": "int",
+        "min": 0,
+        "max": 9,
+        "step": 1
+      }
+    ]
+  },
+  {
+    "external_id": "khan.v3.algebra_2.polynomial_factorization.linear_solve",
+    "skill": "algebra_2",
+    "subskill": "Polynomial factorization",
+    "label": "Linear equation solve",
+    "mode": "expression",
+    "prompt_template": "Solve for x: {m}x + {b} = {c}",
+    "answer_expr": "(c-b)/m",
+    "constraint_expr": "(c-b)%m==0",
+    "explanation_template": "Subtract b, then divide by m.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 8.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "m",
+        "kind": "int",
+        "min": 1,
+        "max": 20,
+        "step": 1
+      },
+      {
+        "name": "b",
+        "kind": "int",
+        "min": -40,
+        "max": 40,
+        "step": 1
+      },
+      {
+        "name": "c",
+        "kind": "int",
+        "min": -180,
+        "max": 180,
+        "step": 1
+      }
+    ]
+  },
+  {
+    "external_id": "khan.v3.algebra_2.polynomial_factorization.model_word",
+    "skill": "algebra_2",
+    "subskill": "Polynomial factorization",
+    "label": "Linear model word problem",
+    "mode": "word",
+    "prompt_template": "A plan charges ${f} fee plus ${r} per unit. What is total for {n} units?",
+    "answer_expr": "f + r*n",
+    "constraint_expr": "",
+    "explanation_template": "Use total = fixed fee + rate*units.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 12.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "f",
+        "kind": "int",
+        "min": 5,
+        "max": 140,
+        "step": 1
+      },
+      {
+        "name": "r",
+        "kind": "int",
+        "min": 2,
+        "max": 30,
+        "step": 1
+      },
+      {
+        "name": "n",
+        "kind": "int",
+        "min": 2,
+        "max": 35,
+        "step": 1
+      }
+    ]
+  },
+  {
+    "external_id": "khan.v3.algebra_2.polynomial_division.linear_solve",
+    "skill": "algebra_2",
+    "subskill": "Polynomial division",
+    "label": "Linear equation solve",
+    "mode": "expression",
+    "prompt_template": "Solve for x: {m}x + {b} = {c}",
+    "answer_expr": "(c-b)/m",
+    "constraint_expr": "(c-b)%m==0",
+    "explanation_template": "Subtract b, then divide by m.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 8.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "m",
+        "kind": "int",
+        "min": 1,
+        "max": 20,
+        "step": 1
+      },
+      {
+        "name": "b",
+        "kind": "int",
+        "min": -40,
+        "max": 40,
+        "step": 1
+      },
+      {
+        "name": "c",
+        "kind": "int",
+        "min": -180,
+        "max": 180,
+        "step": 1
+      }
+    ]
+  },
+  {
+    "external_id": "khan.v3.algebra_2.polynomial_division.model_word",
+    "skill": "algebra_2",
+    "subskill": "Polynomial division",
+    "label": "Linear model word problem",
+    "mode": "word",
+    "prompt_template": "A plan charges ${f} fee plus ${r} per unit. What is total for {n} units?",
+    "answer_expr": "f + r*n",
+    "constraint_expr": "",
+    "explanation_template": "Use total = fixed fee + rate*units.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 12.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "f",
+        "kind": "int",
+        "min": 5,
+        "max": 140,
+        "step": 1
+      },
+      {
+        "name": "r",
+        "kind": "int",
+        "min": 2,
+        "max": 30,
+        "step": 1
+      },
+      {
+        "name": "n",
+        "kind": "int",
+        "min": 2,
+        "max": 35,
+        "step": 1
+      }
+    ]
+  },
+  {
+    "external_id": "khan.v3.algebra_2.polynomial_graphs.linear_solve",
+    "skill": "algebra_2",
+    "subskill": "Polynomial graphs",
+    "label": "Linear equation solve",
+    "mode": "expression",
+    "prompt_template": "Solve for x: {m}x + {b} = {c}",
+    "answer_expr": "(c-b)/m",
+    "constraint_expr": "(c-b)%m==0",
+    "explanation_template": "Subtract b, then divide by m.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 8.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "m",
+        "kind": "int",
+        "min": 1,
+        "max": 20,
+        "step": 1
+      },
+      {
+        "name": "b",
+        "kind": "int",
+        "min": -40,
+        "max": 40,
+        "step": 1
+      },
+      {
+        "name": "c",
+        "kind": "int",
+        "min": -180,
+        "max": 180,
+        "step": 1
+      }
+    ]
+  },
+  {
+    "external_id": "khan.v3.algebra_2.polynomial_graphs.model_word",
+    "skill": "algebra_2",
+    "subskill": "Polynomial graphs",
+    "label": "Linear model word problem",
+    "mode": "word",
+    "prompt_template": "A plan charges ${f} fee plus ${r} per unit. What is total for {n} units?",
+    "answer_expr": "f + r*n",
+    "constraint_expr": "",
+    "explanation_template": "Use total = fixed fee + rate*units.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 12.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "f",
+        "kind": "int",
+        "min": 5,
+        "max": 140,
+        "step": 1
+      },
+      {
+        "name": "r",
+        "kind": "int",
+        "min": 2,
+        "max": 30,
+        "step": 1
+      },
+      {
+        "name": "n",
+        "kind": "int",
+        "min": 2,
+        "max": 35,
+        "step": 1
+      }
+    ]
+  },
+  {
+    "external_id": "khan.v3.algebra_2.rational_exponents_and_radicals.linear_solve",
+    "skill": "algebra_2",
+    "subskill": "Rational exponents and radicals",
+    "label": "Linear equation solve",
+    "mode": "expression",
+    "prompt_template": "Solve for x: {m}x + {b} = {c}",
+    "answer_expr": "(c-b)/m",
+    "constraint_expr": "(c-b)%m==0",
+    "explanation_template": "Subtract b, then divide by m.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 8.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "m",
+        "kind": "int",
+        "min": 1,
+        "max": 20,
+        "step": 1
+      },
+      {
+        "name": "b",
+        "kind": "int",
+        "min": -40,
+        "max": 40,
+        "step": 1
+      },
+      {
+        "name": "c",
+        "kind": "int",
+        "min": -180,
+        "max": 180,
+        "step": 1
+      }
+    ]
+  },
+  {
+    "external_id": "khan.v3.algebra_2.rational_exponents_and_radicals.model_word",
+    "skill": "algebra_2",
+    "subskill": "Rational exponents and radicals",
+    "label": "Linear model word problem",
+    "mode": "word",
+    "prompt_template": "A plan charges ${f} fee plus ${r} per unit. What is total for {n} units?",
+    "answer_expr": "f + r*n",
+    "constraint_expr": "",
+    "explanation_template": "Use total = fixed fee + rate*units.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 12.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "f",
+        "kind": "int",
+        "min": 5,
+        "max": 140,
+        "step": 1
+      },
+      {
+        "name": "r",
+        "kind": "int",
+        "min": 2,
+        "max": 30,
+        "step": 1
+      },
+      {
+        "name": "n",
+        "kind": "int",
+        "min": 2,
+        "max": 35,
+        "step": 1
+      }
+    ]
+  },
+  {
+    "external_id": "khan.v3.algebra_2.exponential_models.linear_solve",
+    "skill": "algebra_2",
+    "subskill": "Exponential models",
+    "label": "Linear equation solve",
+    "mode": "expression",
+    "prompt_template": "Solve for x: {m}x + {b} = {c}",
+    "answer_expr": "(c-b)/m",
+    "constraint_expr": "(c-b)%m==0",
+    "explanation_template": "Subtract b, then divide by m.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 8.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "m",
+        "kind": "int",
+        "min": 1,
+        "max": 20,
+        "step": 1
+      },
+      {
+        "name": "b",
+        "kind": "int",
+        "min": -40,
+        "max": 40,
+        "step": 1
+      },
+      {
+        "name": "c",
+        "kind": "int",
+        "min": -180,
+        "max": 180,
+        "step": 1
+      }
+    ]
+  },
+  {
+    "external_id": "khan.v3.algebra_2.exponential_models.model_word",
+    "skill": "algebra_2",
+    "subskill": "Exponential models",
+    "label": "Linear model word problem",
+    "mode": "word",
+    "prompt_template": "A plan charges ${f} fee plus ${r} per unit. What is total for {n} units?",
+    "answer_expr": "f + r*n",
+    "constraint_expr": "",
+    "explanation_template": "Use total = fixed fee + rate*units.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 12.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "f",
+        "kind": "int",
+        "min": 5,
+        "max": 140,
+        "step": 1
+      },
+      {
+        "name": "r",
+        "kind": "int",
+        "min": 2,
+        "max": 30,
+        "step": 1
+      },
+      {
+        "name": "n",
+        "kind": "int",
+        "min": 2,
+        "max": 35,
+        "step": 1
+      }
+    ]
+  },
+  {
+    "external_id": "khan.v3.algebra_2.logarithms.log_power",
+    "skill": "algebra_2",
+    "subskill": "Logarithms",
+    "label": "Log from exponent form",
+    "mode": "expression",
+    "prompt_template": "Compute log base {b} of {b}^{p}.",
+    "answer_expr": "p",
+    "constraint_expr": "",
+    "explanation_template": "log_b(b^p) = p.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 8.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "b",
+        "kind": "int",
+        "min": 2,
+        "max": 10,
+        "step": 1
+      },
+      {
+        "name": "p",
+        "kind": "int",
+        "min": 1,
+        "max": 6,
+        "step": 1
+      }
+    ]
+  },
+  {
+    "external_id": "khan.v3.algebra_2.logarithms.log_word",
+    "skill": "algebra_2",
+    "subskill": "Logarithms",
+    "label": "Exponent from logarithm",
+    "mode": "word",
+    "prompt_template": "If log base {b} of N is {p}, and N = {b}^{p}, what is N?",
+    "answer_expr": "b**p",
+    "constraint_expr": "",
+    "explanation_template": "Convert log form to exponent form.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 20.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "b",
+        "kind": "int",
+        "min": 2,
+        "max": 9,
+        "step": 1
+      },
+      {
+        "name": "p",
+        "kind": "int",
+        "min": 1,
+        "max": 5,
+        "step": 1
+      }
+    ]
+  },
+  {
+    "external_id": "khan.v3.algebra_2.transformations_of_functions.linear_solve",
+    "skill": "algebra_2",
+    "subskill": "Transformations of functions",
+    "label": "Linear equation solve",
+    "mode": "expression",
+    "prompt_template": "Solve for x: {m}x + {b} = {c}",
+    "answer_expr": "(c-b)/m",
+    "constraint_expr": "(c-b)%m==0",
+    "explanation_template": "Subtract b, then divide by m.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 8.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "m",
+        "kind": "int",
+        "min": 1,
+        "max": 20,
+        "step": 1
+      },
+      {
+        "name": "b",
+        "kind": "int",
+        "min": -40,
+        "max": 40,
+        "step": 1
+      },
+      {
+        "name": "c",
+        "kind": "int",
+        "min": -180,
+        "max": 180,
+        "step": 1
+      }
+    ]
+  },
+  {
+    "external_id": "khan.v3.algebra_2.transformations_of_functions.model_word",
+    "skill": "algebra_2",
+    "subskill": "Transformations of functions",
+    "label": "Linear model word problem",
+    "mode": "word",
+    "prompt_template": "A plan charges ${f} fee plus ${r} per unit. What is total for {n} units?",
+    "answer_expr": "f + r*n",
+    "constraint_expr": "",
+    "explanation_template": "Use total = fixed fee + rate*units.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 12.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "f",
+        "kind": "int",
+        "min": 5,
+        "max": 140,
+        "step": 1
+      },
+      {
+        "name": "r",
+        "kind": "int",
+        "min": 2,
+        "max": 30,
+        "step": 1
+      },
+      {
+        "name": "n",
+        "kind": "int",
+        "min": 2,
+        "max": 35,
+        "step": 1
+      }
+    ]
+  },
+  {
+    "external_id": "khan.v3.algebra_2.equations.linear_solve",
+    "skill": "algebra_2",
+    "subskill": "Equations",
+    "label": "Linear equation solve",
+    "mode": "expression",
+    "prompt_template": "Solve for x: {m}x + {b} = {c}",
+    "answer_expr": "(c-b)/m",
+    "constraint_expr": "(c-b)%m==0",
+    "explanation_template": "Subtract b, then divide by m.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 8.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "m",
+        "kind": "int",
+        "min": 1,
+        "max": 20,
+        "step": 1
+      },
+      {
+        "name": "b",
+        "kind": "int",
+        "min": -40,
+        "max": 40,
+        "step": 1
+      },
+      {
+        "name": "c",
+        "kind": "int",
+        "min": -180,
+        "max": 180,
+        "step": 1
+      }
+    ]
+  },
+  {
+    "external_id": "khan.v3.algebra_2.equations.model_word",
+    "skill": "algebra_2",
+    "subskill": "Equations",
+    "label": "Linear model word problem",
+    "mode": "word",
+    "prompt_template": "A plan charges ${f} fee plus ${r} per unit. What is total for {n} units?",
+    "answer_expr": "f + r*n",
+    "constraint_expr": "",
+    "explanation_template": "Use total = fixed fee + rate*units.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 12.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "f",
+        "kind": "int",
+        "min": 5,
+        "max": 140,
+        "step": 1
+      },
+      {
+        "name": "r",
+        "kind": "int",
+        "min": 2,
+        "max": 30,
+        "step": 1
+      },
+      {
+        "name": "n",
+        "kind": "int",
+        "min": 2,
+        "max": 35,
+        "step": 1
+      }
+    ]
+  },
+  {
+    "external_id": "khan.v3.algebra_2.trigonometry.tan_ratio",
+    "skill": "algebra_2",
+    "subskill": "Trigonometry",
+    "label": "Tangent ratio",
+    "mode": "expression",
+    "prompt_template": "In a right triangle, opposite={o}, adjacent={a}. Compute 100*tan(theta).",
+    "answer_expr": "(100*o)/a",
+    "constraint_expr": "(100*o)%a==0",
+    "explanation_template": "tan(theta)=opposite/adjacent.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 8.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "o",
+        "kind": "int",
+        "min": 2,
+        "max": 20,
+        "step": 1
+      },
+      {
+        "name": "a",
+        "kind": "int",
+        "min": 2,
+        "max": 20,
+        "step": 1
+      }
+    ]
+  },
+  {
+    "external_id": "khan.v3.algebra_2.trigonometry.similar_tri",
+    "skill": "algebra_2",
+    "subskill": "Trigonometry",
+    "label": "Right-triangle scaling",
+    "mode": "word",
+    "prompt_template": "A similar right triangle has adjacent side {a2} when the reference adjacent side is {a1} with opposite {o1}. Find new opposite.",
+    "answer_expr": "(o1*a2)/a1",
+    "constraint_expr": "(o1*a2)%a1==0",
+    "explanation_template": "Similar triangles preserve side ratios.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 8.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "a1",
+        "kind": "int",
+        "min": 2,
+        "max": 20,
+        "step": 1
+      },
+      {
+        "name": "o1",
+        "kind": "int",
+        "min": 2,
+        "max": 20,
+        "step": 1
+      },
+      {
+        "name": "a2",
+        "kind": "int",
+        "min": 2,
+        "max": 40,
+        "step": 1
+      }
+    ]
+  },
+  {
+    "external_id": "khan.v3.algebra_2.modeling.linear_solve",
+    "skill": "algebra_2",
+    "subskill": "Modeling",
+    "label": "Linear equation solve",
+    "mode": "expression",
+    "prompt_template": "Solve for x: {m}x + {b} = {c}",
+    "answer_expr": "(c-b)/m",
+    "constraint_expr": "(c-b)%m==0",
+    "explanation_template": "Subtract b, then divide by m.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 8.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "m",
+        "kind": "int",
+        "min": 1,
+        "max": 20,
+        "step": 1
+      },
+      {
+        "name": "b",
+        "kind": "int",
+        "min": -40,
+        "max": 40,
+        "step": 1
+      },
+      {
+        "name": "c",
+        "kind": "int",
+        "min": -180,
+        "max": 180,
+        "step": 1
+      }
+    ]
+  },
+  {
+    "external_id": "khan.v3.algebra_2.modeling.model_word",
+    "skill": "algebra_2",
+    "subskill": "Modeling",
+    "label": "Linear model word problem",
+    "mode": "word",
+    "prompt_template": "A plan charges ${f} fee plus ${r} per unit. What is total for {n} units?",
+    "answer_expr": "f + r*n",
+    "constraint_expr": "",
+    "explanation_template": "Use total = fixed fee + rate*units.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 12.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "f",
+        "kind": "int",
+        "min": 5,
+        "max": 140,
+        "step": 1
+      },
+      {
+        "name": "r",
+        "kind": "int",
+        "min": 2,
+        "max": 30,
+        "step": 1
+      },
+      {
+        "name": "n",
+        "kind": "int",
+        "min": 2,
+        "max": 35,
+        "step": 1
+      }
+    ]
+  },
+  {
+    "external_id": "khan.v3.algebra_2.rational_functions.linear_solve",
+    "skill": "algebra_2",
+    "subskill": "Rational functions",
+    "label": "Linear equation solve",
+    "mode": "expression",
+    "prompt_template": "Solve for x: {m}x + {b} = {c}",
+    "answer_expr": "(c-b)/m",
+    "constraint_expr": "(c-b)%m==0",
+    "explanation_template": "Subtract b, then divide by m.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 8.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "m",
+        "kind": "int",
+        "min": 1,
+        "max": 20,
+        "step": 1
+      },
+      {
+        "name": "b",
+        "kind": "int",
+        "min": -40,
+        "max": 40,
+        "step": 1
+      },
+      {
+        "name": "c",
+        "kind": "int",
+        "min": -180,
+        "max": 180,
+        "step": 1
+      }
+    ]
+  },
+  {
+    "external_id": "khan.v3.algebra_2.rational_functions.model_word",
+    "skill": "algebra_2",
+    "subskill": "Rational functions",
+    "label": "Linear model word problem",
+    "mode": "word",
+    "prompt_template": "A plan charges ${f} fee plus ${r} per unit. What is total for {n} units?",
+    "answer_expr": "f + r*n",
+    "constraint_expr": "",
+    "explanation_template": "Use total = fixed fee + rate*units.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 12.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "f",
+        "kind": "int",
+        "min": 5,
+        "max": 140,
+        "step": 1
+      },
+      {
+        "name": "r",
+        "kind": "int",
+        "min": 2,
+        "max": 30,
+        "step": 1
+      },
+      {
+        "name": "n",
+        "kind": "int",
+        "min": 2,
+        "max": 35,
+        "step": 1
+      }
+    ]
+  },
+  {
+    "external_id": "khan.v3.geometry_area.area_of_rectangles_and_squares.rect_area",
+    "skill": "geometry_area",
+    "subskill": "Area of rectangles and squares",
+    "label": "Rectangle area",
+    "mode": "expression",
+    "prompt_template": "Find area of rectangle with length {l} and width {w}.",
+    "answer_expr": "l*w",
+    "constraint_expr": "",
+    "explanation_template": "Area = length*width.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 8.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "l",
+        "kind": "int",
+        "min": 3,
+        "max": 40,
+        "step": 1
+      },
+      {
+        "name": "w",
+        "kind": "int",
+        "min": 2,
+        "max": 35,
+        "step": 1
+      }
+    ]
+  },
+  {
+    "external_id": "khan.v3.geometry_area.area_of_rectangles_and_squares.square_area",
+    "skill": "geometry_area",
+    "subskill": "Area of rectangles and squares",
+    "label": "Square area",
+    "mode": "expression",
+    "prompt_template": "Find area of square with side {s}.",
+    "answer_expr": "s*s",
+    "constraint_expr": "",
+    "explanation_template": "Area = side^2.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 8.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "s",
+        "kind": "int",
+        "min": 2,
+        "max": 30,
+        "step": 1
+      }
+    ]
+  },
+  {
+    "external_id": "khan.v3.geometry_area.area_of_triangles_and_parallelograms.tri_area",
+    "skill": "geometry_area",
+    "subskill": "Area of triangles and parallelograms",
+    "label": "Triangle area",
+    "mode": "expression",
+    "prompt_template": "Find area of triangle with base {b} and height {h}.",
+    "answer_expr": "(b*h)/2",
+    "constraint_expr": "(b*h)%2==0",
+    "explanation_template": "Area = 1/2*base*height.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 8.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "b",
+        "kind": "int",
+        "min": 4,
+        "max": 36,
+        "step": 1
+      },
+      {
+        "name": "h",
+        "kind": "int",
+        "min": 2,
+        "max": 30,
+        "step": 1
+      }
+    ]
+  },
+  {
+    "external_id": "khan.v3.geometry_area.area_of_triangles_and_parallelograms.trap_area",
+    "skill": "geometry_area",
+    "subskill": "Area of triangles and parallelograms",
+    "label": "Trapezoid area",
+    "mode": "expression",
+    "prompt_template": "Find area of trapezoid with bases {b1},{b2} and height {h}.",
+    "answer_expr": "((b1+b2)*h)/2",
+    "constraint_expr": "((b1+b2)*h)%2==0",
+    "explanation_template": "Area = (b1+b2)*h/2.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 8.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "b1",
+        "kind": "int",
+        "min": 4,
+        "max": 30,
+        "step": 1
+      },
+      {
+        "name": "b2",
+        "kind": "int",
+        "min": 4,
+        "max": 30,
+        "step": 1
+      },
+      {
+        "name": "h",
+        "kind": "int",
+        "min": 2,
+        "max": 24,
+        "step": 1
+      }
+    ]
+  },
+  {
+    "external_id": "khan.v3.geometry_area.area_of_trapezoids_and_composite_figures.tri_area",
+    "skill": "geometry_area",
+    "subskill": "Area of trapezoids and composite figures",
+    "label": "Triangle area",
+    "mode": "expression",
+    "prompt_template": "Find area of triangle with base {b} and height {h}.",
+    "answer_expr": "(b*h)/2",
+    "constraint_expr": "(b*h)%2==0",
+    "explanation_template": "Area = 1/2*base*height.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 8.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "b",
+        "kind": "int",
+        "min": 4,
+        "max": 36,
+        "step": 1
+      },
+      {
+        "name": "h",
+        "kind": "int",
+        "min": 2,
+        "max": 30,
+        "step": 1
+      }
+    ]
+  },
+  {
+    "external_id": "khan.v3.geometry_area.area_of_trapezoids_and_composite_figures.trap_area",
+    "skill": "geometry_area",
+    "subskill": "Area of trapezoids and composite figures",
+    "label": "Trapezoid area",
+    "mode": "expression",
+    "prompt_template": "Find area of trapezoid with bases {b1},{b2} and height {h}.",
+    "answer_expr": "((b1+b2)*h)/2",
+    "constraint_expr": "((b1+b2)*h)%2==0",
+    "explanation_template": "Area = (b1+b2)*h/2.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 8.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "b1",
+        "kind": "int",
+        "min": 4,
+        "max": 30,
+        "step": 1
+      },
+      {
+        "name": "b2",
+        "kind": "int",
+        "min": 4,
+        "max": 30,
+        "step": 1
+      },
+      {
+        "name": "h",
+        "kind": "int",
+        "min": 2,
+        "max": 24,
+        "step": 1
+      }
+    ]
+  },
+  {
+    "external_id": "khan.v3.geometry_area.perimeter_and_missing_sides.perimeter",
+    "skill": "geometry_area",
+    "subskill": "Perimeter and missing sides",
+    "label": "Rectangle perimeter",
+    "mode": "expression",
+    "prompt_template": "Find perimeter of rectangle with length {l} and width {w}.",
+    "answer_expr": "2*(l+w)",
+    "constraint_expr": "",
+    "explanation_template": "Perimeter adds all sides.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 8.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "l",
+        "kind": "int",
+        "min": 4,
+        "max": 30,
+        "step": 1
+      },
+      {
+        "name": "w",
+        "kind": "int",
+        "min": 3,
+        "max": 24,
+        "step": 1
+      }
+    ]
+  },
+  {
+    "external_id": "khan.v3.geometry_area.perimeter_and_missing_sides.missing_side",
+    "skill": "geometry_area",
+    "subskill": "Perimeter and missing sides",
+    "label": "Missing width from perimeter",
+    "mode": "word",
+    "prompt_template": "A rectangle has perimeter {p} and length {l}. Find width.",
+    "answer_expr": "(p/2)-l",
+    "constraint_expr": "(p/2)>l",
+    "explanation_template": "From p=2(l+w), solve w=p/2-l.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 8.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "p",
+        "kind": "int",
+        "min": 20,
+        "max": 200,
+        "step": 2
+      },
+      {
+        "name": "l",
+        "kind": "int",
+        "min": 4,
+        "max": 80,
+        "step": 1
+      }
+    ]
+  },
+  {
+    "external_id": "khan.v3.geometry_area.circumference_and_area_of_circles.circumference",
+    "skill": "geometry_area",
+    "subskill": "Circumference and area of circles",
+    "label": "Circumference (pi\u22483.14)",
+    "mode": "expression",
+    "prompt_template": "Using pi\u22483.14, find circumference for radius {r}.",
+    "answer_expr": "(628*r)/100",
+    "constraint_expr": "",
+    "explanation_template": "C=2*pi*r.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 8.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "r",
+        "kind": "int",
+        "min": 2,
+        "max": 25,
+        "step": 1
+      }
+    ]
+  },
+  {
+    "external_id": "khan.v3.geometry_area.circumference_and_area_of_circles.circle_area",
+    "skill": "geometry_area",
+    "subskill": "Circumference and area of circles",
+    "label": "Circle area (pi\u22483.14)",
+    "mode": "expression",
+    "prompt_template": "Using pi\u22483.14, find area for radius {r}.",
+    "answer_expr": "(314*(r**2))/100",
+    "constraint_expr": "",
+    "explanation_template": "A=pi*r^2.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 20.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "r",
+        "kind": "int",
+        "min": 2,
+        "max": 20,
+        "step": 1
+      }
+    ]
+  },
+  {
+    "external_id": "khan.v3.geometry_area.surface_area_and_volume.prism_volume",
+    "skill": "geometry_area",
+    "subskill": "Surface area and volume",
+    "label": "Prism volume",
+    "mode": "expression",
+    "prompt_template": "Find volume of rectangular prism l={l}, w={w}, h={h}.",
+    "answer_expr": "l*w*h",
+    "constraint_expr": "",
+    "explanation_template": "Volume=l*w*h.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 8.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "l",
+        "kind": "int",
+        "min": 2,
+        "max": 20,
+        "step": 1
+      },
+      {
+        "name": "w",
+        "kind": "int",
+        "min": 2,
+        "max": 16,
+        "step": 1
+      },
+      {
+        "name": "h",
+        "kind": "int",
+        "min": 2,
+        "max": 14,
+        "step": 1
+      }
+    ]
+  },
+  {
+    "external_id": "khan.v3.geometry_area.surface_area_and_volume.prism_surface",
+    "skill": "geometry_area",
+    "subskill": "Surface area and volume",
+    "label": "Prism surface area",
+    "mode": "expression",
+    "prompt_template": "Find surface area of rectangular prism l={l}, w={w}, h={h}.",
+    "answer_expr": "2*(l*w + l*h + w*h)",
+    "constraint_expr": "",
+    "explanation_template": "Add all face pairs.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 8.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "l",
+        "kind": "int",
+        "min": 2,
+        "max": 18,
+        "step": 1
+      },
+      {
+        "name": "w",
+        "kind": "int",
+        "min": 2,
+        "max": 14,
+        "step": 1
+      },
+      {
+        "name": "h",
+        "kind": "int",
+        "min": 2,
+        "max": 12,
+        "step": 1
+      }
+    ]
+  },
+  {
+    "external_id": "khan.v3.geometry_area.pythagorean_theorem.pyth_hyp",
+    "skill": "geometry_area",
+    "subskill": "Pythagorean theorem",
+    "label": "Find hypotenuse",
+    "mode": "expression",
+    "prompt_template": "Right triangle legs are {a} and {b} where ({a},{b},{c}) is a Pythagorean triple. Find hypotenuse.",
+    "answer_expr": "c",
+    "constraint_expr": "(a*a + b*b) == (c*c)",
+    "explanation_template": "Use known triple / a^2+b^2=c^2.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 8.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "a",
+        "kind": "int",
+        "min": 3,
+        "max": 9,
+        "step": 1
+      },
+      {
+        "name": "b",
+        "kind": "int",
+        "min": 4,
+        "max": 12,
+        "step": 1
+      },
+      {
+        "name": "c",
+        "kind": "int",
+        "min": 5,
+        "max": 15,
+        "step": 1
+      }
+    ]
+  },
+  {
+    "external_id": "khan.v3.geometry_area.pythagorean_theorem.pyth_leg",
+    "skill": "geometry_area",
+    "subskill": "Pythagorean theorem",
+    "label": "Find missing leg",
+    "mode": "expression",
+    "prompt_template": "Right triangle has hypotenuse {c} and one leg {a}. In this triple, find other leg.",
+    "answer_expr": "b",
+    "constraint_expr": "(a*a + b*b) == (c*c)",
+    "explanation_template": "Use triple relation.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 8.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "a",
+        "kind": "int",
+        "min": 3,
+        "max": 9,
+        "step": 1
+      },
+      {
+        "name": "b",
+        "kind": "int",
+        "min": 4,
+        "max": 12,
+        "step": 1
+      },
+      {
+        "name": "c",
+        "kind": "int",
+        "min": 5,
+        "max": 15,
+        "step": 1
+      }
+    ]
+  },
+  {
+    "external_id": "khan.v3.geometry_area.coordinate_geometry_distance_and_midpoint.midpoint_x",
+    "skill": "geometry_area",
+    "subskill": "Coordinate geometry distance and midpoint",
+    "label": "Midpoint x-coordinate",
+    "mode": "expression",
+    "prompt_template": "Find x-coordinate of midpoint of ({x1},{y1}) and ({x2},{y2}).",
+    "answer_expr": "(x1+x2)/2",
+    "constraint_expr": "(x1+x2)%2==0",
+    "explanation_template": "Average x-values.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 8.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "x1",
+        "kind": "int",
+        "min": -20,
+        "max": 20,
+        "step": 1
+      },
+      {
+        "name": "y1",
+        "kind": "int",
+        "min": -20,
+        "max": 20,
+        "step": 1
+      },
+      {
+        "name": "x2",
+        "kind": "int",
+        "min": -20,
+        "max": 20,
+        "step": 1
+      },
+      {
+        "name": "y2",
+        "kind": "int",
+        "min": -20,
+        "max": 20,
+        "step": 1
+      }
+    ]
+  },
+  {
+    "external_id": "khan.v3.geometry_area.coordinate_geometry_distance_and_midpoint.slope",
+    "skill": "geometry_area",
+    "subskill": "Coordinate geometry distance and midpoint",
+    "label": "Slope from coordinates",
+    "mode": "expression",
+    "prompt_template": "Find slope through ({x1},{y1}) and ({x2},{y2}).",
+    "answer_expr": "(y2-y1)/(x2-x1)",
+    "constraint_expr": "x2!=x1",
+    "explanation_template": "Slope is rise over run.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 8.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "x1",
+        "kind": "int",
+        "min": -12,
+        "max": 8,
+        "step": 1
+      },
+      {
+        "name": "y1",
+        "kind": "int",
+        "min": -20,
+        "max": 20,
+        "step": 1
+      },
+      {
+        "name": "x2",
+        "kind": "int",
+        "min": -8,
+        "max": 12,
+        "step": 1
+      },
+      {
+        "name": "y2",
+        "kind": "int",
+        "min": -20,
+        "max": 20,
+        "step": 1
+      }
+    ]
+  },
+  {
+    "external_id": "khan.v3.geometry_area.angles_in_lines_and_triangles.tri_area",
+    "skill": "geometry_area",
+    "subskill": "Angles in lines and triangles",
+    "label": "Triangle area",
+    "mode": "expression",
+    "prompt_template": "Find area of triangle with base {b} and height {h}.",
+    "answer_expr": "(b*h)/2",
+    "constraint_expr": "(b*h)%2==0",
+    "explanation_template": "Area = 1/2*base*height.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 8.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "b",
+        "kind": "int",
+        "min": 4,
+        "max": 36,
+        "step": 1
+      },
+      {
+        "name": "h",
+        "kind": "int",
+        "min": 2,
+        "max": 30,
+        "step": 1
+      }
+    ]
+  },
+  {
+    "external_id": "khan.v3.geometry_area.angles_in_lines_and_triangles.trap_area",
+    "skill": "geometry_area",
+    "subskill": "Angles in lines and triangles",
+    "label": "Trapezoid area",
+    "mode": "expression",
+    "prompt_template": "Find area of trapezoid with bases {b1},{b2} and height {h}.",
+    "answer_expr": "((b1+b2)*h)/2",
+    "constraint_expr": "((b1+b2)*h)%2==0",
+    "explanation_template": "Area = (b1+b2)*h/2.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 8.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "b1",
+        "kind": "int",
+        "min": 4,
+        "max": 30,
+        "step": 1
+      },
+      {
+        "name": "b2",
+        "kind": "int",
+        "min": 4,
+        "max": 30,
+        "step": 1
+      },
+      {
+        "name": "h",
+        "kind": "int",
+        "min": 2,
+        "max": 24,
+        "step": 1
+      }
+    ]
+  },
+  {
+    "external_id": "khan.v3.geometry_area.transformations_and_congruence.reflect_y",
+    "skill": "geometry_area",
+    "subskill": "Transformations and congruence",
+    "label": "Reflection over y-axis",
+    "mode": "expression",
+    "prompt_template": "Point ({x},{y}) is reflected across y-axis. What is new x-coordinate?",
+    "answer_expr": "-x",
+    "constraint_expr": "",
+    "explanation_template": "Reflection over y-axis flips x sign.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 8.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "x",
+        "kind": "int",
+        "min": -20,
+        "max": 20,
+        "step": 1
+      },
+      {
+        "name": "y",
+        "kind": "int",
+        "min": -20,
+        "max": 20,
+        "step": 1
+      }
+    ]
+  },
+  {
+    "external_id": "khan.v3.geometry_area.transformations_and_congruence.translate_x",
+    "skill": "geometry_area",
+    "subskill": "Transformations and congruence",
+    "label": "Horizontal translation",
+    "mode": "expression",
+    "prompt_template": "Point ({x},{y}) translated right by {k}. Find new x-coordinate.",
+    "answer_expr": "x+k",
+    "constraint_expr": "",
+    "explanation_template": "Translation adds shift to x.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 8.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "x",
+        "kind": "int",
+        "min": -20,
+        "max": 20,
+        "step": 1
+      },
+      {
+        "name": "y",
+        "kind": "int",
+        "min": -20,
+        "max": 20,
+        "step": 1
+      },
+      {
+        "name": "k",
+        "kind": "int",
+        "min": 1,
+        "max": 20,
+        "step": 1
+      }
+    ]
+  },
+  {
+    "external_id": "khan.v3.geometry_area.similarity_and_scale_factor.scale_side",
+    "skill": "geometry_area",
+    "subskill": "Similarity and scale factor",
+    "label": "Scale factor side length",
+    "mode": "expression",
+    "prompt_template": "A similar figure has scale factor {k}. If original side is {s}, find scaled side.",
+    "answer_expr": "k*s",
+    "constraint_expr": "",
+    "explanation_template": "Multiply corresponding lengths by scale factor.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 8.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "k",
+        "kind": "int",
+        "min": 2,
+        "max": 8,
+        "step": 1
+      },
+      {
+        "name": "s",
+        "kind": "int",
+        "min": 2,
+        "max": 40,
+        "step": 1
+      }
+    ]
+  },
+  {
+    "external_id": "khan.v3.geometry_area.similarity_and_scale_factor.scale_back",
+    "skill": "geometry_area",
+    "subskill": "Similarity and scale factor",
+    "label": "Reverse scale",
+    "mode": "expression",
+    "prompt_template": "Scaled side is {s2} with scale factor {k}. Find original side.",
+    "answer_expr": "s2/k",
+    "constraint_expr": "s2%k==0",
+    "explanation_template": "Divide by scale factor to reverse scaling.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 8.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "s2",
+        "kind": "int",
+        "min": 4,
+        "max": 160,
+        "step": 1
+      },
+      {
+        "name": "k",
+        "kind": "int",
+        "min": 2,
+        "max": 8,
+        "step": 1
+      }
+    ]
+  },
+  {
+    "external_id": "khan.v3.geometry_area.analytic_geometry_and_coordinate_proofs.midpoint_x",
+    "skill": "geometry_area",
+    "subskill": "Analytic geometry and coordinate proofs",
+    "label": "Midpoint x-coordinate",
+    "mode": "expression",
+    "prompt_template": "Find x-coordinate of midpoint of ({x1},{y1}) and ({x2},{y2}).",
+    "answer_expr": "(x1+x2)/2",
+    "constraint_expr": "(x1+x2)%2==0",
+    "explanation_template": "Average x-values.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 8.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "x1",
+        "kind": "int",
+        "min": -20,
+        "max": 20,
+        "step": 1
+      },
+      {
+        "name": "y1",
+        "kind": "int",
+        "min": -20,
+        "max": 20,
+        "step": 1
+      },
+      {
+        "name": "x2",
+        "kind": "int",
+        "min": -20,
+        "max": 20,
+        "step": 1
+      },
+      {
+        "name": "y2",
+        "kind": "int",
+        "min": -20,
+        "max": 20,
+        "step": 1
+      }
+    ]
+  },
+  {
+    "external_id": "khan.v3.geometry_area.analytic_geometry_and_coordinate_proofs.slope",
+    "skill": "geometry_area",
+    "subskill": "Analytic geometry and coordinate proofs",
+    "label": "Slope from coordinates",
+    "mode": "expression",
+    "prompt_template": "Find slope through ({x1},{y1}) and ({x2},{y2}).",
+    "answer_expr": "(y2-y1)/(x2-x1)",
+    "constraint_expr": "x2!=x1",
+    "explanation_template": "Slope is rise over run.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 8.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "x1",
+        "kind": "int",
+        "min": -12,
+        "max": 8,
+        "step": 1
+      },
+      {
+        "name": "y1",
+        "kind": "int",
+        "min": -20,
+        "max": 20,
+        "step": 1
+      },
+      {
+        "name": "x2",
+        "kind": "int",
+        "min": -8,
+        "max": 12,
+        "step": 1
+      },
+      {
+        "name": "y2",
+        "kind": "int",
+        "min": -20,
+        "max": 20,
+        "step": 1
+      }
+    ]
+  }
+]

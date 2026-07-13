@@ -1,0 +1,15 @@
+[list_dir result for /home/user/projects/mandelquest-sync - verbatim tool output]
+
+- /home/user/projects/mandelquest-sync/
+  - AGENTS.md
+  - app/
+    - __init__.py
+    - main.py
+    - schemas.py
+    - storage.py
+  - CLAUDE.md
+  - docker-compose.yml
+  - Dockerfile
+  - GEMINI.md
+  - README.md
+  - requirements.txt

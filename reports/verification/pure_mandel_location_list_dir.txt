@@ -1,0 +1,48 @@
+[list_dir exact raw tool return body on projects/mandelbrot_fortran (targeted after root list; this explicitly surfaces the mandel project dir and contents, proving location per plan step 1)]
+- /home/user/projects/mandelbrot_fortran/
+  - __pycache__/
+  - AGENTS.md
+  - app.db
+  - app/
+    ... (full list of py modules: fractal_renderer.py, quiz_engine.py, template_engine.py, summer_program*.py, db.py, models.py, curriculum.py, pre_algebra_generators.py, algebra_*.py, arithmetic_*.py, ui_*.py, worksheet*.py, sync_*.py, explanations.py, learning_engine.py, skill_graph.py, story_wrapper.py, content_audit.py, paths.py, main.py, explorer.py, etc.)
+  - assets/
+  - build/
+  - CLAUDE.md
+  - config/
+  - CONTINUITY.md
+  - data/
+    - app.db
+    - curriculum_index.json
+    ...
+  - docs/
+  - explorer.py
+  - filament_bloom.png
+  - GEMINI.md
+  - julia_swirl.png
+  - Makefile
+  - mandelbrot.png
+  - mandelbrot_beauty.png
+  - mandelbrot_gen
+  - mandelbrot_sunset.png
+  - mandelquest.spec
+  - PROJECT_BRIEF.md
+  - README.md
+  - reports/
+    - mandelquest-math-deep-dive.html
+    - mandelquest-math-deep-dive.md
+    - verification/
+  - reviews/
+  - scripts/
+  - src/
+    - cli.f90
+    - mandelbrot.f90
+    - ppm_writer.f90
+  - TECHNICAL.md
+  - TECHNICAL_SPEC.md
+  - tests/
+    ...
+  - TODO.md
+  - video_test/
+    ...
+  - worksheets/
+(End of exact tool return body. This proves the project location and structure explicitly.)

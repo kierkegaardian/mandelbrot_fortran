@@ -9,19 +9,17 @@ from app import db
 class DbAssignmentSemanticsTests(unittest.TestCase):
     def setUp(self) -> None:
         self._tmp = tempfile.TemporaryDirectory()
-        self._orig_db_config = db.db_config
         tmp_path = self._tmp.name
 
         def _tmp_config() -> db.DbConfig:
             return db.DbConfig(path=f"{tmp_path}/test_app.db")
 
-        db.db_config = _tmp_config
+        self.enterContext(db.override_db_config(_tmp_config))
         db.init_db()
         profile = db.create_profile("Student", "child", "2026-02-18T00:00:00+00:00")
         self.profile_id = profile.id
 
     def tearDown(self) -> None:
-        db.db_config = self._orig_db_config
         self._tmp.cleanup()
 
     def test_assignment_completion_requires_100_even_if_target_lower(self) -> None:
@@ -156,7 +154,11 @@ class DbAssignmentSemanticsTests(unittest.TestCase):
         self.assertEqual(len(active_filtered), 1)
         self.assertEqual(active_filtered[0].id, second_id)
 
-        analytics = db.assignment_completion_analytics(self.profile_id, recent_days=30)
+        analytics = db.assignment_completion_analytics(
+            self.profile_id,
+            recent_days=30,
+            now_iso_text="2026-02-21T00:00:00+00:00",
+        )
         self.assertEqual(int(analytics["active_count"]), 1)
         self.assertEqual(int(analytics["completed_count"]), 1)
         self.assertEqual(int(analytics["completed_recent_count"]), 1)
@@ -198,6 +200,68 @@ class DbAssignmentSemanticsTests(unittest.TestCase):
         self.assertEqual(int(pipeline["add_subtract"]["attempts"]), 1)
         self.assertEqual(int(pipeline["add_subtract"]["worksheets"]), 1)
         self.assertEqual(int(pipeline["add_subtract"]["questions"]), 8)
+
+    def test_list_worksheets_filters_texas_packets_by_profile(self) -> None:
+        other = db.create_profile("Other", "child", "2026-02-18T00:00:00+00:00")
+        packet = db.create_worksheet(
+            self.profile_id,
+            None,
+            "texas_grade_3",
+            "typed",
+            12,
+            3,
+            "/tmp/grade3.html",
+            "2026-02-18T08:05:00+00:00",
+        )
+        db.create_worksheet(
+            self.profile_id,
+            None,
+            "custom",
+            "typed",
+            4,
+            0,
+            "/tmp/custom.html",
+            "2026-02-18T08:10:00+00:00",
+        )
+        db.create_worksheet(
+            other.id,
+            None,
+            "texas_grade_4",
+            "typed",
+            12,
+            4,
+            "/tmp/other.html",
+            "2026-02-18T08:15:00+00:00",
+        )
+
+        worksheets = db.list_worksheets(self.profile_id, skill_prefix="texas_grade_")
+
+        self.assertEqual(1, len(worksheets))
+        self.assertEqual("texas_grade_3", worksheets[0].skill)
+        self.assertEqual("/tmp/grade3.html", worksheets[0].file_path)
+
+        self.assertFalse(
+            db.archive_worksheet(
+                packet.id,
+                profile_id=other.id,
+                archived_at="2026-02-18T09:00:00+00:00",
+            )
+        )
+        self.assertTrue(
+            db.archive_worksheet(
+                packet.id,
+                profile_id=self.profile_id,
+                archived_at="2026-02-18T09:00:00+00:00",
+            )
+        )
+        self.assertEqual([], db.list_worksheets(self.profile_id, skill_prefix="texas_grade_"))
+
+        archived = db.list_worksheets(self.profile_id, skill_prefix="texas_grade_", include_archived=True)
+        self.assertEqual(1, len(archived))
+        self.assertEqual("2026-02-18T09:00:00+00:00", archived[0].archived_at)
+
+        pipeline = db.skill_progress_pipeline(self.profile_id)
+        self.assertEqual(1, int(pipeline["texas_grade_3"]["worksheets"]))
 
 
 if __name__ == "__main__":

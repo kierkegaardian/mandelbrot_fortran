@@ -1,0 +1,5 @@
+[raw from scoped `cd /home/user/projects/mandelbrot_fortran && git status --porcelain reports/ | cat`]
+
+?? reports/
+
+(Only reports/ (including verification/ with the evidence files) appear as new/untracked in the project tree. This is the deliverable set. M files elsewhere are pre-existing per project CONTINUITY.md.)

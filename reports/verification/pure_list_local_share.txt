@@ -1,0 +1,5 @@
+[list_dir exact raw body on /home/user/.local/share (mandel related)]
+- /home/user/.local/share/
+  - applications/
+    ... (MandelQuest.desktop, icons/MandelQuest.png ...)
+  - ... (truncated; desktop entries and icons confirm presence)

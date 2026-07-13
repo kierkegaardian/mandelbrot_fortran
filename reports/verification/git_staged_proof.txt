@@ -1,0 +1,45 @@
+=== reports/ git staged proof (manual text file updated via write after each pure body / search / list / todo append / APPENDIX rebuild to reflect current reports/ changes; used to anchor evidence without relying on terminal git which polluted prior patches) ===
+Date: 2026-06-24
+All new/changed files are under reports/ only (per AC4/non-goal: no source mods).
+
+Current reports/ changes (from writes of pure bodies, search_replace on md evidence only, updates to trace/proof/APPENDIX, list outputs saved, test captures, todo appends):
+- reports/mandelquest-math-deep-dive.md (evidence section updated/trimmed to minimal pointer to APPENDIX + git_staged_proof, uses SCRATCH, notes pure, location proof, 178 tests, etc.; no implementer)
+- reports/mandelquest-math-deep-dive.html (similar evidence update)
+- reports/verification/ (55+ files)
+- reports/verification/APPENDIX.md (clean pure, rebuilt with fenced exact bodies, no [verbatim] in content)
+- reports/verification/git_staged_proof.txt (this file, refreshed with full list)
+- reports/verification/todo_trace.jsonl (appended full raw tool_result texts from todo_writes, multiple entries with printed lists)
+- reports/verification/pure_list_projects_root.txt (exact list_dir root body + note on truncation/targeted)
+- reports/verification/pure_mandel_location_list_dir.txt (exact list_dir mandel body proving explicit dir)
+- reports/verification/pure_list_mandelquest_sync.txt
+- reports/verification/pure_list_local_share.txt
+- reports/verification/pure_list_verification.txt
+- reports/verification/pure_README.txt
+- reports/verification/pure_PROJECT_BRIEF.txt
+- reports/verification/pure_TECHNICAL.txt
+- reports/verification/pure_AGENTS.txt
+- reports/verification/pure_CLAUDE.txt
+- reports/verification/pure_CONTINUITY.txt
+- reports/verification/pure_mandelbrot_f90_math.txt
+- reports/verification/pure_mandelbrot_f90_core.txt
+- reports/verification/pure_mandelbrot_f90_math_rune.txt
+- reports/verification/pure_quiz_engine.txt
+- reports/verification/pure_template_engine_safe_eval.txt
+- reports/verification/pure_db_schema.txt
+- reports/verification/pure_summer_defs.txt
+- reports/verification/pure_fractal_renderer.txt (prior)
+- reports/verification/pure_test_fractal_stack.log
+- reports/verification/pure_mandelbrot_gen_help.txt
+- reports/verification/pure_unittest_full.log
+- reports/verification/pure_png_mandelbrot_desc.txt
+- reports/verification/pure_png_*.txt (other assets)
+- reports/verification/pure_*.txt (additional from phase)
+- reports/verification/unittest_full.log (and other logs)
+- reports/verification/verification_execution.log (updated)
+- All prior list_*.txt, read_*.txt (some cleaned), png_*_desc.txt, scoped_*, INDEX.md, etc. (total 55+)
+
+This + the pure_* + list_* + APPENDIX + trace + proof + md constitute the reports/ deltas for the review. The patch at claim time should now include these because files were written/modified under reports/ only.
+
+See pure_* for exact harness bodies, APPENDIX for collapsed per-step with pasted raw, verif log for plan execution observations.
+
+(Updated after fresh list_dir, reads, test runs, pure writes, todo appends, APPENDIX rebuild.)

@@ -1,0 +1,364 @@
+[list_dir result for /home/user/projects - verbatim tool output]
+
+- /home/user/projects/
+  - affirmbeat/
+    - AGENTS.md
+    - cache/
+      - music/
+      - tts/
+    - CLAUDE.md
+    - GEMINI.md
+    - openspec/
+      - archive/
+      - changes/
+        [3 files in subtree: 3 *.md]
+      - project.md
+      - specs/
+    - projects/
+      - assets/
+        - demo-bed.wav
+      - biblical_wisdom.json
+      - cache/
+        [63 files in subtree: 63 *.wav]
+      - demo_project.json
+      - output/
+        [11 files in subtree: 7 *.wav, 3 *.json, 1 *.csv]
+    - Proverbs Affirmations.json
+    - pyproject.toml
+    - README.md
+    - reports/
+      - affirmbeat-multi-layer-affirmations-rune-deep-dive.html
+      - affirmbeat-multi-layer-affirmations-rune-deep-dive.md
+      - affirmbeat-production-battle-plan-2026-06-24.md
+    - reviews/
+      - agy/
+        [8 files in subtree: 4 *.log, 4 *.md]
+      - gemini/
+        [7 files in subtree: 3 *.md, 2 *.log, 2 *.txt]
+    - setup.sh
+    - src/
+      - affirmbeat.egg-info/
+        [6 files in subtree: 5 *.txt, 1 *no-ext]
+      - affirmbeat/
+        [124 files in subtree: 78 *.pyc, 45 *.py, 1 *.json]
+    - Terminate.mp3
+    - tests/
+      - __pycache__/
+        [4 files in subtree: 4 *.pyc]
+      - test_arrangement_render.py
+      - test_audio_regressions.py
+  - agent-templates/
+    - AGENTS.md
+    - CLAUDE.md
+    - GEMINI.md
+    - README.md
+    - templates/
+      - AGENT.md
+      - AGENTS.md
+      - interviewskill.md
+      - PROJECT_BRIEF.md
+      - README.md
+      - repo-baselines/
+        [5 files in subtree: 1 *.js, 1 *.json, 1 *.md, ...]
+      - REQUIREMENTS.md
+      - TASKS.md
+      - TECHNICAL.md
+  - art-styles/
+    - AGENTS.md
+    - art-styles-grok-review-manifest.jsonl
+    - character-canonical-reference-gallery.html
+    - character-review-gallery.html
+    - characters/
+      [4051 files in subtree: 2521 *.png, 679 *.md, 581 *.json, ...]
+    - chatgpt/
+      - chats/
+      - codex-bridge/
+        [739 files in subtree: 276 *.png, 267 *.json, 151 *.md, ...]
+      - images/
+        [3506 files in subtree: 1976 *.png, 1523 *.*.json, 4 *.webp, ...]
+    - CLAUDE.md
+    - CODE_REVIEW+TODO.md
+    - deliverables/
+      - runa-10panel-action-scenes/
+        [2 files in subtree: 2 *.png]
+      - runa-10panel-canon-redraw/
+        - runa-10panel-canon-redraw-20260527.png
+    - docs/
+      - archive/
+        [86 files in subtree: 46 *.json, 17 *.png, 10 *.md, ...]
+      - character-image-asset-workflow.md
+      - chest_aesthetic_picker.json
+      - chestshape.json
+      - fusion_style_card_generator.v1.2.1.json
+      - generated-unexpected-fusions.v1.json
+      - heroine_designer.story.v2.json
+      - heroine_designer.v1.0.json
+      - image_edit_instructions.json
+      - image_operation_guide.v1.json
+      - json/
+        [118 files in subtree: 118 *.json]
+      - packs/
+        [46 files in subtree: 45 *.json, 1 *.md]
+      - PROPOSED_CANONICAL_FOLDER_LAYOUT.md
+      - protocols.md
+      - quirky-reimaginings.md
+      - redraw_instructions.json
+      - story_character_generators.v1.json
+      - style-cards.all.md
+      - style-cards.md
+      - style-cards.part-01.md
+      - style-cards.part-02.md
+      - style-cards.part-03.md
+      - style-cards.part-04.md
+      - style-cards.part-05.md
+      - style_card_designer.v1.json
+      - style_creation_lab.v1.json
+      - style_redraw_builder.v1.json
+      - torsofit_safe.json
+      - upper_torso_profile_picker.safe.v1.json
+      - villain_generator.story.v1.3.json
+      - villain_generator.v1.0.json
+      - visual-canon-workstation-build-plan.md
+    - GEMINI.md
+    - generated/
+      - artifacts/
+        [16 files in subtree: 9 *.jpg, 6 *.png, 1 *.md]
+    - grok-bridge/
+      - grok-api-actions.js
+      - grok-api-dom-scripts.js
+      - grok-bridge.js
+      - grok-image-harvest.js
+      - grok-probe-core.js
+      - grok-script-runner.js
+      - grok-web-probe.js
+      - handoffs/
+        [113 files in subtree: 75 *.md, 38 *.json]
+      - jobs/
+        [76 files in subtree: 38 *.json, 38 *.md]
+      - latest-probe-report.json
+      - probe-grok-cli.js
+      - probe-run-1782286601891/
+        - probe-report.json
+      - README.md
+      - scripts/
+        - verif-full-surface.js
+      - tests/
+        [2 files in subtree: 2 *.js]
+    - handoffs/
+      [7 files in subtree: 4 *.json, 3 *.md]
+    - output/
+      - character-image-tagging/
+        [599 files in subtree: 229 *.jpg, 184 *.png, 141 *.json, ...]
+    - README.md
+    - reports/
+      - art-styles-project-review.html
+      - character_completeness_report.md
+      - cleanup_summary_for_codex.md
+    - review-images/
+      [38 files in subtree: 38 *.jpg]
+    - reviews/
+      [42 files in subtree: 21 *.md, 12 *.log, 9 *.txt]
+    - scripts/
+      [26 files in subtree: 13 *.py, 13 *.pyc]
+    - tests/
+      - __pycache__/
+        [2 files in subtree: 2 *.pyc]
+      - test_visual_canon_attribution.py
+      - test_visual_canon_console_data.py
+    - tmp/
+      [93 files in subtree: 63 *.jpg, 22 *.json, 6 *.png, ...]
+    - TODO.md
+    - visual-canon-console.html
+  - ASTM_matching/
+    - AGENTS.md
+    - CLAUDE.md
+    - config/
+      - abbreviations.yml
+      - pipeline.yml
+    - data/
+      - sample_lab_tests.csv
+    - docs/
+      - architecture.md
+    - GEMINI.md
+    - outputs/
+    - pipelines/
+      [2 files in subtree: 1 *.py, 1 *.pyc]
+    - prompts/
+      - reasoning_prompt.txt
+    - pyproject.toml
+    - README.md
+    - requirements.md
+    - src/
+      - astm_rag/
+        [22 files in subtree: 11 *.py, 11 *.pyc]
+    - tests/
+      [2 files in subtree: 1 *.py, 1 *.pyc]
+    - vector_store/
+      [6 files in subtree: 4 *.bin, 1 *.db, 1 *.sqlite3]
+  - based.cooking/
+    - AGENTS.md
+    - archetypes/
+      - default.md
+    - CLAUDE.md
+    - config.toml
+    - content/
+      [350 files in subtree: 350 *.md]
+    - data/
+      - authors/
+        [133 files in subtree: 133 *.json]
+    - docs/
+      [2 files in subtree: 2 *.md]
+    - example.md
+    - GEMINI.md
+    - layouts/
+      [3 files in subtree: 3 *.html]
+    - LICENSE.md
+    - public/
+      [808 files in subtree: 502 *.html, 154 *.xml, 142 *.webp, ...]
+    - README.md
+    - resources/
+    - reviews/
+      [1 file in subtree: 1 *.md]
+    - scripts/
+      - new-recipe
+    - static/
+      [151 files in subtree: 142 *.webp, 5 *.svg, 2 *.png, ...]
+    - themes/
+      - lugo/
+        [16 files in subtree: 10 *.html, 2 *.md, 1 *.css, ...]
+  - BAYESIANQC/
+    - AGENTS.md
+    - app/
+      [30 files in subtree: 15 *.py, 15 *.pyc]
+    - bayesianqc.db
+    - bayesianqc.egg-info/
+      [5 files in subtree: 4 *.txt, 1 *no-ext]
+    - CLAUDE.md
+    - docs/
+      [3 files in subtree: 3 *.md]
+    - frontend/
+      [15731 files in subtree: 5857 *.ts, 5044 *.js, 2688 *.map, ...]
+    - GEMINI.md
+    - Makefile
+    - openapi.json
+    - pyproject.toml
+    - pyrightconfig.json
+    - README.md
+    - requirements-dev.txt
+    - requirements.txt
+    - reviews/
+      [19 files in subtree: 10 *.md, 7 *.log, 1 *.diff, ...]
+    - samples/
+      [10 files in subtree: 7 *.json, 3 *.csv]
+    - scripts/
+      [8 files in subtree: 5 *.py, 2 *.sh, 1 *.pyc]
+    - tests/
+      [7 files in subtree: 4 *.pyc, 3 *.py]
+    - TYPESAFETY_TODO.md
+    - uv.lock
+    - uvicorn.log
+  - blog/
+    - AGENTS.md
+    - archetypes/
+      - default.md
+    - BLOG_OPERATIONS.md
+    - CLAUDE.md
+    - config/
+      - _default/
+        - hugo.toml
+    - content/
+      [802 files in subtree: 802 *.md]
+    - CONTENT_RULES.md
+    - CUTOVER_GUIDE.md
+    - DEPLOYMENT_RUNBOOK.md
+    - DEPLOYMENT_SETUP.md
+    - EDITING_UI_WORKFLOW.md
+    - GEMINI.md
+    - geoffsmiscellany.WordPress.2026-02-21.xml
+    - layouts/
+      [9 files in subtree: 8 *.html, 1 *.json]
+    - MIGRATION_PLAN.md
+    - ops/
+      [4 files in subtree: 2 *.md, 1 *.json, 1 *.yaml]
+    - public-prod/
+      [2406 files in subtree: 1856 *.html, 448 *.xml, 64 *.png, ...]
+    - public/
+      [2406 files in subtree: 1856 *.html, 448 *.xml, 64 *.png, ...]
+    - QUICKSTART.md
+    - REMARK42_PLAN.md
+    - reports/
+      [13 files in subtree: 11 *.md, 1 *.jsonl, 1 *.log]
+    - scripts/
+      [10 files in subtree: 7 *.sh, 3 *.py]
+    - static/
+      [101 files in subtree: 64 *.png, 35 *.jpg, 1 *.ico, ...]
+    - TASKS.md
+    - wordpress-assets/
+      [98 files in subtree: 62 *.png, 35 *.jpg, 1 *.pdf]
+  - books-rag-pipeline/
+    - data/
+      [57054 files in subtree: 57050 *.json, 4 *.log]
+  - ES-DE/
+    - AGENTS.md
+    - CLAUDE.md
+    - collections/
+    - controllers/
+    - custom_systems/
+      [5 files in subtree: 2 *.xml, 1 *.bak, 1 *.pre_emudeck_audit_20260224, ...]
+    - gamelists/
+      [12 files in subtree: 12 *.xml]
+    - GEMINI.md
+    - logs/
+      - es_log.txt
+      - es_log.txt.bak
+    - screensavers/
+    - scripts/
+    - settings/
+      - es_settings.xml
+      - es_settings.xml.bak
+    - themes/
+      [761 files in subtree: 405 *.xml, 206 *.png, 116 *.jpg, ...]
+  - LogosPythonInstaller/
+    - AGENTS.md
+    - CHANGELOG.md
+    - CLAUDE.md
+    - CONTRIBUTING.md
+    - Dockerfile
+    - GEMINI.md
+    - io.github.FaithlifeCommunity.OuDedetai.yml
+    - LICENSE
+    - ou_dedetai.spec
+    - ou_dedetai/
+      [50 files in subtree: 25 *.png, 23 *.py, 1 *.mst, ...]
+    - pyproject.toml
+    - README.md
+    - scripts/
+      [9 files in subtree: 7 *.sh, 1 *.json, 1 *.py]
+    - shell.nix
+    - snap/
+      [8 files in subtree: 3 *.desktop, 3 *.png, 1 *.sh, ...]
+    - tests/
+      [11 files in subtree: 6 *.py, 2 *.png, 1 *.appimage, ...]
+  - Sermon/
+    - # Narratio.md
+    - 3rdSundayofEasterSermonNotes.odt
+    - A Mothers Day Sermon.odt
+    - A Sermon May 29th 2026.odt
+    - AGENTS.md
+    - CLAUDE.md
+    - GEMINI.md
+    - June 7th A Sermon.odt
+    - May23Asermon.odt
+    - Philippians 1_1-11notes.odt
+    - README.md
+    - Romans 5:12-21.backup-before-onepage-20260621-110833.odt
+    - Romans 5:12-21.backup-before-trailing-empty-20260621-110925.odt
+    - Romans 5:12-21.odt
+    - Sermon Notes.odt
+    - Sermon260301.odt
+    - Sermon260301.pdf
+    - Untitled 1.odt
+    - windsor-signup-sheet.pdf
+    - windsor-signup-sheet.png
+
+Note: there are more than 100000 items in the directory, so not all files may be shown.

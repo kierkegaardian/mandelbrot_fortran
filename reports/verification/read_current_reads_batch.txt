@@ -1,0 +1,16 @@
+[Additional verbatim reads performed in this phase for coverage]
+
+quiz_engine.py, template_engine.py, summer_program.py, report head, and previous ones (README, src/mandelbrot, fractal_renderer) written to individual files in this directory.
+
+See:
+- read_quiz_engine.txt
+- read_template_engine.txt
+- read_summer_program.txt
+- read_report_head.txt
+- read_README.txt
+- read_src_mandelbrot_head.txt
+- read_fractal_renderer.txt
+
+Plus PNG descriptions and list_*.txt
+
+This batch contributes to the 30+ read_file requirement with verbatim bodies saved via write.

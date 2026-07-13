@@ -1,0 +1,856 @@
+[
+  {
+    "external_id": "ray.early_math.money.value.v1",
+    "skill": "money",
+    "subskill": "Dollar-coin values",
+    "label": "Money in cents",
+    "mode": "word",
+    "prompt_template": "How many cents are in ${d}.{c}?",
+    "answer_expr": "d * 100 + c",
+    "constraint_expr": "",
+    "explanation_template": "One dollar is 100 cents.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 30.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "d",
+        "min": 0,
+        "max": 15,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "c",
+        "min": 0,
+        "max": 99,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.money.value.v2",
+    "skill": "money",
+    "subskill": "Dollar-coin values",
+    "label": "Coin value",
+    "mode": "expression",
+    "prompt_template": "A pouch has {quarters} quarters, {dimes} dimes, and {nickels} nickels. How many cents are in the pouch?",
+    "answer_expr": "quarters * 25 + dimes * 10 + nickels * 5",
+    "constraint_expr": "",
+    "explanation_template": "Add the value of each coin type.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 25.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "quarters",
+        "min": 0,
+        "max": 8,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "dimes",
+        "min": 0,
+        "max": 8,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "nickels",
+        "min": 0,
+        "max": 8,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.money.value.v3",
+    "skill": "money",
+    "subskill": "Dollar-coin values",
+    "label": "Dollar to cents",
+    "mode": "expression",
+    "prompt_template": "How many cents are in {d} dollars and {c} cents?",
+    "answer_expr": "d * 100 + c",
+    "constraint_expr": "",
+    "explanation_template": "Convert dollars into hundreds of cents, then add the extra cents.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 30.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "d",
+        "min": 0,
+        "max": 15,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "c",
+        "min": 0,
+        "max": 99,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "ray.early_math.money.change.v1",
+    "skill": "money",
+    "subskill": "Making change",
+    "label": "Find change",
+    "mode": "word",
+    "prompt_template": "An item costs ${cost_d}.{cost_c} and you pay ${pay_d}.{pay_c}. How many cents of change should you get?",
+    "answer_expr": "(pay_d * 100 + pay_c) - (cost_d * 100 + cost_c)",
+    "constraint_expr": "(pay_d * 100 + pay_c) > (cost_d * 100 + cost_c)",
+    "explanation_template": "Change is the amount paid minus the cost.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 30.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "cost_d",
+        "min": 0,
+        "max": 12,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "cost_c",
+        "min": 0,
+        "max": 95,
+        "step": 5,
+        "kind": "int"
+      },
+      {
+        "name": "pay_d",
+        "min": 1,
+        "max": 20,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "pay_c",
+        "min": 0,
+        "max": 95,
+        "step": 5,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.money.change.v2",
+    "skill": "money",
+    "subskill": "Making change",
+    "label": "Change in cents",
+    "mode": "expression",
+    "prompt_template": "You pay {paid} cents for an item that costs {cost} cents. How many cents are left as change?",
+    "answer_expr": "paid - cost",
+    "constraint_expr": "paid > cost",
+    "explanation_template": "Subtract the cost from the amount paid.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 25.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "paid",
+        "min": 50,
+        "max": 900,
+        "step": 5,
+        "kind": "int"
+      },
+      {
+        "name": "cost",
+        "min": 15,
+        "max": 700,
+        "step": 5,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.money.change.v3",
+    "skill": "money",
+    "subskill": "Making change",
+    "label": "Price difference",
+    "mode": "expression",
+    "prompt_template": "Find the difference between {paid} cents and {cost} cents.",
+    "answer_expr": "paid - cost",
+    "constraint_expr": "paid > cost",
+    "explanation_template": "The difference tells how much change remains after paying.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 25.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "paid",
+        "min": 50,
+        "max": 900,
+        "step": 5,
+        "kind": "int"
+      },
+      {
+        "name": "cost",
+        "min": 15,
+        "max": 700,
+        "step": 5,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "ray.early_math.money.budget.v1",
+    "skill": "money",
+    "subskill": "Budget-style totals",
+    "label": "Budget total",
+    "mode": "word",
+    "prompt_template": "A snack costs ${a_d}.{a_c} and a drink costs ${b_d}.{b_c}. How many cents is the total cost?",
+    "answer_expr": "(a_d * 100 + a_c) + (b_d * 100 + b_c)",
+    "constraint_expr": "",
+    "explanation_template": "Add the two amounts in cents to get the total.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 25.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "a_d",
+        "min": 0,
+        "max": 8,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "a_c",
+        "min": 0,
+        "max": 95,
+        "step": 5,
+        "kind": "int"
+      },
+      {
+        "name": "b_d",
+        "min": 0,
+        "max": 8,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "b_c",
+        "min": 0,
+        "max": 95,
+        "step": 5,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.money.budget.v2",
+    "skill": "money",
+    "subskill": "Budget-style totals",
+    "label": "Add prices",
+    "mode": "expression",
+    "prompt_template": "What is the total number of cents in ${a_d}.{a_c} + ${b_d}.{b_c}?",
+    "answer_expr": "(a_d * 100 + a_c) + (b_d * 100 + b_c)",
+    "constraint_expr": "",
+    "explanation_template": "Convert both prices to cents, then add.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 25.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "a_d",
+        "min": 0,
+        "max": 8,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "a_c",
+        "min": 0,
+        "max": 95,
+        "step": 5,
+        "kind": "int"
+      },
+      {
+        "name": "b_d",
+        "min": 0,
+        "max": 8,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "b_c",
+        "min": 0,
+        "max": 95,
+        "step": 5,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.money.budget.v3",
+    "skill": "money",
+    "subskill": "Budget-style totals",
+    "label": "Add cents totals",
+    "mode": "expression",
+    "prompt_template": "What is {a} cents + {b} cents?",
+    "answer_expr": "a + b",
+    "constraint_expr": "",
+    "explanation_template": "Add the two amounts to get the combined total.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 25.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "a",
+        "min": 25,
+        "max": 900,
+        "step": 5,
+        "kind": "int"
+      },
+      {
+        "name": "b",
+        "min": 25,
+        "max": 900,
+        "step": 5,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "ray.early_math.money.place.v1",
+    "skill": "money",
+    "subskill": "Place-value in currency",
+    "label": "Currency place value",
+    "mode": "word",
+    "prompt_template": "How many cents are in ${d}.{c}?",
+    "answer_expr": "d * 100 + c",
+    "constraint_expr": "",
+    "explanation_template": "Dollars are wholes and cents are hundredths of a dollar.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 30.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "d",
+        "min": 0,
+        "max": 12,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "c",
+        "min": 0,
+        "max": 99,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.money.place.v2",
+    "skill": "money",
+    "subskill": "Place-value in currency",
+    "label": "Cents to dollars",
+    "mode": "expression",
+    "prompt_template": "{cents} cents is how many whole dollars?",
+    "answer_expr": "cents // 100",
+    "constraint_expr": "",
+    "explanation_template": "Each 100 cents makes 1 whole dollar.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 4.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "cents",
+        "min": 100,
+        "max": 1200,
+        "step": 25,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.money.place.v3",
+    "skill": "money",
+    "subskill": "Place-value in currency",
+    "label": "Hundredths in amount",
+    "mode": "expression",
+    "prompt_template": "How many hundredths of a dollar are in ${d}.{c}?",
+    "answer_expr": "d * 100 + c",
+    "constraint_expr": "",
+    "explanation_template": "The number of hundredths matches the total cents in the amount.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 30.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "d",
+        "min": 0,
+        "max": 12,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "c",
+        "min": 0,
+        "max": 99,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.measure.length.v1",
+    "skill": "measurement",
+    "subskill": "Length unit conversion",
+    "label": "Feet to inches",
+    "mode": "expression",
+    "prompt_template": "How many inches are in {feet} feet?",
+    "answer_expr": "feet * 12",
+    "constraint_expr": "",
+    "explanation_template": "There are 12 inches in 1 foot.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 20.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "feet",
+        "min": 1,
+        "max": 20,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.measure.length.v2",
+    "skill": "measurement",
+    "subskill": "Length unit conversion",
+    "label": "Meters to centimeters",
+    "mode": "expression",
+    "prompt_template": "How many centimeters are in {meters} meters?",
+    "answer_expr": "meters * 100",
+    "constraint_expr": "",
+    "explanation_template": "There are 100 centimeters in 1 meter.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 40.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "meters",
+        "min": 1,
+        "max": 20,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.measure.time.v1",
+    "skill": "measurement",
+    "subskill": "Time reading and arithmetic",
+    "label": "Hours to minutes",
+    "mode": "expression",
+    "prompt_template": "How many minutes are in {hours} hours and {minutes} minutes?",
+    "answer_expr": "hours * 60 + minutes",
+    "constraint_expr": "",
+    "explanation_template": "Convert hours to minutes, then add the extra minutes.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 20.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "hours",
+        "min": 1,
+        "max": 8,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "minutes",
+        "min": 5,
+        "max": 55,
+        "step": 5,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "ray.early_math.measure.time.word.v1",
+    "skill": "measurement",
+    "subskill": "Time reading and arithmetic",
+    "label": "Practice time",
+    "mode": "word",
+    "prompt_template": "A lesson lasts {hours} hours and {minutes} minutes. How many minutes is that altogether?",
+    "answer_expr": "hours * 60 + minutes",
+    "constraint_expr": "",
+    "explanation_template": "Hours turn into 60-minute groups before you add the remainder.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 20.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "hours",
+        "min": 1,
+        "max": 5,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "minutes",
+        "min": 5,
+        "max": 55,
+        "step": 5,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.measure.time.v2",
+    "skill": "measurement",
+    "subskill": "Time reading and arithmetic",
+    "label": "Add time parts",
+    "mode": "expression",
+    "prompt_template": "How many minutes are in {start_h} hour and {start_m} minutes?",
+    "answer_expr": "start_h * 60 + start_m",
+    "constraint_expr": "",
+    "explanation_template": "Convert the hour into 60 minutes, then add the remaining minutes.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 20.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "start_h",
+        "min": 1,
+        "max": 8,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "start_m",
+        "min": 5,
+        "max": 55,
+        "step": 5,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.measure.capacity.v1",
+    "skill": "measurement",
+    "subskill": "Capacity and weight units",
+    "label": "Quarts to cups",
+    "mode": "expression",
+    "prompt_template": "How many cups are in {quarts} quarts?",
+    "answer_expr": "quarts * 4",
+    "constraint_expr": "",
+    "explanation_template": "There are 4 cups in 1 quart.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 10.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "quarts",
+        "min": 1,
+        "max": 10,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "ray.early_math.measure.weight.word.v1",
+    "skill": "measurement",
+    "subskill": "Capacity and weight units",
+    "label": "Pounds to ounces",
+    "mode": "word",
+    "prompt_template": "A bag weighs {pounds} pounds. How many ounces is that?",
+    "answer_expr": "pounds * 16",
+    "constraint_expr": "",
+    "explanation_template": "There are 16 ounces in 1 pound.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 16.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "pounds",
+        "min": 1,
+        "max": 12,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.measure.weight.v2",
+    "skill": "measurement",
+    "subskill": "Capacity and weight units",
+    "label": "Ounces in pounds",
+    "mode": "expression",
+    "prompt_template": "How many ounces are in {pounds} pounds?",
+    "answer_expr": "pounds * 16",
+    "constraint_expr": "",
+    "explanation_template": "Multiply pounds by 16 because each pound has 16 ounces.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 16.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "pounds",
+        "min": 1,
+        "max": 12,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.measure.temp.v1",
+    "skill": "measurement",
+    "subskill": "Temperature basics",
+    "label": "Fahrenheit to Celsius",
+    "mode": "expression",
+    "prompt_template": "Use C = (F - 32) x 5 / 9. What is the Celsius temperature when F = {f}?",
+    "answer_expr": "(f - 32) * 5 / 9",
+    "constraint_expr": "",
+    "explanation_template": "Substitute the Fahrenheit value into the conversion rule.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 8.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "f",
+        "min": 32,
+        "max": 212,
+        "step": 18,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.measure.temp.v2",
+    "skill": "measurement",
+    "subskill": "Temperature basics",
+    "label": "Compare temperatures",
+    "mode": "expression",
+    "prompt_template": "What is the difference in degrees between {warm} degrees and {cold} degrees?",
+    "answer_expr": "warm - cold",
+    "constraint_expr": "warm > cold",
+    "explanation_template": "Subtract the colder temperature from the warmer one.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 8.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "warm",
+        "min": 5,
+        "max": 40,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "cold",
+        "min": -10,
+        "max": 10,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.measure.convert.v1",
+    "skill": "measurement",
+    "subskill": "Metric and customary conversions",
+    "label": "Yards to feet",
+    "mode": "word",
+    "prompt_template": "How many feet are in {yards} yards?",
+    "answer_expr": "yards * 3",
+    "constraint_expr": "",
+    "explanation_template": "There are 3 feet in 1 yard.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 10.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "yards",
+        "min": 1,
+        "max": 20,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.measure.convert.v2",
+    "skill": "measurement",
+    "subskill": "Metric and customary conversions",
+    "label": "Liters to milliliters",
+    "mode": "expression",
+    "prompt_template": "How many milliliters are in {liters} liters?",
+    "answer_expr": "liters * 1000",
+    "constraint_expr": "",
+    "explanation_template": "There are 1000 milliliters in 1 liter.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 60.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "liters",
+        "min": 1,
+        "max": 12,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.measure.convert.v3",
+    "skill": "measurement",
+    "subskill": "Metric and customary conversions",
+    "label": "Mixed metric length",
+    "mode": "expression",
+    "prompt_template": "How many centimeters are in {meters} meters and {centimeters} centimeters?",
+    "answer_expr": "meters * 100 + centimeters",
+    "constraint_expr": "",
+    "explanation_template": "Convert the meters to centimeters, then add the extra centimeters.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 40.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "meters",
+        "min": 1,
+        "max": 20,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "centimeters",
+        "min": 1,
+        "max": 99,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "ray.early_math.measure.elapsed.v1",
+    "skill": "measurement",
+    "subskill": "Elapsed time",
+    "label": "Elapsed minutes",
+    "mode": "word",
+    "prompt_template": "A game starts at hour {start_h} and minute {start_m}. It ends {elapsed} minutes later. How many minutes passed?",
+    "answer_expr": "elapsed",
+    "constraint_expr": "",
+    "explanation_template": "Elapsed time measures the distance between the start and end times.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 10.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "start_h",
+        "min": 1,
+        "max": 10,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "start_m",
+        "min": 0,
+        "max": 50,
+        "step": 10,
+        "kind": "int"
+      },
+      {
+        "name": "elapsed",
+        "min": 10,
+        "max": 90,
+        "step": 5,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.measure.elapsed.v2",
+    "skill": "measurement",
+    "subskill": "Elapsed time",
+    "label": "End minus start",
+    "mode": "expression",
+    "prompt_template": "A timer starts and then stops {elapsed} minutes later. How many minutes elapsed?",
+    "answer_expr": "elapsed",
+    "constraint_expr": "",
+    "explanation_template": "The elapsed time is the amount of time between start and stop.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 10.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "elapsed",
+        "min": 10,
+        "max": 120,
+        "step": 5,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.measure.elapsed.v3",
+    "skill": "measurement",
+    "subskill": "Elapsed time",
+    "label": "Difference in minutes",
+    "mode": "expression",
+    "prompt_template": "What is the elapsed time from {start} minutes to {end} minutes?",
+    "answer_expr": "end - start",
+    "constraint_expr": "end > start",
+    "explanation_template": "Elapsed time is the ending time minus the starting time.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 10.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "start",
+        "min": 5,
+        "max": 120,
+        "step": 5,
+        "kind": "int"
+      },
+      {
+        "name": "end",
+        "min": 10,
+        "max": 180,
+        "step": 5,
+        "kind": "int"
+      }
+    ]
+  }
+]

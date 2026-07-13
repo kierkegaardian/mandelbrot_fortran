@@ -1,0 +1,9 @@
+[Scoped final proof output]
+
+=== SCOPED FINAL PROOF ===
+total 4
+drwxr-xr-x 1 user user    0 Jun 24 04:07 verification
+-rw-r--r-- 1 user user 31093 Jun 24 03:53 mandelquest-math-deep-dive.html
+-rw-r--r-- 1 user user 32135 Jun 24 04:04 mandelquest-math-deep-dive.md
+
+( reports/ contains the main report + verification/ subdir as the complete deliverable set. )

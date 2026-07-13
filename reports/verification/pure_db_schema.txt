@@ -1,0 +1,15 @@
+[exact raw from read_file projects/mandelbrot_fortran/app/db.py]
+            CREATE TABLE IF NOT EXISTS question_templates (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                ...
+                prompt_template TEXT NOT NULL,
+                answer_expr TEXT NOT NULL,
+                constraint_expr TEXT NOT NULL DEFAULT '',
+                explanation_template TEXT NOT NULL,
+                ...
+                mode TEXT NOT NULL DEFAULT 'expression',
+                subskill TEXT NOT NULL,
+                active INTEGER NOT NULL DEFAULT 1,
+                ...
+            );
+ (and other tables)

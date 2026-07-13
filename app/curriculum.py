@@ -14,6 +14,9 @@ class CurriculumEntry:
     topics: tuple[str, ...]
     pdf: str
     source: str
+    grade_band: str = ""
+    mvp_tier: str = ""
+    standard_refs: tuple[str, ...] = ()
 
 
 def _load_curriculum() -> list[CurriculumEntry]:
@@ -30,6 +33,9 @@ def _load_curriculum() -> list[CurriculumEntry]:
                 topics=tuple(str(topic) for topic in item.get("topics", [])),
                 pdf=str(item.get("pdf", "")),
                 source=str(item.get("source", "")),
+                grade_band=str(item.get("grade_band", "")),
+                mvp_tier=str(item.get("mvp_tier", "")),
+                standard_refs=tuple(str(ref) for ref in item.get("standard_refs", [])),
             )
         )
     return entries

@@ -1,0 +1,450 @@
+[
+  {
+    "external_id": "khan.early_math.counting.number_recognition.v1",
+    "skill": "counting",
+    "subskill": "Number recognition",
+    "label": "Write numeral",
+    "mode": "expression",
+    "prompt_template": "Write the numeral for {n}.",
+    "answer_expr": "n",
+    "constraint_expr": "",
+    "explanation_template": "The numeral matches the size of the set.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 6.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "n",
+        "min": 0,
+        "max": 30,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.counting.number_recognition.v2",
+    "skill": "counting",
+    "subskill": "Number recognition",
+    "label": "Next number",
+    "mode": "expression",
+    "prompt_template": "What number comes after {n}?",
+    "answer_expr": "n + 1",
+    "constraint_expr": "",
+    "explanation_template": "Counting forward by 1 gives the next numeral.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 6.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "n",
+        "min": 0,
+        "max": 49,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.counting.skip_counting.v1",
+    "skill": "counting",
+    "subskill": "Skip-counting",
+    "label": "Continue skip-count",
+    "mode": "expression",
+    "prompt_template": "Starting at {start}, skip-count by {step} for three jumps. What number do you reach?",
+    "answer_expr": "start + step + step + step",
+    "constraint_expr": "step != 3 and step != 4 and step != 6 and step != 7 and step != 8 and step != 9",
+    "explanation_template": "Skip-counting adds the same jump size each time.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 6.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "step",
+        "min": 2,
+        "max": 10,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "start",
+        "min": 0,
+        "max": 40,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.counting.skip_counting.v2",
+    "skill": "counting",
+    "subskill": "Skip-counting",
+    "label": "Nth skip-count term",
+    "mode": "expression",
+    "prompt_template": "Starting at {start}, what is the 4th number when you skip-count by {step}?",
+    "answer_expr": "start + step + step + step",
+    "constraint_expr": "step != 3 and step != 4 and step != 6 and step != 7 and step != 8 and step != 9",
+    "explanation_template": "The 4th term is three equal jumps after the start.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 6.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "step",
+        "min": 2,
+        "max": 10,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "start",
+        "min": 0,
+        "max": 30,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.counting.count_match.v1",
+    "skill": "counting",
+    "subskill": "Count-to-number matching",
+    "label": "Match final count",
+    "mode": "expression",
+    "prompt_template": "A student finishes counting a set and says {n}. How many objects were counted?",
+    "answer_expr": "n",
+    "constraint_expr": "",
+    "explanation_template": "The last count word names the total in the set.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 6.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "n",
+        "min": 1,
+        "max": 40,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.counting.count_match.v2",
+    "skill": "counting",
+    "subskill": "Count-to-number matching",
+    "label": "Numeral match",
+    "mode": "expression",
+    "prompt_template": "A bin holds {n} counters. Which numeral matches the total?",
+    "answer_expr": "n",
+    "constraint_expr": "",
+    "explanation_template": "Match the quantity to the numeral that names it.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 6.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "n",
+        "min": 1,
+        "max": 40,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.place_value.place_digit.v1",
+    "skill": "place_value",
+    "subskill": "Ones, tens, and hundreds identification",
+    "label": "Digit in place",
+    "mode": "expression",
+    "prompt_template": "What digit is in the tens place of {h}{te}{o}?",
+    "answer_expr": "te",
+    "constraint_expr": "",
+    "explanation_template": "The tens place is the second digit from the right.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 6.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "h",
+        "min": 1,
+        "max": 9,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "te",
+        "min": 0,
+        "max": 9,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "o",
+        "min": 0,
+        "max": 9,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.place_value.place_digit.v2",
+    "skill": "place_value",
+    "subskill": "Ones, tens, and hundreds identification",
+    "label": "Value of digit",
+    "mode": "expression",
+    "prompt_template": "What value does the hundreds digit represent in {h}{te}{o}?",
+    "answer_expr": "h * 100",
+    "constraint_expr": "",
+    "explanation_template": "The hundreds digit counts hundreds, not ones.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 80.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "h",
+        "min": 1,
+        "max": 9,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "te",
+        "min": 0,
+        "max": 9,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "o",
+        "min": 0,
+        "max": 9,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.place_value.expanded_form.v1",
+    "skill": "place_value",
+    "subskill": "Expanded form",
+    "label": "Build number",
+    "mode": "expression",
+    "prompt_template": "What number is represented by {h} hundreds, {te} tens, and {o} ones?",
+    "answer_expr": "h * 100 + te * 10 + o",
+    "constraint_expr": "",
+    "explanation_template": "Add each place-value part back into one number.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 80.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "h",
+        "min": 1,
+        "max": 9,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "te",
+        "min": 0,
+        "max": 9,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "o",
+        "min": 0,
+        "max": 9,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.place_value.expanded_form.v2",
+    "skill": "place_value",
+    "subskill": "Expanded form",
+    "label": "Missing expanded part",
+    "mode": "expression",
+    "prompt_template": "In {h}{te}{o}, what is the value of the tens part?",
+    "answer_expr": "te * 10",
+    "constraint_expr": "",
+    "explanation_template": "The tens part is the tens digit times 10.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 20.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "h",
+        "min": 1,
+        "max": 9,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "te",
+        "min": 1,
+        "max": 9,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "o",
+        "min": 0,
+        "max": 9,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.place_value.compare.v1",
+    "skill": "place_value",
+    "subskill": "Compare numbers by place value",
+    "label": "Larger number",
+    "mode": "expression",
+    "prompt_template": "Which number is larger: {a} or {b}?",
+    "answer_expr": "a",
+    "constraint_expr": "a > b",
+    "explanation_template": "Compare from the highest place where the numbers differ.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 80.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "a",
+        "min": 200,
+        "max": 999,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "b",
+        "min": 100,
+        "max": 998,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.place_value.compare.v2",
+    "skill": "place_value",
+    "subskill": "Compare numbers by place value",
+    "label": "Smaller number",
+    "mode": "expression",
+    "prompt_template": "Which number is smaller: {a} or {b}?",
+    "answer_expr": "a",
+    "constraint_expr": "a < b",
+    "explanation_template": "The smaller number has the smaller first different place value.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 80.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "a",
+        "min": 100,
+        "max": 900,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "b",
+        "min": 101,
+        "max": 999,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.place_value.decimals.v1",
+    "skill": "place_value",
+    "subskill": "Decimal place value and comparison",
+    "label": "Tenths digit",
+    "mode": "expression",
+    "prompt_template": "What digit is in the tenths place of {w}.{te}{hu}?",
+    "answer_expr": "te",
+    "constraint_expr": "",
+    "explanation_template": "The tenths place is the first place to the right of the decimal point.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 6.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "w",
+        "min": 0,
+        "max": 9,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "te",
+        "min": 0,
+        "max": 9,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "hu",
+        "min": 0,
+        "max": 9,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.place_value.decimals.v2",
+    "skill": "place_value",
+    "subskill": "Decimal place value and comparison",
+    "label": "Decimal to hundredths",
+    "mode": "expression",
+    "prompt_template": "Write {w}.{te}{hu} as a number of hundredths.",
+    "answer_expr": "w * 100 + te * 10 + hu",
+    "constraint_expr": "",
+    "explanation_template": "One whole is 100 hundredths, each tenth is 10 hundredths, and each hundredth is 1 hundredth.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 30.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "w",
+        "min": 0,
+        "max": 4,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "te",
+        "min": 0,
+        "max": 9,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "hu",
+        "min": 0,
+        "max": 9,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  }
+]

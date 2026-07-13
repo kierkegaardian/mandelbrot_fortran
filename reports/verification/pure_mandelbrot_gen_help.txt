@@ -1,0 +1,48 @@
+[exact stdout from run_terminal ./mandelbrot_gen --help 2>&1]
+Fortran Mandelbrot Generator
+
+Usage:
+  ./mandelbrot_gen [options]
+
+Options:
+  --width N           Image width (default 800)
+  --height N          Image height (default 600)
+  --iter N            Max iterations (default 255)
+  --output PATH       Output PPM path (default mandelbrot.ppm)
+  --palette NAME      rgb|gray|sunset|ice|fire (default rgb)
+  --progress-every N  Print progress every N rows; 0 disables (default 50)
+  --threads N         OpenMP threads (requires build with OPENMP=1)
+  --smooth            Enable smooth coloring
+  --interactive       Start interactive explorer mode
+
+Fractal Modes:
+  --type NAME         mandelbrot|julia|ship|tricorn|multibrot (default mandelbrot)
+  --power N           Exponent for Multibrot (default 2.0)
+
+Julia Set options:
+  --julia             Shortcut for --type julia
+  --julia-cx X        Julia constant real component (default -0.8)
+  --julia-cy Y        Julia constant imag component (default 0.156)
+
+Coloring options:
+  --cyclic            Enable cyclic/psychedelic coloring
+  --freq F            Frequency for cyclic coloring (default 0.1)
+
+Video options:
+  --video             Generate a zoom sequence
+  --frames N          Number of frames (default 60)
+  --zoom-start Z      Start zoom level (default 1.0)
+  --zoom-end Z        End zoom level (default 100.0)
+  --output-dir DIR    Directory for frames (default 'frames')
+
+Bounds mode:
+  --xmin X --xmax X --ymin Y --ymax Y
+
+Center/zoom mode (used when bounds not given):
+  --center-x X --center-y Y --zoom Z
+
+Examples:
+  ./mandelbrot_gen --type ship --output ship.ppm
+  ./mandelbrot_gen --type multibrot --power 3 --palette ice
+  ./mandelbrot_gen --cyclic --freq 0.2 --palette fire
+  ./mandelbrot_gen --video --center-x -0.75 --frames 300 --zoom-end 10000

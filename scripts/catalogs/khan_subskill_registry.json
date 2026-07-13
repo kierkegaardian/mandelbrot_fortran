@@ -1,0 +1,1377 @@
+{
+  "version": 1,
+  "generated_at": "2026-03-20T22:08:58.370854+00:00",
+  "entry_count": 137,
+  "entries": [
+    {
+      "skill": "counting",
+      "skill_label": "Counting",
+      "subskill": "Number recognition",
+      "khan_query": "counting number recognition",
+      "khan_unit_url": "https://www.khanacademy.org/math/cc-kindergarten-math/cc-kindergarten-counting-and-cardinality",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "counting",
+      "skill_label": "Counting",
+      "subskill": "Skip-counting",
+      "khan_query": "counting skip-counting",
+      "khan_unit_url": "https://www.khanacademy.org/math/cc-kindergarten-math/cc-kindergarten-counting-and-cardinality",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "counting",
+      "skill_label": "Counting",
+      "subskill": "Count-to-number matching",
+      "khan_query": "counting count-to-number matching",
+      "khan_unit_url": "https://www.khanacademy.org/math/cc-kindergarten-math/cc-kindergarten-counting-and-cardinality",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "place_value",
+      "skill_label": "Place Value",
+      "subskill": "Ones, tens, and hundreds identification",
+      "khan_query": "place value ones, tens, and hundreds identification",
+      "khan_unit_url": "",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "place_value",
+      "skill_label": "Place Value",
+      "subskill": "Expanded form",
+      "khan_query": "place value expanded form",
+      "khan_unit_url": "",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "place_value",
+      "skill_label": "Place Value",
+      "subskill": "Compare numbers by place value",
+      "khan_query": "place value compare numbers by place value",
+      "khan_unit_url": "",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "add_subtract",
+      "skill_label": "Add/Subtract",
+      "subskill": "Single-digit addition",
+      "khan_query": "add subtract single-digit addition",
+      "khan_unit_url": "https://www.khanacademy.org/math/cc-2nd-grade-math/cc-2nd-add-subtract-100",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "add_subtract",
+      "skill_label": "Add/Subtract",
+      "subskill": "Single-digit subtraction",
+      "khan_query": "add subtract single-digit subtraction",
+      "khan_unit_url": "https://www.khanacademy.org/math/cc-2nd-grade-math/cc-2nd-add-subtract-100",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "add_subtract",
+      "skill_label": "Add/Subtract",
+      "subskill": "Borrowing and carrying basics",
+      "khan_query": "add subtract borrowing and carrying basics",
+      "khan_unit_url": "https://www.khanacademy.org/math/cc-2nd-grade-math/cc-2nd-add-subtract-100",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "add_subtract",
+      "skill_label": "Add/Subtract",
+      "subskill": "Word problems",
+      "khan_query": "add subtract word problems",
+      "khan_unit_url": "https://www.khanacademy.org/math/cc-2nd-grade-math/cc-2nd-add-subtract-100",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "multiply",
+      "skill_label": "Multiply",
+      "subskill": "Repeated addition",
+      "khan_query": "multiply repeated addition",
+      "khan_unit_url": "https://www.khanacademy.org/math/cc-third-grade-math/imp-mult-div",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "multiply",
+      "skill_label": "Multiply",
+      "subskill": "Times tables",
+      "khan_query": "multiply times tables",
+      "khan_unit_url": "https://www.khanacademy.org/math/cc-third-grade-math/imp-mult-div",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "multiply",
+      "skill_label": "Multiply",
+      "subskill": "Array and grid models",
+      "khan_query": "multiply array and grid models",
+      "khan_unit_url": "https://www.khanacademy.org/math/cc-third-grade-math/imp-mult-div",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "multiply",
+      "skill_label": "Multiply",
+      "subskill": "Simple product facts",
+      "khan_query": "multiply simple product facts",
+      "khan_unit_url": "https://www.khanacademy.org/math/cc-third-grade-math/imp-mult-div",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "divide",
+      "skill_label": "Divide",
+      "subskill": "Equal sharing",
+      "khan_query": "divide equal sharing",
+      "khan_unit_url": "https://www.khanacademy.org/math/cc-third-grade-math/imp-mult-div",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "divide",
+      "skill_label": "Divide",
+      "subskill": "Division as repeated subtraction",
+      "khan_query": "divide division as repeated subtraction",
+      "khan_unit_url": "https://www.khanacademy.org/math/cc-third-grade-math/imp-mult-div",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "divide",
+      "skill_label": "Divide",
+      "subskill": "Remainders",
+      "khan_query": "divide remainders",
+      "khan_unit_url": "https://www.khanacademy.org/math/cc-third-grade-math/imp-mult-div",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "divide",
+      "skill_label": "Divide",
+      "subskill": "Inverse thinking",
+      "khan_query": "divide inverse thinking",
+      "khan_unit_url": "https://www.khanacademy.org/math/cc-third-grade-math/imp-mult-div",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "ratios",
+      "skill_label": "Ratios",
+      "subskill": "Ratio language (to:of)",
+      "khan_query": "ratios ratio language (to:of)",
+      "khan_unit_url": "https://www.khanacademy.org/math/cc-seventh-grade-math/cc-7th-ratios-proportional-relationships",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "ratios",
+      "skill_label": "Ratios",
+      "subskill": "Equivalent ratios",
+      "khan_query": "ratios equivalent ratios",
+      "khan_unit_url": "https://www.khanacademy.org/math/cc-seventh-grade-math/cc-7th-ratios-proportional-relationships",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "ratios",
+      "skill_label": "Ratios",
+      "subskill": "Fractional comparison",
+      "khan_query": "ratios fractional comparison",
+      "khan_unit_url": "https://www.khanacademy.org/math/cc-seventh-grade-math/cc-7th-ratios-proportional-relationships",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "fractions",
+      "skill_label": "Fractions",
+      "subskill": "Unit fractions",
+      "khan_query": "fractions unit fractions",
+      "khan_unit_url": "https://www.khanacademy.org/math/cc-fourth-grade-math/imp-fractions-2",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "fractions",
+      "skill_label": "Fractions",
+      "subskill": "Equivalent fractions",
+      "khan_query": "fractions equivalent fractions",
+      "khan_unit_url": "https://www.khanacademy.org/math/cc-fourth-grade-math/imp-fractions-2",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "fractions",
+      "skill_label": "Fractions",
+      "subskill": "Shaded region meaning",
+      "khan_query": "fractions shaded region meaning",
+      "khan_unit_url": "https://www.khanacademy.org/math/cc-fourth-grade-math/imp-fractions-2",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "fractions",
+      "skill_label": "Fractions",
+      "subskill": "Fraction to decimal",
+      "khan_query": "fractions fraction to decimal",
+      "khan_unit_url": "https://www.khanacademy.org/math/cc-fourth-grade-math/imp-fractions-2",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "long_addition",
+      "skill_label": "Long Addition",
+      "subskill": "Column alignment",
+      "khan_query": "long addition column alignment",
+      "khan_unit_url": "https://www.khanacademy.org/math/arithmetic-home/arith-review-add-subtract",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "long_addition",
+      "skill_label": "Long Addition",
+      "subskill": "Carry handling",
+      "khan_query": "long addition carry handling",
+      "khan_unit_url": "https://www.khanacademy.org/math/arithmetic-home/arith-review-add-subtract",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "long_addition",
+      "skill_label": "Long Addition",
+      "subskill": "Multi-digit accuracy",
+      "khan_query": "long addition multi-digit accuracy",
+      "khan_unit_url": "https://www.khanacademy.org/math/arithmetic-home/arith-review-add-subtract",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "long_addition",
+      "skill_label": "Long Addition",
+      "subskill": "Place-value structure",
+      "khan_query": "long addition place-value structure",
+      "khan_unit_url": "https://www.khanacademy.org/math/arithmetic-home/arith-review-add-subtract",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "long_subtraction",
+      "skill_label": "Long Subtraction",
+      "subskill": "Borrowing",
+      "khan_query": "long subtraction borrowing",
+      "khan_unit_url": "https://www.khanacademy.org/math/arithmetic-home/arith-review-add-subtract",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "long_subtraction",
+      "skill_label": "Long Subtraction",
+      "subskill": "Column alignment",
+      "khan_query": "long subtraction column alignment",
+      "khan_unit_url": "https://www.khanacademy.org/math/arithmetic-home/arith-review-add-subtract",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "long_subtraction",
+      "skill_label": "Long Subtraction",
+      "subskill": "Crossing zero safely",
+      "khan_query": "long subtraction crossing zero safely",
+      "khan_unit_url": "https://www.khanacademy.org/math/arithmetic-home/arith-review-add-subtract",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "long_multiplication",
+      "skill_label": "Long Multiplication",
+      "subskill": "Partial products",
+      "khan_query": "long multiplication partial products",
+      "khan_unit_url": "https://www.khanacademy.org/math/arithmetic-home/arith-review-multiply-divide",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "long_multiplication",
+      "skill_label": "Long Multiplication",
+      "subskill": "Place-value breakdown",
+      "khan_query": "long multiplication place-value breakdown",
+      "khan_unit_url": "https://www.khanacademy.org/math/arithmetic-home/arith-review-multiply-divide",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "long_multiplication",
+      "skill_label": "Long Multiplication",
+      "subskill": "Two-digit multiplies",
+      "khan_query": "long multiplication two-digit multiplies",
+      "khan_unit_url": "https://www.khanacademy.org/math/arithmetic-home/arith-review-multiply-divide",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "long_division",
+      "skill_label": "Long Division",
+      "subskill": "Division layout",
+      "khan_query": "long division division layout",
+      "khan_unit_url": "https://www.khanacademy.org/math/arithmetic-home/arith-review-multiply-divide",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "long_division",
+      "skill_label": "Long Division",
+      "subskill": "Quotient estimation",
+      "khan_query": "long division quotient estimation",
+      "khan_unit_url": "https://www.khanacademy.org/math/arithmetic-home/arith-review-multiply-divide",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "long_division",
+      "skill_label": "Long Division",
+      "subskill": "Remainder handling",
+      "khan_query": "long division remainder handling",
+      "khan_unit_url": "https://www.khanacademy.org/math/arithmetic-home/arith-review-multiply-divide",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "money",
+      "skill_label": "Money",
+      "subskill": "Dollar-coin values",
+      "khan_query": "money dollar-coin values",
+      "khan_unit_url": "https://www.khanacademy.org/math/cc-2nd-grade-math/cc-2nd-money",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "money",
+      "skill_label": "Money",
+      "subskill": "Making change",
+      "khan_query": "money making change",
+      "khan_unit_url": "https://www.khanacademy.org/math/cc-2nd-grade-math/cc-2nd-money",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "money",
+      "skill_label": "Money",
+      "subskill": "Budget-style totals",
+      "khan_query": "money budget-style totals",
+      "khan_unit_url": "https://www.khanacademy.org/math/cc-2nd-grade-math/cc-2nd-money",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "money",
+      "skill_label": "Money",
+      "subskill": "Place-value in currency",
+      "khan_query": "money place-value in currency",
+      "khan_unit_url": "https://www.khanacademy.org/math/cc-2nd-grade-math/cc-2nd-money",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "measurement",
+      "skill_label": "Measurement",
+      "subskill": "Length unit conversion",
+      "khan_query": "measurement length unit conversion",
+      "khan_unit_url": "",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "measurement",
+      "skill_label": "Measurement",
+      "subskill": "Time reading and arithmetic",
+      "khan_query": "measurement time reading and arithmetic",
+      "khan_unit_url": "",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "measurement",
+      "skill_label": "Measurement",
+      "subskill": "Temperature basics",
+      "khan_query": "measurement temperature basics",
+      "khan_unit_url": "",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "integers",
+      "skill_label": "Integers",
+      "subskill": "Signed numbers",
+      "khan_query": "integers signed numbers",
+      "khan_unit_url": "https://www.khanacademy.org/math/pre-algebra/pre-algebra-negative-numbers",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "integers",
+      "skill_label": "Integers",
+      "subskill": "Negative arithmetic",
+      "khan_query": "integers negative arithmetic",
+      "khan_unit_url": "https://www.khanacademy.org/math/pre-algebra/pre-algebra-negative-numbers",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "integers",
+      "skill_label": "Integers",
+      "subskill": "Order-dependent operations",
+      "khan_query": "integers order-dependent operations",
+      "khan_unit_url": "https://www.khanacademy.org/math/pre-algebra/pre-algebra-negative-numbers",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "order_of_operations",
+      "skill_label": "Order of Operations",
+      "subskill": "Parentheses first",
+      "khan_query": "order of operations parentheses first",
+      "khan_unit_url": "https://www.khanacademy.org/math/pre-algebra/pre-algebra-exponents-radicals",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "order_of_operations",
+      "skill_label": "Order of Operations",
+      "subskill": "Multiplication vs addition/subtraction",
+      "khan_query": "order of operations multiplication vs addition/subtraction",
+      "khan_unit_url": "https://www.khanacademy.org/math/pre-algebra/pre-algebra-exponents-radicals",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "order_of_operations",
+      "skill_label": "Order of Operations",
+      "subskill": "Expression grouping",
+      "khan_query": "order of operations expression grouping",
+      "khan_unit_url": "https://www.khanacademy.org/math/pre-algebra/pre-algebra-exponents-radicals",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "algebra_linear",
+      "skill_label": "Linear Equations",
+      "subskill": "One-step equations",
+      "khan_query": "linear equations one-step equations",
+      "khan_unit_url": "https://www.khanacademy.org/math/algebra-basics/alg-basics-solving-equations-and-inequalities",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "algebra_linear",
+      "skill_label": "Linear Equations",
+      "subskill": "Two-step equations",
+      "khan_query": "linear equations two-step equations",
+      "khan_unit_url": "https://www.khanacademy.org/math/algebra-basics/alg-basics-solving-equations-and-inequalities",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "algebra_linear",
+      "skill_label": "Linear Equations",
+      "subskill": "Variables on both sides",
+      "khan_query": "linear equations variables on both sides",
+      "khan_unit_url": "https://www.khanacademy.org/math/algebra-basics/alg-basics-solving-equations-and-inequalities",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "algebra_linear",
+      "skill_label": "Linear Equations",
+      "subskill": "Distributive property equations",
+      "khan_query": "linear equations distributive property equations",
+      "khan_unit_url": "https://www.khanacademy.org/math/algebra-basics/alg-basics-solving-equations-and-inequalities",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "algebra_linear",
+      "skill_label": "Linear Equations",
+      "subskill": "Fraction and decimal equations",
+      "khan_query": "linear equations fraction and decimal equations",
+      "khan_unit_url": "https://www.khanacademy.org/math/algebra-basics/alg-basics-solving-equations-and-inequalities",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "algebra_linear",
+      "skill_label": "Linear Equations",
+      "subskill": "Linear inequalities",
+      "khan_query": "linear equations linear inequalities",
+      "khan_unit_url": "https://www.khanacademy.org/math/algebra-basics/alg-basics-solving-equations-and-inequalities",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "algebra_linear",
+      "skill_label": "Linear Equations",
+      "subskill": "Slope from points",
+      "khan_query": "linear equations slope from points",
+      "khan_unit_url": "https://www.khanacademy.org/math/algebra-basics/alg-basics-solving-equations-and-inequalities",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "algebra_linear",
+      "skill_label": "Linear Equations",
+      "subskill": "Slope-intercept interpretation",
+      "khan_query": "linear equations slope-intercept interpretation",
+      "khan_unit_url": "https://www.khanacademy.org/math/algebra-basics/alg-basics-solving-equations-and-inequalities",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "algebra_linear",
+      "skill_label": "Linear Equations",
+      "subskill": "Systems of linear equations",
+      "khan_query": "linear equations systems of linear equations",
+      "khan_unit_url": "https://www.khanacademy.org/math/algebra-basics/alg-basics-solving-equations-and-inequalities",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "algebra_linear",
+      "skill_label": "Linear Equations",
+      "subskill": "Direct variation",
+      "khan_query": "linear equations direct variation",
+      "khan_unit_url": "https://www.khanacademy.org/math/algebra-basics/alg-basics-solving-equations-and-inequalities",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "algebra_linear",
+      "skill_label": "Linear Equations",
+      "subskill": "Rate and unit-rate modeling",
+      "khan_query": "linear equations rate and unit-rate modeling",
+      "khan_unit_url": "https://www.khanacademy.org/math/algebra-basics/alg-basics-solving-equations-and-inequalities",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "algebra_linear",
+      "skill_label": "Linear Equations",
+      "subskill": "Word problems with linear models",
+      "khan_query": "linear equations word problems with linear models",
+      "khan_unit_url": "https://www.khanacademy.org/math/algebra-basics/alg-basics-solving-equations-and-inequalities",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "geometry_area",
+      "skill_label": "Geometry",
+      "subskill": "Area of rectangles and squares",
+      "khan_query": "geometry area of rectangles and squares",
+      "khan_unit_url": "https://www.khanacademy.org/math/geometry",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "geometry_area",
+      "skill_label": "Geometry",
+      "subskill": "Area of triangles and parallelograms",
+      "khan_query": "geometry area of triangles and parallelograms",
+      "khan_unit_url": "https://www.khanacademy.org/math/geometry",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "geometry_area",
+      "skill_label": "Geometry",
+      "subskill": "Area of trapezoids and composite figures",
+      "khan_query": "geometry area of trapezoids and composite figures",
+      "khan_unit_url": "https://www.khanacademy.org/math/geometry",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "geometry_area",
+      "skill_label": "Geometry",
+      "subskill": "Perimeter and missing sides",
+      "khan_query": "geometry perimeter and missing sides",
+      "khan_unit_url": "https://www.khanacademy.org/math/geometry",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "geometry_area",
+      "skill_label": "Geometry",
+      "subskill": "Circumference and area of circles",
+      "khan_query": "geometry circumference and area of circles",
+      "khan_unit_url": "https://www.khanacademy.org/math/geometry",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "geometry_area",
+      "skill_label": "Geometry",
+      "subskill": "Surface area and volume",
+      "khan_query": "geometry surface area and volume",
+      "khan_unit_url": "https://www.khanacademy.org/math/geometry",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "geometry_area",
+      "skill_label": "Geometry",
+      "subskill": "Pythagorean theorem",
+      "khan_query": "geometry pythagorean theorem",
+      "khan_unit_url": "https://www.khanacademy.org/math/geometry",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "geometry_area",
+      "skill_label": "Geometry",
+      "subskill": "Coordinate geometry distance and midpoint",
+      "khan_query": "geometry coordinate geometry distance and midpoint",
+      "khan_unit_url": "https://www.khanacademy.org/math/geometry",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "geometry_area",
+      "skill_label": "Geometry",
+      "subskill": "Angles in lines and triangles",
+      "khan_query": "geometry angles in lines and triangles",
+      "khan_unit_url": "https://www.khanacademy.org/math/geometry",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "geometry_area",
+      "skill_label": "Geometry",
+      "subskill": "Transformations and congruence",
+      "khan_query": "geometry transformations and congruence",
+      "khan_unit_url": "https://www.khanacademy.org/math/geometry",
+      "khan_assignable_url": "https://www.khanacademy.org/math/geometry/xff63fac4:hs-geo-transformation-properties-and-proofs/hs-geo-transformations-definitions/e/qualitatively-defining-rigid-transformations",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "geometry_area",
+      "skill_label": "Geometry",
+      "subskill": "Similarity and scale factor",
+      "khan_query": "geometry similarity and scale factor",
+      "khan_unit_url": "https://www.khanacademy.org/math/geometry",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "geometry_area",
+      "skill_label": "Geometry",
+      "subskill": "Analytic geometry and coordinate proofs",
+      "khan_query": "geometry analytic geometry and coordinate proofs",
+      "khan_unit_url": "https://www.khanacademy.org/math/geometry",
+      "khan_assignable_url": "https://www.khanacademy.org/math/geometry/hs-geo-analytic-geometry/hs-geo-dist-problems/e/coordinate-plane-word-problems-with-polygons",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "trig_right_triangle",
+      "skill_label": "Precalculus & Trig",
+      "subskill": "Right-triangle trig ratios",
+      "khan_query": "precalculus & trig right-triangle trig ratios",
+      "khan_unit_url": "https://www.khanacademy.org/math/precalculus",
+      "khan_assignable_url": "https://www.khanacademy.org/math/precalculus",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "stats_percent",
+      "skill_label": "Percent",
+      "subskill": "Percent change",
+      "khan_query": "percent percent change",
+      "khan_unit_url": "https://www.khanacademy.org/math/pre-algebra/pre-algebra-ratios-rates",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "stats_percent",
+      "skill_label": "Percent",
+      "subskill": "Reverse percent change",
+      "khan_query": "percent reverse percent change",
+      "khan_unit_url": "https://www.khanacademy.org/math/pre-algebra/pre-algebra-ratios-rates",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "stats_percent",
+      "skill_label": "Percent",
+      "subskill": "Percent word problems",
+      "khan_query": "percent percent word problems",
+      "khan_unit_url": "https://www.khanacademy.org/math/pre-algebra/pre-algebra-ratios-rates",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "stats_mean",
+      "skill_label": "Mean",
+      "subskill": "Mean",
+      "khan_query": "mean mean",
+      "khan_unit_url": "https://www.khanacademy.org/math/statistics-probability/summarizing-quantitative-data",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "stats_mean",
+      "skill_label": "Mean",
+      "subskill": "Mean from display",
+      "khan_query": "mean mean from display",
+      "khan_unit_url": "https://www.khanacademy.org/math/statistics-probability/summarizing-quantitative-data",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "stats_probability",
+      "skill_label": "Probability",
+      "subskill": "Probability models",
+      "khan_query": "probability probability models",
+      "khan_unit_url": "https://www.khanacademy.org/math/statistics-probability/probability-library",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "calculus_1",
+      "skill_label": "Calculus I",
+      "subskill": "Average rate of change between two points",
+      "khan_query": "calculus i average rate of change between two points",
+      "khan_unit_url": "https://www.khanacademy.org/math/ap-calculus-ab",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "calculus_2",
+      "skill_label": "Calculus II",
+      "subskill": "Definite integral of a linear function",
+      "khan_query": "calculus ii definite integral of a linear function",
+      "khan_unit_url": "https://www.khanacademy.org/math/ap-calculus-bc",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "calculus_3",
+      "skill_label": "Calculus III",
+      "subskill": "Partial derivative with respect to x at a point",
+      "khan_query": "calculus iii partial derivative with respect to x at a point",
+      "khan_unit_url": "https://www.khanacademy.org/math/multivariable-calculus",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "pre_algebra",
+      "skill_label": "Pre-Algebra Foundations",
+      "subskill": "Integer and fraction fluency",
+      "khan_query": "pre-algebra foundations integer and fraction fluency",
+      "khan_unit_url": "https://www.khanacademy.org/math/pre-algebra",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "pre_algebra",
+      "skill_label": "Pre-Algebra Foundations",
+      "subskill": "Order of operations",
+      "khan_query": "pre-algebra foundations order of operations",
+      "khan_unit_url": "https://www.khanacademy.org/math/pre-algebra",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "pre_algebra",
+      "skill_label": "Pre-Algebra Foundations",
+      "subskill": "Expressions and variables",
+      "khan_query": "pre-algebra foundations expressions and variables",
+      "khan_unit_url": "https://www.khanacademy.org/math/pre-algebra",
+      "khan_assignable_url": "https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:foundation-algebra/x2f8bb11595b61c86:substitute-evaluate-expression/e/evaluating_expressions_2",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "pre_algebra",
+      "skill_label": "Pre-Algebra Foundations",
+      "subskill": "One-step equations",
+      "khan_query": "pre-algebra foundations one-step equations",
+      "khan_unit_url": "https://www.khanacademy.org/math/pre-algebra",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "pre_algebra",
+      "skill_label": "Pre-Algebra Foundations",
+      "subskill": "Two-step equations and inequalities",
+      "khan_query": "pre-algebra foundations two-step equations and inequalities",
+      "khan_unit_url": "https://www.khanacademy.org/math/pre-algebra",
+      "khan_assignable_url": "https://www.khanacademy.org/math/cc-seventh-grade-math/cc-7th-variables-expressions/cc-7th-2-step-equations-intro/e/linear_equations_2",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "pre_algebra",
+      "skill_label": "Pre-Algebra Foundations",
+      "subskill": "Ratios, rates, and proportional relationships",
+      "khan_query": "pre-algebra foundations ratios, rates, and proportional relationships",
+      "khan_unit_url": "https://www.khanacademy.org/math/pre-algebra",
+      "khan_assignable_url": "https://www.khanacademy.org/math/cc-seventh-grade-math/cc-7th-ratio-proportion/cc-7th-proportional-rel/e/analyzing-and-identifying-proportional-relationships",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "pre_algebra",
+      "skill_label": "Pre-Algebra Foundations",
+      "subskill": "Percent problems",
+      "khan_query": "pre-algebra foundations percent problems",
+      "khan_unit_url": "https://www.khanacademy.org/math/pre-algebra",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "pre_algebra",
+      "skill_label": "Pre-Algebra Foundations",
+      "subskill": "Exponents, roots, and scientific notation",
+      "khan_query": "pre-algebra foundations exponents, roots, and scientific notation",
+      "khan_unit_url": "https://www.khanacademy.org/math/pre-algebra",
+      "khan_assignable_url": "https://www.khanacademy.org/math/cc-eighth-grade-math/cc-8th-numbers-operations/cc-8th-scientific-notation/e/scientific_notation",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "pre_algebra",
+      "skill_label": "Pre-Algebra Foundations",
+      "subskill": "Coordinate plane and function tables",
+      "khan_query": "pre-algebra foundations coordinate plane and function tables",
+      "khan_unit_url": "https://www.khanacademy.org/math/pre-algebra",
+      "khan_assignable_url": "https://www.khanacademy.org/math/cc-sixth-grade-math/x0267d782:coordinate-plane/x0267d782:cc-6th-distance/e/coordinate-plane-word-problems",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "algebra_1",
+      "skill_label": "Algebra 1",
+      "subskill": "Algebra foundations",
+      "khan_query": "algebra 1 algebra foundations",
+      "khan_unit_url": "https://www.khanacademy.org/math/algebra",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "algebra_1",
+      "skill_label": "Algebra 1",
+      "subskill": "Solving equations & inequalities",
+      "khan_query": "algebra 1 solving equations & inequalities",
+      "khan_unit_url": "https://www.khanacademy.org/math/algebra",
+      "khan_assignable_url": "https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:inequalities-systems-graphs/x2f8bb11595b61c86:checking-solutions-of-two-variable-inequalities/e/checking-solutions-to-two-var-inequalities",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "algebra_1",
+      "skill_label": "Algebra 1",
+      "subskill": "Working with units",
+      "khan_query": "algebra 1 working with units",
+      "khan_unit_url": "https://www.khanacademy.org/math/algebra",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "algebra_1",
+      "skill_label": "Algebra 1",
+      "subskill": "Linear equations & graphs",
+      "khan_query": "algebra 1 linear equations & graphs",
+      "khan_unit_url": "https://www.khanacademy.org/math/algebra",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "algebra_1",
+      "skill_label": "Algebra 1",
+      "subskill": "Forms of linear equations",
+      "khan_query": "algebra 1 forms of linear equations",
+      "khan_unit_url": "https://www.khanacademy.org/math/algebra",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "algebra_1",
+      "skill_label": "Algebra 1",
+      "subskill": "Systems of equations",
+      "khan_query": "algebra 1 systems of equations",
+      "khan_unit_url": "https://www.khanacademy.org/math/algebra",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "algebra_1",
+      "skill_label": "Algebra 1",
+      "subskill": "Inequalities (systems & graphs)",
+      "khan_query": "algebra 1 inequalities (systems & graphs)",
+      "khan_unit_url": "https://www.khanacademy.org/math/algebra",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "algebra_1",
+      "skill_label": "Algebra 1",
+      "subskill": "Functions",
+      "khan_query": "algebra 1 functions",
+      "khan_unit_url": "https://www.khanacademy.org/math/algebra",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "algebra_1",
+      "skill_label": "Algebra 1",
+      "subskill": "Sequences",
+      "khan_query": "algebra 1 sequences",
+      "khan_unit_url": "https://www.khanacademy.org/math/algebra",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "algebra_1",
+      "skill_label": "Algebra 1",
+      "subskill": "Absolute value & piecewise functions",
+      "khan_query": "algebra 1 absolute value & piecewise functions",
+      "khan_unit_url": "https://www.khanacademy.org/math/algebra",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "algebra_1",
+      "skill_label": "Algebra 1",
+      "subskill": "Exponents & radicals",
+      "khan_query": "algebra 1 exponents & radicals",
+      "khan_unit_url": "https://www.khanacademy.org/math/algebra",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "algebra_1",
+      "skill_label": "Algebra 1",
+      "subskill": "Exponential growth & decay",
+      "khan_query": "algebra 1 exponential growth & decay",
+      "khan_unit_url": "https://www.khanacademy.org/math/algebra",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "algebra_1",
+      "skill_label": "Algebra 1",
+      "subskill": "Quadratics: Multiplying & factoring",
+      "khan_query": "algebra 1 quadratics: multiplying & factoring",
+      "khan_unit_url": "https://www.khanacademy.org/math/algebra",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "algebra_1",
+      "skill_label": "Algebra 1",
+      "subskill": "Quadratic functions & equations",
+      "khan_query": "algebra 1 quadratic functions & equations",
+      "khan_unit_url": "https://www.khanacademy.org/math/algebra",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "algebra_1",
+      "skill_label": "Algebra 1",
+      "subskill": "Irrational numbers",
+      "khan_query": "algebra 1 irrational numbers",
+      "khan_unit_url": "https://www.khanacademy.org/math/algebra",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "algebra_2",
+      "skill_label": "Algebra 2",
+      "subskill": "Polynomial arithmetic",
+      "khan_query": "algebra 2 polynomial arithmetic",
+      "khan_unit_url": "https://www.khanacademy.org/math/algebra2",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "algebra_2",
+      "skill_label": "Algebra 2",
+      "subskill": "Complex numbers",
+      "khan_query": "algebra 2 complex numbers",
+      "khan_unit_url": "https://www.khanacademy.org/math/algebra2",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "algebra_2",
+      "skill_label": "Algebra 2",
+      "subskill": "Polynomial factorization",
+      "khan_query": "algebra 2 polynomial factorization",
+      "khan_unit_url": "https://www.khanacademy.org/math/algebra2",
+      "khan_assignable_url": "https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:quadratics-multiplying-factoring/x2f8bb11595b61c86:factor-quadratics-intro/e/factor-quadratics-common-factor",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "algebra_2",
+      "skill_label": "Algebra 2",
+      "subskill": "Polynomial division",
+      "khan_query": "algebra 2 polynomial division",
+      "khan_unit_url": "https://www.khanacademy.org/math/algebra2",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "algebra_2",
+      "skill_label": "Algebra 2",
+      "subskill": "Polynomial graphs",
+      "khan_query": "algebra 2 polynomial graphs",
+      "khan_unit_url": "https://www.khanacademy.org/math/algebra2",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "algebra_2",
+      "skill_label": "Algebra 2",
+      "subskill": "Rational exponents and radicals",
+      "khan_query": "algebra 2 rational exponents and radicals",
+      "khan_unit_url": "https://www.khanacademy.org/math/algebra2",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "algebra_2",
+      "skill_label": "Algebra 2",
+      "subskill": "Exponential models",
+      "khan_query": "algebra 2 exponential models",
+      "khan_unit_url": "https://www.khanacademy.org/math/algebra2",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "algebra_2",
+      "skill_label": "Algebra 2",
+      "subskill": "Logarithms",
+      "khan_query": "algebra 2 logarithms",
+      "khan_unit_url": "https://www.khanacademy.org/math/algebra2",
+      "khan_assignable_url": "https://www.khanacademy.org/math/algebra2/x2ec2f6f830c9fb89:transformations/x2ec2f6f830c9fb89:log-graphs/e/graphs-of-exponentials-and-logarithms",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "algebra_2",
+      "skill_label": "Algebra 2",
+      "subskill": "Transformations of functions",
+      "khan_query": "algebra 2 transformations of functions",
+      "khan_unit_url": "https://www.khanacademy.org/math/algebra2",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "algebra_2",
+      "skill_label": "Algebra 2",
+      "subskill": "Equations",
+      "khan_query": "algebra 2 equations",
+      "khan_unit_url": "https://www.khanacademy.org/math/algebra2",
+      "khan_assignable_url": "https://www.khanacademy.org/math/algebra2/x2ec2f6f830c9fb89:complex/x2ec2f6f830c9fb89:complex-eq/e/quadratic-formula-with-complex-solutions",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "algebra_2",
+      "skill_label": "Algebra 2",
+      "subskill": "Trigonometry",
+      "khan_query": "algebra 2 trigonometry",
+      "khan_unit_url": "https://www.khanacademy.org/math/algebra2",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "algebra_2",
+      "skill_label": "Algebra 2",
+      "subskill": "Modeling",
+      "khan_query": "algebra 2 modeling",
+      "khan_unit_url": "https://www.khanacademy.org/math/algebra2",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "algebra_2",
+      "skill_label": "Algebra 2",
+      "subskill": "Rational functions",
+      "khan_query": "algebra 2 rational functions",
+      "khan_unit_url": "https://www.khanacademy.org/math/algebra2",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "statistics",
+      "skill_label": "Statistics",
+      "subskill": "Integrated descriptive statistics and probability",
+      "khan_query": "statistics integrated descriptive statistics and probability",
+      "khan_unit_url": "https://www.khanacademy.org/math/statistics-probability",
+      "khan_assignable_url": "https://www.khanacademy.org/math/statistics-probability",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "sat_math",
+      "skill_label": "SAT Math Focus",
+      "subskill": "SAT algebra modeling",
+      "khan_query": "sat math focus sat algebra modeling",
+      "khan_unit_url": "https://www.khanacademy.org/digital-sat/start",
+      "khan_assignable_url": "https://www.khanacademy.org/digital-sat/start",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "sat_math",
+      "skill_label": "SAT Math Focus",
+      "subskill": "SAT linear relationships",
+      "khan_query": "sat math focus sat linear relationships",
+      "khan_unit_url": "https://www.khanacademy.org/digital-sat/start",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "sat_math",
+      "skill_label": "SAT Math Focus",
+      "subskill": "SAT percent and data",
+      "khan_query": "sat math focus sat percent and data",
+      "khan_unit_url": "https://www.khanacademy.org/digital-sat/start",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "sat_math",
+      "skill_label": "SAT Math Focus",
+      "subskill": "SAT statistics",
+      "khan_query": "sat math focus sat statistics",
+      "khan_unit_url": "https://www.khanacademy.org/digital-sat/start",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "sat_math",
+      "skill_label": "SAT Math Focus",
+      "subskill": "SAT mixed-domain",
+      "khan_query": "sat math focus sat mixed-domain",
+      "khan_unit_url": "https://www.khanacademy.org/digital-sat/start",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "psat_math",
+      "skill_label": "PSAT Math Focus",
+      "subskill": "PSAT algebra modeling",
+      "khan_query": "psat math focus psat algebra modeling",
+      "khan_unit_url": "https://www.khanacademy.org/digital-sat/start",
+      "khan_assignable_url": "https://www.khanacademy.org/digital-sat/start",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "psat_math",
+      "skill_label": "PSAT Math Focus",
+      "subskill": "PSAT equation solving",
+      "khan_query": "psat math focus psat equation solving",
+      "khan_unit_url": "https://www.khanacademy.org/digital-sat/start",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "psat_math",
+      "skill_label": "PSAT Math Focus",
+      "subskill": "PSAT geometry",
+      "khan_query": "psat math focus psat geometry",
+      "khan_unit_url": "https://www.khanacademy.org/digital-sat/start",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "psat_math",
+      "skill_label": "PSAT Math Focus",
+      "subskill": "PSAT percentages",
+      "khan_query": "psat math focus psat percentages",
+      "khan_unit_url": "https://www.khanacademy.org/digital-sat/start",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "psat_math",
+      "skill_label": "PSAT Math Focus",
+      "subskill": "PSAT mixed-domain",
+      "khan_query": "psat math focus psat mixed-domain",
+      "khan_unit_url": "https://www.khanacademy.org/digital-sat/start",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "gre_quant",
+      "skill_label": "GRE Quant Focus",
+      "subskill": "GRE quantitative comparison",
+      "khan_query": "gre quant focus gre quantitative comparison",
+      "khan_unit_url": "https://www.khanacademy.org/math/algebra2",
+      "khan_assignable_url": "https://www.khanacademy.org/math/algebra2",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "gre_quant",
+      "skill_label": "GRE Quant Focus",
+      "subskill": "GRE ratios and proportions",
+      "khan_query": "gre quant focus gre ratios and proportions",
+      "khan_unit_url": "https://www.khanacademy.org/math/algebra2",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "gre_quant",
+      "skill_label": "GRE Quant Focus",
+      "subskill": "GRE percent reasoning",
+      "khan_query": "gre quant focus gre percent reasoning",
+      "khan_unit_url": "https://www.khanacademy.org/math/algebra2",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    },
+    {
+      "skill": "gre_quant",
+      "skill_label": "GRE Quant Focus",
+      "subskill": "GRE data interpretation",
+      "khan_query": "gre quant focus gre data interpretation",
+      "khan_unit_url": "https://www.khanacademy.org/math/algebra2",
+      "khan_assignable_url": "",
+      "pull_status": "seeded",
+      "source": "khan-academy-connector"
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+
+
+Julia set render showing intricate red/orange snowflake-like spiral structures on a pure black background. Delicate filaments extend from multiple centers with high symmetry. The image is hypnotic and mathematically precise, providing a clear example of Julia iteration behavior suitable for educational exploration.
+
+Read via read_file(..., format="image").

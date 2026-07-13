@@ -1,0 +1,5 @@
+
+
+Warm orange "seahorse valley" and spiral structures on a solid amber/orange gradient background. Softer, more approachable palette than the high-contrast renders. Calm and beautiful, well-suited for calm math practice contexts.
+
+Read via read_file(..., format="image").

@@ -1,0 +1,271 @@
+
+
+from __future__ import annotations
+
+import math
+import random
+from dataclasses import dataclass
+from typing import Optional
+
+from .early_math_catalog import early_math_subskills_for
+from .models import ScaffoldStep
+from .quiz_content import ContentUnavailableError, is_template_only_skill
+from .algebra_1_generators import build_algebra_1_problem
+from .algebra_2_generators import build_algebra_2_problem
+from .pre_algebra_generators import build_pre_algebra_problem
+from .question_bank import try_generate_from_templates
+
+
+SKILLS = [
+    "counting",
+    "place_value",
+    "add_subtract",
+    "multiply",
+    "divide",
+    "ratios",
+    "fractions",
+    "long_addition",
+    "long_subtraction",
+    "long_multiplication",
+    "long_division",
+    "money",
+    "measurement",
+    "integers",
+    "order_of_operations",
+    "algebra_linear",
+    "geometry_area",
+    "trig_right_triangle",
+    "stats_percent",
+    "stats_mean",
+    "stats_probability",
+    "calculus_1",
+    "calculus_2",
+    "calculus_3",
+    "pre_algebra",
+    "algebra_1",
+    "algebra_2",
+    "statistics",
+    "sat_math",
+    "psat_math",
+    "gre_quant",
+]
+LEGACY_SKILL_ALIASES = {
+    "calculus_slope": "calculus_1",
+}
+QUESTION_TYPES = ["mc", "typed", "both"]
+RIGHT_TRIANGLE_TRIPLES = [(3, 4, 5), (5, 12, 13), (6, 8, 10), (8, 15, 17), (9, 12, 15)]
+
+
+@dataclass
+class Question:
+    skill: str
+    prompt: str
+    correct_answer: str
+    explanation: str
+    choices: Optional[list[str]]
+    visual: Optional[dict]
+    template_id: Optional[int] = None
+    template_external_id: Optional[str] = None
+    subskill: Optional[str] = None
+    question_label: str = "Core"
+    mode: str = "expression"
+    scaffold_steps: Optional[list[ScaffoldStep]] = None
+
+
+def _level_range(level: int) -> tuple[int, int]:
+    if level <= 1:
+        return (0, 10)
+    if level == 2:
+        return (0, 20)
+    return (0, 50)
+
+
+def _choice_set(correct: int, spread: int = 4) -> list[str]:
+    choices = {correct}
+    while len(choices) < 4:
+        delta = random.randint(-spread, spread)
+        if delta == 0:
+            continue
+        choices.add(max(0, correct + delta))
+    ordered = list(choices)
+    random.shuffle(ordered)
+    return [str(c) for c in ordered]
+
+
+def _signed_choice_set(correct: int, spread: int = 4) -> list[str]:
+    choices = {correct}
+    while len(choices) < 4:
+        delta = random.randint(-spread, spread)
+        if delta == 0:
+            continue
+        choices.add(correct + delta)
+    ordered = list(choices)
+    random.shuffle(ordered)
+    return [str(c) for c in ordered]
+
+
+def _float_choice_set(correct: float, spread: float = 2.0) -> list[str]:
+    cent = int(round(correct * 100))
+    choices = {correct}
+    while len(choices) < 4:
+        delta = random.randint(-round(spread * 100), round(spread * 100))
+        if delta == 0:
+            continue
+        choices.add(round((cent + delta) / 100, 2))
+    ordered = list(choices)
+    random.shuffle(ordered)
+    return [_format_numeric(v) for v in ordered]
+
+
+def _format_numeric(value: float) -> str:
+    rounded = round(value, 2)
+    if abs(rounded - round(rounded)) < 1e-9:
+        return str(int(round(rounded)))
+    return f"{rounded:.2f}".rstrip("0").rstrip(".")
+
+
+def _frac(num: int, den: int) -> tuple[int, int]:
+    if den == 0:
+        return (0, 1)
+    if den < 0:
+        num = -num
+        den = -den
+    gcd = math.gcd(num, den)
+    if gcd == 0:
+        return (0, 1)
+    return (num // gcd, den // gcd)
+
+
+def _fraction_string(num: int, den: int) -> str:
+    num, den = _frac(num, den)
+    return f"{num}/{den}"
+
+
+def _long_range(level: int) -> tuple[int, int]:
+    if level <= 1:
+        return (10, 99)
+    if level == 2:
+        return (100, 999)
+    return (1000, 9999)
+
+
+def _money_choice_set(dollars: int, cents: int) -> list[str]:
+    def fmt(d: int, c: int) -> str:
+        return f"${d}.{c:02d}"
+
+    choices = {fmt(dollars, cents)}
+    while len(choices) < 4:
+        d = max(0, dollars + random.choice([-2, -1, 1, 2, 5]))
+        c = (cents + random.choice([-25, -10, -5, 5, 10, 25])) % 100
+        choices.add(fmt(d, c))
+    ordered = list(choices)
+    random.shuffle(ordered)
+    return ordered
+
+
+def _fraction_choice_set(numerator: int, denominator: int) -> list[str]:
+    def fmt(n: int, d: int) -> str:
+        return f"{n}/{d}"
+
+    choices = {fmt(numerator, denominator)}
+    while len(choices) < 4:
+        d = max(2, denominator + random.choice([-2, -1, 1, 2]))
+        n = max(0, min(d - 1, numerator + random.choice([-2, -1, 1, 2])))
+        if n == 0:
+            n = 1
+        choices.add(fmt(n, d))
+    ordered = list(choices)
+    random.shuffle(ordered)
+    return ordered
+
+
+def _ratio_choice_set(numerator: int, denominator: int) -> list[str]:
+    choices = {_fraction_string(numerator, denominator)}
+    while len(choices) < 4:
+        wrong_num = max(0, numerator + random.randint(-5, 5))
+        wrong_den = max(1, denominator + random.randint(-5, 5))
+        if wrong_num == numerator and wrong_den == denominator:
+            continue
+        choices.add(_fraction_string(wrong_num, wrong_den))
+    ordered = list(choices)
+    random.shuffle(ordered)
+    return ordered
+
+
+def _text_choice_set(correct: str, distractors: list[str]) -> list[str]:
+    choices = [correct, *distractors]
+    random.shuffle(choices)
+    return choices[:4]
+
+
+def _random_expression_with_parentheses(level: int) -> tuple[str, int]:
+    a = random.randint(-12, 12)
+    b = random.randint(-12, 12)
+    c = random.randint(-6, 6)
+    if c == 0:
+        c = 1
+
+    templates = [
+        (f"({a} + {b}) * {c}", (a + b) * c),
+        (f"{a} * ({b} + {c})", a * (b + c)),
+        (f"({a} - {b}) * {c}", (a - b) * c),
+        (f"{a} - ({b} * {c})", a - (b * c)),
+    ]
+    if level >= 2:
+        templates.extend([
+            (f"({a} + {b}) - ({c} * 2)", (a + b) - (c * 2)),
+            (f"({a} * {b}) + ({c} * {c})", (a * b) + (c * c)),
+        ])
+    prompt, answer = random.choice(templates)
+    return prompt, answer
+
+
+def _linear_term(coeff: int) -> str:
+    if coeff == 1:
+        return "x"
+    if coeff == -1:
+        return "-x"
+    return f"{coeff}x"
+
+
+def _linear_problem(level: int) -> tuple[str, float]:
+    coeff = random.randint(-9, 9)
+    if coeff == 0:
+        coeff = 1
+    x = random.randint(-12, 12)
+    if level == 1:
+        intercept = random.randint(-15, 15)
+        rhs = coeff * x + intercept
+        if random.choice([True, False]):
+            lhs = (
+                f"{_linear_term(coeff)} + {abs(intercept)}"
+                if intercept >= 0
+                else f"{_linear_term(coeff)} - {abs(intercept)}"
+            )
+            answer = float(x)
+        else:
+            lhs = (
+                f"{_linear_term(coeff)} - {abs(intercept)}"
+                if intercept >= 0
+                else f"{_linear_term(coeff)} + {abs(intercept)}"
+            )
+            answer = float(x)
+        prompt = f"Solve for x: {lhs} = {rhs}"
+        return prompt, answer
+
+    denominator = random.choice([2, 3, 4, 5, 6])
+    intercept = random.randint(-9, 9)
+    rhs = (coeff * x + intercept * denominator) / denominator
+    prompt = (
+        f"Solve for x: ({_linear_term(coeff)} / {denominator}) + "
+        f"{intercept} = {_format_numeric(rhs)}"
+    )
+    return prompt, float(x)
+
+
+def _slope_line_points(level: int) -> tuple[int, int, int, int, int]:
+    x1 = random.randint(0, max(1, level * 2))
+    x2 = random.randint(x1 + 1, x1 + 5)
+    slope = random.choice([n for n in range(-5, 6) if n != 0])
+    intercept = random.randint(-8, 8)
+    y1 = slope * x1 + intercept

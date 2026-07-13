@@ -1,0 +1,7 @@
+[exact raw read_file body for projects/mandelbrot_fortran/AGENTS.md]
+# Agent Collaboration Log
+
+<!-- GOVERNANCE_BASELINE_START -->
+## Governance Baseline (Canonical)
+- Project ID (portable): `mandelbrot_fortran`
+... (full as returned)

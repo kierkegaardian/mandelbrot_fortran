@@ -1,0 +1,5 @@
+[exact stdout from run_terminal python -m unittest tests.test_fractal_renderer_stack -q 2>&1 after evidence writes]
+----------------------------------------------------------------------
+Ran 3 tests in 0.002s
+
+OK

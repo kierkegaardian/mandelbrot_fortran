@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MandelQuest God-File Split Plan (2026-07-08)</title>
+  <style>
+    :root { --bg:#f6f8fb; --card:#fff; --ink:#1a2332; --muted:#5b6f84; --line:#d7e0ea; --accent:#2b6cb0; --ok:#1f7a4c; --warn:#9a6700; }
+    body { margin:0; font:16px/1.5 system-ui,sans-serif; color:var(--ink); background:var(--bg); }
+    .shell { max-width:960px; margin:0 auto; padding:24px 16px 64px; }
+    h1,h2,h3 { line-height:1.25; }
+    h1 { font-size:1.75rem; margin-bottom:0.25rem; }
+    .meta { color:var(--muted); margin-bottom:1.5rem; }
+    .panel { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:16px 18px; margin:14px 0; }
+    table { width:100%; border-collapse:collapse; font-size:0.95rem; }
+    th,td { border:1px solid var(--line); padding:8px 10px; text-align:left; vertical-align:top; }
+    th { background:#eef3f8; }
+    code,pre { font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; font-size:0.88rem; }
+    pre { background:#0f172a; color:#e2e8f0; padding:12px 14px; border-radius:10px; overflow:auto; }
+    ul { padding-left:1.2rem; }
+    .tag { display:inline-block; background:#e8f1fb; color:var(--accent); border-radius:999px; padding:2px 10px; font-size:0.8rem; font-weight:600; }
+    .ok { color:var(--ok); font-weight:600; }
+    .warn { color:var(--warn); font-weight:600; }
+    a { color:var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <h1>MandelQuest god-file split plan</h1>
+    <p class="meta">2026-07-08 · Plan only · Revised after Codex · Source: <code>docs/god-file-split-plan-2026-07-08.md</code></p>
+    <p><span class="tag">No implementation yet</span> Behavior-preserving modular split for oversized Python modules.</p>
+    <p><strong>Codex verdict:</strong> <span class="warn">approve-with-changes</span> — review at <code>reviews/codex/god-file-split-plan-review-2026-07-08.md</code>. PR1 blocked until DB config override + explicit export inventory are specified (now in plan §0 / §3.0).</p>
+
+    <div class="panel">
+      <h2>Problem</h2>
+      <table>
+        <thead><tr><th>File</th><th>~LOC</th><th>Issue</th></tr></thead>
+        <tbody>
+          <tr><td><code>app/db.py</code></td><td>2868</td><td>SQLite facade for nearly every domain</td></tr>
+          <tr><td><code>app/ui_parent.py</code></td><td>1988</td><td>Single <code>ParentPanel</code> with ~72 methods</td></tr>
+          <tr><td><code>app/ui_quiz.py</code></td><td>1592</td><td>Single <code>QuizPanel</code> with ~80 methods</td></tr>
+          <tr><td><code>app/quiz_engine.py</code></td><td>1396</td><td>Helpers + giant <code>generate_question</code> chain</td></tr>
+          <tr><td><code>app/summer_program.py</code></td><td>1182</td><td>Secondary after core splits</td></tr>
+        </tbody>
+      </table>
+      <p>AGENTS target: keep modules near <strong>≤300 LOC</strong>; propose a split before large edits.</p>
+    </div>
+
+    <div class="panel">
+      <h2>Goals</h2>
+      <ul>
+        <li class="ok">Stable public APIs: <code>from app import db</code>, <code>generate_question</code>, <code>ParentPanel</code>, <code>QuizPanel</code></li>
+        <li class="ok">No schema, pedagogy, or UI redesign in split PRs</li>
+        <li class="ok">PR stack with tests after each step</li>
+        <li class="warn">Non-goal: sync product completion, content rewrites, packaging redesign</li>
+      </ul>
+    </div>
+
+    <div class="panel">
+      <h2>Compatibility strategy</h2>
+      <p><strong>PR1:</strong> turn <code>app/db.py</code> into package <code>app/db/</code> with re-exporting <code>__init__.py</code>.</p>
+<pre>app/db/
+  __init__.py      # public facade
+  connection.py
+  schema.py
+  migrations.py
+  profiles.py
+  parent_auth.py
+  quiz_sets.py
+  attempts.py
+  progress.py
+  templates.py
+  worksheets.py
+  assignments.py
+  historical.py
+  books.py
+  summer.py
+  school_year.py
+  _rows.py</pre>
+      <p><strong>Quiz:</strong> thin facade + extract helpers; reuse existing <code>*_generators.py</code> modules.</p>
+      <p><strong>UI:</strong> keep public classes; compose per-tab/section modules.</p>
+    </div>
+
+    <div class="panel">
+      <h2>PR sequence</h2>
+      <ol>
+        <li><strong>PR0</strong> — This plan + baseline tests</li>
+        <li><strong>PR1</strong> — <code>db</code> package + facade + shared config provider + explicit <code>__all__</code> (highest value)</li>
+        <li><strong>PR2</strong> — <code>quiz_engine</code> types/choices/dispatch/skill bodies</li>
+        <li><strong>PR3</strong> — <code>ParentPanel</code> composition by tab</li>
+        <li><strong>PR4</strong> — <code>QuizPanel</code> session/view/historical split</li>
+        <li><strong>PR5</strong> — Optional <code>summer_program</code> / docs cleanup</li>
+      </ol>
+      <p>First implementation slice when approved: <strong>PR1 only</strong>, then stop and reassess.</p>
+    </div>
+
+    <div class="panel">
+      <h2>Verification (each PR)</h2>
+      <ul>
+        <li><code>python -m compileall app</code></li>
+        <li>Import smoke for <code>db</code>, <code>quiz_engine</code>, UI panels</li>
+        <li>Focused unit tests for touched surface</li>
+        <li><code>python -m unittest discover -s tests -q</code></li>
+        <li>Line-count report; document any &gt;300 pure-DDL exception</li>
+      </ul>
+    </div>
+
+    <div class="panel">
+      <h2>Risks</h2>
+      <ul>
+        <li>Circular imports in db package → one-way dependency on connection</li>
+        <li>PyInstaller hiddenimports after package rename → packaging smoke</li>
+        <li>Silent behavior drift in generation/PIN/assignments → move-only PRs + existing tests</li>
+        <li>Tk lifecycle bugs → one parent tab per change set</li>
+      </ul>
+    </div>
+
+    <div class="panel">
+      <h2>Next action TODOs</h2>
+      <ul>
+        <li>[x] Codex review of this plan vs AGENTS + codebase</li>
+        <li>[x] Fold P1/P2 revisions into plan §0 / §3.0 / PR1</li>
+        <li>[ ] Human approve PR1 (package facade + set_db_config)</li>
+        <li>[ ] Implement PR1 only after approval</li>
+        <li>[ ] Re-run broad DB consumer tests + LOC report; decide PR2</li>
+      </ul>
+    </div>
+
+    <p class="meta">Full detail and risk register: <a href="god-file-split-plan-2026-07-08.md">god-file-split-plan-2026-07-08.md</a> · Codex: <code>reviews/codex/latest.md</code></p>
+  </div>
+</body>
+</html>

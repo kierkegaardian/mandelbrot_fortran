@@ -1,0 +1,102 @@
+
+
+from __future__ import annotations
+
+import ast
+import math
+import random
+from dataclasses import dataclass
+
+from .models import QuestionTemplate, TemplateVar
+
+
+@dataclass(frozen=True)
+class InstantiatedTemplate:
+    prompt: str
+    answer: str
+    explanation: str
+    numeric_answer: float | None
+
+
+def instantiate_template(
+    template: QuestionTemplate, vars_spec: list[TemplateVar], *, rng: random.Random
+) -> InstantiatedTemplate:
+    values = _sample_with_constraints(template.constraint_expr, vars_spec, rng=rng)
+
+    numeric = _safe_eval_numeric(template.answer_expr, values)
+    answer = _format_numeric(numeric)
+    prompt = template.prompt_template.format_map(_format_map(values))
+    explanation = template.explanation_template.format_map(_format_map(values))
+    return InstantiatedTemplate(prompt=prompt, answer=answer, explanation=explanation, numeric_answer=float(numeric))
+
+
+def mc_choices(numeric_answer: float, *, spread: float, rng: random.Random) -> list[str]:
+    # Numeric-only baseline. We can add domain-specific distractors later.
+    correct = float(numeric_answer)
+    if abs(correct - round(correct)) < 1e-9:
+        correct_int = int(round(correct))
+        return _int_choice_set(correct_int, spread=max(2, int(round(spread))), rng=rng)
+    return _float_choice_set(correct, spread=max(0.5, float(spread)), rng=rng)
+
+
+def _format_map(values: dict[str, float]) -> dict[str, str]:
+    out: dict[str, str] = {}
+    for k, v in values.items():
+        out[k] = _format_numeric(v)
+    return out
+
+
+def _sample_var(var: TemplateVar, *, rng: random.Random) -> float:
+    lo = float(var.min_value)
+    hi = float(var.max_value)
+    step = float(var.step) if float(var.step) > 0 else 1.0
+    if hi < lo:
+        lo, hi = hi, lo
+
+    if var.kind == "int":
+        ilo = int(math.ceil(lo))
+        ihi = int(math.floor(hi))
+        if ihi < ilo:
+            ihi = ilo
+        candidates = list(range(ilo, ihi + 1, max(1, int(round(step)))))
+        return float(rng.choice(candidates))
+
+    # float kind
+    if abs(step - round(step)) < 1e-9:
+        step = float(int(round(step)))
+    steps = int(max(0, math.floor((hi - lo) / step)))
+    return lo + rng.randint(0, max(0, steps)) * step
+
+
+def _format_numeric(value: float) -> str:
+    rounded = round(float(value), 3)
+    if abs(rounded - round(rounded)) < 1e-9:
+        return str(int(round(rounded)))
+    text = f"{rounded:.3f}".rstrip("0").rstrip(".")
+    return text
+
+
+def _int_choice_set(correct: int, *, spread: int, rng: random.Random) -> list[str]:
+    correct = int(correct)
+    spread = max(1, int(spread))
+    choices: set[int] = {correct}
+
+    deltas = [d for d in range(-spread, spread + 1) if d != 0]
+    rng.shuffle(deltas)
+    for d in deltas:
+        if len(choices) >= 4:
+            break
+        choices.add(correct + d)
+
+    # Deterministic fallback to guarantee termination.
+    step = spread + 1
+    while len(choices) < 4:
+        choices.add(correct + step)
+        if len(choices) >= 4:
+            break
+        choices.add(correct - step)
+        step += 1
+
+    ordered = list(choices)
+    rng.shuffle(ordered)
+    return [str(c) for c in ordered]
