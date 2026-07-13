@@ -1023,3 +1023,35 @@ python -m unittest discover -s tests -q
 
 The untouched baseline consumer run passed 65 tests; the post-change consumer/contract run passed 68 tests;
 the app smoke test reported `[smoke-test] OK`; and full discovery passed 347 tests.
+
+## Latest PR1 Database Package Split Receipt
+
+The first god-file split is complete and behavior-preserving.
+
+- The verified pre-split product state is checkpointed on branch
+  `codex/worktree-checkpoint-2026-07-13` at commit `9fb3665`.
+- The former 3,058-line `app/db.py` monolith is replaced by an explicit `app/db/` package. Its static
+  `__init__.py` facade preserves all 88 frozen exports, while 19 implementation modules separate connection,
+  schema, migration, profile/auth, quiz, progress, historical/template, worksheet/assignment, and Summer
+  Program concerns.
+- Every DB package file is at or below 290 lines. `migrations.py` is 290 lines, `schema.py` is 283, and
+  `migration_helpers.py` is 262, resolving the migration-size concern without a `>400`-line exception.
+- The shared config provider remains owned by `connection.py`; all domain modules import the same
+  `managed_connection()` boundary, so scoped test overrides cannot fall through to the default database.
+- Static equivalence checks confirm all 82 public function signatures and all 153 SQL literals match the
+  checkpoint source exactly. No SQL literal was added or removed.
+
+Verification passed:
+
+```bash
+python -m py_compile app/db/*.py
+python -m unittest -q tests.test_db_split_contract tests.test_db_parent_auth_and_progress tests.test_db_assignment_semantics tests.test_db_sync_migration tests.test_sync_store tests.test_sync_service tests.test_summer_program tests.test_summer_program_templates tests.test_school_year tests.test_fall_readiness_audit tests.test_content_audit tests.test_mastery_truthfulness
+python scripts/template_catalog.py --help
+python scripts/import_template_manifest.py --help
+python scripts/ingest_textbook.py --help
+python -m app.main --smoke-test
+python -m unittest discover -s tests -q
+```
+
+The broad DB-consumer set passed 68 tests, all three script smokes passed, app smoke reported
+`[smoke-test] OK`, and full discovery passed 347 tests.
