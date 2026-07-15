@@ -27,6 +27,16 @@ def _ensure_sync_schema(conn: sqlite3.Connection) -> None:
         );
         """
     )
+    conn.execute(
+        """
+        CREATE TABLE IF NOT EXISTS sync_tombstones (
+            entity_type TEXT NOT NULL,
+            entity_sync_id TEXT NOT NULL,
+            deleted_at TEXT NOT NULL,
+            PRIMARY KEY (entity_type, entity_sync_id)
+        );
+        """
+    )
 
 
 def _ensure_sync_columns(conn: sqlite3.Connection, table: str, source_timestamp_column: str | None) -> None:

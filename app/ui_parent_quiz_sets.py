@@ -5,7 +5,7 @@ from __future__ import annotations
 import tkinter as tk
 from tkinter import messagebox, ttk
 
-from . import db
+from . import sync_service
 from .quiz_engine import SKILLS
 from .time_utils import now_iso
 from .ui_widgets import int_spinbox
@@ -73,7 +73,7 @@ class ParentQuizSetsMixin:
         ttk.Button(self.quiz_tab, text="Delete Selected", command=self._delete_quiz_set).pack(pady=2)
         ttk.Button(self.quiz_tab, text="Add Default Quiz Sets", command=self._add_default_quiz_sets).pack(pady=(6, 2))
     def _refresh_quiz_sets(self) -> None:
-        self._quiz_sets = db.list_quiz_sets()
+        self._quiz_sets = sync_service.list_quiz_sets()
         self.quiz_list.delete(0, tk.END)
         for qset in self._quiz_sets:
             mix = ""
@@ -111,7 +111,7 @@ class ParentQuizSetsMixin:
         if not name:
             messagebox.showerror("Missing name", "Please enter a quiz name.")
             return
-        db.create_quiz_set(
+        sync_service.create_quiz_set(
             name,
             self.quiz_skill.get(),
             self.quiz_type.get(),
@@ -129,7 +129,7 @@ class ParentQuizSetsMixin:
         self._refresh_quiz_sets()
 
     def _add_default_quiz_sets(self) -> None:
-        existing = {q.name for q in db.list_quiz_sets()}
+        existing = {q.name for q in sync_service.list_quiz_sets()}
         defaults = [
             ("Counting Basics", "counting"),
             ("Add/Subtract Basics", "add_subtract"),
@@ -158,7 +158,7 @@ class ParentQuizSetsMixin:
         for name, skill in defaults:
             if name in existing:
                 continue
-            db.create_quiz_set(name, skill, "both", 8, 1, now_iso())
+            sync_service.create_quiz_set(name, skill, "both", 8, 1, now_iso())
             added += 1
         if added == 0:
             messagebox.showinfo("Defaults", "Default quiz sets already exist.")
@@ -174,7 +174,7 @@ class ParentQuizSetsMixin:
         qset = self._quiz_sets[selection[0]]
         if not messagebox.askyesno("Confirm delete", f"Delete quiz set '{qset.name}'?"):
             return
-        db.delete_quiz_set(qset.id)
+        sync_service.delete_quiz_set(qset.id, now_iso())
         self._refresh_quiz_sets()
     def _load_quiz_set(self) -> None:
         selection = self.quiz_list.curselection()
@@ -208,7 +208,7 @@ class ParentQuizSetsMixin:
         if not name:
             messagebox.showerror("Missing name", "Please enter a quiz name.")
             return
-        db.update_quiz_set(
+        sync_service.update_quiz_set(
             qset.id,
             name,
             self.quiz_skill.get(),
@@ -221,6 +221,7 @@ class ParentQuizSetsMixin:
                 self.quiz_mode_expression.get(),
                 self.quiz_mode_word.get(),
             ),
+            updated_at=now_iso(),
         )
         self._refresh_quiz_sets()
 def _mode_mix_or_none(enabled: bool, intuition: int, expression: int, word: int) -> tuple[int | None, int | None, int | None]:

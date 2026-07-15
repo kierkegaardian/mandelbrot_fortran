@@ -25,7 +25,7 @@ class ShellShortcutsMixin:
         self.root.bind_all("<Alt-i>", self._shortcut_quiz_intuition)
         self.root.bind_all("<Alt-d>", self._shortcut_dashboard_daily)
         self.root.bind_all("<Alt-a>", self._shortcut_dashboard_assignment)
-        for index in range(5):
+        for index in range(6):
             self.root.bind_all(
                 f"<Alt-Key-{index + 1}>",
                 lambda _event, selected=index: self._shortcut_parent_tab(selected),

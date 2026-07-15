@@ -8,6 +8,7 @@ from .explanations import PARENT_EXPLANATION
 from .models import Profile
 from .parent_worksheets import WorksheetSection
 from .ui_explain import ExplanationPanel
+from .ui_family_sync import FamilySyncSettings
 from .ui_parent_assignment_actions import ParentAssignmentActionsMixin
 from .ui_parent_assignment_view import ParentAssignmentViewMixin
 from .ui_parent_profiles import ParentProfilesMixin
@@ -47,11 +48,13 @@ class ParentPanel(
         self.grades_tab = ttk.Frame(self.tabs)
         self.assignments_tab = ttk.Frame(self.tabs)
         self.worksheets_tab = ttk.Frame(self.tabs)
+        self.sync_tab = ttk.Frame(self.tabs)
         self.tabs.add(self.profile_tab, text="Profiles")
         self.tabs.add(self.quiz_tab, text="Quiz Sets")
         self.tabs.add(self.grades_tab, text="Grades")
         self.tabs.add(self.assignments_tab, text="Assignments")
         self.tabs.add(self.worksheets_tab, text="Worksheets")
+        self.tabs.add(self.sync_tab, text="Family Sync")
 
         self._build_profiles_tab()
         self._build_quiz_tab()
@@ -60,6 +63,7 @@ class ParentPanel(
         self.worksheets = WorksheetSection(
             self.worksheets_tab, self._profile_getter
         )
+        self.family_sync = FamilySyncSettings(self.sync_tab, self._profile_getter)
         self._refresh_profiles()
         self._refresh_quiz_sets()
         self.explain = ExplanationPanel(frame)
@@ -88,6 +92,7 @@ class ParentPanel(
             2: self._refresh_grades,
             3: self._refresh_assignments,
             4: self.worksheets.refresh_quiz_sets,
+            5: self.family_sync.refresh,
         }
         refreshers[self._active_parent_tab_index()]()
 
@@ -109,6 +114,7 @@ class ParentPanel(
             2: self.profile_combo,
             3: self.assignment_profile_combo,
             4: self.worksheets.ws_combo,
+            5: self.family_sync.sync_enabled_btn,
         }
         controls[self._active_parent_tab_index()].focus_set()
 

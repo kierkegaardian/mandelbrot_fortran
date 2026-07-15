@@ -5,7 +5,7 @@ from __future__ import annotations
 import tkinter as tk
 from tkinter import messagebox
 
-from . import db
+from . import sync_service
 from .skill_graph import SKILL_LABELS, subskills_for
 from .time_utils import now_iso
 
@@ -14,7 +14,7 @@ class ParentAssignmentActionsMixin:
     def _refresh_profiles_for_grades(self) -> None:
         if not hasattr(self, "profile_combo"):
             return
-        profiles = db.list_profiles()
+        profiles = sync_service.list_profiles()
         labels = [p.name for p in profiles]
         self._profile_map = {p.name: p for p in profiles}
         self.profile_combo.configure(values=labels)
@@ -22,7 +22,7 @@ class ParentAssignmentActionsMixin:
     def _refresh_profiles_for_assignments(self) -> None:
         if not hasattr(self, "assignment_profile_combo"):
             return
-        profiles = [p for p in db.list_profiles() if p.role == "child"]
+        profiles = [p for p in sync_service.list_profiles() if p.role == "child"]
         labels = [p.name for p in profiles]
         self._assignment_profile_map = {p.name: p for p in profiles}
         self.assignment_profile_combo.configure(values=labels)
@@ -54,7 +54,7 @@ class ParentAssignmentActionsMixin:
             self.assignment_mode_expression.get(),
             self.assignment_mode_word.get(),
         )
-        db.create_assignment(
+        sync_service.create_assignment(
             profile_id=profile.id,
             skill=self.assignment_skill.get().strip(),
             subskill=subskill,
@@ -84,13 +84,13 @@ class ParentAssignmentActionsMixin:
         skill_filter = None if self.assignment_filter_skill.get() == "All" else self.assignment_filter_skill.get()
         target_filter = None if self.assignment_filter_target.get() == "All" else self.assignment_filter_target.get()
         done_limit = int(self.assignment_done_limit.get())
-        self._active_assignments = db.list_assignments(
+        self._active_assignments = sync_service.list_assignments(
             profile.id,
             active_only=True,
             skill=skill_filter,
             target_type=target_filter,
         )
-        self._done_assignments = db.list_assignments(
+        self._done_assignments = sync_service.list_assignments(
             profile.id,
             active_only=False,
             skill=skill_filter,
@@ -101,7 +101,9 @@ class ParentAssignmentActionsMixin:
             self.assignments_active_list.insert(tk.END, _assignment_label(a))
         for a in self._done_assignments:
             self.assignments_done_list.insert(tk.END, _assignment_label(a))
-        analytics = db.assignment_completion_analytics(profile.id, recent_days=int(self.assignment_recent_days.get()))
+        analytics = sync_service.assignment_completion_analytics(
+            profile.id, recent_days=int(self.assignment_recent_days.get())
+        )
         avg_hours = analytics.get("avg_completion_hours")
         avg_text = "n/a" if avg_hours is None else f"{(float(avg_hours) / 24.0):.1f}d avg complete"
         top = analytics.get("top_completed_skills", [])
@@ -126,7 +128,7 @@ class ParentAssignmentActionsMixin:
             messagebox.showerror("Select assignment", "Choose an active assignment to complete.")
             return
         assignment = self._active_assignments[sel[0]]
-        db.set_assignment_active(assignment.id, False, completed_at=now_iso())
+        sync_service.complete_assignment(assignment.id, now_iso())
         self._refresh_assignments()
 
     def _refresh_grades(self) -> None:
@@ -134,7 +136,7 @@ class ParentAssignmentActionsMixin:
         profile = self._profile_map.get(name)
         if profile is None:
             return
-        attempts = db.list_attempts(profile.id)
+        attempts = sync_service.list_attempts(profile.id)
         self.grades_list.delete(0, tk.END)
         for attempt in attempts:
             self.grades_list.insert(

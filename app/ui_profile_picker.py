@@ -3,7 +3,7 @@ from __future__ import annotations
 import tkinter as tk
 from tkinter import messagebox, ttk
 
-from . import db
+from . import db, sync_service
 from .models import Profile
 from .time_utils import now_iso
 
@@ -103,7 +103,7 @@ class ProfilePicker:
             messagebox.showerror("Missing name", "Please enter a name.")
             return
         try:
-            db.create_profile(name, role, now_iso())
+            sync_service.create_profile(name, role, now_iso())
         except Exception as exc:  # noqa: BLE001
             messagebox.showerror("Could not create profile", str(exc))
             return

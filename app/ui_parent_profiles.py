@@ -5,7 +5,7 @@ from __future__ import annotations
 import tkinter as tk
 from tkinter import messagebox, ttk
 
-from . import db
+from . import db, sync_service
 from .time_utils import now_iso
 from .ui_settings import (
     load_ui_settings,
@@ -69,7 +69,7 @@ class ParentProfilesMixin:
         )
 
     def _refresh_profiles(self) -> None:
-        self._profiles = db.list_profiles()
+        self._profiles = sync_service.list_profiles()
         self.profile_list.delete(0, tk.END)
         for profile in self._profiles:
             self.profile_list.insert(tk.END, f"{profile.name} ({profile.role})")
@@ -109,7 +109,7 @@ class ParentProfilesMixin:
         if not name:
             messagebox.showerror("Missing name", "Please enter a name.")
             return
-        db.create_profile(name, role, now_iso())
+        sync_service.create_profile(name, role, now_iso())
         self.profile_name.delete(0, tk.END)
         self._refresh_profiles()
     def _delete_profile(self) -> None:
@@ -126,5 +126,5 @@ class ParentProfilesMixin:
             return
         if not messagebox.askyesno("Confirm delete", f"Delete profile '{profile.name}' and its grades?"):
             return
-        db.delete_profile(profile.id)
+        sync_service.delete_profile(profile.id, now_iso())
         self._refresh_profiles()

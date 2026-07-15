@@ -1,15 +1,32 @@
-"""Stable application service boundary; Family Sync is added in the next slice."""
+"""Stable application service boundary for canonical sync-aware mutations."""
 
 from __future__ import annotations
 
 from dataclasses import dataclass
 from typing import Sequence
 
+from . import db, sync_client, sync_runner, sync_state, sync_store
 from .db.quiz_completion import (
     CompletionQuestion,
     CompletionRequest,
     record_completed_quiz_atomic,
 )
+from .models import Assignment, Profile, QuizAttempt, QuizSet
+from .sync_mutations_assignments import (
+    complete_assignment,
+    create_assignment,
+)
+from .sync_mutations_profiles import (
+    create_profile,
+    delete_profile as _delete_profile,
+)
+from .sync_mutations_quiz_sets import (
+    create_quiz_set,
+    delete_quiz_set as _delete_quiz_set,
+    update_quiz_set as _update_quiz_set,
+)
+from .sync_service_types import PairingActionResult, SyncRunResult
+from .time_utils import now_iso
 
 
 @dataclass(frozen=True)
@@ -89,8 +106,113 @@ def record_completed_quiz(
     )
 
 
+def list_profiles() -> list[Profile]:
+    return db.list_profiles()
+
+
+def delete_profile(profile_id: int, deleted_at: str | None = None) -> None:
+    _delete_profile(profile_id, deleted_at or now_iso())
+
+
+def list_quiz_sets() -> list[QuizSet]:
+    return db.list_quiz_sets()
+
+
+def update_quiz_set(
+    quiz_set_id: int,
+    name: str,
+    skill: str,
+    question_type: str,
+    num_questions: int,
+    level: int,
+    mode_intuition_pct: int | None = None,
+    mode_expression_pct: int | None = None,
+    mode_word_pct: int | None = None,
+    updated_at: str | None = None,
+) -> None:
+    _update_quiz_set(
+        quiz_set_id,
+        name,
+        skill,
+        question_type,
+        num_questions,
+        level,
+        mode_intuition_pct,
+        mode_expression_pct,
+        mode_word_pct,
+        updated_at or now_iso(),
+    )
+
+
+def delete_quiz_set(quiz_set_id: int, deleted_at: str | None = None) -> None:
+    _delete_quiz_set(quiz_set_id, deleted_at or now_iso())
+
+
+def list_assignments(
+    profile_id: int,
+    active_only: bool | None = True,
+    *,
+    skill: str | None = None,
+    target_type: str | None = None,
+    limit: int | None = None,
+) -> list[Assignment]:
+    return db.list_assignments(
+        profile_id,
+        active_only=active_only,
+        skill=skill,
+        target_type=target_type,
+        limit=limit,
+    )
+
+
+def assignment_completion_analytics(
+    profile_id: int, recent_days: int = 30
+) -> dict[str, object]:
+    return db.assignment_completion_analytics(profile_id, recent_days=recent_days)
+
+
+def get_next_active_assignment(profile_id: int) -> Assignment | None:
+    return db.get_next_active_assignment(profile_id)
+
+
+def list_attempts(profile_id: int) -> list[QuizAttempt]:
+    return db.list_attempts(profile_id)
+
+
+def sync_now(parent_profile_id: int | None = None) -> SyncRunResult:
+    return sync_runner.sync_now(parent_profile_id)
+
+
+def start_family_sync(parent_profile_id: int | None = None) -> PairingActionResult:
+    return sync_runner.start_family_sync(parent_profile_id)
+
+
+def join_family_sync(
+    pairing_token: str, parent_profile_id: int | None = None
+) -> PairingActionResult:
+    return sync_runner.join_family_sync(pairing_token, parent_profile_id)
+
+
 __all__ = (
+    "PairingActionResult",
     "QuestionResultInput",
     "RecordCompletedQuizResult",
+    "SyncRunResult",
+    "assignment_completion_analytics",
+    "complete_assignment",
+    "create_assignment",
+    "create_profile",
+    "create_quiz_set",
+    "delete_profile",
+    "delete_quiz_set",
+    "get_next_active_assignment",
+    "join_family_sync",
+    "list_assignments",
+    "list_attempts",
+    "list_profiles",
+    "list_quiz_sets",
     "record_completed_quiz",
+    "start_family_sync",
+    "sync_now",
+    "update_quiz_set",
 )
