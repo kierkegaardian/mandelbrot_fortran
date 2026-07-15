@@ -1,0 +1,221 @@
+{
+  "public_signatures": {
+    "add_exercise_candidate": "book_id: int, location: str, text: str, status: str, created_at: str",
+    "add_question_result": "attempt_id: int, skill: str, question_label: str, mode: str, prompt: str, correct_answer: str, user_answer: str, is_correct: bool, explanation: str",
+    "add_template_var": "template_id: int, name: str, kind: str, min_value: float, max_value: float, step: float",
+    "apply_historical_answer_key": "*, exam_code: str, answers: dict[int, str]",
+    "assignment_completion_analytics": "profile_id: int, recent_days: int=30",
+    "connect": "",
+    "create_assignment": "profile_id: int, skill: str, subskill: str | None, target_type: str, target_value: float, level: int, num_questions: int, question_type: str, mode_intuition_pct: int | None, mode_expression_pct: int | None, mode_word_pct: int | None, notes: str, created_at: str",
+    "create_attempt": "profile_id: int, quiz_set_id: Optional[int], skill: str, question_type: str, num_questions: int, level: int, score: int, created_at: str, elapsed_seconds: float | None=None",
+    "create_book": "title: str, source: str, pdf_filename: str, created_at: str",
+    "create_profile": "name: str, role: str, created_at: str",
+    "create_question_template": "*, book_id: int | None, external_id: str | None, skill: str, subskill: str, label: str, mode: str, prompt_template: str, answer_expr: str, constraint_expr: str, explanation_template: str, min_level: int, max_level: int, choice_spread: float, active: bool, created_at: str",
+    "create_quiz_set": "name: str, skill: str, question_type: str, num_questions: int, level: int, created_at: str, mode_intuition_pct: int | None=None, mode_expression_pct: int | None=None, mode_word_pct: int | None=None",
+    "create_worksheet": "profile_id: int, quiz_set_id: Optional[int], skill: str, question_type: str, num_questions: int, level: int, file_path: str, created_at: str",
+    "daily_goal_status": "profile_id: int, now_iso_text: str | None=None",
+    "db_config": "",
+    "delete_profile": "profile_id: int",
+    "delete_quiz_set": "quiz_set_id: int",
+    "delete_template_by_external_id": "external_id: str",
+    "delete_templates_by_identity": "*, skill: str, subskill: str, label: str",
+    "evaluate_assignments_for_attempt": "profile_id: int, attempt_id: int, completed_at: str",
+    "get_next_active_assignment": "profile_id: int",
+    "init_db": "",
+    "list_all_question_templates": "active_only: bool=True",
+    "list_assignments": "profile_id: int, active_only: bool | None=True, *, skill: str | None=None, target_type: str | None=None, limit: int | None=None",
+    "list_attempts": "profile_id: int",
+    "list_books": "",
+    "list_daily_goal_history": "profile_id: int, limit: int=60",
+    "list_exercise_candidates": "book_id: int, status: str='new', limit: int=200",
+    "list_historical_questions": "*, exam_type: str='all', category: str='all', limit: int=50",
+    "list_historical_questions_for_test": "test_id: int",
+    "list_historical_tests": "exam_type: str | None=None",
+    "list_profiles": "",
+    "list_question_templates": "skill: str, level: int, subskill: str | None=None, mode: str | None=None",
+    "list_quiz_sets": "",
+    "list_subskill_progress": "profile_id: int, skill: str | None=None",
+    "list_template_vars": "template_id: int",
+    "mode_accuracy_by_skill": "profile_id: int, skill: str",
+    "record_daily_review_completion": "profile_id: int, completed_at: str",
+    "replace_historical_questions": "test_id: int, questions: list[dict[str, object]]",
+    "set_assignment_active": "assignment_id: int, active: bool, completed_at: str | None=None",
+    "skill_progress_pipeline": "profile_id: int",
+    "update_quiz_set": "quiz_set_id: int, name: str, skill: str, question_type: str, num_questions: int, level: int, mode_intuition_pct: int | None=None, mode_expression_pct: int | None=None, mode_word_pct: int | None=None",
+    "upsert_historical_test": "*, exam_code: str, title: str, exam_type: str, year: int | None, pdf_path: str, source: str, created_at: str",
+    "upsert_subskill_progress": "profile_id: int, skill: str, subskill: str, is_correct: bool, updated_at: str, streak_to_master: int"
+  },
+  "source": "311f3ec:app/db.py",
+  "sql_literals_by_function": {
+    "_ensure_column": [
+      "f'PRAGMA table_info({table})'",
+      "f'ALTER TABLE {table} ADD COLUMN {column} {ddl}'"
+    ],
+    "_ensure_external_id_unique_index": [
+      "'\\n        CREATE UNIQUE INDEX IF NOT EXISTS idx_question_templates_external_id\\n        ON question_templates(external_id)\\n        WHERE external_id IS NOT NULL;\\n        '"
+    ],
+    "_ensure_historical_indexes": [
+      "'\\n        CREATE INDEX IF NOT EXISTS idx_historical_questions_test_qnum\\n        ON historical_questions(test_id, question_number);\\n        '",
+      "'\\n        CREATE INDEX IF NOT EXISTS idx_historical_questions_category\\n        ON historical_questions(category);\\n        '"
+    ],
+    "_rewrite_skill_id": [
+      "f'UPDATE {table} SET {column} = ? WHERE {column} = ?'"
+    ],
+    "_run_migrations": [
+      "'\\n        CREATE TABLE IF NOT EXISTS schema_version (\\n            id INTEGER PRIMARY KEY CHECK(id = 1),\\n            version INTEGER NOT NULL\\n        );\\n        '",
+      "'SELECT version FROM schema_version WHERE id = 1'",
+      "'INSERT INTO schema_version (id, version) VALUES (1, 0)'",
+      "'UPDATE schema_version SET version = 1 WHERE id = 1'",
+      "'UPDATE schema_version SET version = 2 WHERE id = 1'",
+      "\"\\n            CREATE TABLE IF NOT EXISTS assignments (\\n                id INTEGER PRIMARY KEY AUTOINCREMENT,\\n                profile_id INTEGER NOT NULL,\\n                skill TEXT NOT NULL,\\n                subskill TEXT,\\n                target_type TEXT NOT NULL,\\n                target_value REAL NOT NULL DEFAULT 0,\\n                level INTEGER NOT NULL DEFAULT 1,\\n                num_questions INTEGER NOT NULL DEFAULT 5,\\n                question_type TEXT NOT NULL DEFAULT 'both',\\n                mode_intuition_pct INTEGER,\\n                mode_expression_pct INTEGER,\\n                mode_word_pct INTEGER,\\n                active INTEGER NOT NULL DEFAULT 1,\\n                notes TEXT NOT NULL DEFAULT '',\\n                created_at TEXT NOT NULL,\\n                completed_at TEXT,\\n                FOREIGN KEY(profile_id) REFERENCES profiles(id) ON DELETE CASCADE\\n            );\\n            \"",
+      "'UPDATE schema_version SET version = 3 WHERE id = 1'",
+      "'UPDATE schema_version SET version = 4 WHERE id = 1'",
+      "'UPDATE schema_version SET version = 5 WHERE id = 1'",
+      "'UPDATE schema_version SET version = 6 WHERE id = 1'",
+      "'\\n            CREATE TABLE IF NOT EXISTS daily_goal_history (\\n                profile_id INTEGER NOT NULL,\\n                day_utc TEXT NOT NULL,\\n                completions INTEGER NOT NULL DEFAULT 0,\\n                last_completed_at TEXT NOT NULL,\\n                PRIMARY KEY (profile_id, day_utc),\\n                FOREIGN KEY(profile_id) REFERENCES profiles(id) ON DELETE CASCADE\\n            );\\n            '",
+      "'UPDATE schema_version SET version = 7 WHERE id = 1'",
+      "\"\\n            CREATE TABLE IF NOT EXISTS historical_tests (\\n                id INTEGER PRIMARY KEY AUTOINCREMENT,\\n                exam_code TEXT NOT NULL UNIQUE,\\n                title TEXT NOT NULL,\\n                exam_type TEXT NOT NULL,\\n                year INTEGER,\\n                pdf_path TEXT NOT NULL,\\n                source TEXT NOT NULL DEFAULT 'historical_pdf',\\n                created_at TEXT NOT NULL\\n            );\\n            \"",
+      "\"\\n            CREATE TABLE IF NOT EXISTS historical_questions (\\n                id INTEGER PRIMARY KEY AUTOINCREMENT,\\n                test_id INTEGER NOT NULL,\\n                question_number INTEGER NOT NULL,\\n                section TEXT NOT NULL DEFAULT 'General',\\n                category TEXT NOT NULL DEFAULT 'unknown',\\n                prompt TEXT NOT NULL,\\n                choice_a TEXT,\\n                choice_b TEXT,\\n                choice_c TEXT,\\n                choice_d TEXT,\\n                choice_e TEXT,\\n                correct_answer TEXT,\\n                explanation TEXT NOT NULL DEFAULT '',\\n                source_page INTEGER,\\n                FOREIGN KEY(test_id) REFERENCES historical_tests(id) ON DELETE CASCADE\\n            );\\n            \"",
+      "'UPDATE schema_version SET version = 8 WHERE id = 1'",
+      "'UPDATE schema_version SET version = 9 WHERE id = 1'"
+    ],
+    "add_exercise_candidate": [
+      "'\\n            INSERT INTO exercise_candidates (book_id, location, text, status, created_at)\\n            VALUES (?, ?, ?, ?, ?)\\n            '"
+    ],
+    "add_question_result": [
+      "'\\n            INSERT INTO quiz_questions\\n            (attempt_id, skill, question_label, mode, prompt, correct_answer, user_answer, is_correct, explanation)\\n            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)\\n            '"
+    ],
+    "add_template_var": [
+      "'\\n            INSERT INTO template_vars (template_id, name, kind, min_value, max_value, step)\\n            VALUES (?, ?, ?, ?, ?, ?)\\n            '"
+    ],
+    "apply_historical_answer_key": [
+      "'SELECT id FROM historical_tests WHERE exam_code = ?'",
+      "'\\n                UPDATE historical_questions\\n                SET correct_answer = ?\\n                WHERE test_id = ? AND question_number = ?\\n                '"
+    ],
+    "connect": [
+      "'PRAGMA foreign_keys = ON;'"
+    ],
+    "create_assignment": [
+      "'\\n            INSERT INTO assignments\\n            (profile_id, skill, subskill, target_type, target_value, level, num_questions, question_type,\\n             mode_intuition_pct, mode_expression_pct, mode_word_pct, notes, created_at)\\n            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)\\n            '"
+    ],
+    "create_attempt": [
+      "'\\n            INSERT INTO quiz_attempts\\n            (profile_id, quiz_set_id, skill, question_type, num_questions, level, score, elapsed_seconds, created_at)\\n            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)\\n            '"
+    ],
+    "create_book": [
+      "'INSERT INTO books (title, source, pdf_filename, created_at) VALUES (?, ?, ?, ?)'"
+    ],
+    "create_profile": [
+      "'INSERT INTO profiles (name, role, created_at) VALUES (?, ?, ?)'"
+    ],
+    "create_question_template": [
+      "'\\n            INSERT INTO question_templates\\n            (book_id, external_id, skill, subskill, label, mode, prompt_template, answer_expr, constraint_expr, explanation_template,\\n             min_level, max_level, choice_spread, active, created_at)\\n            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)\\n            '"
+    ],
+    "create_quiz_set": [
+      "'\\n            INSERT INTO quiz_sets\\n            (name, skill, question_type, num_questions, level, mode_intuition_pct, mode_expression_pct, mode_word_pct, created_at)\\n            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)\\n            '"
+    ],
+    "create_worksheet": [
+      "'\\n            INSERT INTO worksheets\\n            (profile_id, quiz_set_id, skill, question_type, num_questions, level, file_path, created_at)\\n            VALUES (?, ?, ?, ?, ?, ?, ?, ?)\\n            '"
+    ],
+    "delete_profile": [
+      "'DELETE FROM profiles WHERE id = ?'"
+    ],
+    "delete_quiz_set": [
+      "'DELETE FROM quiz_sets WHERE id = ?'"
+    ],
+    "delete_template_by_external_id": [
+      "'DELETE FROM question_templates WHERE external_id = ?'"
+    ],
+    "delete_templates_by_identity": [
+      "'\\n            DELETE FROM question_templates\\n            WHERE skill = ? AND subskill = ? AND label = ?\\n            '"
+    ],
+    "evaluate_assignments_for_attempt": [
+      "'\\n            SELECT id, profile_id, skill, score, num_questions\\n            FROM quiz_attempts\\n            WHERE id = ? AND profile_id = ?\\n            '",
+      "'\\n            SELECT id, skill, subskill, target_type, target_value\\n            FROM assignments\\n            WHERE profile_id = ? AND active = 1\\n            ORDER BY created_at ASC, id ASC\\n            '",
+      "'\\n                    SELECT mastered\\n                    FROM skill_subskill_progress\\n                    WHERE profile_id = ? AND skill = ? AND subskill = ?\\n                    '",
+      "'UPDATE assignments SET active = 0, completed_at = ? WHERE id = ?'"
+    ],
+    "init_db": [
+      "\"\\n            CREATE TABLE IF NOT EXISTS profiles (\\n                id INTEGER PRIMARY KEY AUTOINCREMENT,\\n                name TEXT NOT NULL,\\n                role TEXT NOT NULL,\\n                created_at TEXT NOT NULL\\n            );\\n\\n            CREATE TABLE IF NOT EXISTS quiz_sets (\\n                id INTEGER PRIMARY KEY AUTOINCREMENT,\\n                name TEXT NOT NULL,\\n                skill TEXT NOT NULL,\\n                question_type TEXT NOT NULL,\\n                num_questions INTEGER NOT NULL,\\n                level INTEGER NOT NULL,\\n                mode_intuition_pct INTEGER,\\n                mode_expression_pct INTEGER,\\n                mode_word_pct INTEGER,\\n                created_at TEXT NOT NULL\\n            );\\n\\n            CREATE TABLE IF NOT EXISTS quiz_attempts (\\n                id INTEGER PRIMARY KEY AUTOINCREMENT,\\n                profile_id INTEGER NOT NULL,\\n                quiz_set_id INTEGER,\\n                skill TEXT NOT NULL,\\n                question_type TEXT NOT NULL,\\n                num_questions INTEGER NOT NULL,\\n                level INTEGER NOT NULL,\\n                score INTEGER NOT NULL,\\n                elapsed_seconds REAL,\\n                created_at TEXT NOT NULL,\\n                FOREIGN KEY(profile_id) REFERENCES profiles(id) ON DELETE CASCADE,\\n                FOREIGN KEY(quiz_set_id) REFERENCES quiz_sets(id) ON DELETE SET NULL\\n            );\\n\\n            CREATE TABLE IF NOT EXISTS quiz_questions (\\n                id INTEGER PRIMARY KEY AUTOINCREMENT,\\n                attempt_id INTEGER NOT NULL,\\n                skill TEXT NOT NULL,\\n                question_label TEXT NOT NULL DEFAULT 'Core',\\n                mode TEXT NOT NULL DEFAULT 'expression',\\n                prompt TEXT NOT NULL,\\n                correct_answer TEXT NOT NULL,\\n                user_answer TEXT NOT NULL,\\n                is_correct INTEGER NOT NULL,\\n                explanation TEXT NOT NULL,\\n                FOREIGN KEY(attempt_id) REFERENCES quiz_attempts(id) ON DELETE CASCADE\\n            );\\n\\n            CREATE TABLE IF NOT EXISTS worksheets (\\n                id INTEGER PRIMARY KEY AUTOINCREMENT,\\n                profile_id INTEGER NOT NULL,\\n                quiz_set_id INTEGER,\\n                skill TEXT NOT NULL,\\n                question_type TEXT NOT NULL,\\n                num_questions INTEGER NOT NULL,\\n                level INTEGER NOT NULL,\\n                file_path TEXT NOT NULL,\\n                created_at TEXT NOT NULL,\\n                FOREIGN KEY(profile_id) REFERENCES profiles(id) ON DELETE CASCADE,\\n                FOREIGN KEY(quiz_set_id) REFERENCES quiz_sets(id) ON DELETE SET NULL\\n            );\\n\\n            CREATE TABLE IF NOT EXISTS skill_subskill_progress (\\n                profile_id INTEGER NOT NULL,\\n                skill TEXT NOT NULL,\\n                subskill TEXT NOT NULL,\\n                current_streak INTEGER NOT NULL DEFAULT 0,\\n                best_streak INTEGER NOT NULL DEFAULT 0,\\n                mastered INTEGER NOT NULL DEFAULT 0,\\n                updated_at TEXT NOT NULL,\\n                PRIMARY KEY (profile_id, skill, subskill),\\n                FOREIGN KEY(profile_id) REFERENCES profiles(id) ON DELETE CASCADE\\n            );\\n\\n            CREATE TABLE IF NOT EXISTS books (\\n                id INTEGER PRIMARY KEY AUTOINCREMENT,\\n                title TEXT NOT NULL,\\n                source TEXT NOT NULL,\\n                pdf_filename TEXT NOT NULL,\\n                created_at TEXT NOT NULL\\n            );\\n\\n            CREATE TABLE IF NOT EXISTS exercise_candidates (\\n                id INTEGER PRIMARY KEY AUTOINCREMENT,\\n                book_id INTEGER NOT NULL,\\n                location TEXT NOT NULL,\\n                text TEXT NOT NULL,\\n                status TEXT NOT NULL DEFAULT 'new',\\n                created_at TEXT NOT NULL,\\n                FOREIGN KEY(book_id) REFERENCES books(id) ON DELETE CASCADE\\n            );\\n\\n            CREATE TABLE IF NOT EXISTS question_templates (\\n                id INTEGER PRIMARY KEY AUTOINCREMENT,\\n                book_id INTEGER,\\n                external_id TEXT,\\n                skill TEXT NOT NULL,\\n                subskill TEXT NOT NULL,\\n                label TEXT NOT NULL,\\n                mode TEXT NOT NULL DEFAULT 'expression',\\n                prompt_template TEXT NOT NULL,\\n                answer_expr TEXT NOT NULL,\\n                constraint_expr TEXT NOT NULL DEFAULT '',\\n                explanation_template TEXT NOT NULL,\\n                min_level INTEGER NOT NULL DEFAULT 1,\\n                max_level INTEGER NOT NULL DEFAULT 3,\\n                choice_spread REAL NOT NULL DEFAULT 4.0,\\n                active INTEGER NOT NULL DEFAULT 1,\\n                created_at TEXT NOT NULL,\\n                FOREIGN KEY(book_id) REFERENCES books(id) ON DELETE SET NULL\\n            );\\n\\n            CREATE TABLE IF NOT EXISTS template_vars (\\n                template_id INTEGER NOT NULL,\\n                name TEXT NOT NULL,\\n                kind TEXT NOT NULL,\\n                min_value REAL NOT NULL,\\n                max_value REAL NOT NULL,\\n                step REAL NOT NULL DEFAULT 1,\\n                PRIMARY KEY (template_id, name),\\n                FOREIGN KEY(template_id) REFERENCES question_templates(id) ON DELETE CASCADE\\n            );\\n\\n            CREATE TABLE IF NOT EXISTS assignments (\\n                id INTEGER PRIMARY KEY AUTOINCREMENT,\\n                profile_id INTEGER NOT NULL,\\n                skill TEXT NOT NULL,\\n                subskill TEXT,\\n                target_type TEXT NOT NULL,\\n                target_value REAL NOT NULL DEFAULT 0,\\n                level INTEGER NOT NULL DEFAULT 1,\\n                num_questions INTEGER NOT NULL DEFAULT 5,\\n                question_type TEXT NOT NULL DEFAULT 'both',\\n                mode_intuition_pct INTEGER,\\n                mode_expression_pct INTEGER,\\n                mode_word_pct INTEGER,\\n                active INTEGER NOT NULL DEFAULT 1,\\n                notes TEXT NOT NULL DEFAULT '',\\n                created_at TEXT NOT NULL,\\n                completed_at TEXT,\\n                FOREIGN KEY(profile_id) REFERENCES profiles(id) ON DELETE CASCADE\\n            );\\n\\n            CREATE TABLE IF NOT EXISTS daily_goal_history (\\n                profile_id INTEGER NOT NULL,\\n                day_utc TEXT NOT NULL,\\n                completions INTEGER NOT NULL DEFAULT 0,\\n                last_completed_at TEXT NOT NULL,\\n                PRIMARY KEY (profile_id, day_utc),\\n                FOREIGN KEY(profile_id) REFERENCES profiles(id) ON DELETE CASCADE\\n            );\\n\\n            CREATE TABLE IF NOT EXISTS historical_tests (\\n                id INTEGER PRIMARY KEY AUTOINCREMENT,\\n                exam_code TEXT NOT NULL UNIQUE,\\n                title TEXT NOT NULL,\\n                exam_type TEXT NOT NULL,\\n                year INTEGER,\\n                pdf_path TEXT NOT NULL,\\n                source TEXT NOT NULL DEFAULT 'historical_pdf',\\n                created_at TEXT NOT NULL\\n            );\\n\\n            CREATE TABLE IF NOT EXISTS historical_questions (\\n                id INTEGER PRIMARY KEY AUTOINCREMENT,\\n                test_id INTEGER NOT NULL,\\n                question_number INTEGER NOT NULL,\\n                section TEXT NOT NULL DEFAULT 'General',\\n                category TEXT NOT NULL DEFAULT 'unknown',\\n                prompt TEXT NOT NULL,\\n                choice_a TEXT,\\n                choice_b TEXT,\\n                choice_c TEXT,\\n                choice_d TEXT,\\n                choice_e TEXT,\\n                correct_answer TEXT,\\n                explanation TEXT NOT NULL DEFAULT '',\\n                source_page INTEGER,\\n                FOREIGN KEY(test_id) REFERENCES historical_tests(id) ON DELETE CASCADE\\n            );\\n            \""
+    ],
+    "list_all_question_templates": [
+      "'\\n                SELECT id, book_id, external_id, skill, subskill, label, prompt_template, answer_expr, constraint_expr, explanation_template,\\n                       min_level, max_level, choice_spread, mode, active\\n                FROM question_templates\\n                WHERE active = 1\\n                ORDER BY skill ASC, id ASC\\n                '",
+      "'\\n                SELECT id, book_id, external_id, skill, subskill, label, prompt_template, answer_expr, constraint_expr, explanation_template,\\n                       min_level, max_level, choice_spread, mode, active\\n                FROM question_templates\\n                ORDER BY skill ASC, id ASC\\n                '"
+    ],
+    "list_assignments": [
+      "f'\\n            SELECT id, profile_id, skill, subskill, target_type, target_value, level, num_questions, question_type,\\n                   mode_intuition_pct, mode_expression_pct, mode_word_pct,\\n                   active, notes, created_at, completed_at\\n            FROM assignments\\n            WHERE {where_sql}\\n            ORDER BY {order_sql}{limit_sql}\\n            '"
+    ],
+    "list_attempts": [
+      "'\\n            SELECT id, profile_id, quiz_set_id, skill, question_type, num_questions, level, score, elapsed_seconds, created_at\\n            FROM quiz_attempts\\n            WHERE profile_id = ?\\n            ORDER BY created_at DESC\\n            '"
+    ],
+    "list_books": [
+      "'SELECT id, title, source, pdf_filename FROM books ORDER BY id DESC'"
+    ],
+    "list_daily_goal_history": [
+      "'\\n            SELECT profile_id, day_utc, completions, last_completed_at\\n            FROM daily_goal_history\\n            WHERE profile_id = ?\\n            ORDER BY day_utc DESC\\n            LIMIT ?\\n            '"
+    ],
+    "list_exercise_candidates": [
+      "'\\n            SELECT id, book_id, location, text, status\\n            FROM exercise_candidates\\n            WHERE book_id = ? AND status = ?\\n            ORDER BY id ASC\\n            LIMIT ?\\n            '"
+    ],
+    "list_historical_questions": [
+      "f'\\n            SELECT hq.id, hq.test_id, hq.question_number, hq.section, hq.category, hq.prompt,\\n                   hq.choice_a, hq.choice_b, hq.choice_c, hq.choice_d, hq.choice_e,\\n                   hq.correct_answer, hq.explanation, hq.source_page\\n            FROM historical_questions hq\\n            JOIN historical_tests ht ON ht.id = hq.test_id\\n            {where_sql}\\n            ORDER BY RANDOM()\\n            LIMIT ?\\n            '"
+    ],
+    "list_historical_questions_for_test": [
+      "'\\n            SELECT id, test_id, question_number, section, category, prompt,\\n                   choice_a, choice_b, choice_c, choice_d, choice_e,\\n                   correct_answer, explanation, source_page\\n            FROM historical_questions\\n            WHERE test_id = ?\\n            ORDER BY question_number ASC, id ASC\\n            '"
+    ],
+    "list_historical_tests": [
+      "'\\n                SELECT id, exam_code, title, exam_type, year, pdf_path, source\\n                FROM historical_tests\\n                ORDER BY COALESCE(year, 0) DESC, title ASC\\n                '",
+      "'\\n                SELECT id, exam_code, title, exam_type, year, pdf_path, source\\n                FROM historical_tests\\n                WHERE exam_type = ?\\n                ORDER BY COALESCE(year, 0) DESC, title ASC\\n                '"
+    ],
+    "list_profiles": [
+      "'SELECT id, name, role FROM profiles ORDER BY role DESC, name ASC'"
+    ],
+    "list_question_templates": [
+      "'\\n                SELECT id, book_id, external_id, skill, subskill, label, prompt_template, answer_expr, constraint_expr, explanation_template,\\n                       min_level, max_level, choice_spread, mode, active\\n                FROM question_templates\\n                WHERE active = 1 AND skill = ? AND ? BETWEEN min_level AND max_level\\n                ORDER BY id DESC\\n                '",
+      "'\\n                SELECT id, book_id, external_id, skill, subskill, label, prompt_template, answer_expr, constraint_expr, explanation_template,\\n                       min_level, max_level, choice_spread, mode, active\\n                FROM question_templates\\n                WHERE active = 1 AND skill = ? AND ? BETWEEN min_level AND max_level AND mode = ?\\n                ORDER BY id DESC\\n                '",
+      "'\\n                SELECT id, book_id, external_id, skill, subskill, label, prompt_template, answer_expr, constraint_expr, explanation_template,\\n                       min_level, max_level, choice_spread, mode, active\\n                FROM question_templates\\n                WHERE active = 1 AND skill = ? AND subskill = ? AND ? BETWEEN min_level AND max_level\\n                ORDER BY id DESC\\n                '",
+      "'\\n                SELECT id, book_id, external_id, skill, subskill, label, prompt_template, answer_expr, constraint_expr, explanation_template,\\n                       min_level, max_level, choice_spread, mode, active\\n                FROM question_templates\\n                WHERE active = 1 AND skill = ? AND subskill = ? AND ? BETWEEN min_level AND max_level AND mode = ?\\n                ORDER BY id DESC\\n                '"
+    ],
+    "list_quiz_sets": [
+      "'\\n            SELECT id, name, skill, question_type, num_questions, level,\\n                   mode_intuition_pct, mode_expression_pct, mode_word_pct\\n            FROM quiz_sets\\n            ORDER BY name\\n            '"
+    ],
+    "list_subskill_progress": [
+      "'\\n                SELECT profile_id, skill, subskill, current_streak, best_streak, mastered, updated_at\\n                FROM skill_subskill_progress\\n                WHERE profile_id = ?\\n                ORDER BY skill ASC, subskill ASC\\n                '",
+      "'\\n                SELECT profile_id, skill, subskill, current_streak, best_streak, mastered, updated_at\\n                FROM skill_subskill_progress\\n                WHERE profile_id = ? AND skill = ?\\n                ORDER BY subskill ASC\\n                '"
+    ],
+    "list_template_vars": [
+      "'\\n            SELECT template_id, name, kind, min_value, max_value, step\\n            FROM template_vars\\n            WHERE template_id = ?\\n            ORDER BY name ASC\\n            '"
+    ],
+    "mode_accuracy_by_skill": [
+      "'\\n            SELECT qq.mode AS mode, COUNT(*) AS total, SUM(qq.is_correct) AS correct\\n            FROM quiz_questions qq\\n            JOIN quiz_attempts qa ON qa.id = qq.attempt_id\\n            WHERE qa.profile_id = ? AND qq.skill = ?\\n            GROUP BY qq.mode\\n            '"
+    ],
+    "record_daily_review_completion": [
+      "'\\n            SELECT completions\\n            FROM daily_goal_history\\n            WHERE profile_id = ? AND day_utc = ?\\n            '",
+      "'\\n                INSERT INTO daily_goal_history (profile_id, day_utc, completions, last_completed_at)\\n                VALUES (?, ?, ?, ?)\\n                '",
+      "'\\n            UPDATE daily_goal_history\\n            SET completions = ?, last_completed_at = ?\\n            WHERE profile_id = ? AND day_utc = ?\\n            '"
+    ],
+    "replace_historical_questions": [
+      "'DELETE FROM historical_questions WHERE test_id = ?'",
+      "'\\n                INSERT INTO historical_questions\\n                (test_id, question_number, section, category, prompt, choice_a, choice_b, choice_c, choice_d, choice_e,\\n                 correct_answer, explanation, source_page)\\n                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)\\n                '"
+    ],
+    "set_assignment_active": [
+      "'UPDATE assignments SET active = ?, completed_at = ? WHERE id = ?'"
+    ],
+    "skill_progress_pipeline": [
+      "'\\n            SELECT skill, COUNT(*) AS attempts, SUM(num_questions) AS questions\\n            FROM quiz_attempts\\n            WHERE profile_id = ?\\n            GROUP BY skill\\n            '",
+      "'\\n            SELECT skill, COUNT(*) AS worksheets\\n            FROM worksheets\\n            WHERE profile_id = ?\\n            GROUP BY skill\\n            '"
+    ],
+    "update_quiz_set": [
+      "'\\n            UPDATE quiz_sets\\n            SET name = ?, skill = ?, question_type = ?, num_questions = ?, level = ?,\\n                mode_intuition_pct = ?, mode_expression_pct = ?, mode_word_pct = ?\\n            WHERE id = ?\\n            '"
+    ],
+    "upsert_historical_test": [
+      "'SELECT id FROM historical_tests WHERE exam_code = ?'",
+      "'\\n                INSERT INTO historical_tests (exam_code, title, exam_type, year, pdf_path, source, created_at)\\n                VALUES (?, ?, ?, ?, ?, ?, ?)\\n                '",
+      "'\\n            UPDATE historical_tests\\n            SET title = ?, exam_type = ?, year = ?, pdf_path = ?, source = ?\\n            WHERE id = ?\\n            '"
+    ],
+    "upsert_subskill_progress": [
+      "'\\n            SELECT current_streak, best_streak, mastered\\n            FROM skill_subskill_progress\\n            WHERE profile_id = ? AND skill = ? AND subskill = ?\\n            '",
+      "'\\n                INSERT INTO skill_subskill_progress\\n                (profile_id, skill, subskill, current_streak, best_streak, mastered, updated_at)\\n                VALUES (?, ?, ?, ?, ?, ?, ?)\\n                '",
+      "'\\n            UPDATE skill_subskill_progress\\n            SET current_streak = ?, best_streak = ?, mastered = ?, updated_at = ?\\n            WHERE profile_id = ? AND skill = ? AND subskill = ?\\n            '"
+    ]
+  }
+}
