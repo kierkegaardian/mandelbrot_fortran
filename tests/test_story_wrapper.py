@@ -2,11 +2,16 @@ from __future__ import annotations
 
 import unittest
 
-from app.story_wrapper import _extract_story_snippets, _is_relevant_to_skill
+from tests.test_support import temporary_data_root
 
 
 class StoryWrapperTests(unittest.TestCase):
+    def setUp(self) -> None:
+        self.enterContext(temporary_data_root())
+
     def test_extract_filters_noise_and_equation_blocks(self) -> None:
+        from app.story_wrapper import _extract_story_snippets
+
         text = """
         Page 12 Header
 
@@ -21,6 +26,8 @@ class StoryWrapperTests(unittest.TestCase):
         self.assertFalse(any("5 + 3 = 8" in snippet for snippet in snippets))
 
     def test_skill_relevance_filter(self) -> None:
+        from app.story_wrapper import _is_relevant_to_skill
+
         money_snippet = "A student has 5 dollars and 20 cents and buys a snack."
         geometry_snippet = "A triangle has side lengths 3, 4, and 5."
         self.assertTrue(_is_relevant_to_skill("money", money_snippet))

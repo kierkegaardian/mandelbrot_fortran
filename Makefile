@@ -1,5 +1,6 @@
 FC = gfortran
-FFLAGS = -O3 -Wall -cpp -fPIE
+PYTHON ?= python
+FFLAGS = -O3 -Wall -cpp -fPIE -ffree-line-length-none
 LDFLAGS =
 SRC_DIR = src
 BUILD_DIR = build
@@ -37,8 +38,17 @@ run: all
 	./$(TARGET)
 
 png: all
+	@command -v magick >/dev/null 2>&1 || (echo "Error: ImageMagick 'magick' not found. Install imagemagick or use PPM output."; exit 1)
 	./$(TARGET) --output $(PPM)
 	magick $(PPM) $(PNG)
+
+test:
+	$(PYTHON) -m tests.run_isolated
+
+smoke:
+	$(PYTHON) -m tests.run_isolated --smoke
+
+check: all test smoke
 
 DOCKER ?= docker
 DOCKER_IMAGE ?= gcc:14
@@ -53,4 +63,4 @@ docker-run: docker-build
 docker-run-omp:
 	@$(DOCKER_RUN) bash -lc "make clean >/dev/null 2>&1 || true; make OPENMP=1 && ./$(TARGET) --threads 8 --progress-every 0 --output mandelbrot_omp.ppm"
 
-.PHONY: all clean run png preflight docker-build docker-run docker-run-omp
+.PHONY: all clean run png test smoke check preflight docker-build docker-run docker-run-omp

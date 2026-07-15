@@ -1,28 +1,17 @@
 from __future__ import annotations
 
-import tempfile
+from datetime import datetime, timedelta, timezone
 import unittest
 
 from app import db
+from tests.test_support import temporary_database
 
 
 class DbAssignmentSemanticsTests(unittest.TestCase):
     def setUp(self) -> None:
-        self._tmp = tempfile.TemporaryDirectory()
-        self._orig_db_config = db.db_config
-        tmp_path = self._tmp.name
-
-        def _tmp_config() -> db.DbConfig:
-            return db.DbConfig(path=f"{tmp_path}/test_app.db")
-
-        db.db_config = _tmp_config
-        db.init_db()
+        self.enterContext(temporary_database())
         profile = db.create_profile("Student", "child", "2026-02-18T00:00:00+00:00")
         self.profile_id = profile.id
-
-    def tearDown(self) -> None:
-        db.db_config = self._orig_db_config
-        self._tmp.cleanup()
 
     def test_assignment_completion_requires_100_even_if_target_lower(self) -> None:
         assignment_id = db.create_assignment(
@@ -111,6 +100,10 @@ class DbAssignmentSemanticsTests(unittest.TestCase):
         )
 
     def test_assignment_filters_and_analytics(self) -> None:
+        now = datetime.now(timezone.utc)
+        first_created_at = (now - timedelta(days=2)).isoformat()
+        first_completed_at = (now - timedelta(days=1)).isoformat()
+        second_created_at = (now - timedelta(hours=1)).isoformat()
         first_id = db.create_assignment(
             profile_id=self.profile_id,
             skill="add_subtract",
@@ -124,7 +117,7 @@ class DbAssignmentSemanticsTests(unittest.TestCase):
             mode_expression_pct=None,
             mode_word_pct=None,
             notes="",
-            created_at="2026-02-18T00:00:00+00:00",
+            created_at=first_created_at,
         )
         second_id = db.create_assignment(
             profile_id=self.profile_id,
@@ -139,9 +132,9 @@ class DbAssignmentSemanticsTests(unittest.TestCase):
             mode_expression_pct=None,
             mode_word_pct=None,
             notes="",
-            created_at="2026-02-18T01:00:00+00:00",
+            created_at=second_created_at,
         )
-        db.set_assignment_active(first_id, False, completed_at="2026-02-20T00:00:00+00:00")
+        db.set_assignment_active(first_id, False, completed_at=first_completed_at)
         done_filtered = db.list_assignments(
             self.profile_id,
             active_only=False,

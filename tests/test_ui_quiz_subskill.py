@@ -2,12 +2,17 @@ from __future__ import annotations
 
 import unittest
 
-from app.quiz_engine import Question
-from app.ui_quiz import _subskill_for_question
+from tests.test_support import temporary_data_root
 
 
 class SubskillMappingTests(unittest.TestCase):
+    def setUp(self) -> None:
+        self.enterContext(temporary_data_root())
+
     def test_same_template_stable_across_labels(self) -> None:
+        from app.quiz_engine import Question
+        from app.ui_quiz import _subskill_for_question
+
         core = Question(
             skill="add_subtract",
             prompt="8 + 5 = ?",
@@ -45,6 +50,9 @@ class SubskillMappingTests(unittest.TestCase):
         self.assertEqual(_subskill_for_question(prereq), _subskill_for_question(review))
 
     def test_non_template_wrapper_and_plain_prompt_map_same(self) -> None:
+        from app.quiz_engine import Question
+        from app.ui_quiz import _subskill_for_question
+
         wrapped = Question(
             skill="add_subtract",
             prompt="Story context (source): A child has 8 apples and gets 5 more.\nQuestion: 8 + 5 = ?",

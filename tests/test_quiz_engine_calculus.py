@@ -3,9 +3,13 @@ from __future__ import annotations
 import unittest
 
 from app.quiz_engine import generate_question
+from tests.test_support import temporary_database
 
 
 class QuizEngineCalculusTests(unittest.TestCase):
+    def setUp(self) -> None:
+        self.enterContext(temporary_database())
+
     def test_generate_calculus_1_question(self) -> None:
         q = generate_question("calculus_1", 1, "typed")
         self.assertEqual(q.skill, "calculus_1")

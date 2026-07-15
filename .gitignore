@@ -13,6 +13,19 @@
 __pycache__/
 *.pyc
 
+# Private repo/runtime state
+/.codex/
+/app.db
+/app.db-*
+/*.sqlite
+/*.sqlite3
+/*.db-wal
+/*.db-shm
+*.log
+/config/internal/
+.[eE][nN][vV]
+.[eE][nN][vV].*
+
 # Local app runtime state
 /data/
 /worksheets/
