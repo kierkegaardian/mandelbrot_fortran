@@ -3,35 +3,56 @@ from __future__ import annotations
 import tkinter as tk
 from tkinter import ttk
 
+from .models import Profile
+from .theme import FONTS, apply_theme
 from .ui_arithmetic import ArithmeticPanel
 from .ui_dashboard import DashboardPanel
 from .ui_fractals import FractalPanel
 from .ui_parent import ParentPanel
 from .ui_quiz import QuizPanel
+from .ui_settings import UiSettings, load_ui_settings
+from .ui_shell_launchers import ShellQuizLaunchersMixin
+from .ui_shell_shortcuts import ShellShortcutsMixin
 from .ui_skill_map import SkillMapPanel
 
 
-class AppShell:
-    def __init__(self, root: tk.Tk, profile) -> None:
+class AppShell(ShellShortcutsMixin, ShellQuizLaunchersMixin):
+    """Role-aware application shell with stable panel constructors."""
+
+    def __init__(self, root: tk.Tk, profile: Profile) -> None:
         self.root = root
         self.profile = profile
+        self._settings: UiSettings = load_ui_settings()
 
         self.root.title("MandelQuest")
         self.root.geometry("1200x720")
+        self.root.minsize(960, 580)
+        apply_theme(self.root)
 
         self._build_header()
         self._build_layout()
+        self._bind_global_shortcuts()
 
     def _build_header(self) -> None:
         bar = ttk.Frame(self.root)
         bar.pack(fill=tk.X)
         self.profile_var = tk.StringVar(value=f"Profile: {self.profile.name}")
-        ttk.Label(bar, textvariable=self.profile_var, font=("Helvetica", 11, "bold")).pack(side=tk.LEFT, padx=10, pady=6)
+        ttk.Label(
+            bar,
+            textvariable=self.profile_var,
+            font=FONTS["subheading"],
+        ).pack(side=tk.LEFT, padx=10, pady=6)
+        self.offline_var = tk.StringVar()
+        ttk.Label(
+            bar,
+            textvariable=self.offline_var,
+            foreground="#5b6f84",
+        ).pack(side=tk.RIGHT, padx=10, pady=6)
+        self._refresh_offline_status()
 
     def _build_layout(self) -> None:
         self.paned = ttk.Panedwindow(self.root, orient=tk.HORIZONTAL)
         self.paned.pack(fill=tk.BOTH, expand=True)
-
         self.left_panel = ttk.Frame(self.paned, width=320)
         self.right_panel = ttk.Frame(self.paned)
         self.paned.add(self.left_panel, weight=1)
@@ -39,7 +60,6 @@ class AppShell:
 
         self.notebook = ttk.Notebook(self.left_panel)
         self.notebook.pack(fill=tk.BOTH, expand=True)
-
         self.view_stack = ttk.Frame(self.right_panel)
         self.view_stack.pack(fill=tk.BOTH, expand=True)
         self.view_stack.rowconfigure(0, weight=1)
@@ -48,7 +68,12 @@ class AppShell:
         self.fractal = FractalPanel(self.notebook, self.view_stack)
         self.arithmetic = ArithmeticPanel(self.notebook, self.view_stack)
         self.quiz = QuizPanel(self.notebook, self.view_stack, self.get_profile)
-        self.parent = ParentPanel(self.notebook, self.view_stack, self.get_profile, self.launch_quiz_set)
+        self.parent = ParentPanel(
+            self.notebook,
+            self.view_stack,
+            self.get_profile,
+            self.launch_quiz_set,
+        )
         self.dashboard = DashboardPanel(
             self.notebook,
             self.view_stack,
@@ -63,117 +88,59 @@ class AppShell:
             self.launch_skill_map_quiz,
         )
 
-        self._modules = [
-            ("Fractals", self.fractal),
-            ("Math Skills", self.arithmetic),
+        common = [
+            ("Today", self.dashboard),
+            ("Practice", self.arithmetic),
             ("Quizzes", self.quiz),
-            ("Parent", self.parent),
-            ("Dashboard", self.dashboard),
             ("Skill Map", self.skill_map),
         ]
+        if self.profile.role == "parent":
+            self._modules = common + [
+                ("Parent", self.parent),
+                ("Bonus Explore", self.fractal),
+            ]
+        else:
+            self._modules = common
 
         for name, module in self._modules:
             self.notebook.add(module.controls_frame, text=name)
             module.view_frame.grid(row=0, column=0, sticky="nsew")
-
         self.notebook.bind("<<NotebookTabChanged>>", self._on_tab_changed)
         self._show_module(0)
 
-    def _on_tab_changed(self, _event) -> None:
-        idx = self.notebook.index(self.notebook.select())
-        self._show_module(idx)
+    def _on_tab_changed(self, _event: tk.Event) -> None:  # type: ignore[type-arg]
+        self._show_module(self.notebook.index(self.notebook.select()))
 
-    def _show_module(self, idx: int) -> None:
-        module = self._modules[idx][1]
+    def _show_module(self, index: int) -> None:
+        self._refresh_offline_status()
+        module = self._modules[index][1]
         module.view_frame.tkraise()
-        if hasattr(module, "render"):
-            module.render()
+        activated = getattr(module, "on_module_activated", None)
+        if callable(activated):
+            activated()
+        render = getattr(module, "render", None)
+        if callable(render):
+            render()
 
-    def get_profile(self):
+    def get_profile(self) -> Profile:
         return self.profile
 
-    def launch_daily_review(self, skill: str, subskill: str | None) -> None:
-        self.notebook.select(self.quiz.controls_frame)
-        self.quiz.apply_preset(
-            track="All",
-            skill=skill,
-            subskill=subskill,
-            num_questions=5,
-            level=1,
-            question_type="both",
-            launch_context="daily_review",
-        )
-        self.quiz.start_quiz()
-
-    def launch_assignment_quiz(
-        self,
-        skill: str,
-        subskill: str | None,
-        level: int,
-        num_questions: int,
-        question_type: str,
-        mode_intuition_pct: int | None = None,
-        mode_expression_pct: int | None = None,
-        mode_word_pct: int | None = None,
-    ) -> None:
-        self.notebook.select(self.quiz.controls_frame)
-        mode_mix = None
-        if mode_intuition_pct is not None and mode_expression_pct is not None and mode_word_pct is not None:
-            mode_mix = (int(mode_intuition_pct), int(mode_expression_pct), int(mode_word_pct))
-        self.quiz.apply_preset(
-            track="All",
-            skill=skill,
-            subskill=subskill,
-            num_questions=num_questions,
-            level=level,
-            question_type=question_type,
-            strategy="learning_blend",
-            mode_mix_override=mode_mix,
-            launch_context="assignment",
-        )
-        self.quiz.start_quiz()
-
-    def launch_quiz_set(
-        self,
-        skill: str,
-        num_questions: int,
-        level: int,
-        question_type: str,
-        mode_intuition_pct: int | None = None,
-        mode_expression_pct: int | None = None,
-        mode_word_pct: int | None = None,
-    ) -> None:
-        self.notebook.select(self.quiz.controls_frame)
-        mode_mix = None
-        if mode_intuition_pct is not None and mode_expression_pct is not None and mode_word_pct is not None:
-            mode_mix = (int(mode_intuition_pct), int(mode_expression_pct), int(mode_word_pct))
-        self.quiz.apply_preset(
-            track="All",
-            skill=skill,
-            subskill="Any",
-            num_questions=num_questions,
-            level=level,
-            question_type=question_type,
-            strategy="focused",
-            mode_mix_override=mode_mix,
-            launch_context="quiz_set",
-        )
-        self.quiz.start_quiz()
-
-    def launch_skill_map_quiz(self, skill: str) -> None:
-        self.notebook.select(self.quiz.controls_frame)
-        self.quiz.apply_preset(
-            track="All",
-            skill=skill,
-            subskill="Any",
-            num_questions=5,
-            level=1,
-            question_type="both",
-            strategy="learning_blend",
-            launch_context="skill_map",
-        )
-        self.quiz.start_quiz()
+    def _refresh_offline_status(self) -> None:
+        self._settings = load_ui_settings()
+        if self._settings.enforce_offline_mode:
+            self.offline_var.set("Offline mode: enforced")
+        else:
+            self.offline_var.set("Offline mode: optional links")
 
     def shutdown(self) -> None:
-        if hasattr(self.fractal, "shutdown"):
-            self.fractal.shutdown()
+        for module in (
+            self.fractal,
+            self.arithmetic,
+            self.quiz,
+            self.parent,
+            self.dashboard,
+            self.skill_map,
+        ):
+            shutdown = getattr(module, "shutdown", None)
+            if callable(shutdown):
+                shutdown()

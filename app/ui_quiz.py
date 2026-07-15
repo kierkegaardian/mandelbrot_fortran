@@ -224,6 +224,31 @@ class QuizPanel:
         self.summary_box.pack(fill=tk.BOTH, expand=True, padx=16, pady=8)
         self.summary_box.config(state=tk.DISABLED)
 
+    def _start_quiz_shortcut(self) -> str:
+        self.start_quiz()
+        return "break"
+
+    def _submit_or_next_shortcut(self) -> str:
+        if not self._questions:
+            self.start_quiz()
+        elif self.next_btn.instate(["!disabled"]):
+            self.next_question()
+        elif self.submit_btn.instate(["!disabled"]):
+            self.submit_answer()
+        return "break"
+
+    def _show_intuition_shortcut(self) -> str:
+        if self.stuck_btn.instate(["!disabled"]):
+            self._show_intuition()
+        return "break"
+
+    def focus_primary_control(self) -> None:
+        self.skill_combo.focus_set()
+
+    def on_module_activated(self) -> None:
+        self._apply_track_filter()
+        self.focus_primary_control()
+
     def _update_curriculum_label(self) -> None:
         skill = self.skill_var.get()
         entry = get_curriculum_for_skill(skill)

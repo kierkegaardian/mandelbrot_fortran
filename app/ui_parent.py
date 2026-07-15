@@ -56,6 +56,49 @@ class ParentPanel:
             text="Parent tools appear on the left. Use them to manage profiles and learning.",
             wraplength=500,
         ).pack(pady=30)
+
+    def _active_parent_tab_index(self) -> int:
+        return self.tabs.index(self.tabs.select())
+
+    def _select_parent_tab(self, index: int) -> None:
+        if 0 <= index < self.tabs.index("end"):
+            self.tabs.select(index)
+            self._refresh_active_tab_shortcut()
+
+    def _refresh_active_tab_shortcut(self) -> None:
+        refreshers = {
+            0: self._refresh_profiles,
+            1: self._refresh_quiz_sets,
+            2: self._refresh_grades,
+            3: self._refresh_assignments,
+            4: self.worksheets.refresh_quiz_sets,
+        }
+        refreshers[self._active_parent_tab_index()]()
+
+    def _create_active_item_shortcut(self) -> None:
+        creators = {
+            0: self._add_profile,
+            1: self._add_quiz_set,
+            3: self._create_assignment,
+            4: self.worksheets._add_topic_row,
+        }
+        create = creators.get(self._active_parent_tab_index())
+        if create is not None:
+            create()
+
+    def focus_primary_control(self) -> None:
+        controls = {
+            0: self.profile_name,
+            1: self.quiz_name,
+            2: self.profile_combo,
+            3: self.assignment_profile_combo,
+            4: self.worksheets.ws_combo,
+        }
+        controls[self._active_parent_tab_index()].focus_set()
+
+    def on_module_activated(self) -> None:
+        self._refresh_active_tab_shortcut()
+
     def _build_profiles_tab(self) -> None:
         self.profile_list = tk.Listbox(self.profile_tab, height=6)
         self.profile_list.pack(fill=tk.X, padx=10, pady=6)

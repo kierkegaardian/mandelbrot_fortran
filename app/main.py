@@ -45,11 +45,13 @@ def main(argv: list[str] | None = None) -> None:
     import tkinter as tk
     from tkinter import messagebox
 
+    from .theme import apply_theme
     from .ui_profile_picker import pick_profile
     from .ui_root import AppShell
 
     db.init_db()
     root = tk.Tk()
+    apply_theme(root)
     profile = pick_profile(root)
     if profile is None:
         messagebox.showinfo("Goodbye", "No profile selected. Closing the app.")
@@ -58,7 +60,7 @@ def main(argv: list[str] | None = None) -> None:
 
     app = AppShell(root, profile)
     root.protocol("WM_DELETE_WINDOW", lambda: _on_close(root, app))
-    root.after(200, app.fractal.render)
+    root.after(200, app.dashboard.render)
     root.mainloop()
 
 

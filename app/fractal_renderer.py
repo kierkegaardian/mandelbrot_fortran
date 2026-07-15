@@ -6,7 +6,7 @@ from dataclasses import dataclass
 import os
 from pathlib import Path
 from threading import Event
-from time import sleep
+from time import monotonic
 
 from .paths import mandelbrot_binary
 
@@ -35,6 +35,22 @@ class FractalConfig:
 
 class RenderCancelled(RuntimeError):
     """Raised when a render is cancelled by the UI."""
+
+
+def _close_process_pipes(proc: subprocess.Popen[bytes]) -> None:
+    for pipe in (proc.stdout, proc.stderr):
+        if pipe is not None and not pipe.closed:
+            pipe.close()
+
+
+def _kill_and_drain_process(proc: subprocess.Popen[bytes]) -> None:
+    if proc.poll() is None:
+        proc.kill()
+    try:
+        proc.communicate(timeout=2.0)
+    except subprocess.TimeoutExpired:
+        proc.kill()
+        proc.wait(timeout=2.0)
 
 
 def _base_args(config: FractalConfig, output_path: str) -> list[str]:
@@ -74,33 +90,35 @@ def _base_args(config: FractalConfig, output_path: str) -> list[str]:
 
 def _run_with_cancel(args: list[str], cancel_event: Event | None, timeout_seconds: float) -> subprocess.CompletedProcess[bytes]:
     proc = subprocess.Popen(args, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    out = b""
+    err = b""
+    ret: int | None = None
     try:
         if cancel_event is None:
-            out, err = proc.communicate(timeout=timeout_seconds)
-            ret = proc.returncode
+            try:
+                out, err = proc.communicate(timeout=timeout_seconds)
+                ret = proc.returncode
+            except subprocess.TimeoutExpired as exc:
+                _kill_and_drain_process(proc)
+                raise TimeoutError(f"Render timed out after {int(timeout_seconds)}s") from exc
         else:
-            waited = 0.0
             interval = 0.05
+            deadline = monotonic() + timeout_seconds
             while True:
-                if cancel_event.is_set():
-                    proc.kill()
-                    proc.wait(timeout=2.0)
+                remaining = deadline - monotonic()
+                if remaining <= 0:
+                    _kill_and_drain_process(proc)
+                    raise TimeoutError(f"Render timed out after {int(timeout_seconds)}s")
+                if cancel_event.wait(timeout=min(interval, remaining)):
+                    _kill_and_drain_process(proc)
                     raise RenderCancelled("Render cancelled")
                 ret = proc.poll()
                 if ret is not None:
-                    out = proc.stdout.read() if proc.stdout is not None else b""
-                    err = proc.stderr.read() if proc.stderr is not None else b""
+                    out, err = proc.communicate(timeout=2.0)
+                    ret = proc.returncode
                     break
-                sleep(interval)
-                waited += interval
-                if waited >= timeout_seconds:
-                    proc.kill()
-                    proc.wait(timeout=2.0)
-                    raise TimeoutError(f"Render timed out after {int(timeout_seconds)}s")
-    except subprocess.TimeoutExpired as exc:
-        proc.kill()
-        proc.wait(timeout=2.0)
-        raise TimeoutError(f"Render timed out after {int(timeout_seconds)}s") from exc
+    finally:
+        _close_process_pipes(proc)
 
     if ret != 0:
         raise subprocess.CalledProcessError(ret, args, output=out, stderr=err)
