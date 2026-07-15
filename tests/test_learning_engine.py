@@ -7,6 +7,7 @@ from app.learning_engine import (
     SkillStats,
     apply_word_gap_boost,
     default_mode_mix_for_stage,
+    mastery_label,
 )
 
 
@@ -51,6 +52,9 @@ class LearningEngineModeMixTests(unittest.TestCase):
         self.assertEqual(apply_word_gap_boost(base, 80.0, 73.0), base)
         self.assertEqual(apply_word_gap_boost(base, 80.0, 70.0), ModeMix(intuition=30, expression=35, word=35))
         self.assertEqual(apply_word_gap_boost(base, 80.0, 55.0), ModeMix(intuition=30, expression=25, word=45))
+
+    def test_mastery_label_does_not_require_perfect_attempt(self) -> None:
+        self.assertEqual(mastery_label(4, 95.0, 95.0, 0), "Mastered")
 
 
 if __name__ == "__main__":

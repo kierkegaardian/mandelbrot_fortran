@@ -175,6 +175,13 @@ class HistoricalQuestion:
 
 
 @dataclass(frozen=True)
+class ScaffoldStep:
+    prompt: str
+    expected_answer: str
+    hint: str
+
+
+@dataclass(frozen=True)
 class SummerProgram:
     id: int
     profile_id: int

@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import sqlite3
 import uuid
 
 from ..models import Profile
@@ -31,4 +32,17 @@ def create_profile(name: str, role: str, created_at: str) -> Profile:
 
 def delete_profile(profile_id: int) -> None:
     with managed_connection() as conn:
+        _ensure_profile_deletable(conn, profile_id)
         conn.execute("DELETE FROM profiles WHERE id = ?", (profile_id,))
+
+
+def _ensure_profile_deletable(
+    conn: sqlite3.Connection, profile_id: int
+) -> None:
+    owner = conn.execute(
+        "SELECT 1 FROM parent_auth WHERE profile_id = ?", (int(profile_id),)
+    ).fetchone()
+    if owner is not None:
+        raise ValueError(
+            "Set the parent PIN from another parent profile before deleting this profile."
+        )

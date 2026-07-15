@@ -20,6 +20,12 @@ def parent_pin_configured() -> bool:
     return row is not None
 
 
+def parent_pin_owner_id() -> int | None:
+    with managed_connection() as conn:
+        row = conn.execute("SELECT profile_id FROM parent_auth LIMIT 1").fetchone()
+    return int(row["profile_id"]) if row is not None else None
+
+
 def parent_pin_locked(now_iso_text: str | None = None) -> tuple[bool, str | None]:
     now = _parse_iso_utc(now_iso_text) if now_iso_text else datetime.now(timezone.utc)
     if now is None:

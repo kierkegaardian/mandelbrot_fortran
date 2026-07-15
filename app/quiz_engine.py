@@ -5,6 +5,7 @@ import random
 from dataclasses import dataclass
 from typing import Optional
 
+from .models import ScaffoldStep
 from .question_bank import try_generate_from_templates
 
 
@@ -59,6 +60,7 @@ class Question:
     subskill: Optional[str] = None
     question_label: str = "Core"
     mode: str = "expression"
+    scaffold_steps: Optional[list[ScaffoldStep]] = None
 
 
 def _level_range(level: int) -> tuple[int, int]:

@@ -9,6 +9,7 @@ from .ui_arithmetic import ArithmeticPanel
 from .ui_dashboard import DashboardPanel
 from .ui_fractals import FractalPanel
 from .ui_parent import ParentPanel
+from .ui_parent_access import ParentAccessMixin
 from .ui_quiz import QuizPanel
 from .ui_settings import UiSettings, load_ui_settings
 from .ui_shell_launchers import ShellQuizLaunchersMixin
@@ -16,13 +17,17 @@ from .ui_shell_shortcuts import ShellShortcutsMixin
 from .ui_skill_map import SkillMapPanel
 
 
-class AppShell(ShellShortcutsMixin, ShellQuizLaunchersMixin):
+class AppShell(ParentAccessMixin, ShellShortcutsMixin, ShellQuizLaunchersMixin):
     """Role-aware application shell with stable panel constructors."""
 
     def __init__(self, root: tk.Tk, profile: Profile) -> None:
         self.root = root
         self.profile = profile
         self._settings: UiSettings = load_ui_settings()
+        self._parent_unlocked = False
+        self._last_tab_index = 0
+        self._handling_tab_change = False
+        self._parent_tab_index: int | None = None
 
         self.root.title("MandelQuest")
         self.root.geometry("1200x720")
@@ -105,11 +110,26 @@ class AppShell(ShellShortcutsMixin, ShellQuizLaunchersMixin):
         for name, module in self._modules:
             self.notebook.add(module.controls_frame, text=name)
             module.view_frame.grid(row=0, column=0, sticky="nsew")
+            if name == "Parent":
+                self._parent_tab_index = self.notebook.index("end") - 1
         self.notebook.bind("<<NotebookTabChanged>>", self._on_tab_changed)
         self._show_module(0)
 
     def _on_tab_changed(self, _event: tk.Event) -> None:  # type: ignore[type-arg]
-        self._show_module(self.notebook.index(self.notebook.select()))
+        if self._handling_tab_change:
+            return
+        index = self.notebook.index(self.notebook.select())
+        if (
+            self._parent_tab_index is not None
+            and index == self._parent_tab_index
+            and not self._ensure_parent_access()
+        ):
+            self._handling_tab_change = True
+            self.notebook.select(self._last_tab_index)
+            self._handling_tab_change = False
+            return
+        self._last_tab_index = index
+        self._show_module(index)
 
     def _show_module(self, index: int) -> None:
         self._refresh_offline_status()

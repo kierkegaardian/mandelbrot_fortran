@@ -25,6 +25,7 @@ class TkAppTestCase(unittest.TestCase):
         self._roots: list[tk.Tk] = []
         self._tk_errors: list[str] = []
         self._messagebox_errors: list[str] = []
+        self._messagebox_warnings: list[str] = []
         self._askyesno_answers: list[bool] = []
         self._askstring_answers: list[str | None] = []
 
@@ -33,11 +34,13 @@ class TkAppTestCase(unittest.TestCase):
 
         self._orig_showinfo = messagebox.showinfo
         self._orig_showerror = messagebox.showerror
+        self._orig_showwarning = messagebox.showwarning
         self._orig_askyesno = messagebox.askyesno
         self._orig_askstring = simpledialog.askstring
 
         messagebox.showinfo = self._fake_showinfo
         messagebox.showerror = self._fake_showerror
+        messagebox.showwarning = self._fake_showwarning
         messagebox.askyesno = self._fake_askyesno
         simpledialog.askstring = self._fake_askstring
 
@@ -50,6 +53,7 @@ class TkAppTestCase(unittest.TestCase):
 
         messagebox.showinfo = self._orig_showinfo
         messagebox.showerror = self._orig_showerror
+        messagebox.showwarning = self._orig_showwarning
         messagebox.askyesno = self._orig_askyesno
         simpledialog.askstring = self._orig_askstring
 
@@ -65,6 +69,10 @@ class TkAppTestCase(unittest.TestCase):
 
     def _fake_showerror(self, title, message, **_kwargs):
         self._messagebox_errors.append(f"{title}: {message}")
+        return "ok"
+
+    def _fake_showwarning(self, title, message, **_kwargs):
+        self._messagebox_warnings.append(f"{title}: {message}")
         return "ok"
 
     def _fake_askyesno(self, _title, _message, **_kwargs):
