@@ -1,10 +1,11 @@
 from __future__ import annotations
 
 from typing import Optional
+import uuid
 
 from ..models import QuizAttempt
+from ._util import _sync_now_text
 from .connection import managed_connection
-
 
 def create_attempt(
     profile_id: int,
@@ -17,12 +18,14 @@ def create_attempt(
     created_at: str,
     elapsed_seconds: float | None = None,
 ) -> int:
+    sync_id = str(uuid.uuid4())
     with managed_connection() as conn:
         cur = conn.execute(
             """
             INSERT INTO quiz_attempts
-            (profile_id, quiz_set_id, skill, question_type, num_questions, level, score, elapsed_seconds, created_at)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+            (profile_id, quiz_set_id, skill, question_type, num_questions, level, score, elapsed_seconds, created_at,
+             sync_id, sync_updated_at, sync_deleted)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0)
             """,
             (
                 profile_id,
@@ -34,9 +37,12 @@ def create_attempt(
                 score,
                 None if elapsed_seconds is None else float(elapsed_seconds),
                 created_at,
+                sync_id,
+                created_at,
             ),
         )
         return int(cur.lastrowid)
+
 
 def add_question_result(
     attempt_id: int,
@@ -48,17 +54,48 @@ def add_question_result(
     user_answer: str,
     is_correct: bool,
     explanation: str,
-) -> None:
+) -> int:
+    return add_question_result_with_subskill(
+        attempt_id=attempt_id,
+        skill=skill,
+        subskill=None,
+        question_label=question_label,
+        mode=mode,
+        prompt=prompt,
+        correct_answer=correct_answer,
+        user_answer=user_answer,
+        is_correct=is_correct,
+        explanation=explanation,
+    )
+
+
+def add_question_result_with_subskill(
+    attempt_id: int,
+    skill: str,
+    subskill: str | None,
+    question_label: str,
+    mode: str,
+    prompt: str,
+    correct_answer: str,
+    user_answer: str,
+    is_correct: bool,
+    explanation: str,
+    sync_updated_at: str | None = None,
+) -> int:
+    row_sync_id = str(uuid.uuid4())
+    updated_at = sync_updated_at or _sync_now_text()
     with managed_connection() as conn:
-        conn.execute(
+        cur = conn.execute(
             """
             INSERT INTO quiz_questions
-            (attempt_id, skill, question_label, mode, prompt, correct_answer, user_answer, is_correct, explanation)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+            (attempt_id, skill, subskill, question_label, mode, prompt, correct_answer, user_answer, is_correct, explanation,
+             sync_id, sync_updated_at, sync_deleted)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0)
             """,
             (
                 attempt_id,
                 skill,
+                subskill,
                 question_label,
                 mode,
                 prompt,
@@ -66,8 +103,11 @@ def add_question_result(
                 user_answer,
                 int(is_correct),
                 explanation,
+                row_sync_id,
+                updated_at,
             ),
         )
+        return int(cur.lastrowid)
 
 def list_attempts(profile_id: int) -> list[QuizAttempt]:
     with managed_connection() as conn:
@@ -75,7 +115,7 @@ def list_attempts(profile_id: int) -> list[QuizAttempt]:
             """
             SELECT id, profile_id, quiz_set_id, skill, question_type, num_questions, level, score, elapsed_seconds, created_at
             FROM quiz_attempts
-            WHERE profile_id = ?
+            WHERE profile_id = ? AND sync_deleted = 0
             ORDER BY created_at DESC
             """,
             (profile_id,),
@@ -103,7 +143,7 @@ def mode_accuracy_by_skill(profile_id: int, skill: str) -> dict[str, float]:
             SELECT qq.mode AS mode, COUNT(*) AS total, SUM(qq.is_correct) AS correct
             FROM quiz_questions qq
             JOIN quiz_attempts qa ON qa.id = qq.attempt_id
-            WHERE qa.profile_id = ? AND qq.skill = ?
+            WHERE qa.profile_id = ? AND qq.skill = ?\n              AND qa.sync_deleted = 0 AND qq.sync_deleted = 0
             GROUP BY qq.mode
             """,
             (int(profile_id), skill),

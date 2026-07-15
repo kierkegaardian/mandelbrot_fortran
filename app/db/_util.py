@@ -42,3 +42,6 @@ def _iso_day_utc(value: str) -> str:
     if parsed is None:
         return datetime.now(timezone.utc).date().isoformat()
     return parsed.date().isoformat()
+
+def _sync_now_text() -> str:
+    return datetime.now(timezone.utc).isoformat()

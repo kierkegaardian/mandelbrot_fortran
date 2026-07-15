@@ -49,6 +49,7 @@ class Worksheet:
     level: int
     file_path: str
     created_at: str
+    archived_at: Optional[str] = None
 
 
 @dataclass(frozen=True)
@@ -137,6 +138,14 @@ class DailyGoalHistory:
 
 
 @dataclass(frozen=True)
+class SchoolYearTarget:
+    profile_id: int
+    grade: int
+    stretch_enabled: bool
+    updated_at: str
+
+
+@dataclass(frozen=True)
 class HistoricalTest:
     id: int
     exam_code: str
@@ -163,3 +172,48 @@ class HistoricalQuestion:
     correct_answer: Optional[str]
     explanation: str
     source_page: Optional[int]
+
+
+@dataclass(frozen=True)
+class SummerProgram:
+    id: int
+    profile_id: int
+    lane: str
+    start_date: str
+    end_date: str
+    days_per_week: int
+    minutes_per_session: int
+    status: str
+    finish_definition: str
+    placement_recommendation: Optional[str]
+    placement_review_status: str
+    placement_reviewed_at: Optional[str]
+    student_age_years: Optional[int]
+    created_at: str
+    updated_at: str
+
+
+@dataclass(frozen=True)
+class SummerProgramTask:
+    id: int
+    program_id: int
+    unit_code: str
+    task_kind: str
+    skill: str
+    subskill: Optional[str]
+    sequence_index: int
+    status: str
+    target_score_pct: Optional[float]
+    scheduled_date: str
+    notes_json: str
+
+
+@dataclass(frozen=True)
+class SummerAssessmentRun:
+    id: int
+    program_id: int
+    assessment_type: str
+    score_pct: float
+    passed: bool
+    strand_results_json: str
+    completed_at: str

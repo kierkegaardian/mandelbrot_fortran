@@ -4,17 +4,25 @@ from .assignments import (
     assignment_completion_analytics,
     create_assignment,
     evaluate_assignments_for_attempt,
+    evaluate_assignments_for_attempt_ids,
     get_next_active_assignment,
     list_assignments,
     set_assignment_active,
 )
-from .attempts import add_question_result, create_attempt, list_attempts, mode_accuracy_by_skill
+from .attempts import (
+    add_question_result,
+    add_question_result_with_subskill,
+    create_attempt,
+    list_attempts,
+    mode_accuracy_by_skill,
+)
 from .books import add_exercise_candidate, create_book, list_books, list_exercise_candidates
 from .connection import (
     DbConfig,
     connect,
     db_config,
     get_db_config,
+    managed_connection,
     override_db_config,
     reset_db_config,
     set_db_config,
@@ -28,10 +36,56 @@ from .historical import (
     replace_historical_questions,
     upsert_historical_test,
 )
+from .parent_auth import (
+    PIN_HASH_ITERATIONS,
+    PIN_LOCK_MAX_ATTEMPTS,
+    PIN_LOCK_MINUTES,
+    PIN_MAX_LENGTH,
+    PIN_MIN_LENGTH,
+    clear_parent_lock,
+    parent_pin_configured,
+    parent_pin_locked,
+    record_parent_auth_failure,
+    set_parent_pin,
+    verify_parent_pin,
+)
 from .profiles import create_profile, delete_profile, list_profiles
-from .progress import list_subskill_progress, upsert_subskill_progress
+from .progress import (
+    list_subskill_progress,
+    rebuild_subskill_progress,
+    skill_progress_pipeline,
+    upsert_subskill_progress,
+)
+from .quiz_progress import (
+    clear_quiz_progress,
+    clear_quiz_progress_for_profile,
+    load_quiz_progress,
+    save_quiz_progress,
+)
 from .quiz_sets import create_quiz_set, delete_quiz_set, list_quiz_sets, update_quiz_set
 from .schema import init_db
+from .school_year import get_school_year_target, save_school_year_target
+from .summer_assessments import (
+    get_summer_assessment_run,
+    list_summer_assessment_runs,
+    record_summer_assessment,
+)
+from .summer_programs import (
+    archive_summer_programs,
+    create_summer_program,
+    get_active_summer_program,
+    get_summer_program,
+    list_summer_programs,
+    update_summer_program,
+)
+from .summer_tasks import (
+    create_summer_program_task,
+    get_summer_program_task,
+    list_summer_program_tasks,
+    replace_summer_program_tasks,
+    shift_summer_program_task_sequences,
+    update_summer_program_task,
+)
 from .templates import (
     add_template_var,
     create_question_template,
@@ -41,16 +95,27 @@ from .templates import (
     list_question_templates,
     list_template_vars,
 )
-from .worksheets import create_worksheet, skill_progress_pipeline
+from .worksheets import archive_worksheet, create_worksheet, list_worksheets
 
 
 __all__ = (
     "DbConfig",
+    "PIN_HASH_ITERATIONS",
+    "PIN_LOCK_MAX_ATTEMPTS",
+    "PIN_LOCK_MINUTES",
+    "PIN_MAX_LENGTH",
+    "PIN_MIN_LENGTH",
     "add_exercise_candidate",
     "add_question_result",
+    "add_question_result_with_subskill",
     "add_template_var",
     "apply_historical_answer_key",
+    "archive_summer_programs",
+    "archive_worksheet",
     "assignment_completion_analytics",
+    "clear_parent_lock",
+    "clear_quiz_progress",
+    "clear_quiz_progress_for_profile",
     "connect",
     "create_assignment",
     "create_attempt",
@@ -58,6 +123,8 @@ __all__ = (
     "create_profile",
     "create_question_template",
     "create_quiz_set",
+    "create_summer_program",
+    "create_summer_program_task",
     "create_worksheet",
     "daily_goal_status",
     "db_config",
@@ -66,8 +133,14 @@ __all__ = (
     "delete_template_by_external_id",
     "delete_templates_by_identity",
     "evaluate_assignments_for_attempt",
+    "evaluate_assignments_for_attempt_ids",
+    "get_active_summer_program",
     "get_db_config",
     "get_next_active_assignment",
+    "get_school_year_target",
+    "get_summer_assessment_run",
+    "get_summer_program",
+    "get_summer_program_task",
     "init_db",
     "list_all_question_templates",
     "list_assignments",
@@ -82,16 +155,35 @@ __all__ = (
     "list_question_templates",
     "list_quiz_sets",
     "list_subskill_progress",
+    "list_summer_assessment_runs",
+    "list_summer_program_tasks",
+    "list_summer_programs",
     "list_template_vars",
+    "list_worksheets",
+    "load_quiz_progress",
+    "managed_connection",
     "mode_accuracy_by_skill",
     "override_db_config",
+    "parent_pin_configured",
+    "parent_pin_locked",
+    "rebuild_subskill_progress",
     "record_daily_review_completion",
+    "record_parent_auth_failure",
+    "record_summer_assessment",
     "replace_historical_questions",
+    "replace_summer_program_tasks",
     "reset_db_config",
+    "save_quiz_progress",
+    "save_school_year_target",
     "set_assignment_active",
     "set_db_config",
+    "set_parent_pin",
+    "shift_summer_program_task_sequences",
     "skill_progress_pipeline",
     "update_quiz_set",
+    "update_summer_program",
+    "update_summer_program_task",
     "upsert_historical_test",
     "upsert_subskill_progress",
+    "verify_parent_pin",
 )

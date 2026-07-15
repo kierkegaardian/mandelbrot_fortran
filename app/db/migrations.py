@@ -2,22 +2,18 @@ from __future__ import annotations
 
 import sqlite3
 
+from .migration_helpers import (
+    _enqueue_existing_sync_rows,
+    _ensure_column,
+    _ensure_external_id_unique_index,
+    _ensure_schema_support,
+    _ensure_sync_schema,
+    _rewrite_skill_id,
+    _schema_version,
+)
 
 def _run_migrations(conn: sqlite3.Connection) -> None:
-    conn.execute(
-        """
-        CREATE TABLE IF NOT EXISTS schema_version (
-            id INTEGER PRIMARY KEY CHECK(id = 1),
-            version INTEGER NOT NULL
-        );
-        """
-    )
-    row = conn.execute("SELECT version FROM schema_version WHERE id = 1").fetchone()
-    if row is None:
-        conn.execute("INSERT INTO schema_version (id, version) VALUES (1, 0)")
-        version = 0
-    else:
-        version = int(row["version"])
+    version = _schema_version(conn)
 
     # v1: ensure constraint_expr exists
     if version < 1:
@@ -154,50 +150,140 @@ def _run_migrations(conn: sqlite3.Connection) -> None:
         conn.execute("UPDATE schema_version SET version = 9 WHERE id = 1")
         version = 9
 
-    # Always ensure indexes exist (idempotent).
-    _ensure_external_id_unique_index(conn)
-    _ensure_historical_indexes(conn)
+    # v10: parent auth pin + in-progress quiz resume persistence
+    if version < 10:
+        conn.execute(
+            """
+            CREATE TABLE IF NOT EXISTS parent_auth (
+                profile_id INTEGER PRIMARY KEY,
+                pin_hash TEXT NOT NULL,
+                pin_salt TEXT NOT NULL,
+                failed_attempts INTEGER NOT NULL DEFAULT 0,
+                locked_until TEXT,
+                updated_at TEXT NOT NULL,
+                FOREIGN KEY(profile_id) REFERENCES profiles(id) ON DELETE CASCADE
+            );
+            """
+        )
+        conn.execute(
+            """
+            CREATE TABLE IF NOT EXISTS quiz_attempt_progress (
+                attempt_id INTEGER PRIMARY KEY AUTOINCREMENT,
+                profile_id INTEGER NOT NULL,
+                question_index INTEGER NOT NULL DEFAULT 0,
+                state_json TEXT NOT NULL,
+                updated_at TEXT NOT NULL,
+                FOREIGN KEY(profile_id) REFERENCES profiles(id) ON DELETE CASCADE
+            );
+            """
+        )
+        conn.execute("UPDATE schema_version SET version = 10 WHERE id = 1")
+        version = 10
 
-def _ensure_external_id_unique_index(conn: sqlite3.Connection) -> None:
-    # Enforce uniqueness without requiring ALTER TABLE to add a UNIQUE column.
-    # Multiple NULL values are allowed; empty strings should be avoided by the loader.
-    conn.execute(
-        """
-        CREATE UNIQUE INDEX IF NOT EXISTS idx_question_templates_external_id
-        ON question_templates(external_id)
-        WHERE external_id IS NOT NULL;
-        """
-    )
+    # v11: persist credited subskill for quiz history rows
+    if version < 11:
+        _ensure_column(conn, "quiz_questions", "subskill", "TEXT")
+        conn.execute("UPDATE schema_version SET version = 11 WHERE id = 1")
+        version = 11
 
-def _ensure_historical_indexes(conn: sqlite3.Connection) -> None:
-    conn.execute(
-        """
-        CREATE INDEX IF NOT EXISTS idx_historical_questions_test_qnum
-        ON historical_questions(test_id, question_number);
-        """
-    )
-    conn.execute(
-        """
-        CREATE INDEX IF NOT EXISTS idx_historical_questions_category
-        ON historical_questions(category);
-        """
-    )
+    # v12: sync metadata + local outbox for optional family sync
+    if version < 12:
+        _ensure_sync_schema(conn)
+        conn.execute("UPDATE schema_version SET version = 12 WHERE id = 1")
+        version = 12
 
-def _ensure_column(conn: sqlite3.Connection, table: str, column: str, ddl: str) -> None:
-    rows = conn.execute(f"PRAGMA table_info({table})").fetchall()
-    existing = {r["name"] for r in rows}
-    if column in existing:
-        return
-    conn.execute(f"ALTER TABLE {table} ADD COLUMN {column} {ddl}")
+    # v13: local-only Summer Program planning tables
+    if version < 13:
+        conn.execute(
+            """
+            CREATE TABLE IF NOT EXISTS summer_programs (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                profile_id INTEGER NOT NULL,
+                lane TEXT NOT NULL,
+                start_date TEXT NOT NULL,
+                end_date TEXT NOT NULL,
+                days_per_week INTEGER NOT NULL,
+                minutes_per_session INTEGER NOT NULL,
+                status TEXT NOT NULL,
+                finish_definition TEXT NOT NULL,
+                placement_recommendation TEXT,
+                placement_review_status TEXT NOT NULL DEFAULT 'accepted',
+                placement_reviewed_at TEXT,
+                student_age_years INTEGER,
+                created_at TEXT NOT NULL,
+                updated_at TEXT NOT NULL,
+                FOREIGN KEY(profile_id) REFERENCES profiles(id) ON DELETE CASCADE
+            );
+            """
+        )
+        conn.execute(
+            """
+            CREATE TABLE IF NOT EXISTS summer_program_tasks (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                program_id INTEGER NOT NULL,
+                unit_code TEXT NOT NULL,
+                task_kind TEXT NOT NULL,
+                skill TEXT NOT NULL,
+                subskill TEXT,
+                sequence_index INTEGER NOT NULL,
+                status TEXT NOT NULL,
+                target_score_pct REAL,
+                scheduled_date TEXT NOT NULL,
+                notes_json TEXT NOT NULL DEFAULT '{}',
+                FOREIGN KEY(program_id) REFERENCES summer_programs(id) ON DELETE CASCADE
+            );
+            """
+        )
+        conn.execute(
+            """
+            CREATE TABLE IF NOT EXISTS summer_assessment_runs (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                program_id INTEGER NOT NULL,
+                assessment_type TEXT NOT NULL,
+                score_pct REAL NOT NULL,
+                passed INTEGER NOT NULL,
+                strand_results_json TEXT NOT NULL,
+                completed_at TEXT NOT NULL,
+                FOREIGN KEY(program_id) REFERENCES summer_programs(id) ON DELETE CASCADE
+            );
+            """
+        )
+        conn.execute("UPDATE schema_version SET version = 13 WHERE id = 1")
+        version = 13
 
-def _rewrite_skill_id(
-    conn: sqlite3.Connection,
-    table: str,
-    column: str,
-    old_skill: str,
-    new_skill: str,
-) -> None:
-    conn.execute(
-        f"UPDATE {table} SET {column} = ? WHERE {column} = ?",
-        (new_skill, old_skill),
-    )
+    # v14: Summer Program placement review state
+    if version < 14:
+        _ensure_column(conn, "summer_programs", "placement_review_status", "TEXT NOT NULL DEFAULT 'accepted'")
+        _ensure_column(conn, "summer_programs", "placement_reviewed_at", "TEXT")
+        conn.execute("UPDATE schema_version SET version = 14 WHERE id = 1")
+        version = 14
+
+    # v15: per-child Texas school-year grade targets
+    if version < 15:
+        conn.execute(
+            """
+            CREATE TABLE IF NOT EXISTS school_year_targets (
+                profile_id INTEGER PRIMARY KEY,
+                grade INTEGER NOT NULL,
+                stretch_enabled INTEGER NOT NULL DEFAULT 1,
+                updated_at TEXT NOT NULL,
+                FOREIGN KEY(profile_id) REFERENCES profiles(id) ON DELETE CASCADE
+            );
+            """
+        )
+        conn.execute("UPDATE schema_version SET version = 15 WHERE id = 1")
+        version = 15
+
+    # v16: archived worksheet rows for parent packet management
+    if version < 16:
+        _ensure_column(conn, "worksheets", "archived_at", "TEXT")
+        conn.execute("UPDATE schema_version SET version = 16 WHERE id = 1")
+        version = 16
+
+    # v17: queue canonical rows created before the sync-aware service existed
+    if version < 17:
+        _ensure_sync_schema(conn)
+        _enqueue_existing_sync_rows(conn)
+        conn.execute("UPDATE schema_version SET version = 17 WHERE id = 1")
+        version = 17
+    _ensure_schema_support(conn)

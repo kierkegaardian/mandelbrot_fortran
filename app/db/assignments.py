@@ -1,11 +1,12 @@
 from __future__ import annotations
 
 from datetime import datetime, timezone
+import sqlite3
+import uuid
 
 from ..models import Assignment
+from ._util import _parse_iso_utc, _row_to_assignment, _sync_now_text
 from .connection import managed_connection
-from ._util import _parse_iso_utc, _row_to_assignment
-
 
 def create_assignment(
     profile_id: int,
@@ -22,13 +23,15 @@ def create_assignment(
     notes: str,
     created_at: str,
 ) -> int:
+    sync_id = str(uuid.uuid4())
     with managed_connection() as conn:
         cur = conn.execute(
             """
             INSERT INTO assignments
             (profile_id, skill, subskill, target_type, target_value, level, num_questions, question_type,
-             mode_intuition_pct, mode_expression_pct, mode_word_pct, notes, created_at)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+             mode_intuition_pct, mode_expression_pct, mode_word_pct, notes, created_at,
+             sync_id, sync_updated_at, sync_deleted)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0)
             """,
             (
                 int(profile_id),
@@ -44,9 +47,12 @@ def create_assignment(
                 mode_word_pct,
                 notes,
                 created_at,
+                sync_id,
+                created_at,
             ),
         )
         return int(cur.lastrowid)
+
 
 def list_assignments(
     profile_id: int,
@@ -56,7 +62,7 @@ def list_assignments(
     target_type: str | None = None,
     limit: int | None = None,
 ) -> list[Assignment]:
-    clauses: list[str] = ["profile_id = ?"]
+    clauses: list[str] = ["profile_id = ?", "sync_deleted = 0"]
     params: list[object] = [int(profile_id)]
     if active_only is True:
         clauses.append("active = 1")
@@ -93,6 +99,7 @@ def list_assignments(
         ).fetchall()
     return [_row_to_assignment(r) for r in rows]
 
+
 def assignment_completion_analytics(profile_id: int, recent_days: int = 30) -> dict[str, object]:
     recent_days = max(1, int(recent_days))
     active_items = list_assignments(profile_id, active_only=True)
@@ -125,36 +132,53 @@ def assignment_completion_analytics(profile_id: int, recent_days: int = 30) -> d
         "top_completed_skills": top_skills,
     }
 
+
 def set_assignment_active(assignment_id: int, active: bool, completed_at: str | None = None) -> None:
+    sync_updated_at = completed_at or _sync_now_text()
     with managed_connection() as conn:
         conn.execute(
-            "UPDATE assignments SET active = ?, completed_at = ? WHERE id = ?",
-            (1 if active else 0, completed_at if not active else None, int(assignment_id)),
+            """
+            UPDATE assignments
+            SET active = ?, completed_at = ?, sync_updated_at = ?, sync_deleted = 0
+            WHERE id = ?
+            """,
+            (
+                1 if active else 0,
+                completed_at if not active else None,
+                sync_updated_at,
+                int(assignment_id),
+            ),
         )
+
 
 def get_next_active_assignment(profile_id: int) -> Assignment | None:
     items = list_assignments(profile_id, active_only=True)
     return items[0] if items else None
 
+
 def evaluate_assignments_for_attempt(profile_id: int, attempt_id: int, completed_at: str) -> int:
-    completed = 0
+    return len(evaluate_assignments_for_attempt_ids(profile_id, attempt_id, completed_at))
+
+
+def evaluate_assignments_for_attempt_ids(profile_id: int, attempt_id: int, completed_at: str) -> list[int]:
+    completed_ids: list[int] = []
     with managed_connection() as conn:
         attempt = conn.execute(
             """
             SELECT id, profile_id, skill, score, num_questions
             FROM quiz_attempts
-            WHERE id = ? AND profile_id = ?
+            WHERE id = ? AND profile_id = ? AND sync_deleted = 0
             """,
             (int(attempt_id), int(profile_id)),
         ).fetchone()
         if attempt is None:
-            return 0
+            return []
 
         assignments = conn.execute(
             """
             SELECT id, skill, subskill, target_type, target_value
             FROM assignments
-            WHERE profile_id = ? AND active = 1
+            WHERE profile_id = ? AND active = 1 AND sync_deleted = 0
             ORDER BY created_at ASC, id ASC
             """,
             (int(profile_id),),
@@ -187,8 +211,12 @@ def evaluate_assignments_for_attempt(profile_id: int, attempt_id: int, completed
                 is_done = bool(row and int(row["mastered"]) == 1)
             if is_done:
                 conn.execute(
-                    "UPDATE assignments SET active = 0, completed_at = ? WHERE id = ?",
-                    (completed_at, int(item["id"])),
+                    """
+                    UPDATE assignments
+                    SET active = 0, completed_at = ?, sync_updated_at = ?, sync_deleted = 0
+                    WHERE id = ?
+                    """,
+                    (completed_at, completed_at, int(item["id"])),
                 )
-                completed += 1
-    return completed
+                completed_ids.append(int(item["id"]))
+    return completed_ids

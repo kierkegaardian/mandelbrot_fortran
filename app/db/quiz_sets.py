@@ -1,8 +1,10 @@
 from __future__ import annotations
 
-from ..models import QuizSet
-from .connection import managed_connection
+import uuid
 
+from ..models import QuizSet
+from ._util import _sync_now_text
+from .connection import managed_connection
 
 def list_quiz_sets() -> list[QuizSet]:
     with managed_connection() as conn:
@@ -11,6 +13,7 @@ def list_quiz_sets() -> list[QuizSet]:
             SELECT id, name, skill, question_type, num_questions, level,
                    mode_intuition_pct, mode_expression_pct, mode_word_pct
             FROM quiz_sets
+            WHERE sync_deleted = 0
             ORDER BY name
             """
         ).fetchall()
@@ -29,6 +32,7 @@ def list_quiz_sets() -> list[QuizSet]:
         for r in rows
     ]
 
+
 def create_quiz_set(
     name: str,
     skill: str,
@@ -40,12 +44,14 @@ def create_quiz_set(
     mode_expression_pct: int | None = None,
     mode_word_pct: int | None = None,
 ) -> QuizSet:
+    sync_id = str(uuid.uuid4())
     with managed_connection() as conn:
         cur = conn.execute(
             """
             INSERT INTO quiz_sets
-            (name, skill, question_type, num_questions, level, mode_intuition_pct, mode_expression_pct, mode_word_pct, created_at)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+            (name, skill, question_type, num_questions, level, mode_intuition_pct, mode_expression_pct, mode_word_pct,
+             created_at, sync_id, sync_updated_at, sync_deleted)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0)
             """,
             (
                 name,
@@ -56,6 +62,8 @@ def create_quiz_set(
                 mode_intuition_pct,
                 mode_expression_pct,
                 mode_word_pct,
+                created_at,
+                sync_id,
                 created_at,
             ),
         )
@@ -72,9 +80,11 @@ def create_quiz_set(
         mode_word_pct,
     )
 
+
 def delete_quiz_set(quiz_set_id: int) -> None:
     with managed_connection() as conn:
         conn.execute("DELETE FROM quiz_sets WHERE id = ?", (quiz_set_id,))
+
 
 def update_quiz_set(
     quiz_set_id: int,
@@ -87,12 +97,14 @@ def update_quiz_set(
     mode_expression_pct: int | None = None,
     mode_word_pct: int | None = None,
 ) -> None:
+    sync_updated_at = _sync_now_text()
     with managed_connection() as conn:
         conn.execute(
             """
             UPDATE quiz_sets
             SET name = ?, skill = ?, question_type = ?, num_questions = ?, level = ?,
-                mode_intuition_pct = ?, mode_expression_pct = ?, mode_word_pct = ?
+                mode_intuition_pct = ?, mode_expression_pct = ?, mode_word_pct = ?,
+                sync_updated_at = ?, sync_deleted = 0
             WHERE id = ?
             """,
             (
@@ -104,6 +116,7 @@ def update_quiz_set(
                 mode_intuition_pct,
                 mode_expression_pct,
                 mode_word_pct,
+                sync_updated_at,
                 quiz_set_id,
             ),
         )
