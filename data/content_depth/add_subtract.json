@@ -1,0 +1,372 @@
+{
+  "version": 1,
+  "skill": "add_subtract",
+  "subskills": [
+    {
+      "subskill": "Single-digit addition",
+      "content_status": "ready",
+      "archetypes": [
+        {
+          "id": "depth.v1.add_subtract.single_digit_addition.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Single-digit addition?"
+        },
+        {
+          "id": "depth.v1.add_subtract.single_digit_addition.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.add_subtract.single_digit_addition.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.add_subtract.single_digit_addition.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A classroom combines two trays of pencils. Draw or choose the joining-groups model, then solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Single-digit addition",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "Mia has 4 red counters and 3 blue counters. How many altogether?",
+            "explanation": "Join the two groups: 4 + 3 = 7.",
+            "expected_answer": "7"
+          },
+          {
+            "stage": "guided",
+            "prompt": "Use counting on to find 6 + 2.",
+            "explanation": "Start at 6 and count two steps: 7, 8.",
+            "expected_answer": "8"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "Find 5 + 4 without recounting the first group.",
+            "explanation": "Count on four times from 5.",
+            "expected_answer": "9"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "operation_choice",
+          "feedback": "You used an operation that separates groups instead of joining them.",
+          "hint": "Act out both groups joining before writing the equation.",
+          "recovery_archetype_id": "depth.v1.add_subtract.single_digit_addition.concept"
+        },
+        {
+          "code": "counting_slip",
+          "feedback": "The joining model is right, but the total was counted inaccurately.",
+          "hint": "Count on from the larger addend once for each object in the smaller group.",
+          "recovery_archetype_id": "depth.v1.add_subtract.single_digit_addition.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Single-digit subtraction",
+      "content_status": "ready",
+      "archetypes": [
+        {
+          "id": "depth.v1.add_subtract.single_digit_subtraction.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Single-digit subtraction?"
+        },
+        {
+          "id": "depth.v1.add_subtract.single_digit_subtraction.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.add_subtract.single_digit_subtraction.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.add_subtract.single_digit_subtraction.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A classroom is tracking supplies; construct an addition or subtraction model and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Single-digit subtraction",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "There are 9 counters and 4 are removed. How many remain?",
+            "explanation": "Model the whole, remove 4, and count the 5 counters left.",
+            "expected_answer": "5"
+          },
+          {
+            "stage": "guided",
+            "prompt": "Use counting back to find 8 - 3.",
+            "explanation": "Start at 8 and move back three steps: 7, 6, 5.",
+            "expected_answer": "5"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "Find 7 - 2 and check it with addition.",
+            "explanation": "7 - 2 = 5, and 5 + 2 returns to 7.",
+            "expected_answer": "5"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "adds_instead",
+          "feedback": "You joined the quantities instead of removing a part from the whole.",
+          "hint": "Act out the starting group, remove the named part, and count what remains.",
+          "recovery_archetype_id": "depth.v1.add_subtract.single_digit_subtraction.concept"
+        },
+        {
+          "code": "reverses_parts",
+          "feedback": "You reversed the whole and the removed part.",
+          "hint": "Write the starting whole first, then subtract the part that leaves.",
+          "recovery_archetype_id": "depth.v1.add_subtract.single_digit_subtraction.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Borrowing and carrying basics",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.add_subtract.borrowing_and_carrying_basics.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Borrowing and carrying basics?"
+        },
+        {
+          "id": "depth.v1.add_subtract.borrowing_and_carrying_basics.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.add_subtract.borrowing_and_carrying_basics.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.add_subtract.borrowing_and_carrying_basics.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A classroom is tracking supplies; construct an addition or subtraction model and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Borrowing and carrying basics",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "8 + 3 = ?",
+            "explanation": "Adding combines two groups into one. Answer: 11",
+            "expected_answer": "11"
+          },
+          {
+            "stage": "guided",
+            "prompt": "16 + 10 = ?",
+            "explanation": "Explain why 10 ones can become 1 ten and back again.",
+            "expected_answer": "26"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "1 - 0 = ?",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "1"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "borrowing_and_carrying_basics.model_confusion",
+          "feedback": "Moving a digit without noticing what value was regrouped.",
+          "hint": "Carrying and borrowing are trades between place-value buckets.",
+          "recovery_archetype_id": "depth.v1.add_subtract.borrowing_and_carrying_basics.concept"
+        },
+        {
+          "code": "borrowing_and_carrying_basics.procedure_slip",
+          "feedback": "The setup is close, but a step in Borrowing and carrying basics changed the result.",
+          "hint": "Explain why 10 ones can become 1 ten and back again.",
+          "recovery_archetype_id": "depth.v1.add_subtract.borrowing_and_carrying_basics.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Word problems",
+      "content_status": "ready",
+      "archetypes": [
+        {
+          "id": "depth.v1.add_subtract.word_problems.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Word problems?"
+        },
+        {
+          "id": "depth.v1.add_subtract.word_problems.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.add_subtract.word_problems.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.add_subtract.word_problems.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A classroom is tracking supplies; construct an addition or subtraction model and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Word problems",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "Sam has 6 shells and finds 3 more. How many altogether?",
+            "explanation": "The story joins groups, so use 6 + 3 = 9.",
+            "expected_answer": "9"
+          },
+          {
+            "stage": "guided",
+            "prompt": "Ten birds are on a fence and 4 fly away. How many remain?",
+            "explanation": "The story separates a part, so use 10 - 4 = 6.",
+            "expected_answer": "6"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "Mia has 12 cards and Leo has 7. How many more does Mia have?",
+            "explanation": "The story compares amounts, so use 12 - 7 = 5.",
+            "expected_answer": "5"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "wrong_relationship",
+          "feedback": "You selected an operation before identifying whether the story joins, separates, or compares.",
+          "hint": "Name the story relationship first, then write its equation.",
+          "recovery_archetype_id": "depth.v1.add_subtract.word_problems.concept"
+        },
+        {
+          "code": "calculation_slip",
+          "feedback": "The story model is close, but the calculation does not match the quantities.",
+          "hint": "Point to each quantity in the equation and recompute one step at a time.",
+          "recovery_archetype_id": "depth.v1.add_subtract.word_problems.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Missing addends",
+      "content_status": "ready",
+      "archetypes": [
+        {
+          "id": "depth.v1.add_subtract.missing_addends.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Missing addends?"
+        },
+        {
+          "id": "depth.v1.add_subtract.missing_addends.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.add_subtract.missing_addends.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.add_subtract.missing_addends.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A classroom is tracking supplies; construct an addition or subtraction model and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Missing addends",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "Complete 6 + ? = 10.",
+            "explanation": "The missing part is the distance from 6 to 10, so it is 4.",
+            "expected_answer": "4"
+          },
+          {
+            "stage": "guided",
+            "prompt": "What number makes 8 + ? = 13 true?",
+            "explanation": "Count up from 8 to 13 or subtract 13 - 8.",
+            "expected_answer": "5"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "A box holds 12 items; 7 are visible. How many are hidden?",
+            "explanation": "The hidden part completes 7 + ? = 12, so 5 are hidden.",
+            "expected_answer": "5"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "adds_whole",
+          "feedback": "You added the known part to the whole instead of finding the missing part.",
+          "hint": "Treat the total as the whole and count up from the known part.",
+          "recovery_archetype_id": "depth.v1.add_subtract.missing_addends.concept"
+        },
+        {
+          "code": "uses_known_part",
+          "feedback": "You repeated the known addend instead of finding the other part.",
+          "hint": "Use subtraction to check which part completes the total.",
+          "recovery_archetype_id": "depth.v1.add_subtract.missing_addends.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Multi-digit regrouping",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.add_subtract.multi_digit_regrouping.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Multi-digit regrouping?"
+        },
+        {
+          "id": "depth.v1.add_subtract.multi_digit_regrouping.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.add_subtract.multi_digit_regrouping.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.add_subtract.multi_digit_regrouping.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A classroom is tracking supplies; construct an addition or subtraction model and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Multi-digit regrouping",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "17 - 11 = ?",
+            "explanation": "Subtracting removes part of a group. Answer: 6",
+            "expected_answer": "6"
+          },
+          {
+            "stage": "guided",
+            "prompt": "20 - 15 = ?",
+            "explanation": "Write 312 + 98 as 312 + 100 - 2 to see the regrouping idea.",
+            "expected_answer": "5"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "15 - 2 = ?",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "13"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "multi_digit_regrouping.model_confusion",
+          "feedback": "Forgetting that 1 ten equals 10 ones during the trade.",
+          "hint": "Regrouping keeps the total the same while moving value between places.",
+          "recovery_archetype_id": "depth.v1.add_subtract.multi_digit_regrouping.concept"
+        },
+        {
+          "code": "multi_digit_regrouping.procedure_slip",
+          "feedback": "The setup is close, but a step in Multi-digit regrouping changed the result.",
+          "hint": "Write 312 + 98 as 312 + 100 - 2 to see the regrouping idea.",
+          "recovery_archetype_id": "depth.v1.add_subtract.multi_digit_regrouping.procedure"
+        }
+      ]
+    }
+  ]
+}

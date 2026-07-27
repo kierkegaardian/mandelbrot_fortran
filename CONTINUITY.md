@@ -1,6 +1,6 @@
 # MandelQuest Continuity
 
-Last updated: 2026-06-26
+Last updated: 2026-07-15
 
 ## Current Product Direction
 
@@ -1055,3 +1055,259 @@ python -m unittest discover -s tests -q
 
 The broad DB-consumer set passed 68 tests, all three script smokes passed, app smoke reported
 `[smoke-test] OK`, and full discovery passed 347 tests.
+
+## Superseded Foundations-to-Algebra-1 Curriculum Depth Receipt (2026-07-14)
+
+This receipt recorded structural manifest completeness as curriculum readiness. The 2026-07-15 reconciliation
+below supersedes that interpretation. MandelQuest remains an
+offline-first deep practice and instruction companion, not a complete textbook replacement; Algebra 2,
+Precalculus, Calculus, composite Statistics, and expanded test prep remain outside this initiative.
+
+- `app/content_depth/` owns typed depth models, versioned registry loading, request-based generation,
+  deterministic proof grading, worked-example and proof UI controllers, resume serialization, cumulative-unit
+  composition, Summer compatibility helpers, the general audit, and printable Depth Review output. Every new
+  Python module is below 300 lines.
+- `data/content_depth/` contains one tracked version-1 JSON manifest per in-scope skill. Together the 26 files
+  define all 158 subskills with conceptual, procedural, transfer, and separate model-building application
+  archetypes; three-stage worked examples; and two targeted misconceptions. Five proof-bearing Geometry
+  subskills also carry dependency-graded proofs with at least four required pairs and two distractors.
+- Schema v18 adds classified template and local question-history metadata while leaving the Family Sync wire
+  payload unchanged. Legacy templates receive stable `legacy.template.<id>` identifiers. Corrected retries and
+  transfer outcomes are stored separately in the local-only `quiz_recoveries` table, so the original wrong
+  answer remains wrong for mastery.
+- First-time child launches for a selected, not-started depth subskill present the worked model, a guided check,
+  and three independent questions. Practice keeps examples optional, rotates archetypes without premature
+  repetition, uses misconception-specific feedback when matched, and follows correction with a different
+  transfer archetype. This historical implementation also enabled the beta by default; the reconciliation below
+  corrects that rollout mistake.
+- Texas goals now expose companion units and soft cumulative checks with grade-specific lengths and 50/30/20
+  target sampling. Algebra 1 is grouped into seven cumulative companion units. Existing Pre-Algebra units and
+  the 85% exit threshold remain intact; mixed reviews, checkpoints, midpoint, and exit work sample prior units,
+  and assessments no longer auto-show scaffolds.
+- Parent tools include Depth Review plus printable HTML export. Summer Resource Review remains compatible but
+  is now backed by the new audit. Worksheets and Texas packets render blank proof tables with completed tables
+  in answer keys. PyInstaller packages the manifest directory.
+
+Verification passed on 2026-07-14:
+
+```bash
+python scripts/audit_content_depth.py --seeds 100
+python scripts/template_dry_run.py --samples 3 --mc --require-external-id
+python -W default::ResourceWarning -m unittest discover -s tests -q
+python -m app.main --smoke-test
+git diff --check
+```
+
+The old structural audit reported `158 ready / 0 thin / 0 missing` at 100 deterministic seeds per archetype/form;
+the reconciliation below explains why that result is not an accepted curriculum release gate.
+Template dry-run completed 3,462 instantiations across 1,154 templates with zero failures and zero missing
+external IDs. Full discovery passed 368 tests with ResourceWarning enabled, and the app smoke test reported
+`[smoke-test] OK`.
+
+## Curriculum Depth Reconciliation (2026-07-15)
+
+The previous `158 ready` result was a structural false positive. The audit verified that each manifest declared
+four archetype labels, three example stages, and two misconception labels, but it did not verify that the
+generated questions were subskill-specific or that application choices actually tested model selection. For
+example, the old Equivalent fractions worked example generated generic shaded-fraction questions rather than
+equivalence reasoning. The implementation also exposed the beta by default before all content was authored.
+
+The reconciled boundary is now `9 ready / 149 thin / 0 missing`:
+
+- The nine planned vertical-slice subskills have authored generators for conceptual, procedural, error-analysis,
+  and model-selecting application questions, plus distinct worked examples and answer-matched misconception
+  recovery. Triangle congruence also exercises the deterministic proof builder.
+- The other 149 subskills retain versioned review scaffolds, but the audit labels them `thin` until substantive
+  archetypes and diagnostic answers are authored. Structural metadata alone cannot produce `ready` status.
+- `Curriculum Depth beta` is parent-only and defaults off. Even when enabled, scaffold-only rows fall back to
+  established practice instead of entering the depth flow.
+- The audit now checks authored-generator presence, distinct worked-example tasks, reasoning-kind integrity,
+  answer-keyed misconception candidates, error-analysis wording, and genuine model choice in application MC
+  forms. The 25- and 100-seed gates exercise ready content; release still requires all 158 rows to pass.
+- Texas/Algebra 1 unit definitions and composition helpers are framework work, not a completed child progression.
+  UI insertion and persisted soft-review recommendations remain open in `TODO.md`.
+- The v18 local metadata, resume serialization, recovery ledger, Family Sync wire boundary, printable proof
+  support, parent audit/export, and package-data work remain valid.
+
+Reconciliation verification:
+
+- `python -W default::ResourceWarning -m unittest discover -s tests -q` passed 369 tests.
+- The substantive 100-seed audit reported `9 ready / 149 thin / 0 missing` and exited nonzero as the intended
+  release gate until all 158 rows pass.
+- Template dry-run completed 3,462 generations with zero failures and zero missing external IDs.
+- `python -m app.main --smoke-test` reported `[smoke-test] OK`.
+- `git diff --check` passed, and every new `app/content_depth/` Python module remains below 300 lines.
+
+## Grade 1 Place-Value Curriculum Depth Slice (2026-07-15)
+
+The first standards-ordered authoring slice after reconciliation is complete. The Grade 1 Texas place-value
+goal now has substantive depth content for both of its mapped subskills:
+
+- `Ones, tens, and hundreds identification`
+- `Compare numbers by place value`
+
+`app/content_depth/pilot_place_value.py` provides typed, authored conceptual, procedural, error-analysis, and
+model-selecting application generators for both targets. Each target also has three distinct worked-example
+stages, two answer-keyed misconception recoveries, enriched intuition, and a parent-controlled Khan mapping.
+Generated values remain within the Grade 1 goal boundary of reading and comparing numbers through 120.
+
+The versioned `place_value` manifest marks only those two targets `ready`; `Expanded form` and `Decimal place
+value and comparison` remain honestly `scaffold`. Grade 3 cumulative composition now uses authored procedural
+questions for the ready place-value rows while preserving legacy generation for scaffold-only rows and keeping
+all cumulative questions free of answer scaffolds.
+
+Verification passed:
+
+```bash
+python -m py_compile app/content_depth/*.py tests/test_content_depth*.py scripts/audit_content_depth.py scripts/generate_content_depth_manifests.py
+python -W default::ResourceWarning -m unittest -v tests.test_content_depth_framework tests.test_content_depth_place_value tests.test_content_depth_proof tests.test_content_depth_serialization tests.test_content_depth_templates tests.test_content_depth_units tests.test_texas_grade_goals tests.test_fall_readiness_audit
+python scripts/audit_content_depth.py --seeds 100 --summary-only
+python scripts/template_dry_run.py --samples 3 --mc --require-external-id
+python -W default::ResourceWarning -m unittest discover -s tests -q
+python -m app.main --smoke-test
+git diff --check
+```
+
+The substantive audit now reports `11 ready / 147 thin / 0 missing` across 158 subskills and intentionally exits
+nonzero until every row is ready. Template dry-run completed 3,462 generations with zero failures and zero
+missing external IDs. Full discovery passed 372 tests, and the app smoke test reported `[smoke-test] OK`.
+The new generator module is 128 lines and its focused test module is 79 lines, both below the 300-line target.
+
+## Grade 1 Addition/Subtraction Curriculum Depth Slice (2026-07-15)
+
+The second standards-ordered authoring slice is complete. All four subskills in the Grade 1 Texas goal
+`g1_add_subtract` now pass the substantive depth gate. The newly authored targets are:
+
+- `Single-digit subtraction`
+- `Missing addends`
+- `Word problems`
+
+`app/content_depth/pilot_add_subtract.py` supplies typed conceptual, procedural, error-analysis, and
+model-selecting application generators. Subtraction distinguishes taking away from joining and reversed-part
+errors. Missing-addend work separates known parts from the whole and uses the addition/subtraction inverse.
+Word problems deliberately rotate among joining, separating, and comparing relationships so operation choice
+is tested before calculation. Generated Grade 1 quantities and results stay within 20.
+
+Each new target has three distinct worked-example stages, two answer-keyed misconception recoveries, enriched
+intuition, and a parent-controlled Khan mapping. The versioned `add_subtract` manifest now marks the full Grade 1
+goal ready while keeping Grade 2 `Borrowing and carrying basics` and `Multi-digit regrouping` honestly
+`scaffold`. The first Grade 1 cumulative check now contains six authored procedural questions and two authored
+application questions, with no legacy questions or answer scaffolds.
+
+Verification passed:
+
+```bash
+python -m py_compile app/content_depth/*.py tests/test_content_depth*.py scripts/audit_content_depth.py scripts/generate_content_depth_manifests.py
+python -W default::ResourceWarning -m unittest -v tests.test_content_depth_add_subtract tests.test_content_depth_place_value tests.test_content_depth_framework tests.test_content_depth_proof tests.test_content_depth_serialization tests.test_content_depth_templates tests.test_content_depth_units tests.test_texas_grade_goals tests.test_fall_readiness_audit tests.test_public_docs
+python scripts/audit_content_depth.py --seeds 100 --summary-only
+python scripts/template_dry_run.py --samples 3 --mc --require-external-id
+python -W default::ResourceWarning -m unittest discover -s tests -q
+python -m app.main --smoke-test
+git diff --check
+```
+
+The substantive audit now reports `14 ready / 144 thin / 0 missing` across 158 subskills and intentionally exits
+nonzero until every row is ready. Template dry-run completed 3,462 generations with zero failures and zero
+missing external IDs. Full discovery passed 377 tests, and the app smoke test reported `[smoke-test] OK`.
+The new generator module is 172 lines and its focused test module is 112 lines, both below the 300-line target.
+
+## Grade 1 Money Curriculum Depth Slice and Grok 4.5 Plan Review (2026-07-15)
+
+The third standards-ordered authoring slice is complete. The Grade 1 Texas goal `g1_money` now has substantive
+depth content for `Dollar-coin values`, while `Making change`, `Budget-style totals`, and `Place-value in
+currency` remain honestly `scaffold`.
+
+Before implementation, Grok 4.5 reviewed the bounded plan in
+`reviews/grok/curriculum-depth-money-plan-review-20260715.md`. Its initial verdict was `BLOCK`: the plan omitted
+three frozen audit-counter updates, did not enumerate every generator/spec registration surface, and proposed a
+cumulative assertion that could not exercise money because the existing sampler always selected the first
+earlier targets. Grok also required explicit Grade 1 bounds rather than inheriting multi-dollar legacy-template
+examples. All four findings were incorporated before building.
+
+`app/content_depth/pilot_money.py` now provides typed conceptual, procedural, error-analysis, and model-selecting
+application generators for pennies, nickels, dimes, quarters, and the one-dollar/100-cents relationship. Coin
+collections are capped at 100 cents, and prompts exclude change-from-payment and budget arithmetic. Diagnostic
+answers distinguish coin count from coin value and dollars from cents. The first-launch worked examples use
+three distinct Grade 1 tasks, and the enriched `Try this` copy now stays on denomination names and values.
+
+The cumulative target sampler now shuffles each target pool with its seeded local RNG before repeating targets.
+This preserves the 50/30/20 composition while allowing later earlier-unit targets such as money to appear in
+small cumulative review quotas. Grade 1 check-2 regression coverage proves money questions are authored when
+sampled, all questions remain scaffold-free, and neighboring thin goals may still truthfully use legacy forms.
+
+Verification passed:
+
+```bash
+python -m py_compile app/content_depth/*.py tests/test_content_depth*.py scripts/audit_content_depth.py scripts/generate_content_depth_manifests.py
+python -W default::ResourceWarning -m unittest -v tests.test_content_depth_money tests.test_content_depth_add_subtract tests.test_content_depth_place_value tests.test_content_depth_framework tests.test_content_depth_proof tests.test_content_depth_serialization tests.test_content_depth_templates tests.test_content_depth_units tests.test_texas_grade_goals tests.test_fall_readiness_audit tests.test_public_docs
+python scripts/audit_content_depth.py --seeds 100 --summary-only
+python scripts/template_dry_run.py --samples 3 --mc --require-external-id
+python -W default::ResourceWarning -m unittest discover -s tests -q
+python -m app.main --smoke-test
+git diff --check
+```
+
+The substantive audit now reports `15 ready / 143 thin / 0 missing` across 158 subskills and intentionally exits
+nonzero until every row is ready. Template dry-run completed 3,462 generations with zero failures and zero
+missing external IDs. Full discovery passed 382 tests, and the app smoke test reported `[smoke-test] OK`.
+The new generator module is 73 lines and its focused test module is 109 lines, both below the 300-line target.
+
+## Grade 1 Personal Finance Curriculum Depth Slice (2026-07-15)
+
+Wave 1D is complete. The next standards-ordered Grade 1 Texas goal, `g1_personal_finance` (TEKS 1.9), now has
+substantive depth content for `Income, gifts, wants, and needs`. The audit moved from
+`15 ready / 143 thin / 0 missing` to `16 ready / 142 thin / 0 missing` without promoting any other scaffolded
+financial-literacy row. The existing advanced `Budget percentages, net worth, interest, and incentives` pilot
+remains ready and unchanged.
+
+Codex and Grok 4.5 collaborated on the implementation contract before coding. Grok's review in
+`reviews/grok/curriculum-depth-g1-personal-finance-goal-review-20260715.md` initially blocked the draft because
+promotion changes the Grade 1 cumulative windows, the Grade 1 goal names job skills that had no authored item
+family, and the frozen audit-counter surfaces were not enumerated. The reconciled contract is preserved in
+`reviews/codex/curriculum-depth-wave-1d-goal-20260715.md`; it also corrects Grok's overly broad sibling assertion
+by preserving the already-ready advanced finance row.
+
+`app/content_depth/pilot_income_gifts.py` now provides typed conceptual, procedural, error-analysis, and
+model-selecting application generators across three separate axes: earned income versus gifts, needs versus
+wants from explicit context, and concrete job skills. Four same-item purpose pairs can classify differently
+from context, and six child-accessible role/skill pairs cover organizing, following steps, sorting, careful
+attention, gentle handling, and careful counting. Prompts avoid later-grade budgets, saving totals, tax,
+interest, profit, credit, salaries, family-income assumptions, universal need/want claims, and moralizing wants.
+
+The generated manifest contains three distinct first-launch examples and two answer-keyed recoveries for
+`gift_as_income` and `context_need_want`. The enriched intuition names the source/purpose/skill routine, and the
+existing Khan mapping remains disabled unless a parent enables external links. The Grade 1 cumulative check 2
+is now fully authored across its place-value, addition/subtraction, money, and personal-finance window. Check 3
+continues to surface honest legacy neighbors from the still-thin shapes/data goals, with no scaffold steps
+attached to cumulative questions.
+
+Verification passed:
+
+```bash
+python -m py_compile app/content_depth/*.py tests/test_content_depth*.py scripts/audit_content_depth.py scripts/generate_content_depth_manifests.py
+python -W default::ResourceWarning -m unittest -v tests.test_content_depth_income_gifts tests.test_content_depth_money tests.test_content_depth_add_subtract tests.test_content_depth_place_value tests.test_content_depth_framework tests.test_content_depth_proof tests.test_content_depth_serialization tests.test_content_depth_templates tests.test_content_depth_units tests.test_texas_grade_goals tests.test_texas_financial_literacy tests.test_fall_readiness_audit tests.test_public_docs
+python scripts/audit_content_depth.py --seeds 100 --summary-only
+python scripts/template_dry_run.py --samples 3 --mc --require-external-id
+python -W default::ResourceWarning -m unittest discover -s tests -q
+python -m app.main --smoke-test
+git diff --check
+```
+
+The focused gate passed 56 tests. The substantive audit reports `16 ready / 142 thin / 0 missing` across all
+158 subskills and intentionally exits nonzero until the rollout is complete. Template dry-run completed 3,462
+generations with zero failures and zero missing external IDs. Full discovery passed 389 tests, the app smoke
+test reported `[smoke-test] OK`, and `git diff --check` passed. The new generator is 159 lines and its focused
+test module is 182 lines, both below the 300-line target.
+
+## Draft PR #1 Curriculum-Depth Reconciliation (2026-07-28)
+
+The post-checkpoint curriculum-depth work was reconciled for draft PR #1 without broadening the beta boundary.
+`Curriculum Depth beta` remains parent-only and off by default, ready-only generation is covered explicitly, and
+the Parent `Depth Review` refresh/export now uses the same 25-seed audit as the CI-depth gate. A focused export
+test caught and fixed an unescaped CSS percent sign that previously made printable review generation fail.
+
+README, TODO, and public coverage copy now agree with the substantive audit at
+`16 ready / 142 thin / 0 missing`. The coverage matrix also counts all sixteen ready rows by describing eleven
+foundations/arithmetic/finance rows, including the existing advanced finance pilot, alongside the other five
+subject-area pilots. Isolated focused verification passed 22 tests; the 100-seed release audit reproduced
+`rows=158 ready=16 thin=142 missing=0` and exited `1` as documented because the full rollout is incomplete.

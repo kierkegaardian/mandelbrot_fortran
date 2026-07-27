@@ -1,0 +1,189 @@
+{
+  "version": 1,
+  "skill": "long_subtraction",
+  "subskills": [
+    {
+      "subskill": "Borrowing",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.long_subtraction.borrowing.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Borrowing?"
+        },
+        {
+          "id": "depth.v1.long_subtraction.borrowing.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.long_subtraction.borrowing.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.long_subtraction.borrowing.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "Choose a useful mathematical model and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Borrowing",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "Long subtraction: 434 - 356 = ?",
+            "explanation": "Long subtraction keeps digits aligned and uses borrowing when needed. Answer: 78",
+            "expected_answer": "78"
+          },
+          {
+            "stage": "guided",
+            "prompt": "Long subtraction: 398 - 385 = ?",
+            "explanation": "Explain why 1 hundred can become 10 tens before subtracting.",
+            "expected_answer": "13"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "Long subtraction: 776 - 657 = ?",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "119"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "borrowing.model_confusion",
+          "feedback": "Crossing out digits without stating what value changed.",
+          "hint": "Borrowing is regrouping one larger place into 10 of the next smaller place.",
+          "recovery_archetype_id": "depth.v1.long_subtraction.borrowing.concept"
+        },
+        {
+          "code": "borrowing.procedure_slip",
+          "feedback": "The setup is close, but a step in Borrowing changed the result.",
+          "hint": "Explain why 1 hundred can become 10 tens before subtracting.",
+          "recovery_archetype_id": "depth.v1.long_subtraction.borrowing.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Column alignment",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.long_subtraction.column_alignment.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Column alignment?"
+        },
+        {
+          "id": "depth.v1.long_subtraction.column_alignment.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.long_subtraction.column_alignment.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.long_subtraction.column_alignment.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "Choose a useful mathematical model and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Column alignment",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "Long subtraction: 985 - 467 = ?",
+            "explanation": "Long subtraction keeps digits aligned and uses borrowing when needed. Answer: 518",
+            "expected_answer": "518"
+          },
+          {
+            "stage": "guided",
+            "prompt": "Long subtraction: 605 - 127 = ?",
+            "explanation": "Write both numbers with the ones place stacked on the right edge.",
+            "expected_answer": "478"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "Long subtraction: 687 - 684 = ?",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "3"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "column_alignment.model_confusion",
+          "feedback": "Subtracting tens from ones because the numbers were not lined up.",
+          "hint": "Digits must stay in matching place columns for subtraction to mean anything.",
+          "recovery_archetype_id": "depth.v1.long_subtraction.column_alignment.concept"
+        },
+        {
+          "code": "column_alignment.procedure_slip",
+          "feedback": "The setup is close, but a step in Column alignment changed the result.",
+          "hint": "Write both numbers with the ones place stacked on the right edge.",
+          "recovery_archetype_id": "depth.v1.long_subtraction.column_alignment.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Crossing zero safely",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.long_subtraction.crossing_zero_safely.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Crossing zero safely?"
+        },
+        {
+          "id": "depth.v1.long_subtraction.crossing_zero_safely.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.long_subtraction.crossing_zero_safely.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.long_subtraction.crossing_zero_safely.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "Choose a useful mathematical model and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Crossing zero safely",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "Long subtraction: 439 - 261 = ?",
+            "explanation": "Long subtraction keeps digits aligned and uses borrowing when needed. Answer: 178",
+            "expected_answer": "178"
+          },
+          {
+            "stage": "guided",
+            "prompt": "Long subtraction: 808 - 496 = ?",
+            "explanation": "Work through 402 - 187 and say each regrouping trade out loud.",
+            "expected_answer": "312"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "Long subtraction: 719 - 233 = ?",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "486"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "crossing_zero_safely.model_confusion",
+          "feedback": "Stopping when a zero cannot lend immediately.",
+          "hint": "Zeros can still lend value by borrowing from the next nonzero place to the left.",
+          "recovery_archetype_id": "depth.v1.long_subtraction.crossing_zero_safely.concept"
+        },
+        {
+          "code": "crossing_zero_safely.procedure_slip",
+          "feedback": "The setup is close, but a step in Crossing zero safely changed the result.",
+          "hint": "Work through 402 - 187 and say each regrouping trade out loud.",
+          "recovery_archetype_id": "depth.v1.long_subtraction.crossing_zero_safely.procedure"
+        }
+      ]
+    }
+  ]
+}

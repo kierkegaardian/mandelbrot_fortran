@@ -21,6 +21,17 @@ from .learning_engine import (
     normalize_mode_mix,
 )
 from .models import ScaffoldStep
+from .content_depth.serialization import question_depth_kwargs, question_depth_payload
+from .content_depth.generation import match_misconception
+from .content_depth.quiz_controller import DepthQuizController
+from .content_depth.recovery_controller import (
+    misconception_by_code,
+    record_transfer,
+    resume_source,
+    transfer_request,
+)
+from .content_depth.proof import is_question_answer_correct
+from .content_depth.proof import decode_proof_answer
 from .quiz_answers import is_correct_answer
 from .quiz_engine import QUESTION_TYPES, Question, generate_question
 from .quiz_recovery import (
@@ -88,6 +99,8 @@ class QuizPanel:
         self._scaffold_question_index: int | None = None
         self._scaffold_step_index = 0
         self._scaffold_step_answers: list[str] = []
+        self._proof_builder = None
+        self._depth_controller = DepthQuizController()
 
         self._build_controls()
         self._build_view()
@@ -286,12 +299,17 @@ class QuizPanel:
         btns.pack(pady=6)
         self.submit_btn = ttk.Button(btns, text="Submit", command=self.submit_answer)
         self.stuck_btn = ttk.Button(btns, text="Show intuition (I'm stuck)", command=self._show_intuition)
+        self.example_btn = ttk.Button(
+            btns, text="Show Example", command=lambda: self._depth_controller.show_example(self)
+        )
         self.next_btn = ttk.Button(btns, text="Next", command=self.next_question)
         self.submit_btn.pack(side=tk.LEFT, padx=4)
         self.stuck_btn.pack(side=tk.LEFT, padx=4)
+        self.example_btn.pack(side=tk.LEFT, padx=4)
         self.next_btn.pack(side=tk.LEFT, padx=4)
         self.next_btn.state(["disabled"])
         self.stuck_btn.state(["disabled"])
+        self.example_btn.state(["disabled"])
 
         self.summary_frame = ttk.Frame(self.view_frame)
         self.summary_frame.pack(fill=tk.BOTH, expand=True, padx=16, pady=8)
@@ -637,6 +655,7 @@ class QuizPanel:
         skill_stats = build_skill_stats(attempts, tuple(SKILL_ORDER))
         mode_acc_cache: dict[str, dict[str, float]] = {}
         self._questions = []
+        self._depth_controller.reset()
         seen_signatures: set[str] = set()
         self._record_attempt = True
         self._record_progress = True
@@ -715,6 +734,17 @@ class QuizPanel:
                 return
 
         self._questions = result.questions
+        lesson = self._depth_controller.prepare_first_lesson(
+            profile.id,
+            getattr(profile, "role", ""),
+            selected_skill,
+            chosen_subskill,
+            strategy,
+            self.level_var.get(),
+            seen_signatures,
+        )
+        if lesson is not None:
+            self._questions = lesson
         self._attempt_skill = result.attempt_skill
         self._record_progress = result.record_progress
         self.meta_var.set(result.meta)
@@ -738,6 +768,7 @@ class QuizPanel:
         self.type_var.set(plan.question_type)
         self.level_var.set(int(plan.level))
         self._questions = plan.questions
+        self._depth_controller.reset()
         self._attempt_skill = plan.attempt_skill
         self._record_attempt = True
         self._record_progress = True
@@ -762,6 +793,8 @@ class QuizPanel:
 
     def _show_question(self) -> None:
         quiz_flow.show_question(self)
+        if self._depth_controller.first_lesson and self._index == 0 and self._questions:
+            self.recovery_var.set(self._depth_controller.example_text(self._questions[0]))
         self._update_quiz_progress()
 
     def _build_answer_widget(self, question: Question) -> None:
@@ -857,7 +890,21 @@ class QuizPanel:
         *,
         subskill: str | None,
         preferred_mode: str | None,
+        preferred_archetype_id: str | None = None,
+        excluded_archetype_ids: frozenset[str] = frozenset(),
     ) -> Question:
+        q = self._depth_controller.generate(
+            seen_signatures,
+            skill,
+            level,
+            question_type,
+            subskill=subskill,
+            preferred_mode=preferred_mode,
+            preferred_archetype_id=preferred_archetype_id,
+            excluded_archetype_ids=excluded_archetype_ids,
+        )
+        if q is not None:
+            return q
         if not self.vary_numbers_var.get():
             q = generate_question(skill, level, question_type, subskill=subskill, preferred_mode=preferred_mode)
             seen_signatures.add(_question_session_signature(q))
@@ -898,6 +945,7 @@ class QuizPanel:
         settings = load_ui_settings()
         return should_offer_mistake_recovery(
             summer_mode=settings.summer_mode,
+            curriculum_depth_beta=settings.curriculum_depth_beta,
             strategy=self.strategy_var.get(),
             question=question,
         )
@@ -915,7 +963,8 @@ class QuizPanel:
 
     def _recovery_explanation_text(self, question: Question, *, phase: str) -> str:
         explanation = explanation_for(question.skill, subskill=question.subskill)
-        return build_mistake_recovery_text(explanation, phase=phase)
+        misconception = self._mistake_recovery.misconception if self._mistake_recovery is not None else None
+        return build_mistake_recovery_text(explanation, phase=phase, misconception=misconception)
 
     def _render_recovery_question(self, question: Question, *, prompt_prefix: str) -> None:
         self.prompt_var.set(f"{prompt_prefix}: {question.prompt}")
@@ -928,6 +977,7 @@ class QuizPanel:
     def _build_mistake_recovery_followup(self, question: Question) -> Question | None:
         preferred_mode = question.mode if question.mode in {"intuition", "expression", "word"} else None
         try:
+            recovery_id, exclusions = transfer_request(question)
             followup = self._generate_question_with_variation(
                 {_question_session_signature(question)},
                 question.skill,
@@ -935,6 +985,8 @@ class QuizPanel:
                 self._question_type_for(question),
                 subskill=question.subskill,
                 preferred_mode=preferred_mode,
+                preferred_archetype_id=recovery_id,
+                excluded_archetype_ids=exclusions,
             )
         except ContentUnavailableError:
             return None
@@ -943,10 +995,13 @@ class QuizPanel:
         return followup
 
     def _start_mistake_recovery(self, question: Question, incorrect_answer: str) -> None:
+        misconception = match_misconception(question, incorrect_answer)
+        question.matched_misconception_code = misconception.code if misconception is not None else None
         self._mistake_recovery = MistakeRecoveryState(
             phase="redo",
             source_question=question,
             incorrect_answer=incorrect_answer,
+            misconception=misconception,
         )
         self.submit_btn.config(text="Try Again")
         self.stuck_btn.state(["disabled"])
@@ -970,11 +1025,12 @@ class QuizPanel:
         self.next_btn.state(["disabled"])
         self._persist_quiz_progress()
 
-    def _complete_mistake_recovery(self, *, correct: bool) -> None:
+    def _complete_mistake_recovery(self, *, correct: bool, answer: str | None = None) -> None:
         state = self._mistake_recovery
         if state is None:
             return
         question = state.followup_question or state.source_question
+        record_transfer(state.source_question, state.followup_question, answer, correct)
         if correct:
             self.feedback_var.set("Nice recovery. You fixed it and used it again.")
             self._set_feedback_state(correct=True)
@@ -1001,12 +1057,13 @@ class QuizPanel:
         if not answer:
             messagebox.showerror("Missing answer", "Please enter or choose an answer.")
             return
-        correct = is_correct_answer(question.correct_answer, answer, self.repeat_var.get())
+        correct = is_question_answer_correct(question, answer, repeating=self.repeat_var.get())
         if state.phase == "redo":
             if not correct:
                 self.feedback_var.set("Use the hint and try again. Focus on the mental model.")
                 self._set_feedback_state(correct=False)
                 return
+            state.source_question.recovery_corrected_answer = answer
             followup = self._build_mistake_recovery_followup(state.source_question)
             if followup is None:
                 self._complete_mistake_recovery(correct=True)
@@ -1015,7 +1072,7 @@ class QuizPanel:
             state.followup_question = followup
             self._show_mistake_recovery_followup(followup)
             return
-        self._complete_mistake_recovery(correct=correct)
+        self._complete_mistake_recovery(correct=correct, answer=answer)
 
     def _advance_after_mistake_recovery(self) -> bool:
         if self._mistake_recovery is None:
@@ -1123,7 +1180,7 @@ class QuizPanel:
         self._cancel_correct_animation()
 
     def _question_to_payload(self, question: Question) -> dict[str, object]:
-        return {
+        payload = {
             "skill": question.skill,
             "prompt": question.prompt,
             "correct_answer": question.correct_answer,
@@ -1144,6 +1201,8 @@ class QuizPanel:
                 for step in (question.scaffold_steps or [])
             ],
         }
+        payload.update(question_depth_payload(question))
+        return payload
 
     def _question_from_payload(self, payload: dict[str, object]) -> Question:
         raw_choices = payload.get("choices")
@@ -1180,9 +1239,15 @@ class QuizPanel:
             question_label=str(payload.get("question_label", "Core")),
             mode=str(payload.get("mode", "expression")),
             scaffold_steps=scaffold_steps,
+            **question_depth_kwargs(payload),
         )
 
     def _build_progress_state(self) -> str:
+        answer_var = getattr(self, "answer_var", None)
+        choice_var = getattr(self, "choice_var", None)
+        current_response = answer_var.get() if answer_var is not None else ""
+        if not current_response and choice_var is not None:
+            current_response = choice_var.get()
         answer_payload: list[dict[str, object]] = []
         for idx, (_question, answer, correct) in enumerate(self._answers):
             answer_payload.append(
@@ -1194,9 +1259,15 @@ class QuizPanel:
             )
         recovery_payload: dict[str, object] | None = None
         if self._mistake_recovery is not None:
+            misconception_code = (
+                self._mistake_recovery.misconception.code
+                if self._mistake_recovery.misconception is not None
+                else None
+            )
             recovery_payload = {
                 "phase": self._mistake_recovery.phase,
                 "incorrect_answer": self._mistake_recovery.incorrect_answer,
+                "misconception_code": misconception_code,
                 "source_question": self._question_to_payload(self._mistake_recovery.source_question),
                 "followup_question": (
                     self._question_to_payload(self._mistake_recovery.followup_question)
@@ -1213,7 +1284,7 @@ class QuizPanel:
                 "task_id": self._summer_program_launch.task_id,
             }
         payload = {
-            "version": 1,
+            "version": 2,
             "track": self.track_var.get(),
             "skill": self.skill_var.get(),
             "subskill": self.subskill_var.get(),
@@ -1231,6 +1302,10 @@ class QuizPanel:
             "index": int(self._index),
             "score": int(self._score),
             "correct_streak": int(self._correct_streak),
+            "first_depth_lesson": bool(
+                getattr(getattr(self, "_depth_controller", None), "first_lesson", False)
+            ),
+            "current_response": current_response,
             "scaffold_state": {
                 "question_index": self._scaffold_question_index,
                 "step_index": self._scaffold_step_index,
@@ -1315,6 +1390,7 @@ class QuizPanel:
         self._attempt_skill = str(payload.get("attempt_skill")) if payload.get("attempt_skill") else self.skill_var.get()
         self._record_attempt = bool(payload.get("record_attempt", True))
         self._record_progress = bool(payload.get("record_progress", True))
+        self._depth_controller.first_lesson = bool(payload.get("first_depth_lesson", False))
         self._launch_context = str(payload.get("launch_context", "manual"))
         self.meta_var.set(str(payload.get("meta", "")))
         self._profile_override = None
@@ -1365,7 +1441,7 @@ class QuizPanel:
             source_payload = raw_recovery.get("source_question")
             phase = str(raw_recovery.get("phase", "redo"))
             if isinstance(source_payload, dict):
-                source_question = self._question_from_payload(source_payload)
+                source_question = resume_source(self._questions, self._question_from_payload(source_payload))
                 followup_payload = raw_recovery.get("followup_question")
                 followup_question = (
                     self._question_from_payload(followup_payload)
@@ -1377,6 +1453,9 @@ class QuizPanel:
                     source_question=source_question,
                     incorrect_answer=str(raw_recovery.get("incorrect_answer", "")),
                     followup_question=followup_question,
+                    misconception=misconception_by_code(
+                        source_question, str(raw_recovery.get("misconception_code", ""))
+                    ),
                 )
 
         self.streak_var.set(f"Streak: {self._correct_streak}")
@@ -1418,6 +1497,13 @@ class QuizPanel:
                 self.recovery_var.set(self._recovery_explanation_text(state.source_question, phase="redo"))
             return True
         self._show_question()
+        current_response = str(payload.get("current_response", ""))
+        if self._proof_builder is not None:
+            self._proof_builder.restore(decode_proof_answer(current_response))
+        elif self._questions[self._index].choices:
+            self.choice_var.set(current_response)
+        else:
+            self.answer_var.set(current_response)
         if self._index < len(self._answers):
             _, _saved_answer, saved_correct = self._answers[self._index]
             if saved_correct:

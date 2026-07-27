@@ -286,5 +286,28 @@ def _run_migrations(conn: sqlite3.Connection) -> None:
         _enqueue_existing_sync_rows(conn)
         conn.execute("UPDATE schema_version SET version = 17 WHERE id = 1")
         version = 17
-    _ensure_schema_support(conn)
 
+    # v18: local curriculum-depth metadata. These columns deliberately stay
+    # outside the Family Sync payload until the beta protocol is versioned.
+    if version < 18:
+        _ensure_column(conn, "question_templates", "archetype_id", "TEXT")
+        _ensure_column(conn, "question_templates", "reasoning_kind", "TEXT NOT NULL DEFAULT 'legacy'")
+        _ensure_column(conn, "question_templates", "misconceptions_json", "TEXT NOT NULL DEFAULT '[]'")
+        _ensure_column(conn, "quiz_questions", "archetype_id", "TEXT")
+        _ensure_column(conn, "quiz_questions", "misconception_code", "TEXT")
+        _ensure_column(conn, "quiz_questions", "response_kind", "TEXT")
+        conn.execute(
+            """
+            UPDATE question_templates
+            SET external_id = COALESCE(NULLIF(external_id, ''), 'legacy.template.' || id),
+                archetype_id = COALESCE(NULLIF(archetype_id, ''), external_id, 'legacy.template.' || id),
+                reasoning_kind = COALESCE(NULLIF(reasoning_kind, ''), 'legacy')
+            """
+        )
+        conn.execute("UPDATE schema_version SET version = 18 WHERE id = 1")
+        version = 18
+    conn.execute(
+        "UPDATE question_templates SET external_id = 'legacy.template.' || id "
+        "WHERE external_id IS NULL OR external_id = ''"
+    )
+    _ensure_schema_support(conn)

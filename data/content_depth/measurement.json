@@ -1,0 +1,372 @@
+{
+  "version": 1,
+  "skill": "measurement",
+  "subskills": [
+    {
+      "subskill": "Length unit conversion",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.measurement.length_unit_conversion.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Length unit conversion?"
+        },
+        {
+          "id": "depth.v1.measurement.length_unit_conversion.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.measurement.length_unit_conversion.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.measurement.length_unit_conversion.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A maker project needs an exact measurement; choose the unit model and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Length unit conversion",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "How many inches are in 4 feet?",
+            "explanation": "There are 12 inches in 1 foot. Answer: 48",
+            "expected_answer": "48"
+          },
+          {
+            "stage": "guided",
+            "prompt": "How many inches are in 12 feet?",
+            "explanation": "Ask whether the answer should be more units or fewer units before computing.",
+            "expected_answer": "144"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "How many centimeters are in 39 meters?",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "3900"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "length_unit_conversion.model_confusion",
+          "feedback": "Multiplying when moving to a larger unit or dividing when moving smaller.",
+          "hint": "Unit conversion is a scale change, not a new quantity.",
+          "recovery_archetype_id": "depth.v1.measurement.length_unit_conversion.concept"
+        },
+        {
+          "code": "length_unit_conversion.procedure_slip",
+          "feedback": "The setup is close, but a step in Length unit conversion changed the result.",
+          "hint": "Ask whether the answer should be more units or fewer units before computing.",
+          "recovery_archetype_id": "depth.v1.measurement.length_unit_conversion.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Time reading and arithmetic",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.measurement.time_reading_and_arithmetic.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Time reading and arithmetic?"
+        },
+        {
+          "id": "depth.v1.measurement.time_reading_and_arithmetic.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.measurement.time_reading_and_arithmetic.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.measurement.time_reading_and_arithmetic.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A maker project needs an exact measurement; choose the unit model and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Time reading and arithmetic",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "How many minutes are in 7 hours and 60 minutes?",
+            "explanation": "There are 60 minutes in 1 hour. Multiply hours by 60, then add remaining minutes. Answer: 480",
+            "expected_answer": "480"
+          },
+          {
+            "stage": "guided",
+            "prompt": "How many minutes are in 2 hours and 15 minutes?",
+            "explanation": "Convert the hours to minutes first, then combine.",
+            "expected_answer": "135"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "How many minutes are in 1 hours and 60 minutes?",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "120"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "time_reading_and_arithmetic.model_confusion",
+          "feedback": "Adding minutes like base-10 digits and missing the 60-minute regroup.",
+          "hint": "Time uses base-60, so hours and minutes trade differently than place value.",
+          "recovery_archetype_id": "depth.v1.measurement.time_reading_and_arithmetic.concept"
+        },
+        {
+          "code": "time_reading_and_arithmetic.procedure_slip",
+          "feedback": "The setup is close, but a step in Time reading and arithmetic changed the result.",
+          "hint": "Convert the hours to minutes first, then combine.",
+          "recovery_archetype_id": "depth.v1.measurement.time_reading_and_arithmetic.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Capacity and weight units",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.measurement.capacity_and_weight_units.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Capacity and weight units?"
+        },
+        {
+          "id": "depth.v1.measurement.capacity_and_weight_units.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.measurement.capacity_and_weight_units.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.measurement.capacity_and_weight_units.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A maker project needs an exact measurement; choose the unit model and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Capacity and weight units",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "How many ounces are in 2 pounds?",
+            "explanation": "There are 16 ounces in 1 pound. Answer: 32",
+            "expected_answer": "32"
+          },
+          {
+            "stage": "guided",
+            "prompt": "How many ounces are in 6 pounds?",
+            "explanation": "Name the unit first, then decide how many smaller units fit in one larger unit.",
+            "expected_answer": "96"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "How many ounces are in 4 pounds?",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "64"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "capacity_and_weight_units.model_confusion",
+          "feedback": "Mixing the object being measured with the unit used to measure it.",
+          "hint": "Capacity and weight compare real quantities by choosing a unit such as cups, quarts, ounces, or pounds.",
+          "recovery_archetype_id": "depth.v1.measurement.capacity_and_weight_units.concept"
+        },
+        {
+          "code": "capacity_and_weight_units.procedure_slip",
+          "feedback": "The setup is close, but a step in Capacity and weight units changed the result.",
+          "hint": "Name the unit first, then decide how many smaller units fit in one larger unit.",
+          "recovery_archetype_id": "depth.v1.measurement.capacity_and_weight_units.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Temperature basics",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.measurement.temperature_basics.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Temperature basics?"
+        },
+        {
+          "id": "depth.v1.measurement.temperature_basics.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.measurement.temperature_basics.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.measurement.temperature_basics.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A maker project needs an exact measurement; choose the unit model and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Temperature basics",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "Water boils at 212\u00b0F and freezes at 32\u00b0F. Is 50\u00b0F above or below freezing? Answer the temperature in \u00b0C. (Use: \u00b0C = (\u00b0F \u2212 32) \u00d7 5/9)",
+            "explanation": "Convert using the formula: \u00b0C = (\u00b0F \u2212 32) \u00d7 5/9. Answer: 10",
+            "expected_answer": "10"
+          },
+          {
+            "stage": "guided",
+            "prompt": "Water boils at 212\u00b0F and freezes at 32\u00b0F. Is 122\u00b0F above or below freezing? Answer the temperature in \u00b0C. (Use: \u00b0C = (\u00b0F \u2212 32) \u00d7 5/9)",
+            "explanation": "Decide whether -3 degrees is warmer or colder than 2 degrees.",
+            "expected_answer": "50"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "Water boils at 212\u00b0F and freezes at 32\u00b0F. Is 68\u00b0F above or below freezing? Answer the temperature in \u00b0C. (Use: \u00b0C = (\u00b0F \u2212 32) \u00d7 5/9)",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "20"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "temperature_basics.model_confusion",
+          "feedback": "Treating negative temperatures like impossible values.",
+          "hint": "Temperature compares how hot or cold something is on a scale.",
+          "recovery_archetype_id": "depth.v1.measurement.temperature_basics.concept"
+        },
+        {
+          "code": "temperature_basics.procedure_slip",
+          "feedback": "The setup is close, but a step in Temperature basics changed the result.",
+          "hint": "Decide whether -3 degrees is warmer or colder than 2 degrees.",
+          "recovery_archetype_id": "depth.v1.measurement.temperature_basics.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Metric and customary conversions",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.measurement.metric_and_customary_conversions.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Metric and customary conversions?"
+        },
+        {
+          "id": "depth.v1.measurement.metric_and_customary_conversions.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.measurement.metric_and_customary_conversions.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.measurement.metric_and_customary_conversions.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A maker project needs an exact measurement; choose the unit model and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Metric and customary conversions",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "How many milliliters are in 11 liters?",
+            "explanation": "There are 1000 milliliters in 1 liter. Answer: 11000",
+            "expected_answer": "11000"
+          },
+          {
+            "stage": "guided",
+            "prompt": "How many feet are in 9 yards?",
+            "explanation": "Say '12 inches in 1 foot' or '100 cm in 1 meter' before calculating.",
+            "expected_answer": "27"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "How many milliliters are in 6 liters?",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "6000"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "metric_and_customary_conversions.model_confusion",
+          "feedback": "Using the wrong factor because the units sound similar.",
+          "hint": "A conversion factor tells how many smaller units fit inside one larger unit.",
+          "recovery_archetype_id": "depth.v1.measurement.metric_and_customary_conversions.concept"
+        },
+        {
+          "code": "metric_and_customary_conversions.procedure_slip",
+          "feedback": "The setup is close, but a step in Metric and customary conversions changed the result.",
+          "hint": "Say '12 inches in 1 foot' or '100 cm in 1 meter' before calculating.",
+          "recovery_archetype_id": "depth.v1.measurement.metric_and_customary_conversions.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Elapsed time",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.measurement.elapsed_time.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Elapsed time?"
+        },
+        {
+          "id": "depth.v1.measurement.elapsed_time.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.measurement.elapsed_time.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.measurement.elapsed_time.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A maker project needs an exact measurement; choose the unit model and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Elapsed time",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "A practice starts at 7:50 and ends at 8:00. How many minutes elapsed?",
+            "explanation": "Elapsed time is the distance between the start time and end time. Answer: 10",
+            "expected_answer": "10"
+          },
+          {
+            "stage": "guided",
+            "prompt": "A practice starts at 3:00 and ends at 3:28. How many minutes elapsed?",
+            "explanation": "Jump to the next friendly time like the next hour, then finish the difference.",
+            "expected_answer": "28"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "A practice starts at 4:10 and ends at 4:54. How many minutes elapsed?",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "44"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "elapsed_time.model_confusion",
+          "feedback": "Subtracting the hour numbers and ignoring the minutes.",
+          "hint": "Elapsed time is the distance between two clock times.",
+          "recovery_archetype_id": "depth.v1.measurement.elapsed_time.concept"
+        },
+        {
+          "code": "elapsed_time.procedure_slip",
+          "feedback": "The setup is close, but a step in Elapsed time changed the result.",
+          "hint": "Jump to the next friendly time like the next hour, then finish the difference.",
+          "recovery_archetype_id": "depth.v1.measurement.elapsed_time.procedure"
+        }
+      ]
+    }
+  ]
+}

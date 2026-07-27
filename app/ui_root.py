@@ -150,6 +150,7 @@ class AppShell:
         self.root.bind_all("<Alt-s>", self._shortcut_quiz_start)
         self.root.bind_all("<Alt-n>", self._shortcut_quiz_submit_next)
         self.root.bind_all("<Alt-i>", self._shortcut_quiz_intuition)
+        self.root.bind_all("<Alt-e>", self._shortcut_quiz_example)
         self.root.bind_all("<Alt-d>", self._shortcut_dashboard_daily)
         self.root.bind_all("<Alt-a>", self._shortcut_dashboard_assignment)
         self.root.bind_all("<Alt-Key-1>", lambda _e: self._shortcut_parent_tab(0))
@@ -232,6 +233,13 @@ class AppShell:
         module = self._active_module()
         if module is self.quiz:
             module._show_intuition_shortcut()
+            return "break"
+        return ""
+
+    def _shortcut_quiz_example(self, _event=None) -> str:
+        module = self._active_module()
+        if module is self.quiz:
+            module._depth_controller.show_example(module)
             return "break"
         return ""
 

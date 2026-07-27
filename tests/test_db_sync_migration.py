@@ -43,7 +43,17 @@ class DbSyncMigrationTests(unittest.TestCase):
         self.assertFalse((self._state_root / "sync_state.json").exists())
         with db.managed_connection() as conn:
             version = conn.execute("SELECT version FROM schema_version WHERE id = 1").fetchone()
-            self.assertEqual(int(version["version"]), 17)
+            self.assertEqual(int(version["version"]), 18)
+            question_columns = {str(row["name"]) for row in conn.execute("PRAGMA table_info(quiz_questions)")}
+            template_columns = {str(row["name"]) for row in conn.execute("PRAGMA table_info(question_templates)")}
+            self.assertTrue({"archetype_id", "misconception_code", "response_kind"} <= question_columns)
+            self.assertTrue({"archetype_id", "reasoning_kind", "misconceptions_json"} <= template_columns)
+            legacy_question = conn.execute(
+                "SELECT archetype_id, misconception_code, response_kind FROM quiz_questions WHERE id = 30"
+            ).fetchone()
+            self.assertIsNone(legacy_question["archetype_id"])
+            self.assertIsNone(legacy_question["misconception_code"])
+            self.assertIsNone(legacy_question["response_kind"])
             self.assertEqual(conn.execute("PRAGMA foreign_key_check").fetchall(), [])
             profile_rows = conn.execute("SELECT id, name FROM profiles ORDER BY id").fetchall()
             self.assertEqual(

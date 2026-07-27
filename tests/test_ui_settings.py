@@ -29,17 +29,20 @@ class UiSettingsTests(unittest.TestCase):
         self.assertFalse(settings.enforce_offline_mode)
         self.assertEqual(settings.default_grade_band, "K-8")
         self.assertFalse(settings.summer_mode)
+        self.assertFalse(settings.curriculum_depth_beta)
 
     def test_save_helpers_persist_new_fields(self) -> None:
         ui_settings.save_enforce_offline_mode(True)
         ui_settings.save_accessibility_preset("large_text")
         ui_settings.save_default_grade_band("6-8")
         ui_settings.save_summer_mode(True)
+        ui_settings.save_curriculum_depth_beta(True)
         loaded = ui_settings.load_ui_settings()
         self.assertTrue(loaded.enforce_offline_mode)
         self.assertEqual(loaded.accessibility_preset, "large_text")
         self.assertEqual(loaded.default_grade_band, "6-8")
         self.assertTrue(loaded.summer_mode)
+        self.assertTrue(loaded.curriculum_depth_beta)
 
 
 if __name__ == "__main__":

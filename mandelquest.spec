@@ -14,6 +14,7 @@ if not binary_path.exists():
 
 datas = [
     (str(project_root / "assets"), "assets"),
+    (str(project_root / "data" / "content_depth"), "data/content_depth"),
 ]
 config_dir = project_root / "config"
 if config_dir.exists():

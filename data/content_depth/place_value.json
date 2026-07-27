@@ -1,0 +1,250 @@
+{
+  "version": 1,
+  "skill": "place_value",
+  "subskills": [
+    {
+      "subskill": "Ones, tens, and hundreds identification",
+      "content_status": "ready",
+      "archetypes": [
+        {
+          "id": "depth.v1.place_value.ones_tens_and_hundreds_identification.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Ones, tens, and hundreds identification?"
+        },
+        {
+          "id": "depth.v1.place_value.ones_tens_and_hundreds_identification.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.place_value.ones_tens_and_hundreds_identification.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.place_value.ones_tens_and_hundreds_identification.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A school is organizing attendance records; choose a place-value model and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Ones, tens, and hundreds identification",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "In 116, what value does the hundreds digit have?",
+            "explanation": "Decompose 116 as 100 + 10 + 6; the hundreds digit contributes 100.",
+            "expected_answer": "100"
+          },
+          {
+            "stage": "guided",
+            "prompt": "In 84, what value does the digit 8 have?",
+            "explanation": "The 8 is in the tens place, so it contributes 8 tens, or 80.",
+            "expected_answer": "80"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "In 57, what value does the digit 7 have?",
+            "explanation": "The 7 is in the ones place, so it contributes 7.",
+            "expected_answer": "7"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "digit_only",
+          "feedback": "You named the digit but ignored the value of its position.",
+          "hint": "Say the number as hundreds, tens, and ones before naming the digit's value.",
+          "recovery_archetype_id": "depth.v1.place_value.ones_tens_and_hundreds_identification.concept"
+        },
+        {
+          "code": "wrong_place",
+          "feedback": "You assigned the digit to a different place-value column.",
+          "hint": "Start at the ones place on the right and move left one column at a time.",
+          "recovery_archetype_id": "depth.v1.place_value.ones_tens_and_hundreds_identification.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Expanded form",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.place_value.expanded_form.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Expanded form?"
+        },
+        {
+          "id": "depth.v1.place_value.expanded_form.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.place_value.expanded_form.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.place_value.expanded_form.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A school is organizing attendance records; choose a place-value model and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Expanded form",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "What number is represented by the expanded form: 400 + 20 + 8?",
+            "explanation": "Expanded form breaks a number into the sum of each digit times its place value. Answer: 428",
+            "expected_answer": "428"
+          },
+          {
+            "stage": "guided",
+            "prompt": "What number is represented by the expanded form: 700 + 5?",
+            "explanation": "Rewrite 507 as 500 + 7, then rebuild the original number.",
+            "expected_answer": "705"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "What number is represented by the expanded form: 700 + 20 + 9?",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "729"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "expanded_form.model_confusion",
+          "feedback": "Dropping a zero place and changing the total by accident.",
+          "hint": "Expanded form breaks a number into place-value pieces that add back together.",
+          "recovery_archetype_id": "depth.v1.place_value.expanded_form.concept"
+        },
+        {
+          "code": "expanded_form.procedure_slip",
+          "feedback": "The setup is close, but a step in Expanded form changed the result.",
+          "hint": "Rewrite 507 as 500 + 7, then rebuild the original number.",
+          "recovery_archetype_id": "depth.v1.place_value.expanded_form.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Compare numbers by place value",
+      "content_status": "ready",
+      "archetypes": [
+        {
+          "id": "depth.v1.place_value.compare_numbers_by_place_value.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Compare numbers by place value?"
+        },
+        {
+          "id": "depth.v1.place_value.compare_numbers_by_place_value.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.place_value.compare_numbers_by_place_value.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.place_value.compare_numbers_by_place_value.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A school is organizing attendance records; choose a place-value model and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Compare numbers by place value",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "Which is greater: 104 or 98?",
+            "explanation": "Compare hundreds first; 104 has one hundred while 98 has none.",
+            "expected_answer": "104"
+          },
+          {
+            "stage": "guided",
+            "prompt": "Which is greater: 72 or 69?",
+            "explanation": "The tens differ first: 7 tens is greater than 6 tens.",
+            "expected_answer": "72"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "Which is greater: 45 or 43?",
+            "explanation": "The tens match, so compare ones: 5 is greater than 3.",
+            "expected_answer": "45"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "ones_first",
+          "feedback": "You compared the ones before checking the higher-value places.",
+          "hint": "Compare from the leftmost place and stop at the first difference.",
+          "recovery_archetype_id": "depth.v1.place_value.compare_numbers_by_place_value.concept"
+        },
+        {
+          "code": "digit_size_only",
+          "feedback": "You chose a large digit without considering which place it occupies.",
+          "hint": "Name each digit's place value before deciding which whole number is greater.",
+          "recovery_archetype_id": "depth.v1.place_value.compare_numbers_by_place_value.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Decimal place value and comparison",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.place_value.decimal_place_value_and_comparison.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Decimal place value and comparison?"
+        },
+        {
+          "id": "depth.v1.place_value.decimal_place_value_and_comparison.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.place_value.decimal_place_value_and_comparison.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.place_value.decimal_place_value_and_comparison.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A school is organizing attendance records; choose a place-value model and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Decimal place value and comparison",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "What digit is in the tenths place of 4.74?",
+            "explanation": "The tenths place is the first digit to the right of the decimal point. Answer: 7",
+            "expected_answer": "7"
+          },
+          {
+            "stage": "guided",
+            "prompt": "What digit is in the tenths place of 9.55?",
+            "explanation": "Rename 0.45 as 45 hundredths and compare it to 50 hundredths.",
+            "expected_answer": "5"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "What digit is in the tenths place of 7.85?",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "8"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "decimal_place_value_and_comparison.model_confusion",
+          "feedback": "Treating 0.5 as bigger than 0.45 just because 5 is bigger than 45.",
+          "hint": "Tenths and hundredths are smaller place-value buckets to the right of the decimal.",
+          "recovery_archetype_id": "depth.v1.place_value.decimal_place_value_and_comparison.concept"
+        },
+        {
+          "code": "decimal_place_value_and_comparison.procedure_slip",
+          "feedback": "The setup is close, but a step in Decimal place value and comparison changed the result.",
+          "hint": "Rename 0.45 as 45 hundredths and compare it to 50 hundredths.",
+          "recovery_archetype_id": "depth.v1.place_value.decimal_place_value_and_comparison.procedure"
+        }
+      ]
+    }
+  ]
+}

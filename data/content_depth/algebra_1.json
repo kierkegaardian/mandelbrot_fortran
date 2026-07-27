@@ -1,0 +1,1775 @@
+{
+  "version": 1,
+  "skill": "algebra_1",
+  "subskills": [
+    {
+      "subskill": "Algebra foundations",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.algebra_1.algebra_foundations.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Algebra foundations?"
+        },
+        {
+          "id": "depth.v1.algebra_1.algebra_foundations.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.algebra_1.algebra_foundations.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.algebra_1.algebra_foundations.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A real relationship must be represented algebraically; choose the model and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Algebra foundations",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "Simplify and evaluate at x = -6: 1x + -5x",
+            "explanation": "Combine like terms first, then substitute x. Answer: 24",
+            "expected_answer": "24"
+          },
+          {
+            "stage": "guided",
+            "prompt": "Simplify and evaluate at x = 8: -6x + 2x",
+            "explanation": "Simplify 4x - x + 6 first, then evaluate it at x = 3.",
+            "expected_answer": "-32"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "Simplify and evaluate at x = -3: -3x + 1x",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "6"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "algebra_foundations.model_confusion",
+          "feedback": "Substituting a value before combining like terms, which makes the arithmetic longer and easier to misread.",
+          "hint": "Algebra starts by treating expressions as number machines: simplify the machine before feeding in a value.",
+          "recovery_archetype_id": "depth.v1.algebra_1.algebra_foundations.concept"
+        },
+        {
+          "code": "algebra_foundations.procedure_slip",
+          "feedback": "The setup is close, but a step in Algebra foundations changed the result.",
+          "hint": "Simplify 4x - x + 6 first, then evaluate it at x = 3.",
+          "recovery_archetype_id": "depth.v1.algebra_1.algebra_foundations.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Solving equations & inequalities",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.algebra_1.solving_equations_inequalities.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Solving equations & inequalities?"
+        },
+        {
+          "id": "depth.v1.algebra_1.solving_equations_inequalities.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.algebra_1.solving_equations_inequalities.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.algebra_1.solving_equations_inequalities.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A real relationship must be represented algebraically; choose the model and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Solving equations & inequalities",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "Solve for x: 8x + 2 = 2",
+            "explanation": "Undo addition/subtraction, then divide by the coefficient. Answer: 0",
+            "expected_answer": "0"
+          },
+          {
+            "stage": "guided",
+            "prompt": "Solve for x: -2x + -5 = 7",
+            "explanation": "Solve 3x - 5 = 16 by naming the last operation and undoing it first.",
+            "expected_answer": "-6"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "Solve for x: 2x + -4 = 4",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "4"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "solving_equations_inequalities.model_confusion",
+          "feedback": "Changing one side of an equation or inequality without making the same legal move on the other side.",
+          "hint": "Solving means undoing operations in reverse while keeping both sides balanced.",
+          "recovery_archetype_id": "depth.v1.algebra_1.solving_equations_inequalities.concept"
+        },
+        {
+          "code": "solving_equations_inequalities.procedure_slip",
+          "feedback": "The setup is close, but a step in Solving equations & inequalities changed the result.",
+          "hint": "Solve 3x - 5 = 16 by naming the last operation and undoing it first.",
+          "recovery_archetype_id": "depth.v1.algebra_1.solving_equations_inequalities.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Working with units",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.algebra_1.working_with_units.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Working with units?"
+        },
+        {
+          "id": "depth.v1.algebra_1.working_with_units.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.algebra_1.working_with_units.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.algebra_1.working_with_units.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A real relationship must be represented algebraically; choose the model and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Working with units",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "A car travels 31 miles in 63 minutes. What is the speed in mph? (1 decimal)",
+            "explanation": "Convert minutes to hours, then divide distance by time. Answer: 29.5",
+            "expected_answer": "29.5"
+          },
+          {
+            "stage": "guided",
+            "prompt": "A car travels 55 miles in 104 minutes. What is the speed in mph? (1 decimal)",
+            "explanation": "Convert 45 miles in 1.5 hours into miles per hour by writing distance divided by time.",
+            "expected_answer": "31.7"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "A car travels 29 miles in 110 minutes. What is the speed in mph? (1 decimal)",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "15.8"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "working_with_units.model_confusion",
+          "feedback": "Dividing when the conversion calls for multiplying, or dropping units before checking whether they cancel.",
+          "hint": "Units are labels that must travel with the numbers; conversion rewrites the same amount in a different unit.",
+          "recovery_archetype_id": "depth.v1.algebra_1.working_with_units.concept"
+        },
+        {
+          "code": "working_with_units.procedure_slip",
+          "feedback": "The setup is close, but a step in Working with units changed the result.",
+          "hint": "Convert 45 miles in 1.5 hours into miles per hour by writing distance divided by time.",
+          "recovery_archetype_id": "depth.v1.algebra_1.working_with_units.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Linear equations & graphs",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.algebra_1.linear_equations_graphs.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Linear equations & graphs?"
+        },
+        {
+          "id": "depth.v1.algebra_1.linear_equations_graphs.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.algebra_1.linear_equations_graphs.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.algebra_1.linear_equations_graphs.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A real relationship must be represented algebraically; choose the model and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Linear equations & graphs",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "For y = -5x + 7, find y when x = 7.",
+            "explanation": "Substitute x into the linear equation. Answer: -28",
+            "expected_answer": "-28"
+          },
+          {
+            "stage": "guided",
+            "prompt": "For y = -4x + -1, find y when x = 7.",
+            "explanation": "For y = 2x + 3, make a tiny table for x = 0, 1, and 2 and look for the steady change.",
+            "expected_answer": "-29"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "For y = 6x + 5, find y when x = 5.",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "35"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "linear_equations_graphs.model_confusion",
+          "feedback": "Treating the intercept as another step instead of the starting output when x is zero.",
+          "hint": "A linear equation has a steady step: each 1-step change in x changes y by the same amount.",
+          "recovery_archetype_id": "depth.v1.algebra_1.linear_equations_graphs.concept"
+        },
+        {
+          "code": "linear_equations_graphs.procedure_slip",
+          "feedback": "The setup is close, but a step in Linear equations & graphs changed the result.",
+          "hint": "For y = 2x + 3, make a tiny table for x = 0, 1, and 2 and look for the steady change.",
+          "recovery_archetype_id": "depth.v1.algebra_1.linear_equations_graphs.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Forms of linear equations",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.algebra_1.forms_of_linear_equations.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Forms of linear equations?"
+        },
+        {
+          "id": "depth.v1.algebra_1.forms_of_linear_equations.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.algebra_1.forms_of_linear_equations.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.algebra_1.forms_of_linear_equations.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A real relationship must be represented algebraically; choose the model and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Forms of linear equations",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "Line in point-slope form: y - -1 = 5(x - 5). What is y when x = 4?",
+            "explanation": "Point-slope form is equivalent to a linear equation; substitute x directly. Answer: 19",
+            "expected_answer": "19"
+          },
+          {
+            "stage": "guided",
+            "prompt": "Line in point-slope form: y - 5 = 2(x - 0). What is y when x = -1?",
+            "explanation": "Use y - 4 = 3(x - 2) to find y when x = 2, then explain why that point is on the line.",
+            "expected_answer": "3"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "Line in point-slope form: y - -7 = -1(x - 5). What is y when x = 4?",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "-11"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "forms_of_linear_equations.model_confusion",
+          "feedback": "Trying to read y = mx + b shortcuts from point-slope form before rewriting or substituting carefully.",
+          "hint": "Different line forms store the same line information in different places: slope, point, or intercept.",
+          "recovery_archetype_id": "depth.v1.algebra_1.forms_of_linear_equations.concept"
+        },
+        {
+          "code": "forms_of_linear_equations.procedure_slip",
+          "feedback": "The setup is close, but a step in Forms of linear equations changed the result.",
+          "hint": "Use y - 4 = 3(x - 2) to find y when x = 2, then explain why that point is on the line.",
+          "recovery_archetype_id": "depth.v1.algebra_1.forms_of_linear_equations.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Slope from points",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.algebra_1.slope_from_points.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Slope from points?"
+        },
+        {
+          "id": "depth.v1.algebra_1.slope_from_points.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.algebra_1.slope_from_points.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.algebra_1.slope_from_points.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A real relationship must be represented algebraically; choose the model and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Slope from points",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "Find the slope of the line through (3, -2) and (8, 18).",
+            "explanation": "Slope is change in y divided by change in x: rise over run. Answer: 4",
+            "expected_answer": "4"
+          },
+          {
+            "stage": "guided",
+            "prompt": "Find the slope of the line through (-3, -8) and (-2, -10).",
+            "explanation": "Use points (1, 2) and (4, 8); compute change in y and change in x before dividing.",
+            "expected_answer": "-2"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "Find the slope of the line through (-5, -6) and (-3, 0).",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "3"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "slope_from_points.model_confusion",
+          "feedback": "Subtracting the coordinates in a different order for y than for x, which flips the sign.",
+          "hint": "Slope measures how much y changes for each 1-step change in x; it is rise divided by run.",
+          "recovery_archetype_id": "depth.v1.algebra_1.slope_from_points.concept"
+        },
+        {
+          "code": "slope_from_points.procedure_slip",
+          "feedback": "The setup is close, but a step in Slope from points changed the result.",
+          "hint": "Use points (1, 2) and (4, 8); compute change in y and change in x before dividing.",
+          "recovery_archetype_id": "depth.v1.algebra_1.slope_from_points.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Slope-intercept form",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.algebra_1.slope_intercept_form.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Slope-intercept form?"
+        },
+        {
+          "id": "depth.v1.algebra_1.slope_intercept_form.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.algebra_1.slope_intercept_form.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.algebra_1.slope_intercept_form.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A real relationship must be represented algebraically; choose the model and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Slope-intercept form",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "In y = 6x + (6), what is y when x = 0?",
+            "explanation": "In y = mx + b, b is the y-intercept because it is the output when x is 0. Answer: 6",
+            "expected_answer": "6"
+          },
+          {
+            "stage": "guided",
+            "prompt": "In y = 3x + (-8), what is y when x = 0?",
+            "explanation": "For y = 3x - 5, name the slope and then say where the graph crosses the y-axis.",
+            "expected_answer": "-8"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "In y = 6x + (-9), what is y when x = 0?",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "-9"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "slope_intercept_form.model_confusion",
+          "feedback": "Mixing up slope and y-intercept, or treating b as the x-intercept.",
+          "hint": "In y = mx + b, m is the constant rate of change and b is where the line starts on the y-axis.",
+          "recovery_archetype_id": "depth.v1.algebra_1.slope_intercept_form.concept"
+        },
+        {
+          "code": "slope_intercept_form.procedure_slip",
+          "feedback": "The setup is close, but a step in Slope-intercept form changed the result.",
+          "hint": "For y = 3x - 5, name the slope and then say where the graph crosses the y-axis.",
+          "recovery_archetype_id": "depth.v1.algebra_1.slope_intercept_form.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Graphing linear inequalities",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.algebra_1.graphing_linear_inequalities.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Graphing linear inequalities?"
+        },
+        {
+          "id": "depth.v1.algebra_1.graphing_linear_inequalities.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.algebra_1.graphing_linear_inequalities.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.algebra_1.graphing_linear_inequalities.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A real relationship must be represented algebraically; choose the model and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Graphing linear inequalities",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "For the inequality y < -1x + (-3), at x = -2, what boundary y-value separates the shaded region?",
+            "explanation": "Graph the boundary line y = mx + b first; > shades above it and < shades below it. Answer: -1",
+            "expected_answer": "-1"
+          },
+          {
+            "stage": "guided",
+            "prompt": "For the inequality y < 1x + (7), at x = -1, what boundary y-value separates the shaded region?",
+            "explanation": "Graph y = 2x + 1 lightly, then test one point above it and one point below it.",
+            "expected_answer": "6"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "For the inequality y < 2x + (5), at x = -1, what boundary y-value separates the shaded region?",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "3"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "graphing_linear_inequalities.model_confusion",
+          "feedback": "Shading before checking whether the inequality says greater-than or less-than.",
+          "hint": "A linear inequality starts with a boundary line, then shades every point above or below that line.",
+          "recovery_archetype_id": "depth.v1.algebra_1.graphing_linear_inequalities.concept"
+        },
+        {
+          "code": "graphing_linear_inequalities.procedure_slip",
+          "feedback": "The setup is close, but a step in Graphing linear inequalities changed the result.",
+          "hint": "Graph y = 2x + 1 lightly, then test one point above it and one point below it.",
+          "recovery_archetype_id": "depth.v1.algebra_1.graphing_linear_inequalities.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Systems of equations",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.algebra_1.systems_of_equations.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Systems of equations?"
+        },
+        {
+          "id": "depth.v1.algebra_1.systems_of_equations.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.algebra_1.systems_of_equations.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.algebra_1.systems_of_equations.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A real relationship must be represented algebraically; choose the model and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Systems of equations",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "Solve the system and report x: x + y = 6, x - y = -4.",
+            "explanation": "Add the equations to eliminate y and isolate x. Answer: 1",
+            "expected_answer": "1"
+          },
+          {
+            "stage": "guided",
+            "prompt": "Solve the system and report x: x + y = -2, x - y = 2.",
+            "explanation": "Test x = 2, y = 5 in x + y = 7 and x - y = -3 to see both clues agree.",
+            "expected_answer": "0"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "Solve the system and report x: x + y = -4, x - y = 4.",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "0"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "systems_of_equations.model_confusion",
+          "feedback": "Finding a value that satisfies one equation and stopping before checking the other equation.",
+          "hint": "A system is a set of clues that must all be true at the same time.",
+          "recovery_archetype_id": "depth.v1.algebra_1.systems_of_equations.concept"
+        },
+        {
+          "code": "systems_of_equations.procedure_slip",
+          "feedback": "The setup is close, but a step in Systems of equations changed the result.",
+          "hint": "Test x = 2, y = 5 in x + y = 7 and x - y = -3 to see both clues agree.",
+          "recovery_archetype_id": "depth.v1.algebra_1.systems_of_equations.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Systems by substitution",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.algebra_1.systems_by_substitution.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Systems by substitution?"
+        },
+        {
+          "id": "depth.v1.algebra_1.systems_by_substitution.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.algebra_1.systems_by_substitution.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.algebra_1.systems_by_substitution.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A real relationship must be represented algebraically; choose the model and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Systems by substitution",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "Solve by substitution and report x: y = 2x + (9), y = 3x + (13).",
+            "explanation": "Set the two expressions for y equal, then solve the one-variable equation. Answer: -4",
+            "expected_answer": "-4"
+          },
+          {
+            "stage": "guided",
+            "prompt": "Solve by substitution and report x: y = 2x + (-6), y = -1x + (12).",
+            "explanation": "If y = 2x + 1 and y = -x + 7, set the right sides equal before solving.",
+            "expected_answer": "6"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "Solve by substitution and report x: y = 4x + (-8), y = 1x + (1).",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "3"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "systems_by_substitution.model_confusion",
+          "feedback": "Substituting into the wrong equation or forgetting that both equations must share the same x and y.",
+          "hint": "A substitution system gives two clues about the same point; replace one variable with its matching expression so only one unknown remains.",
+          "recovery_archetype_id": "depth.v1.algebra_1.systems_by_substitution.concept"
+        },
+        {
+          "code": "systems_by_substitution.procedure_slip",
+          "feedback": "The setup is close, but a step in Systems by substitution changed the result.",
+          "hint": "If y = 2x + 1 and y = -x + 7, set the right sides equal before solving.",
+          "recovery_archetype_id": "depth.v1.algebra_1.systems_by_substitution.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Systems by elimination",
+      "content_status": "ready",
+      "archetypes": [
+        {
+          "id": "depth.v1.algebra_1.systems_by_elimination.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Systems by elimination?"
+        },
+        {
+          "id": "depth.v1.algebra_1.systems_by_elimination.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.algebra_1.systems_by_elimination.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.algebra_1.systems_by_elimination.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "Two ticket plans produce the same totals. Construct a system and eliminate one variable to solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Systems by elimination",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "Solve x + y = 7 and x - y = 1.",
+            "explanation": "Add the equations: 2x = 8, so x = 4; then y = 3.",
+            "expected_answer": "(4, 3)"
+          },
+          {
+            "stage": "guided",
+            "prompt": "Solve 2x + y = 8 and -2x + 2y = 1 for y.",
+            "explanation": "Add to eliminate x: 3y = 9.",
+            "expected_answer": "3"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "Two ticket counts and revenues form a system. What must happen before adding?",
+            "explanation": "Make one variable's coefficients opposites.",
+            "expected_answer": "opposite coefficients"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "does_not_eliminate",
+          "feedback": "The equations were combined before a variable had opposite coefficients.",
+          "hint": "Scale if needed, then add equations so one variable becomes zero.",
+          "recovery_archetype_id": "depth.v1.algebra_1.systems_by_elimination.concept"
+        },
+        {
+          "code": "elimination_sign",
+          "feedback": "A sign or final division error changed the remaining variable.",
+          "hint": "Write the combined equation explicitly before dividing by its coefficient.",
+          "recovery_archetype_id": "depth.v1.algebra_1.systems_by_elimination.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Graphing systems and intersections",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.algebra_1.graphing_systems_and_intersections.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Graphing systems and intersections?"
+        },
+        {
+          "id": "depth.v1.algebra_1.graphing_systems_and_intersections.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.algebra_1.graphing_systems_and_intersections.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.algebra_1.graphing_systems_and_intersections.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A real relationship must be represented algebraically; choose the model and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Graphing systems and intersections",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "On a graph, y = 2x + (-2) and y = -2x + (6) intersect at one point. Report the x-coordinate of the intersection.",
+            "explanation": "The solution to a graphed system is the intersection point shared by both lines. Answer: 2",
+            "expected_answer": "2"
+          },
+          {
+            "stage": "guided",
+            "prompt": "On a graph, y = 1x + (6) and y = -4x + (11) intersect at one point. Report the x-coordinate of the intersection.",
+            "explanation": "Sketch y = x + 1 and y = -x + 5, then mark the point where the lines meet.",
+            "expected_answer": "1"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "On a graph, y = -1x + (-4) and y = -3x + (4) intersect at one point. Report the x-coordinate of the intersection.",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "4"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "graphing_systems_and_intersections.model_confusion",
+          "feedback": "Reading where one line crosses an axis instead of where the two lines cross each other.",
+          "hint": "A graphed system is two lines on the same plane; the solution is the point where both lines pass through the same x and y.",
+          "recovery_archetype_id": "depth.v1.algebra_1.graphing_systems_and_intersections.concept"
+        },
+        {
+          "code": "graphing_systems_and_intersections.procedure_slip",
+          "feedback": "The setup is close, but a step in Graphing systems and intersections changed the result.",
+          "hint": "Sketch y = x + 1 and y = -x + 5, then mark the point where the lines meet.",
+          "recovery_archetype_id": "depth.v1.algebra_1.graphing_systems_and_intersections.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Inequalities (systems & graphs)",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.algebra_1.inequalities_systems_graphs.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Inequalities (systems & graphs)?"
+        },
+        {
+          "id": "depth.v1.algebra_1.inequalities_systems_graphs.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.algebra_1.inequalities_systems_graphs.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.algebra_1.inequalities_systems_graphs.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A real relationship must be represented algebraically; choose the model and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Inequalities (systems & graphs)",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "Find the smallest integer x satisfying both x > -2 and x <= 3.",
+            "explanation": "The smallest integer strictly greater than the boundary is boundary + 1. Answer: -1",
+            "expected_answer": "-1"
+          },
+          {
+            "stage": "guided",
+            "prompt": "Find the smallest integer x satisfying both x > -4 and x <= 1.",
+            "explanation": "Sketch x > 1 and x <= 4 on one number line, then name the smallest integer in the overlap.",
+            "expected_answer": "-3"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "Find the smallest integer x satisfying both x > 9 and x <= 14.",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "10"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "inequalities_systems_graphs.model_confusion",
+          "feedback": "Using the boundary line as the whole answer instead of checking which side or overlap is allowed.",
+          "hint": "Inequalities describe regions of possible answers; a system keeps only the overlap of all regions.",
+          "recovery_archetype_id": "depth.v1.algebra_1.inequalities_systems_graphs.concept"
+        },
+        {
+          "code": "inequalities_systems_graphs.procedure_slip",
+          "feedback": "The setup is close, but a step in Inequalities (systems & graphs) changed the result.",
+          "hint": "Sketch x > 1 and x <= 4 on one number line, then name the smallest integer in the overlap.",
+          "recovery_archetype_id": "depth.v1.algebra_1.inequalities_systems_graphs.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Functions",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.algebra_1.functions.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Functions?"
+        },
+        {
+          "id": "depth.v1.algebra_1.functions.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.algebra_1.functions.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.algebra_1.functions.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A real relationship must be represented algebraically; choose the model and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Functions",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "If f(x) = -4x^2 + -9, find f(4).",
+            "explanation": "Evaluate the function by substitution. Answer: -73",
+            "expected_answer": "-73"
+          },
+          {
+            "stage": "guided",
+            "prompt": "If f(x) = -1x^2 + 5, find f(5).",
+            "explanation": "Evaluate f(x) = 2x^2 - 1 at x = -3 and underline every place x was replaced.",
+            "expected_answer": "-20"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "If f(x) = 5x^2 + -3, find f(2).",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "17"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "functions.model_confusion",
+          "feedback": "Forgetting to substitute the input everywhere it appears before simplifying.",
+          "hint": "A function is a rule that gives exactly one output for each input.",
+          "recovery_archetype_id": "depth.v1.algebra_1.functions.concept"
+        },
+        {
+          "code": "functions.procedure_slip",
+          "feedback": "The setup is close, but a step in Functions changed the result.",
+          "hint": "Evaluate f(x) = 2x^2 - 1 at x = -3 and underline every place x was replaced.",
+          "recovery_archetype_id": "depth.v1.algebra_1.functions.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Sequences",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.algebra_1.sequences.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Sequences?"
+        },
+        {
+          "id": "depth.v1.algebra_1.sequences.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.algebra_1.sequences.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.algebra_1.sequences.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A real relationship must be represented algebraically; choose the model and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Sequences",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "An arithmetic sequence starts at 12 with common difference -4. Find term 13.",
+            "explanation": "Use a_n = a_1 + (n - 1)d. Answer: -36",
+            "expected_answer": "-36"
+          },
+          {
+            "stage": "guided",
+            "prompt": "An arithmetic sequence starts at 2 with common difference -1. Find term 5.",
+            "explanation": "Start at 5, add 3 each time, and compare term 1, term 2, and term 5.",
+            "expected_answer": "-2"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "An arithmetic sequence starts at 12 with common difference -4. Find term 15.",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "-44"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "sequences.model_confusion",
+          "feedback": "Multiplying the common difference by n instead of by n - 1 when starting from the first term.",
+          "hint": "A sequence is a function with step numbers as inputs; arithmetic sequences add the same difference each step.",
+          "recovery_archetype_id": "depth.v1.algebra_1.sequences.concept"
+        },
+        {
+          "code": "sequences.procedure_slip",
+          "feedback": "The setup is close, but a step in Sequences changed the result.",
+          "hint": "Start at 5, add 3 each time, and compare term 1, term 2, and term 5.",
+          "recovery_archetype_id": "depth.v1.algebra_1.sequences.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Absolute value & piecewise functions",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.algebra_1.absolute_value_piecewise_functions.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Absolute value & piecewise functions?"
+        },
+        {
+          "id": "depth.v1.algebra_1.absolute_value_piecewise_functions.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.algebra_1.absolute_value_piecewise_functions.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.algebra_1.absolute_value_piecewise_functions.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A real relationship must be represented algebraically; choose the model and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Absolute value & piecewise functions",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "Evaluate: |-13 - (9)|",
+            "explanation": "Absolute value is distance from zero. Answer: 22",
+            "expected_answer": "22"
+          },
+          {
+            "stage": "guided",
+            "prompt": "Evaluate: |8 - (2)|",
+            "explanation": "Evaluate |x - 4| at x = 1 and x = 7, then compare the two distances from 4.",
+            "expected_answer": "6"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "Evaluate: |-15 - (2)|",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "17"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "absolute_value_piecewise_functions.model_confusion",
+          "feedback": "Keeping a negative sign inside absolute value even though distance cannot be negative.",
+          "hint": "Absolute value measures distance, while piecewise rules choose different instructions in different zones.",
+          "recovery_archetype_id": "depth.v1.algebra_1.absolute_value_piecewise_functions.concept"
+        },
+        {
+          "code": "absolute_value_piecewise_functions.procedure_slip",
+          "feedback": "The setup is close, but a step in Absolute value & piecewise functions changed the result.",
+          "hint": "Evaluate |x - 4| at x = 1 and x = 7, then compare the two distances from 4.",
+          "recovery_archetype_id": "depth.v1.algebra_1.absolute_value_piecewise_functions.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Function transformations",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.algebra_1.function_transformations.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Function transformations?"
+        },
+        {
+          "id": "depth.v1.algebra_1.function_transformations.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.algebra_1.function_transformations.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.algebra_1.function_transformations.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A real relationship must be represented algebraically; choose the model and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Function transformations",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "If g(x) = (x - (-1))^2 + -3, find g(2).",
+            "explanation": "A horizontal shift changes the input before squaring; the vertical shift adds after. Answer: 6",
+            "expected_answer": "6"
+          },
+          {
+            "stage": "guided",
+            "prompt": "If g(x) = (x - (-1))^2 + -6, find g(3).",
+            "explanation": "Compare f(x) = x^2 and g(x) = (x - 3)^2 + 2 at x = 3; explain what moved.",
+            "expected_answer": "10"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "If g(x) = (x - (-5))^2 + -3, find g(3).",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "61"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "function_transformations.model_confusion",
+          "feedback": "Treating (x - h)^2 as x^2 - h^2 instead of substituting the full shifted input first.",
+          "hint": "Transformations move or reshape a parent function: inside changes move the input side-to-side, outside changes move the output up or down.",
+          "recovery_archetype_id": "depth.v1.algebra_1.function_transformations.concept"
+        },
+        {
+          "code": "function_transformations.procedure_slip",
+          "feedback": "The setup is close, but a step in Function transformations changed the result.",
+          "hint": "Compare f(x) = x^2 and g(x) = (x - 3)^2 + 2 at x = 3; explain what moved.",
+          "recovery_archetype_id": "depth.v1.algebra_1.function_transformations.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Exponents & radicals",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.algebra_1.exponents_radicals.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Exponents & radicals?"
+        },
+        {
+          "id": "depth.v1.algebra_1.exponents_radicals.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.algebra_1.exponents_radicals.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.algebra_1.exponents_radicals.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A real relationship must be represented algebraically; choose the model and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Exponents & radicals",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "Evaluate sqrt(225).",
+            "explanation": "The principal square root of n^2 is n for n > 0. Answer: 15",
+            "expected_answer": "15"
+          },
+          {
+            "stage": "guided",
+            "prompt": "Evaluate sqrt(16).",
+            "explanation": "Square 7, then take the square root of the result and explain why you returned to 7.",
+            "expected_answer": "4"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "Evaluate sqrt(4).",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "2"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "exponents_radicals.model_confusion",
+          "feedback": "Treating sqrt(a + b) like sqrt(a) + sqrt(b), which is not a valid shortcut.",
+          "hint": "Exponents build powers by repeated multiplication; radicals ask for the base that made a power.",
+          "recovery_archetype_id": "depth.v1.algebra_1.exponents_radicals.concept"
+        },
+        {
+          "code": "exponents_radicals.procedure_slip",
+          "feedback": "The setup is close, but a step in Exponents & radicals changed the result.",
+          "hint": "Square 7, then take the square root of the result and explain why you returned to 7.",
+          "recovery_archetype_id": "depth.v1.algebra_1.exponents_radicals.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Radicals and rational exponents",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.algebra_1.radicals_and_rational_exponents.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Radicals and rational exponents?"
+        },
+        {
+          "id": "depth.v1.algebra_1.radicals_and_rational_exponents.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.algebra_1.radicals_and_rational_exponents.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.algebra_1.radicals_and_rational_exponents.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A real relationship must be represented algebraically; choose the model and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Radicals and rational exponents",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "Evaluate 64^(1/2).",
+            "explanation": "A rational exponent of 1/n asks for the nth root of the number. Answer: 8",
+            "expected_answer": "8"
+          },
+          {
+            "stage": "guided",
+            "prompt": "Evaluate 36^(1/2).",
+            "explanation": "Rewrite 64^(1/3) as a cube-root question, then name the number whose cube is 64.",
+            "expected_answer": "6"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "Evaluate 64^(1/3).",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "4"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "radicals_and_rational_exponents.model_confusion",
+          "feedback": "Multiplying the base by the fraction instead of treating the denominator as the root index.",
+          "hint": "A rational exponent rewrites a root: x^(1/n) asks which number multiplied by itself n times gives x.",
+          "recovery_archetype_id": "depth.v1.algebra_1.radicals_and_rational_exponents.concept"
+        },
+        {
+          "code": "radicals_and_rational_exponents.procedure_slip",
+          "feedback": "The setup is close, but a step in Radicals and rational exponents changed the result.",
+          "hint": "Rewrite 64^(1/3) as a cube-root question, then name the number whose cube is 64.",
+          "recovery_archetype_id": "depth.v1.algebra_1.radicals_and_rational_exponents.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Exponential growth & decay",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.algebra_1.exponential_growth_decay.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Exponential growth & decay?"
+        },
+        {
+          "id": "depth.v1.algebra_1.exponential_growth_decay.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.algebra_1.exponential_growth_decay.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.algebra_1.exponential_growth_decay.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A real relationship must be represented algebraically; choose the model and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Exponential growth & decay",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "An amount of 239 grows by 20% each year for 2 years. Find the final amount (2 decimals).",
+            "explanation": "Use A = P(1 + r)^t. Answer: 344.16",
+            "expected_answer": "344.16"
+          },
+          {
+            "stage": "guided",
+            "prompt": "An amount of 229 grows by 8% each year for 2 years. Find the final amount (2 decimals).",
+            "explanation": "Start with 100 and grow by 10 percent twice; compare adding 10 twice with multiplying by 1.1 twice.",
+            "expected_answer": "267.11"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "An amount of 185 grows by 8% each year for 2 years. Find the final amount (2 decimals).",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "215.78"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "exponential_growth_decay.model_confusion",
+          "feedback": "Adding the percent rate each year instead of multiplying by the growth or decay factor.",
+          "hint": "Exponential models multiply by the same factor each step instead of adding the same amount.",
+          "recovery_archetype_id": "depth.v1.algebra_1.exponential_growth_decay.concept"
+        },
+        {
+          "code": "exponential_growth_decay.procedure_slip",
+          "feedback": "The setup is close, but a step in Exponential growth & decay changed the result.",
+          "hint": "Start with 100 and grow by 10 percent twice; compare adding 10 twice with multiplying by 1.1 twice.",
+          "recovery_archetype_id": "depth.v1.algebra_1.exponential_growth_decay.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Polynomial arithmetic",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.algebra_1.polynomial_arithmetic.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Polynomial arithmetic?"
+        },
+        {
+          "id": "depth.v1.algebra_1.polynomial_arithmetic.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.algebra_1.polynomial_arithmetic.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.algebra_1.polynomial_arithmetic.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A real relationship must be represented algebraically; choose the model and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Polynomial arithmetic",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "Simplify (8x^2 + (-1)x + (-7)) - (-3x^2 + (-9)x + (12)). What is the coefficient of x^2?",
+            "explanation": "Combine like terms only; x^2 terms combine with x^2 terms. Answer: 11",
+            "expected_answer": "11"
+          },
+          {
+            "stage": "guided",
+            "prompt": "Simplify (-2x^2 + (1)x + (-3)) + (8x^2 + (7)x + (-4)). What is the coefficient of x^2?",
+            "explanation": "Add (3x^2 + 2x - 1) and (5x^2 - 7x + 4), then circle each pair of like terms.",
+            "expected_answer": "6"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "Simplify (3x^2 + (-1)x + (12)) - (7x^2 + (-9)x + (-9)). What is the coefficient of x^2?",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "-4"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "polynomial_arithmetic.model_confusion",
+          "feedback": "Combining unlike terms, such as adding an x^2 coefficient directly to an x coefficient.",
+          "hint": "Polynomials are sums of terms; arithmetic works by lining up matching powers, like x^2 with x^2 and x with x.",
+          "recovery_archetype_id": "depth.v1.algebra_1.polynomial_arithmetic.concept"
+        },
+        {
+          "code": "polynomial_arithmetic.procedure_slip",
+          "feedback": "The setup is close, but a step in Polynomial arithmetic changed the result.",
+          "hint": "Add (3x^2 + 2x - 1) and (5x^2 - 7x + 4), then circle each pair of like terms.",
+          "recovery_archetype_id": "depth.v1.algebra_1.polynomial_arithmetic.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Factoring basics",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.algebra_1.factoring_basics.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Factoring basics?"
+        },
+        {
+          "id": "depth.v1.algebra_1.factoring_basics.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.algebra_1.factoring_basics.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.algebra_1.factoring_basics.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A real relationship must be represented algebraically; choose the model and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Factoring basics",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "Factor x^2 + (9)x + (18) as (x + m)(x + n). Report the larger constant.",
+            "explanation": "Find two numbers that multiply to the constant term and add to the x-coefficient. Answer: 6",
+            "expected_answer": "6"
+          },
+          {
+            "stage": "guided",
+            "prompt": "Factor x^2 + (-7)x + (6) as (x + m)(x + n). Report the larger constant.",
+            "explanation": "For x^2 + 7x + 12, list factor pairs of 12 and find the pair whose sum is 7.",
+            "expected_answer": "-1"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "Factor x^2 + (-2)x + (-15) as (x + m)(x + n). Report the larger constant.",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "3"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "factoring_basics.model_confusion",
+          "feedback": "Only checking multiplication and forgetting the same two numbers must also add to the x-coefficient.",
+          "hint": "Factoring reverses multiplication: look for pieces that multiply to the constant term and add to the middle coefficient.",
+          "recovery_archetype_id": "depth.v1.algebra_1.factoring_basics.concept"
+        },
+        {
+          "code": "factoring_basics.procedure_slip",
+          "feedback": "The setup is close, but a step in Factoring basics changed the result.",
+          "hint": "For x^2 + 7x + 12, list factor pairs of 12 and find the pair whose sum is 7.",
+          "recovery_archetype_id": "depth.v1.algebra_1.factoring_basics.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Quadratics: Multiplying & factoring",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.algebra_1.quadratics_multiplying_factoring.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Quadratics: Multiplying & factoring?"
+        },
+        {
+          "id": "depth.v1.algebra_1.quadratics_multiplying_factoring.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.algebra_1.quadratics_multiplying_factoring.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.algebra_1.quadratics_multiplying_factoring.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A real relationship must be represented algebraically; choose the model and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Quadratics: Multiplying & factoring",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "Expand (x + -5)(x + 4). What is the coefficient of x?",
+            "explanation": "The middle term comes from m*x plus n*x, so the x-coefficient is m + n. Answer: -1",
+            "expected_answer": "-1"
+          },
+          {
+            "stage": "guided",
+            "prompt": "Expand (x + -4)(x + -1). What is the coefficient of x?",
+            "explanation": "Expand (x + 3)(x + 5), then point to the two products that create the 8x term.",
+            "expected_answer": "-5"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "Expand (x + 6)(x + -3). What is the coefficient of x?",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "3"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "quadratics_multiplying_factoring.model_confusion",
+          "feedback": "Multiplying only the first and last terms and missing the two middle products.",
+          "hint": "Multiplying binomials builds a quadratic; the middle x-term comes from both cross-products working together.",
+          "recovery_archetype_id": "depth.v1.algebra_1.quadratics_multiplying_factoring.concept"
+        },
+        {
+          "code": "quadratics_multiplying_factoring.procedure_slip",
+          "feedback": "The setup is close, but a step in Quadratics: Multiplying & factoring changed the result.",
+          "hint": "Expand (x + 3)(x + 5), then point to the two products that create the 8x term.",
+          "recovery_archetype_id": "depth.v1.algebra_1.quadratics_multiplying_factoring.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Quadratic factoring by grouping",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.algebra_1.quadratic_factoring_by_grouping.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Quadratic factoring by grouping?"
+        },
+        {
+          "id": "depth.v1.algebra_1.quadratic_factoring_by_grouping.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.algebra_1.quadratic_factoring_by_grouping.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.algebra_1.quadratic_factoring_by_grouping.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A real relationship must be represented algebraically; choose the model and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Quadratic factoring by grouping",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "Factor 10x^2 + (28)x + (-6) into two binomials. Report the constant in the factor with the larger x-coefficient.",
+            "explanation": "Use the ac method to split the middle term, then factor by grouping. Answer: -1",
+            "expected_answer": "-1"
+          },
+          {
+            "stage": "guided",
+            "prompt": "Factor 15x^2 + (-3)x + (-18) into two binomials. Report the constant in the factor with the larger x-coefficient.",
+            "explanation": "For 2x^2 + 7x + 3, split 7x as 6x + x, then factor the two groups.",
+            "expected_answer": "-6"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "Factor 30x^2 + (-61)x + (30) into two binomials. Report the constant in the factor with the larger x-coefficient.",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "-5"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "quadratic_factoring_by_grouping.model_confusion",
+          "feedback": "Finding two numbers that multiply to ac but forgetting they must also add to the middle coefficient.",
+          "hint": "Grouping is the ac method made visible: split the middle term so pairs of terms share common factors.",
+          "recovery_archetype_id": "depth.v1.algebra_1.quadratic_factoring_by_grouping.concept"
+        },
+        {
+          "code": "quadratic_factoring_by_grouping.procedure_slip",
+          "feedback": "The setup is close, but a step in Quadratic factoring by grouping changed the result.",
+          "hint": "For 2x^2 + 7x + 3, split 7x as 6x + x, then factor the two groups.",
+          "recovery_archetype_id": "depth.v1.algebra_1.quadratic_factoring_by_grouping.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Difference of squares",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.algebra_1.difference_of_squares.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Difference of squares?"
+        },
+        {
+          "id": "depth.v1.algebra_1.difference_of_squares.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.algebra_1.difference_of_squares.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.algebra_1.difference_of_squares.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A real relationship must be represented algebraically; choose the model and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Difference of squares",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "Factor 25x^2 - 16 as (ax + b)(ax - b). What is b?",
+            "explanation": "A difference of squares follows A^2 - B^2 = (A + B)(A - B). Answer: 4",
+            "expected_answer": "4"
+          },
+          {
+            "stage": "guided",
+            "prompt": "Factor 16x^2 - 36 as (ax + b)(ax - b). What is b?",
+            "explanation": "Rewrite 9x^2 - 25 as (3x)^2 - 5^2 before factoring.",
+            "expected_answer": "6"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "Factor 81x^2 - 49 as (ax + b)(ax - b). What is b?",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "7"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "difference_of_squares.model_confusion",
+          "feedback": "Trying to use the pattern on a sum of squares or on terms that are not both perfect squares.",
+          "hint": "A difference of squares is one square minus another square; it factors into matching plus and minus binomials.",
+          "recovery_archetype_id": "depth.v1.algebra_1.difference_of_squares.concept"
+        },
+        {
+          "code": "difference_of_squares.procedure_slip",
+          "feedback": "The setup is close, but a step in Difference of squares changed the result.",
+          "hint": "Rewrite 9x^2 - 25 as (3x)^2 - 5^2 before factoring.",
+          "recovery_archetype_id": "depth.v1.algebra_1.difference_of_squares.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Quadratic functions & equations",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.algebra_1.quadratic_functions_equations.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Quadratic functions & equations?"
+        },
+        {
+          "id": "depth.v1.algebra_1.quadratic_functions_equations.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.algebra_1.quadratic_functions_equations.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.algebra_1.quadratic_functions_equations.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A real relationship must be represented algebraically; choose the model and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Quadratic functions & equations",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "Solve x^2 + (-3)x + (0) = 0. Report the larger real root.",
+            "explanation": "Choose factors that multiply to c and add to b. Answer: 3",
+            "expected_answer": "3"
+          },
+          {
+            "stage": "guided",
+            "prompt": "Solve x^2 + (4)x + (-21) = 0. Report the larger real root.",
+            "explanation": "For x^2 - 7x + 12 = 0, list factor pairs of 12 and find the pair with sum 7.",
+            "expected_answer": "3"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "Solve x^2 + (-1)x + (-20) = 0. Report the larger real root.",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "5"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "quadratic_functions_equations.model_confusion",
+          "feedback": "Factoring with numbers that multiply to c but do not add to the middle coefficient.",
+          "hint": "A quadratic makes a U-shaped relationship; solving asks where that curve reaches zero.",
+          "recovery_archetype_id": "depth.v1.algebra_1.quadratic_functions_equations.concept"
+        },
+        {
+          "code": "quadratic_functions_equations.procedure_slip",
+          "feedback": "The setup is close, but a step in Quadratic functions & equations changed the result.",
+          "hint": "For x^2 - 7x + 12 = 0, list factor pairs of 12 and find the pair with sum 7.",
+          "recovery_archetype_id": "depth.v1.algebra_1.quadratic_functions_equations.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Completing the square",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.algebra_1.completing_the_square.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Completing the square?"
+        },
+        {
+          "id": "depth.v1.algebra_1.completing_the_square.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.algebra_1.completing_the_square.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.algebra_1.completing_the_square.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A real relationship must be represented algebraically; choose the model and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Completing the square",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "Solve by completing the square: x^2 + (-4)x + (-32) = 0. Report the larger root.",
+            "explanation": "Move c, add (b/2)^2 to both sides, then take square roots. Answer: 8",
+            "expected_answer": "8"
+          },
+          {
+            "stage": "guided",
+            "prompt": "Solve by completing the square: x^2 + (2)x + (-35) = 0. Report the larger root.",
+            "explanation": "For x^2 + 8x = 9, find half of 8, square it, then rewrite the left side as a square.",
+            "expected_answer": "5"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "Solve by completing the square: x^2 + (8)x + (-20) = 0. Report the larger root.",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "2"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "completing_the_square.model_confusion",
+          "feedback": "Adding (b/2)^2 to one side only, or using b^2/2 instead of (b/2)^2.",
+          "hint": "Completing the square turns x^2 + bx into a perfect-square pattern by adding the same balanced amount to both sides.",
+          "recovery_archetype_id": "depth.v1.algebra_1.completing_the_square.concept"
+        },
+        {
+          "code": "completing_the_square.procedure_slip",
+          "feedback": "The setup is close, but a step in Completing the square changed the result.",
+          "hint": "For x^2 + 8x = 9, find half of 8, square it, then rewrite the left side as a square.",
+          "recovery_archetype_id": "depth.v1.algebra_1.completing_the_square.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Quadratic formula",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.algebra_1.quadratic_formula.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Quadratic formula?"
+        },
+        {
+          "id": "depth.v1.algebra_1.quadratic_formula.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.algebra_1.quadratic_formula.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.algebra_1.quadratic_formula.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A real relationship must be represented algebraically; choose the model and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Quadratic formula",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "Use the quadratic formula on 3x^2 + (-27)x + (24) = 0. Report the larger real root.",
+            "explanation": "Use b^2 - 4ac under the square root, then divide the whole numerator by 2a. Answer: 8",
+            "expected_answer": "8"
+          },
+          {
+            "stage": "guided",
+            "prompt": "Use the quadratic formula on 3x^2 + (15)x + (12) = 0. Report the larger real root.",
+            "explanation": "For x^2 - 5x + 6 = 0, identify a, b, and c before doing any arithmetic.",
+            "expected_answer": "-1"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "Use the quadratic formula on 2x^2 + (-18)x + (40) = 0. Report the larger real root.",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "5"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "quadratic_formula.model_confusion",
+          "feedback": "Forgetting that the entire numerator -b +/- sqrt(b^2 - 4ac) sits over 2a, or losing the sign of b.",
+          "hint": "The quadratic formula is a universal root-finder for ax^2 + bx + c = 0: plug in a, b, and c, then simplify carefully.",
+          "recovery_archetype_id": "depth.v1.algebra_1.quadratic_formula.concept"
+        },
+        {
+          "code": "quadratic_formula.procedure_slip",
+          "feedback": "The setup is close, but a step in Quadratic formula changed the result.",
+          "hint": "For x^2 - 5x + 6 = 0, identify a, b, and c before doing any arithmetic.",
+          "recovery_archetype_id": "depth.v1.algebra_1.quadratic_formula.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Irrational numbers",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.algebra_1.irrational_numbers.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Irrational numbers?"
+        },
+        {
+          "id": "depth.v1.algebra_1.irrational_numbers.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.algebra_1.irrational_numbers.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.algebra_1.irrational_numbers.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A real relationship must be represented algebraically; choose the model and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Irrational numbers",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "Approximate sqrt(7) to 2 decimals.",
+            "explanation": "Non-perfect-square roots are irrational; estimate with decimal approximation. Answer: 2.65",
+            "expected_answer": "2.65"
+          },
+          {
+            "stage": "guided",
+            "prompt": "Approximate sqrt(11) to 2 decimals.",
+            "explanation": "Place sqrt(10) between two whole numbers by comparing 10 with nearby perfect squares.",
+            "expected_answer": "3.32"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "Approximate sqrt(11) to 2 decimals.",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "3.32"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "irrational_numbers.model_confusion",
+          "feedback": "Rounding too early and treating the decimal estimate as the exact value.",
+          "hint": "Irrational numbers fill number-line locations that cannot be written as repeating or terminating fractions.",
+          "recovery_archetype_id": "depth.v1.algebra_1.irrational_numbers.concept"
+        },
+        {
+          "code": "irrational_numbers.procedure_slip",
+          "feedback": "The setup is close, but a step in Irrational numbers changed the result.",
+          "hint": "Place sqrt(10) between two whole numbers by comparing 10 with nearby perfect squares.",
+          "recovery_archetype_id": "depth.v1.algebra_1.irrational_numbers.procedure"
+        }
+      ]
+    }
+  ]
+}

@@ -15,6 +15,7 @@ class UiSettings:
     enforce_offline_mode: bool = False
     default_grade_band: str = "K-8"
     summer_mode: bool = False
+    curriculum_depth_beta: bool = False
 
 
 def _settings_path() -> Path:
@@ -57,6 +58,7 @@ def load_ui_settings() -> UiSettings:
     if not default_grade_band:
         default_grade_band = "K-8"
     summer_mode = bool(data.get("summer_mode", False)) if isinstance(data, dict) else False
+    curriculum_depth_beta = bool(data.get("curriculum_depth_beta", False)) if isinstance(data, dict) else False
     if isinstance(detail_geometry, str) and detail_geometry.strip():
         return UiSettings(
             detail_geometry=detail_geometry,
@@ -65,6 +67,7 @@ def load_ui_settings() -> UiSettings:
             enforce_offline_mode=enforce_offline_mode,
             default_grade_band=default_grade_band,
             summer_mode=summer_mode,
+            curriculum_depth_beta=curriculum_depth_beta,
         )
     return UiSettings(
         show_external_links=show_external_links,
@@ -72,6 +75,7 @@ def load_ui_settings() -> UiSettings:
         enforce_offline_mode=enforce_offline_mode,
         default_grade_band=default_grade_band,
         summer_mode=summer_mode,
+        curriculum_depth_beta=curriculum_depth_beta,
     )
 
 
@@ -118,4 +122,10 @@ def save_default_grade_band(value: str) -> None:
 def save_summer_mode(enabled: bool) -> None:
     payload = _load_raw_settings()
     payload["summer_mode"] = bool(enabled)
+    _write_settings(payload)
+
+
+def save_curriculum_depth_beta(enabled: bool) -> None:
+    payload = _load_raw_settings()
+    payload["curriculum_depth_beta"] = bool(enabled)
     _write_settings(payload)

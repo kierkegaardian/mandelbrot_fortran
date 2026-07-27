@@ -1,0 +1,4 @@
+[2m2026-07-15T10:50:03.473993Z[0m [31mERROR[0m [3mname[0m[2m=[0m"BatchSpanProcessor.ExportError" [3merror[0m[2m=[0m"Operation failed: HTTP export failed: network error"
+[2m2026-07-15T10:50:11.856418Z[0m [33m WARN[0m session title generation failed, falling back to truncated user text [3mmodel[0m[2m=[0mgrok-build [3merror[0m[2m=[0mAPI error (status 500 Internal Server Error): reqwest error stream: Transport error: error decoding response body
+[2m2026-07-15T10:50:23.474549Z[0m [31mERROR[0m [3mname[0m[2m=[0m"BatchSpanProcessor.ExportError" [3merror[0m[2m=[0m"Operation failed: HTTP export failed: network error"
+[2m2026-07-15T10:51:13.477396Z[0m [31mERROR[0m [3mname[0m[2m=[0m"BatchSpanProcessor.ExportError" [3merror[0m[2m=[0m"Operation failed: HTTP export failed: network error"

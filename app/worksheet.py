@@ -6,6 +6,7 @@ from typing import Iterable, Optional, Tuple
 
 from .paths import worksheets_dir
 from .quiz_engine import Question, generate_question
+from .content_depth.printable import blank_proof_table, completed_proof_table
 from .worksheet_fractions import fraction_svg
 
 
@@ -83,6 +84,7 @@ def _render_html(title: str, questions: Iterable[Question]) -> str:
         ".fraction-circle{margin-top:8px}",
         ".choices{margin:8px 0 0 0; padding-left:18px}",
         ".choices li{margin:2px 0}",
+        ".proof-table{border-collapse:collapse;width:100%;margin-top:8px}.proof-table th,.proof-table td{border:1px solid #777;padding:8px;height:24px}",
         "@media print{*{print-color-adjust:exact;-webkit-print-color-adjust:exact}}",
         "</style></head><body>",
         f"<h1>{html.escape(title)}</h1>",
@@ -101,15 +103,22 @@ def _render_html(title: str, questions: Iterable[Question]) -> str:
             for choice in q.choices:
                 body.append(f"<li>{html.escape(str(choice))}</li>")
             body.append("</ul>")
-        body.append("<div style='margin-top:8px'>Answer: _____________________</div>")
+        if q.proof_spec is not None:
+            body.append(blank_proof_table(q.proof_spec))
+        else:
+            body.append("<div style='margin-top:8px'>Answer: _____________________</div>")
         body.append("</div>")
         answer_overrides.append(answer_override)
 
     body.append("<h2>Answer Key</h2>")
     for idx, q in enumerate(q_list, start=1):
         override = answer_overrides[idx - 1]
-        answer = override if override is not None else q.correct_answer
-        body.append(f"<div>{idx}. {html.escape(str(answer))}</div>")
+        if q.proof_spec is not None:
+            body.append(f"<div>{idx}.</div>")
+            body.append(completed_proof_table(q.proof_spec))
+        else:
+            answer = override if override is not None else q.correct_answer
+            body.append(f"<div>{idx}. {html.escape(str(answer))}</div>")
 
     body.append("</body></html>")
     return "\n".join(body)

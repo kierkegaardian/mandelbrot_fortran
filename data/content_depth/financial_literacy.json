@@ -1,0 +1,433 @@
+{
+  "version": 1,
+  "skill": "financial_literacy",
+  "subskills": [
+    {
+      "subskill": "Income, gifts, wants, and needs",
+      "content_status": "ready",
+      "archetypes": [
+        {
+          "id": "depth.v1.financial_literacy.income_gifts_wants_and_needs.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Income, gifts, wants, and needs?"
+        },
+        {
+          "id": "depth.v1.financial_literacy.income_gifts_wants_and_needs.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.financial_literacy.income_gifts_wants_and_needs.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.financial_literacy.income_gifts_wants_and_needs.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A child is identifying a money source, a contextual need or want, or a useful job skill. Select the matching model and decide."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Income, gifts, wants, and needs",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "Mia earns six dollars for raking leaves. Is the source income or a gift?",
+            "explanation": "Mia received the money for work, so the source is income.",
+            "expected_answer": "income"
+          },
+          {
+            "stage": "guided",
+            "prompt": "Kai must walk to school in heavy rain and has no umbrella. Is an umbrella a need or want here?",
+            "explanation": "The rain and missing umbrella make it necessary in this situation, so it is a need.",
+            "expected_answer": "need"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "Which skill helps a librarian place books in the correct sections?",
+            "explanation": "Sorting helps the librarian organize books into their correct sections.",
+            "expected_answer": "sorting"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "gift_as_income",
+          "feedback": "You used an income label without checking whether the money or item was earned.",
+          "hint": "Ask whether work earned it; if not, it may be a gift or a different kind of choice.",
+          "recovery_archetype_id": "depth.v1.financial_literacy.income_gifts_wants_and_needs.concept"
+        },
+        {
+          "code": "context_need_want",
+          "feedback": "You used a need-or-want label without using the situation, or used it for a different question.",
+          "hint": "First name whether the question is about source, purpose, or a job skill; needs and wants depend on context.",
+          "recovery_archetype_id": "depth.v1.financial_literacy.income_gifts_wants_and_needs.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Saving, spending, giving, borrowing, and lending",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.financial_literacy.saving_spending_giving_borrowing_and_lending.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Saving, spending, giving, borrowing, and lending?"
+        },
+        {
+          "id": "depth.v1.financial_literacy.saving_spending_giving_borrowing_and_lending.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.financial_literacy.saving_spending_giving_borrowing_and_lending.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.financial_literacy.saving_spending_giving_borrowing_and_lending.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A household is comparing financial choices; construct the relevant model and decide."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Saving, spending, giving, borrowing, and lending",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "If you save $8 each week for 6 weeks, how many dollars will you save?",
+            "explanation": "Repeated saving accumulates by adding the same amount each week. Answer: 48",
+            "expected_answer": "48"
+          },
+          {
+            "stage": "guided",
+            "prompt": "If you save $6 each week for 3 weeks, how many dollars will you save?",
+            "explanation": "Save the same small amount for four weeks and predict the total before adding.",
+            "expected_answer": "18"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "If you save $4 each week for 6 weeks, how many dollars will you save?",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "24"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "saving_spending_giving_borrowing_and_lending.model_confusion",
+          "feedback": "Treating borrowed money like free money instead of money that must be repaid.",
+          "hint": "Money choices move value across time: spend now, save for later, give away, borrow, or lend.",
+          "recovery_archetype_id": "depth.v1.financial_literacy.saving_spending_giving_borrowing_and_lending.concept"
+        },
+        {
+          "code": "saving_spending_giving_borrowing_and_lending.procedure_slip",
+          "feedback": "The setup is close, but a step in Saving, spending, giving, borrowing, and lending changed the result.",
+          "hint": "Save the same small amount for four weeks and predict the total before adding.",
+          "recovery_archetype_id": "depth.v1.financial_literacy.saving_spending_giving_borrowing_and_lending.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Scarcity, planned spending, and credit choices",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.financial_literacy.scarcity_planned_spending_and_credit_choices.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Scarcity, planned spending, and credit choices?"
+        },
+        {
+          "id": "depth.v1.financial_literacy.scarcity_planned_spending_and_credit_choices.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.financial_literacy.scarcity_planned_spending_and_credit_choices.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.financial_literacy.scarcity_planned_spending_and_credit_choices.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A household is comparing financial choices; construct the relevant model and decide."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Scarcity, planned spending, and credit choices",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "Is this planned or unplanned spending: buying a toy on impulse?",
+            "explanation": "Planned spending is decided before purchase; unplanned spending happens without that plan. Answer: unplanned spending",
+            "expected_answer": "unplanned spending"
+          },
+          {
+            "stage": "guided",
+            "prompt": "Is this planned or unplanned spending: saving for a bike before buying it?",
+            "explanation": "Pick one desired item and write what you would give up to buy it.",
+            "expected_answer": "planned spending"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "Is this planned or unplanned spending: saving for a bike before buying it?",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "planned spending"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "scarcity_planned_spending_and_credit_choices.model_confusion",
+          "feedback": "Using credit because something is wanted without checking repayment.",
+          "hint": "Scarcity forces choices, so a plan helps compare benefits, costs, and future obligations.",
+          "recovery_archetype_id": "depth.v1.financial_literacy.scarcity_planned_spending_and_credit_choices.concept"
+        },
+        {
+          "code": "scarcity_planned_spending_and_credit_choices.procedure_slip",
+          "feedback": "The setup is close, but a step in Scarcity, planned spending, and credit choices changed the result.",
+          "hint": "Pick one desired item and write what you would give up to buy it.",
+          "recovery_archetype_id": "depth.v1.financial_literacy.scarcity_planned_spending_and_credit_choices.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Expenses, profit, savings options, and institutions",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.financial_literacy.expenses_profit_savings_options_and_institutions.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Expenses, profit, savings options, and institutions?"
+        },
+        {
+          "id": "depth.v1.financial_literacy.expenses_profit_savings_options_and_institutions.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.financial_literacy.expenses_profit_savings_options_and_institutions.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.financial_literacy.expenses_profit_savings_options_and_institutions.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A household is comparing financial choices; construct the relevant model and decide."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Expenses, profit, savings options, and institutions",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "You sell 7 items for $11 each. Each item costs $2 to make. What is the profit?",
+            "explanation": "Profit is revenue minus cost. Find profit per item, then multiply by items sold. Answer: 63",
+            "expected_answer": "63"
+          },
+          {
+            "stage": "guided",
+            "prompt": "You sell 6 items for $9 each. Each item costs $4 to make. What is the profit?",
+            "explanation": "For a small sale, compute revenue, cost, and profit as three separate numbers.",
+            "expected_answer": "30"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "You sell 6 items for $16 each. Each item costs $10 to make. What is the profit?",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "36"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "expenses_profit_savings_options_and_institutions.model_confusion",
+          "feedback": "Confusing revenue with profit before subtracting the cost to produce or sell.",
+          "hint": "A financial decision compares incoming money, outgoing expenses, risk, and where money is kept.",
+          "recovery_archetype_id": "depth.v1.financial_literacy.expenses_profit_savings_options_and_institutions.concept"
+        },
+        {
+          "code": "expenses_profit_savings_options_and_institutions.procedure_slip",
+          "feedback": "The setup is close, but a step in Expenses, profit, savings options, and institutions changed the result.",
+          "hint": "For a small sale, compute revenue, cost, and profit as three separate numbers.",
+          "recovery_archetype_id": "depth.v1.financial_literacy.expenses_profit_savings_options_and_institutions.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Taxes, payments, records, and simple budgets",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.financial_literacy.taxes_payments_records_and_simple_budgets.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Taxes, payments, records, and simple budgets?"
+        },
+        {
+          "id": "depth.v1.financial_literacy.taxes_payments_records_and_simple_budgets.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.financial_literacy.taxes_payments_records_and_simple_budgets.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.financial_literacy.taxes_payments_records_and_simple_budgets.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A household is comparing financial choices; construct the relevant model and decide."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Taxes, payments, records, and simple budgets",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "A purchase costs $29. Sales tax is 6 percent. How much tax is owed?",
+            "explanation": "Sales tax is the purchase amount multiplied by the tax rate as a decimal. Answer: $1.74",
+            "expected_answer": "$1.74"
+          },
+          {
+            "stage": "guided",
+            "prompt": "A purchase costs $53. Sales tax is 5 percent. How much tax is owed?",
+            "explanation": "Write a three-line budget with income, expenses, and leftover money.",
+            "expected_answer": "$2.65"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "A purchase costs $75. Sales tax is 6 percent. How much tax is owed?",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "$4.50"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "taxes_payments_records_and_simple_budgets.model_confusion",
+          "feedback": "Ignoring taxes or fees and thinking the sticker price is the full cost.",
+          "hint": "Budgets and records tell where money came from, where it went, and what obligations were paid.",
+          "recovery_archetype_id": "depth.v1.financial_literacy.taxes_payments_records_and_simple_budgets.concept"
+        },
+        {
+          "code": "taxes_payments_records_and_simple_budgets.procedure_slip",
+          "feedback": "The setup is close, but a step in Taxes, payments, records, and simple budgets changed the result.",
+          "hint": "Write a three-line budget with income, expenses, and leftover money.",
+          "recovery_archetype_id": "depth.v1.financial_literacy.taxes_payments_records_and_simple_budgets.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Accounts, credit reports, and education income",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.financial_literacy.accounts_credit_reports_and_education_income.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Accounts, credit reports, and education income?"
+        },
+        {
+          "id": "depth.v1.financial_literacy.accounts_credit_reports_and_education_income.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.financial_literacy.accounts_credit_reports_and_education_income.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.financial_literacy.accounts_credit_reports_and_education_income.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A household is comparing financial choices; construct the relevant model and decide."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Accounts, credit reports, and education income",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "A check register starts at $44. You deposit $23 and withdraw $59. What is the new balance?",
+            "explanation": "A register adds deposits and subtracts withdrawals to keep the account balance current. Answer: $8.00",
+            "expected_answer": "$8.00"
+          },
+          {
+            "stage": "guided",
+            "prompt": "A check register starts at $79. You deposit $18 and withdraw $13. What is the new balance?",
+            "explanation": "Compare one job needing training with one not needing training, then compare long-term income.",
+            "expected_answer": "$84.00"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "A check register starts at $55. You deposit $38 and withdraw $50. What is the new balance?",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "$43.00"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "accounts_credit_reports_and_education_income.model_confusion",
+          "feedback": "Thinking debit and credit behave the same because both use a card.",
+          "hint": "Accounts, credit records, and training choices affect both short-term access and long-term income.",
+          "recovery_archetype_id": "depth.v1.financial_literacy.accounts_credit_reports_and_education_income.concept"
+        },
+        {
+          "code": "accounts_credit_reports_and_education_income.procedure_slip",
+          "feedback": "The setup is close, but a step in Accounts, credit reports, and education income changed the result.",
+          "hint": "Compare one job needing training with one not needing training, then compare long-term income.",
+          "recovery_archetype_id": "depth.v1.financial_literacy.accounts_credit_reports_and_education_income.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Budget percentages, net worth, interest, and incentives",
+      "content_status": "ready",
+      "archetypes": [
+        {
+          "id": "depth.v1.financial_literacy.budget_percentages_net_worth_interest_and_incentives.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Budget percentages, net worth, interest, and incentives?"
+        },
+        {
+          "id": "depth.v1.financial_literacy.budget_percentages_net_worth_interest_and_incentives.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.financial_literacy.budget_percentages_net_worth_interest_and_incentives.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.financial_literacy.budget_percentages_net_worth_interest_and_incentives.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A family compares a budget and debt offer. Build the percent or net-worth model before deciding."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Budget percentages, net worth, interest, and incentives",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "Assets are $900 and liabilities are $250. Find net worth.",
+            "explanation": "Net worth = assets - liabilities = 900 - 250.",
+            "expected_answer": "$650"
+          },
+          {
+            "stage": "guided",
+            "prompt": "Find 20% of a $500 monthly income.",
+            "explanation": "Convert 20% to 0.20, then multiply by 500.",
+            "expected_answer": "$100"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "Find simple interest on $400 at 5% for 2 years.",
+            "explanation": "Use I = Prt = 400 x 0.05 x 2.",
+            "expected_answer": "$40"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "wrong_financial_model",
+          "feedback": "The quantities were combined with the wrong financial model.",
+          "hint": "Name the target first: percent of income, assets minus liabilities, or principal times rate times time.",
+          "recovery_archetype_id": "depth.v1.financial_literacy.budget_percentages_net_worth_interest_and_incentives.concept"
+        },
+        {
+          "code": "percent_or_sign_error",
+          "feedback": "A percent, debt, or time factor was used with the wrong sign or scale.",
+          "hint": "Convert percent to a decimal and treat liabilities as amounts subtracted from assets.",
+          "recovery_archetype_id": "depth.v1.financial_literacy.budget_percentages_net_worth_interest_and_incentives.procedure"
+        }
+      ]
+    }
+  ]
+}

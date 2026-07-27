@@ -205,9 +205,9 @@ def build_financial_literacy_problem(
 
 _INTUITION_BY_SUBSKILL: dict[str, FinancialIntuition] = {
     "Income, gifts, wants, and needs": FinancialIntuition(
-        "Financial choices begin by naming where money came from and whether a purchase is necessary.",
-        "Calling every received dollar income, even when it was a gift.",
-        "List three things you need and three things you want before planning any spending.",
+        "First name the question: source, purpose, or job skill. Then use the scenario evidence to decide.",
+        "Calling every received dollar income or naming a need or want without checking the situation.",
+        "Classify one earned item and one gift, decide one need or want from its context, then name a useful skill for a simple job.",
     ),
     "Saving, spending, giving, borrowing, and lending": FinancialIntuition(
         "Money choices move value across time: spend now, save for later, give away, borrow, or lend.",

@@ -20,6 +20,13 @@ class QuestionResultInput:
     user_answer: str
     is_correct: bool
     explanation: str
+    archetype_id: str | None = None
+    misconception_code: str | None = None
+    response_kind: str | None = None
+    recovery_corrected_answer: str | None = None
+    recovery_transfer_archetype_id: str | None = None
+    recovery_transfer_answer: str | None = None
+    recovery_transfer_correct: bool | None = None
 
 
 @dataclass(frozen=True)
@@ -335,8 +342,21 @@ def record_completed_quiz(
             item.user_answer,
             item.is_correct,
             item.explanation,
+            archetype_id=item.archetype_id,
+            misconception_code=item.misconception_code,
+            response_kind=item.response_kind,
             sync_updated_at=created_at,
         )
+        if item.recovery_corrected_answer is not None:
+            db.add_quiz_recovery(
+                question_id,
+                item.misconception_code,
+                item.recovery_corrected_answer,
+                item.recovery_transfer_archetype_id,
+                item.recovery_transfer_answer,
+                item.recovery_transfer_correct,
+                created_at,
+            )
         sync_store.enqueue_change(
             entity_type="quiz_questions",
             local_id=question_id,

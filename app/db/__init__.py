@@ -46,6 +46,7 @@ from .parent_auth import (
     verify_parent_pin,
 )
 from .profiles import create_profile, delete_profile, list_profiles
+from .recoveries import add_quiz_recovery
 from .progress import (
     daily_goal_status,
     list_daily_goal_history,
@@ -107,6 +108,7 @@ __all__ = (
     "PIN_MIN_LENGTH",
     "add_exercise_candidate",
     "add_question_result",
+    "add_quiz_recovery",
     "add_template_var",
     "apply_historical_answer_key",
     "archive_summer_programs",

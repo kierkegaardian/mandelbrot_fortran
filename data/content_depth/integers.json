@@ -1,0 +1,250 @@
+{
+  "version": 1,
+  "skill": "integers",
+  "subskills": [
+    {
+      "subskill": "Signed numbers",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.integers.signed_numbers.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Signed numbers?"
+        },
+        {
+          "id": "depth.v1.integers.signed_numbers.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.integers.signed_numbers.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.integers.signed_numbers.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A temperature or elevation change must be modeled; choose a signed-number model and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Signed numbers",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "Simplify this expression: (-4 + 6) * -4",
+            "explanation": "Apply parentheses first, then multiplication, and finally addition and subtraction. Answer: -8",
+            "expected_answer": "-8"
+          },
+          {
+            "stage": "guided",
+            "prompt": "Simplify this expression: (8 * 4) + (-3 * -3)",
+            "explanation": "Place -4 and 3 on a number line and say which is greater.",
+            "expected_answer": "41"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "Simplify this expression: (-6 + 11) - (-2 * 2)",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "9"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "signed_numbers.model_confusion",
+          "feedback": "Ignoring the sign and comparing only the digits.",
+          "hint": "The sign tells direction or side of zero, not just size.",
+          "recovery_archetype_id": "depth.v1.integers.signed_numbers.concept"
+        },
+        {
+          "code": "signed_numbers.procedure_slip",
+          "feedback": "The setup is close, but a step in Signed numbers changed the result.",
+          "hint": "Place -4 and 3 on a number line and say which is greater.",
+          "recovery_archetype_id": "depth.v1.integers.signed_numbers.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Negative arithmetic",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.integers.negative_arithmetic.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Negative arithmetic?"
+        },
+        {
+          "id": "depth.v1.integers.negative_arithmetic.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.integers.negative_arithmetic.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.integers.negative_arithmetic.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A temperature or elevation change must be modeled; choose a signed-number model and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Negative arithmetic",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "Simplify this expression: (11 - 10) * 3",
+            "explanation": "Apply parentheses first, then multiplication, and finally addition and subtraction. Answer: 3",
+            "expected_answer": "3"
+          },
+          {
+            "stage": "guided",
+            "prompt": "Simplify this expression: (-7 * 12) + (-6 * -6)",
+            "explanation": "Start at -2 and add 5 by moving right five steps.",
+            "expected_answer": "-48"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "Simplify this expression: (-6 - -5) * -6",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "6"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "negative_arithmetic.model_confusion",
+          "feedback": "Treating minus signs as decoration instead of direction.",
+          "hint": "Adding and subtracting signed numbers is movement on the number line.",
+          "recovery_archetype_id": "depth.v1.integers.negative_arithmetic.concept"
+        },
+        {
+          "code": "negative_arithmetic.procedure_slip",
+          "feedback": "The setup is close, but a step in Negative arithmetic changed the result.",
+          "hint": "Start at -2 and add 5 by moving right five steps.",
+          "recovery_archetype_id": "depth.v1.integers.negative_arithmetic.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Order-dependent operations",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.integers.order_dependent_operations.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Order-dependent operations?"
+        },
+        {
+          "id": "depth.v1.integers.order_dependent_operations.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.integers.order_dependent_operations.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.integers.order_dependent_operations.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A temperature or elevation change must be modeled; choose a signed-number model and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Order-dependent operations",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "Simplify this expression: -4 - (2 * -2)",
+            "explanation": "Apply parentheses first, then multiplication, and finally addition and subtraction. Answer: 0",
+            "expected_answer": "0"
+          },
+          {
+            "stage": "guided",
+            "prompt": "Simplify this expression: (3 + 1) - (4 * 2)",
+            "explanation": "Compare 6 - (-2) with (-2) - 6 and explain the difference.",
+            "expected_answer": "-4"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "Simplify this expression: -9 - (0 * -6)",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "-9"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "order_dependent_operations.model_confusion",
+          "feedback": "Assuming subtraction and division behave like commutative operations.",
+          "hint": "With negatives, operation order matters because each step changes the next input.",
+          "recovery_archetype_id": "depth.v1.integers.order_dependent_operations.concept"
+        },
+        {
+          "code": "order_dependent_operations.procedure_slip",
+          "feedback": "The setup is close, but a step in Order-dependent operations changed the result.",
+          "hint": "Compare 6 - (-2) with (-2) - 6 and explain the difference.",
+          "recovery_archetype_id": "depth.v1.integers.order_dependent_operations.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Absolute value",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.integers.absolute_value.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Absolute value?"
+        },
+        {
+          "id": "depth.v1.integers.absolute_value.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.integers.absolute_value.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.integers.absolute_value.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A temperature or elevation change must be modeled; choose a signed-number model and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Absolute value",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "Simplify this expression: 9 - (8 * 1)",
+            "explanation": "Apply parentheses first, then multiplication, and finally addition and subtraction. Answer: 1",
+            "expected_answer": "1"
+          },
+          {
+            "stage": "guided",
+            "prompt": "Simplify this expression: (-6 + -7) - (-3 * 2)",
+            "explanation": "Explain why |-7| and |7| are both 7.",
+            "expected_answer": "-7"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "Simplify this expression: (2 - 11) * 1",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "-9"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "absolute_value.model_confusion",
+          "feedback": "Thinking absolute value keeps the original sign.",
+          "hint": "Absolute value is distance from zero, so it is always nonnegative.",
+          "recovery_archetype_id": "depth.v1.integers.absolute_value.concept"
+        },
+        {
+          "code": "absolute_value.procedure_slip",
+          "feedback": "The setup is close, but a step in Absolute value changed the result.",
+          "hint": "Explain why |-7| and |7| are both 7.",
+          "recovery_archetype_id": "depth.v1.integers.absolute_value.procedure"
+        }
+      ]
+    }
+  ]
+}

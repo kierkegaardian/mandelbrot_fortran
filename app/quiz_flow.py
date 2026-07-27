@@ -10,6 +10,8 @@ from . import db, sync_service
 from .explanations import ARITHMETIC_MODE_EXPLANATIONS, explanation_for
 from .learning_engine import build_skill_stats, recommend_next_skill_paths
 from .quiz_answers import is_correct_answer
+from .content_depth.proof import is_question_answer_correct
+from .content_depth.proof_ui import ProofBuilderController
 from .quiz_visuals import render_quiz_visual
 from .skill_graph import SKILL_LABELS, SKILL_ORDER, SKILL_PREREQUISITE_WEIGHTS, SUBSKILL_STREAK_TO_MASTER
 from .summer_mode import filter_skills
@@ -74,6 +76,8 @@ def show_question(panel) -> None:
         panel.stuck_btn.state(["!disabled"])
     else:
         panel.stuck_btn.state(["disabled"])
+    if hasattr(panel, "example_btn"):
+        panel.example_btn.state(["!disabled"] if question.worked_example is not None else ["disabled"])
     panel._persist_quiz_progress()
 
 
@@ -83,8 +87,15 @@ def build_answer_widget(panel, question) -> None:
     panel.answer_var.set("")
     panel.choice_var.set("")
     panel.repeat_var.set(False)
+    panel._proof_builder = None
     if not question.scaffold_steps:
         getattr(panel, "_clear_scaffold_state", lambda: None)()
+
+    if question.proof_spec is not None:
+        panel._proof_builder = ProofBuilderController(
+            panel.answer_frame, question.proof_spec, panel.answer_var, panel._persist_quiz_progress
+        )
+        return
 
     if question.scaffold_steps:
         step = getattr(panel, "_current_scaffold_step", lambda _q: None)(question)
@@ -204,7 +215,7 @@ def submit_answer(panel) -> None:
         correct = False
         panel.feedback_var.set("Answer recorded. This historical item has no answer key loaded.")
     else:
-        correct = is_correct_answer(question.correct_answer, answer, panel.repeat_var.get())
+        correct = is_question_answer_correct(question, answer, repeating=panel.repeat_var.get())
         if correct:
             panel._score += 1
             panel.feedback_var.set(random.choice(_CORRECT_MESSAGES))
@@ -308,6 +319,13 @@ def finish_quiz(panel) -> None:
                 user_answer=answer,
                 is_correct=correct,
                 explanation=question.explanation,
+                archetype_id=question.archetype_id,
+                misconception_code=question.matched_misconception_code,
+                response_kind=question.response_kind.value,
+                recovery_corrected_answer=question.recovery_corrected_answer,
+                recovery_transfer_archetype_id=question.recovery_transfer_archetype_id,
+                recovery_transfer_answer=question.recovery_transfer_answer,
+                recovery_transfer_correct=question.recovery_transfer_correct,
             )
             for question, answer, correct in panel._answers
         ],

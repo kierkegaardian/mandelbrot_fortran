@@ -1,0 +1,10 @@
+Goal: review a bounded plan to make the MandelQuest Grade 1 Texas goal g1_money depth-ready.
+Current state: substantive audit is 14 ready / 144 thin / 0 missing across 158 subskills. Dollar-coin values is scaffold-only; it already has enriched intuition, a parent-controlled Khan mapping, and legacy templates. Other money subskills must remain scaffold-only.
+Implementation plan:
+1. Add a typed app/content_depth/pilot_money.py generator for Dollar-coin values with conceptual, procedural, transfer/error-analysis, and model-selecting application forms.
+2. Keep Grade 1 scope honest: penny=1 cent, nickel=5, dime=10, quarter=25, one dollar=100 cents; recognize names and values, compare coin count with coin value, and handle dollars-versus-cents without introducing making-change or budget arithmetic.
+3. Add three distinct worked-example stages and two answer-keyed misconceptions for coin-count-versus-value and dollars-versus-cents errors; register the target and regenerate the versioned money manifest.
+4. Add focused tests for typed and MC diagnostic forms, denomination coverage, Grade 1 cumulative questions without scaffolds, the 15 ready / 143 thin / 0 missing gate, and proof that Making change, Budget-style totals, and Place-value in currency stay scaffold-only.
+5. Update README, TODO, docs/coverage.html, and CONTINUITY.md. Run focused tests, 100-seed audit, template dry-run, full unittest discovery, smoke test, HTML parse, and git diff --check.
+Constraints: preserve the large dirty worktree; no commit or push; all new/heavily modified Python files below 300 lines; strict type hints; Curriculum Depth beta stays parent-only and off by default.
+Act as Grok 4.5, a strict curriculum and code-plan reviewer. Findings first. Identify must-fix scope, pedagogy, generator, diagnostic, cumulative-check, and test risks. Then give a GO or BLOCK verdict with only minimal plan changes. Do not edit files.

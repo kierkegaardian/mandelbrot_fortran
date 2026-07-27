@@ -55,6 +55,9 @@ def add_question_result(
     user_answer: str,
     is_correct: bool,
     explanation: str,
+    archetype_id: str | None = None,
+    misconception_code: str | None = None,
+    response_kind: str | None = None,
     sync_updated_at: str | None = None,
 ) -> int:
     row_sync_id = str(uuid.uuid4())
@@ -64,8 +67,8 @@ def add_question_result(
             """
             INSERT INTO quiz_questions
             (attempt_id, skill, subskill, question_label, mode, prompt, correct_answer, user_answer, is_correct, explanation,
-             sync_id, sync_updated_at, sync_deleted)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0)
+             archetype_id, misconception_code, response_kind, sync_id, sync_updated_at, sync_deleted)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0)
             """,
             (
                 attempt_id,
@@ -78,6 +81,9 @@ def add_question_result(
                 user_answer,
                 int(is_correct),
                 explanation,
+                archetype_id,
+                misconception_code,
+                response_kind,
                 row_sync_id,
                 updated_at,
             ),
@@ -129,4 +135,3 @@ def mode_accuracy_by_skill(profile_id: int, skill: str) -> dict[str, float]:
         correct = int(row["correct"] or 0)
         out[str(row["mode"])] = (float(correct) / float(total)) * 100.0
     return out
-

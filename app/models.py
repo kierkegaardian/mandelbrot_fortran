@@ -97,6 +97,9 @@ class QuestionTemplate:
     choice_spread: float
     mode: str
     active: bool
+    archetype_id: Optional[str] = None
+    reasoning_kind: str = "legacy"
+    misconceptions_json: str = "[]"
 
 
 @dataclass(frozen=True)

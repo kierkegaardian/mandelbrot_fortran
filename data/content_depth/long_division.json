@@ -1,0 +1,189 @@
+{
+  "version": 1,
+  "skill": "long_division",
+  "subskills": [
+    {
+      "subskill": "Division layout",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.long_division.division_layout.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Division layout?"
+        },
+        {
+          "id": "depth.v1.long_division.division_layout.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.long_division.division_layout.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.long_division.division_layout.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "Choose a useful mathematical model and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Division layout",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "Long division: 486 / 8 = ? (use 'R' for remainder)",
+            "explanation": "Long division shows how many groups fit, with any leftover as remainder. Answer: 60 R 6",
+            "expected_answer": "60 R 6"
+          },
+          {
+            "stage": "guided",
+            "prompt": "Long division: 523 / 7 = ? (use 'R' for remainder)",
+            "explanation": "Ask which place of the dividend you are working with before you write above it.",
+            "expected_answer": "74 R 5"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "Long division: 138 / 2 = ? (use 'R' for remainder)",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "69"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "division_layout.model_confusion",
+          "feedback": "Dropping a quotient digit into the wrong column.",
+          "hint": "The quotient goes above the place you are currently dividing.",
+          "recovery_archetype_id": "depth.v1.long_division.division_layout.concept"
+        },
+        {
+          "code": "division_layout.procedure_slip",
+          "feedback": "The setup is close, but a step in Division layout changed the result.",
+          "hint": "Ask which place of the dividend you are working with before you write above it.",
+          "recovery_archetype_id": "depth.v1.long_division.division_layout.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Quotient estimation",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.long_division.quotient_estimation.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Quotient estimation?"
+        },
+        {
+          "id": "depth.v1.long_division.quotient_estimation.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.long_division.quotient_estimation.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.long_division.quotient_estimation.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "Choose a useful mathematical model and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Quotient estimation",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "Long division: 550 / 6 = ? (use 'R' for remainder)",
+            "explanation": "Long division shows how many groups fit, with any leftover as remainder. Answer: 91 R 4",
+            "expected_answer": "91 R 4"
+          },
+          {
+            "stage": "guided",
+            "prompt": "Long division: 430 / 8 = ? (use 'R' for remainder)",
+            "explanation": "Round 84 \u00f7 6 to nearby easy facts before writing the digit.",
+            "expected_answer": "53 R 6"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "Long division: 254 / 4 = ? (use 'R' for remainder)",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "63 R 2"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "quotient_estimation.model_confusion",
+          "feedback": "Guessing a quotient digit with no size check.",
+          "hint": "Estimate how many divisor-sized groups fit before subtracting exactly.",
+          "recovery_archetype_id": "depth.v1.long_division.quotient_estimation.concept"
+        },
+        {
+          "code": "quotient_estimation.procedure_slip",
+          "feedback": "The setup is close, but a step in Quotient estimation changed the result.",
+          "hint": "Round 84 \u00f7 6 to nearby easy facts before writing the digit.",
+          "recovery_archetype_id": "depth.v1.long_division.quotient_estimation.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Remainder handling",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.long_division.remainder_handling.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Remainder handling?"
+        },
+        {
+          "id": "depth.v1.long_division.remainder_handling.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.long_division.remainder_handling.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.long_division.remainder_handling.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "Choose a useful mathematical model and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Remainder handling",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "Long division: 410 / 9 = ? (use 'R' for remainder)",
+            "explanation": "Long division shows how many groups fit, with any leftover as remainder. Answer: 45 R 5",
+            "expected_answer": "45 R 5"
+          },
+          {
+            "stage": "guided",
+            "prompt": "Long division: 32 / 3 = ? (use 'R' for remainder)",
+            "explanation": "After each subtraction, check that the remainder is smaller than the divisor.",
+            "expected_answer": "10 R 2"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "Long division: 45 / 4 = ? (use 'R' for remainder)",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "11 R 1"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "remainder_handling.model_confusion",
+          "feedback": "Subtracting past zero because the quotient digit was too large.",
+          "hint": "A remainder is what stays after the largest possible full groups have been removed.",
+          "recovery_archetype_id": "depth.v1.long_division.remainder_handling.concept"
+        },
+        {
+          "code": "remainder_handling.procedure_slip",
+          "feedback": "The setup is close, but a step in Remainder handling changed the result.",
+          "hint": "After each subtraction, check that the remainder is smaller than the divisor.",
+          "recovery_archetype_id": "depth.v1.long_division.remainder_handling.procedure"
+        }
+      ]
+    }
+  ]
+}
