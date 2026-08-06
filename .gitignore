@@ -29,5 +29,6 @@ __pycache__/
 /data/*
 !/data/content_depth/
 !/data/content_depth/*.json
+!/data/curriculum_index.json
 /worksheets/
 /video_test/

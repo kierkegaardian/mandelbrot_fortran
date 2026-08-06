@@ -68,6 +68,10 @@ def repo_root() -> Path:
     return _bundle_root()
 
 
+def bundled_data_dir() -> Path:
+    return repo_root() / "data"
+
+
 def data_dir() -> Path:
     path = _user_data_root()
     _migrate_legacy_data_if_needed(path)

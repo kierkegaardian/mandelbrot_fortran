@@ -9,6 +9,8 @@ import unittest
 
 
 def tk_available() -> bool:
+    if os.environ.get("MANDELQUEST_HEADLESS_TESTS") != "0":
+        return False
     try:
         root = tk.Tk()
         root.withdraw()

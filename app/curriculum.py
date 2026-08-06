@@ -4,7 +4,7 @@ from dataclasses import dataclass
 from pathlib import Path
 import json
 
-from .paths import data_dir
+from .paths import bundled_data_dir, data_dir
 
 
 @dataclass(frozen=True)
@@ -20,7 +20,7 @@ class CurriculumEntry:
 
 
 def _load_curriculum() -> list[CurriculumEntry]:
-    path = data_dir() / "curriculum_index.json"
+    path = bundled_data_dir() / "curriculum_index.json"
     if not path.exists():
         return []
     raw = json.loads(path.read_text(encoding="utf-8"))
