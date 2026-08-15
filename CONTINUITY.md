@@ -1,6 +1,6 @@
 # MandelQuest Continuity
 
-Last updated: 2026-07-15
+Last updated: 2026-08-08
 
 ## Current Product Direction
 
@@ -1311,3 +1311,22 @@ README, TODO, and public coverage copy now agree with the substantive audit at
 foundations/arithmetic/finance rows, including the existing advanced finance pilot, alongside the other five
 subject-area pilots. Isolated focused verification passed 22 tests; the 100-seed release audit reproduced
 `rows=158 ready=16 thin=142 missing=0` and exited `1` as documented because the full rollout is incomplete.
+
+## PR #1 SQLite ResourceWarning Release Blocker Closure (2026-08-08)
+
+Four remaining script call sites were leaking SQLite connections. The open-textbook ingestion and syllogism
+manifest scripts used `with db.connect() as conn`, which controls transactions but does not close the underlying
+connection. All four now use the existing `db.managed_connection()` wrapper, preserving commit/rollback behavior
+while closing every handle. Focused forced-GC regression tests cover both connections in each script workflow.
+
+Verification passed:
+
+```bash
+PYTHONTRACEMALLOC=25 PYTHONWARNINGS=always::ResourceWarning python -m unittest -v tests.test_script_db_connection_lifetime tests.test_ingest_open_textbook_wordproblems tests.test_db_parent_auth_and_progress tests.test_db_split_contract
+PYTHONTRACEMALLOC=25 PYTHONWARNINGS=always::ResourceWarning python -m unittest discover -s tests
+python -m py_compile scripts/ingest_open_textbook_wordproblems.py scripts/generate_syllogism_word_manifest.py tests/test_script_db_connection_lifetime.py
+git diff --check
+```
+
+The focused gate passed 12 tests. Full discovery passed 394 tests with 23 skips and emitted no `ResourceWarning`
+or `unclosed database` output.

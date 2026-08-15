@@ -79,7 +79,7 @@
       "Ratios and proportional reasoning"
     ],
     "pdf": "new_practical_arithmetic.pdf",
-    "source": "Joseph Ray (1897)",
+    "source": "J. L. H. Roy (1892)",
     "grade_band": "6-7",
     "mvp_tier": "v1_core",
     "standard_refs": [
@@ -146,7 +146,7 @@
       "Remainders"
     ],
     "pdf": "new_practical_arithmetic.pdf",
-    "source": "Joseph Ray (1897)",
+    "source": "J. L. H. Roy (1892)",
     "grade_band": "4-6",
     "mvp_tier": "v1_core",
     "standard_refs": []
@@ -172,7 +172,7 @@
       "Budgets, accounts, tax, credit, interest, and incentives"
     ],
     "pdf": "new_practical_arithmetic.pdf",
-    "source": "Joseph Ray (1897) plus Texas TEKS-aligned native generators",
+    "source": "J. L. H. Roy (1892) plus Texas TEKS-aligned native generators",
     "grade_band": "1-7",
     "mvp_tier": "v1_core",
     "standard_refs": [
@@ -263,7 +263,7 @@
       "Evaluating signed expressions"
     ],
     "pdf": "new_practical_arithmetic.pdf",
-    "source": "Joseph Ray (1897)",
+    "source": "J. L. H. Roy (1892)",
     "grade_band": "6-7",
     "mvp_tier": "v1_core",
     "standard_refs": [
@@ -279,7 +279,7 @@
       "Expression evaluation"
     ],
     "pdf": "new_practical_arithmetic.pdf",
-    "source": "Joseph Ray (1897)",
+    "source": "J. L. H. Roy (1892)",
     "grade_band": "5-7",
     "mvp_tier": "v1_core",
     "standard_refs": [
@@ -418,8 +418,8 @@
       "Rate of change",
       "Basic antiderivatives"
     ],
-    "pdf": "calculus_volume_2_openstax_2016.pdf",
-    "source": "OpenStax Calculus Volume 2",
+    "pdf": "active_calculus_single_variable_2e.pdf",
+    "source": "Active Calculus Single Variable, Second Edition",
     "grade_band": "11-12",
     "mvp_tier": "post_v1",
     "standard_refs": []
@@ -432,8 +432,8 @@
       "Integration techniques",
       "Sequences and series"
     ],
-    "pdf": "calculus_volume_2_openstax_2016.pdf",
-    "source": "OpenStax Calculus Volume 2",
+    "pdf": "active_calculus_single_variable_2e.pdf",
+    "source": "Active Calculus Single Variable, Second Edition",
     "grade_band": "12+",
     "mvp_tier": "post_v1",
     "standard_refs": []
@@ -496,8 +496,8 @@
       "Slope between points",
       "Rate of change"
     ],
-    "pdf": "calculus_volume_2_openstax_2016.pdf",
-    "source": "OpenStax Calculus Volume 2",
+    "pdf": "active_calculus_single_variable_2e.pdf",
+    "source": "Active Calculus Single Variable, Second Edition",
     "grade_band": "11-12",
     "mvp_tier": "post_v1",
     "standard_refs": []

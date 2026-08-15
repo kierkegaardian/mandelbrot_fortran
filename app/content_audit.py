@@ -20,7 +20,7 @@ MISSING: Readiness = "missing"
 _READINESS_ORDER: dict[Readiness, int] = {MISSING: 0, THIN: 1, READY: 2}
 
 _OPEN_RESOURCE_BY_SOURCE_ID: dict[str, str] = {
-    "ray_new_practical_arithmetic_1897": "https://archive.org/details/newpracticalarit00rayj",
+    "ray_new_practical_arithmetic_1897": "https://www.canadiana.ca/view/oocihm.12698",
     "basic_arithmetic_student_workbook_2013": "",
     "elementary_algebra_openstax_2e": "https://openstax.org/details/books/elementary-algebra-2e",
     "college_algebra_stitz_zeager_2013": "https://www.stitz-zeager.com/",

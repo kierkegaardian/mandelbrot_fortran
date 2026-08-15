@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import re
 import subprocess
@@ -25,12 +26,20 @@ class SourceCatalogItem:
     url: str
     pdf_filename: str
     answer_key_likely: bool
+    books_rag_resource_id: str
+    books_rag_sha256: str
 
 
 def load_catalog(path: Path) -> list[SourceCatalogItem]:
     raw = json.loads(path.read_text(encoding="utf-8"))
     out: list[SourceCatalogItem] = []
     for item in raw:
+        books_rag_resource_id = str(item.get("books_rag_resource_id", "")).strip()
+        books_rag_sha256 = str(item.get("books_rag_sha256", "")).strip().lower()
+        if bool(books_rag_resource_id) != bool(books_rag_sha256):
+            raise ValueError("Books RAG resource ID and SHA-256 must be provided together")
+        if books_rag_sha256 and re.fullmatch(r"[0-9a-f]{64}", books_rag_sha256) is None:
+            raise ValueError(f"invalid Books RAG SHA-256 for {books_rag_resource_id}")
         out.append(
             SourceCatalogItem(
                 source_id=str(item.get("id", "")).strip(),
@@ -40,6 +49,8 @@ def load_catalog(path: Path) -> list[SourceCatalogItem]:
                 url=str(item.get("url", "")).strip(),
                 pdf_filename=str(item.get("pdf_filename", "")).strip(),
                 answer_key_likely=bool(item.get("answer_key_likely", False)),
+                books_rag_resource_id=books_rag_resource_id,
+                books_rag_sha256=books_rag_sha256,
             )
         )
     return [item for item in out if item.source_id and item.title and item.pdf_filename]
@@ -92,6 +103,13 @@ def ingest_source(
     if not pdf_path.exists():
         print(f"skip source={source.source_id} missing_pdf={pdf_path}")
         return (0, 0, 0)
+    if source.books_rag_sha256:
+        actual_sha256 = _sha256_file(pdf_path)
+        if actual_sha256 != source.books_rag_sha256:
+            raise ValueError(
+                f"Books RAG identity mismatch for {source.source_id}: "
+                f"expected {source.books_rag_sha256}, got {actual_sha256}"
+            )
 
     ingest_dir = data_dir() / "ingest" / "open_textbooks" / source.source_id
     ingest_dir.mkdir(parents=True, exist_ok=True)
@@ -112,7 +130,7 @@ def ingest_source(
 
     db.init_db()
     book_id = _ensure_book(source)
-    with db.connect() as conn:
+    with db.managed_connection() as conn:
         conn.execute(
             "DELETE FROM exercise_candidates WHERE book_id = ? AND location LIKE ?",
             (book_id, f"open-src:{source.source_id}:%"),
@@ -138,7 +156,7 @@ def ingest_source(
 
 
 def _ensure_book(source: SourceCatalogItem) -> int:
-    with db.connect() as conn:
+    with db.managed_connection() as conn:
         row = conn.execute(
             "SELECT id FROM books WHERE title = ? AND source = ? AND pdf_filename = ?",
             (source.title, source.source, source.pdf_filename),
@@ -147,6 +165,14 @@ def _ensure_book(source: SourceCatalogItem) -> int:
         return int(row["id"])
     created = db.create_book(source.title, source.source, source.pdf_filename, now_iso())
     return int(created.id)
+
+
+def _sha256_file(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
 
 
 def _normalize_block(block: str) -> str:
