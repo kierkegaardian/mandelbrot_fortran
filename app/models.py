@@ -224,3 +224,47 @@ class SummerAssessmentRun:
     passed: bool
     strand_results_json: str
     completed_at: str
+
+
+@dataclass(frozen=True)
+class SummerProgramReviewState:
+    current_lane: str
+    recommended_lane: Optional[str]
+    review_status: str
+    weak_strands: tuple[str, ...]
+    age_gate_note: Optional[str]
+    latest_placement_score_pct: Optional[float]
+
+
+@dataclass(frozen=True)
+class SummerProgramBlockSummary:
+    reason: Optional[str]
+    task_id: Optional[int]
+    unit_code: Optional[str]
+    task_kind: Optional[str]
+    score_pct: Optional[float]
+    required_score_pct: Optional[float]
+    weak_strands: tuple[str, ...]
+    next_action: Optional[str]
+
+
+@dataclass(frozen=True)
+class SummerProgramStatusSummary:
+    program_id: int
+    current_lane: str
+    recommended_lane: Optional[str]
+    review_status: str
+    weak_strands: tuple[str, ...]
+    current_blocker: Optional[str]
+    next_action: Optional[str]
+    pace_label: str
+    finish_state: str
+    launchable: bool
+    catch_up_note: Optional[str]
+    projected_finish_date: Optional[str]
+    projected_finish_note: Optional[str]
+    remediation_note: Optional[str]
+    remediation_focus: tuple[str, ...]
+    current_task: Optional[SummerProgramTask]
+    review_state: SummerProgramReviewState
+    block_summary: SummerProgramBlockSummary

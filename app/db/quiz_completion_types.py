@@ -33,6 +33,8 @@ class CompletionRequest:
     record_progress: bool
     streak_to_master: int
     record_daily_review: bool
+    summer_program_task_id: int | None = None
+    summer_strand_scores_json: str = "{}"
 
 
 @dataclass(frozen=True, slots=True)
@@ -40,6 +42,8 @@ class CompletionWriteResult:
     attempt_id: int
     completed_assignment_ids: tuple[int, ...]
     already_recorded: bool
+    completed_summer_task: bool = False
+    summer_program_id: int | None = None
 
 
 __all__ = (

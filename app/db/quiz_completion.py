@@ -14,6 +14,10 @@ from .quiz_completion_types import (
     CompletionRequest,
     CompletionWriteResult,
 )
+from .summer_completion import (
+    apply_summer_task_outcome_on,
+    existing_summer_outcome_on,
+)
 
 
 def record_completed_quiz_atomic(request: CompletionRequest) -> CompletionWriteResult:
@@ -24,6 +28,9 @@ def record_completed_quiz_atomic(request: CompletionRequest) -> CompletionWriteR
             (attempt_sync_id,),
         ).fetchone()
         if existing is not None:
+            summer = existing_summer_outcome_on(
+                conn, request.summer_program_task_id, int(existing["id"])
+            )
             completed_ids = _completed_assignments_at(
                 conn, request.profile_id, request.created_at
             )
@@ -31,6 +38,8 @@ def record_completed_quiz_atomic(request: CompletionRequest) -> CompletionWriteR
                 attempt_id=int(existing["id"]),
                 completed_assignment_ids=completed_ids,
                 already_recorded=True,
+                completed_summer_task=summer.completed,
+                summer_program_id=summer.program_id,
             )
 
         attempt_id = _insert_attempt(conn, request, attempt_sync_id)
@@ -79,11 +88,24 @@ def record_completed_quiz_atomic(request: CompletionRequest) -> CompletionWriteR
             )
         if request.record_daily_review:
             _record_daily_goal(conn, request.profile_id, request.created_at)
+        summer = apply_summer_task_outcome_on(
+            conn,
+            task_id=request.summer_program_task_id,
+            attempt_id=attempt_id,
+            score=request.score,
+            num_questions=request.num_questions,
+            completed_at=request.created_at,
+            strand_scores_json=request.summer_strand_scores_json,
+        )
+        if request.summer_program_task_id is not None and not request.record_daily_review:
+            _record_daily_goal(conn, request.profile_id, request.created_at)
 
     return CompletionWriteResult(
         attempt_id=attempt_id,
         completed_assignment_ids=completed_ids,
         already_recorded=False,
+        completed_summer_task=summer.completed,
+        summer_program_id=summer.program_id,
     )
 
 

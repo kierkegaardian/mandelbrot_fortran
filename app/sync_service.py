@@ -3,9 +3,10 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+import json
 from typing import Sequence
 
-from . import db, sync_client, sync_runner, sync_state, sync_store
+from . import db, summer_program, sync_client, sync_runner, sync_state, sync_store
 from .db.quiz_completion import (
     CompletionQuestion,
     CompletionRequest,
@@ -67,8 +68,7 @@ def record_completed_quiz(
     record_daily_review: bool,
     summer_program_task_id: int | None = None,
 ) -> RecordCompletedQuizResult:
-    if summer_program_task_id is not None:
-        raise ValueError("Summer Program completion is not available in this stack slice.")
+    strand_scores = _summer_program_strand_scores(question_results)
     request = CompletionRequest(
         profile_id=profile_id,
         quiz_set_id=quiz_set_id,
@@ -96,14 +96,51 @@ def record_completed_quiz(
         record_progress=record_progress,
         streak_to_master=streak_to_master,
         record_daily_review=record_daily_review,
+        summer_program_task_id=summer_program_task_id,
+        summer_strand_scores_json=json.dumps(
+            strand_scores, ensure_ascii=True, sort_keys=True
+        ),
     )
     result = record_completed_quiz_atomic(request)
+    summer_program_note = None
+    if result.summer_program_id is not None:
+        summer_program.refresh_program_plan(
+            result.summer_program_id, today_iso=created_at[:10]
+        )
+        program = db.get_summer_program(result.summer_program_id)
+        if program is not None:
+            finish = summer_program.finish_status(profile_id, program.id)
+            db.update_summer_program(
+                program.id, status=finish, updated_at=created_at
+            )
+            summer_program_note = summer_program.program_finish_summary(
+                profile_id, program.id
+            )
     return RecordCompletedQuizResult(
         attempt_id=result.attempt_id,
         completed_assignments=len(result.completed_assignment_ids),
-        completed_summer_task=False,
-        summer_program_note=None,
+        completed_summer_task=result.completed_summer_task,
+        summer_program_note=summer_program_note,
     )
+
+
+def _summer_program_strand_scores(
+    question_results: Sequence[QuestionResultInput],
+) -> dict[str, float]:
+    buckets: dict[str, list[bool]] = {}
+    for item in question_results:
+        if "•" not in item.question_label:
+            continue
+        _prefix, strand = [
+            part.strip() for part in item.question_label.split("•", 1)
+        ]
+        if strand:
+            buckets.setdefault(strand, []).append(bool(item.is_correct))
+    return {
+        strand: 100.0 * sum(values) / len(values)
+        for strand, values in buckets.items()
+        if values
+    }
 
 
 def list_profiles() -> list[Profile]:
