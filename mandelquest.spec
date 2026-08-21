@@ -15,6 +15,9 @@ if not binary_path.exists():
 datas = [
     (str(project_root / "assets"), "assets"),
 ]
+config_dir = project_root / "config"
+if config_dir.exists():
+    datas.append((str(config_dir), "config"))
 binaries = [
     (str(binary_path), "."),
 ]

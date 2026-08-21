@@ -56,6 +56,16 @@ class BlendPolicy:
 
 
 @dataclass(frozen=True)
+class BlendPolicyConfig:
+    base_core_pct: int = 60
+    base_prereq_pct: int = 25
+    base_review_pct: int = 15
+    low_accuracy_prereq_pct: int = 40
+    developing_prereq_pct: int = 30
+    stable_prereq_pct: int = 15
+
+
+@dataclass(frozen=True)
 class FreeModePolicy:
     core_pct: int
     preview_pct: int
@@ -111,24 +121,6 @@ def recommend_next_skill_paths(
     limit: int = 3,
 ) -> list[BranchRecommendation]:
     limit = max(1, int(limit))
-    retake_required = [
-        skill
-        for skill in skill_order
-        if (stats.get(skill) is not None and stats[skill].attempts > 0 and stats[skill].perfect_attempts == 0)
-    ]
-    if retake_required:
-        retake_required.sort(
-            key=lambda s: (
-                _mastery_rank(stats.get(s)),
-                stats[s].weighted_accuracy,
-                skill_order.index(s),
-            )
-        )
-        return [
-            BranchRecommendation(skill=s, score=10_000.0, reasons=("Finish a clean attempt (100%) to lock mastery.",))
-            for s in retake_required[:limit]
-        ]
-
     dependents = _dependents_map(skill_order, prerequisites)
     candidates: list[BranchRecommendation] = []
     for idx, skill in enumerate(skill_order):
@@ -207,20 +199,41 @@ def frontier_skills(
     return frontier
 
 
-def pick_blend_policy(target_stats: SkillStats | None) -> BlendPolicy:
+def pick_blend_policy(
+    target_stats: SkillStats | None,
+    config: BlendPolicyConfig | None = None,
+) -> BlendPolicy:
+    cfg = config or BlendPolicyConfig()
+    base = _normalize_blend_policy(cfg.base_core_pct, cfg.base_prereq_pct, cfg.base_review_pct)
     if target_stats is None or target_stats.attempts == 0:
-        return BlendPolicy(core_pct=60, prereq_pct=25, review_pct=15)
-    if target_stats.perfect_attempts == 0:
-        return BlendPolicy(core_pct=80, prereq_pct=15, review_pct=5)
+        return base
 
     target_recent = target_stats.recent_accuracy
     if target_recent < 60:
-        return BlendPolicy(core_pct=45, prereq_pct=40, review_pct=15)
+        return _policy_with_prereq_share(cfg.low_accuracy_prereq_pct, base.review_pct)
     if target_recent < 75:
-        return BlendPolicy(core_pct=55, prereq_pct=30, review_pct=15)
+        return _policy_with_prereq_share(cfg.developing_prereq_pct, base.review_pct)
     if target_recent > 85:
-        return BlendPolicy(core_pct=70, prereq_pct=15, review_pct=15)
-    return BlendPolicy(core_pct=60, prereq_pct=25, review_pct=15)
+        return _policy_with_prereq_share(cfg.stable_prereq_pct, base.review_pct)
+    return base
+
+
+def _policy_with_prereq_share(prereq_pct: int, review_pct: int) -> BlendPolicy:
+    prereq = max(0, min(100, int(prereq_pct)))
+    review = max(0, min(100 - prereq, int(review_pct)))
+    return BlendPolicy(core_pct=100 - prereq - review, prereq_pct=prereq, review_pct=review)
+
+
+def _normalize_blend_policy(core_pct: int, prereq_pct: int, review_pct: int) -> BlendPolicy:
+    values = [max(0, int(core_pct)), max(0, int(prereq_pct)), max(0, int(review_pct))]
+    total = sum(values)
+    if total <= 0:
+        return BlendPolicy(core_pct=60, prereq_pct=25, review_pct=15)
+    if total == 100:
+        return BlendPolicy(core_pct=values[0], prereq_pct=values[1], review_pct=values[2])
+    scaled = [round((value / total) * 100) for value in values]
+    scaled[0] += 100 - sum(scaled)
+    return BlendPolicy(core_pct=scaled[0], prereq_pct=scaled[1], review_pct=scaled[2])
 
 
 def default_mode_mix_for_stage(target_stats: SkillStats | None) -> ModeMix:
@@ -287,9 +300,10 @@ def build_blended_plan(
     skill_order: tuple[str, ...],
     prerequisites: dict[str, tuple[object, ...]],
     stats: dict[str, SkillStats],
+    config: BlendPolicyConfig | None = None,
 ) -> tuple[list[PlanItem], BlendPolicy]:
     total = max(1, int(num_questions))
-    policy = pick_blend_policy(stats.get(target_skill))
+    policy = pick_blend_policy(stats.get(target_skill), config=config)
 
     core_count = round(total * (policy.core_pct / 100.0))
     prereq_count = round(total * (policy.prereq_pct / 100.0))
@@ -484,7 +498,7 @@ def mastery_label(attempts: int, weighted_accuracy: float, recent_accuracy: floa
         return "Not started"
 
     blended = (weighted_accuracy * 0.7) + (recent_accuracy * 0.3)
-    if blended >= 95 and perfect_attempts >= 1:
+    if blended >= 95:
         return "Mastered"
     if blended >= 85:
         return "Proficient"

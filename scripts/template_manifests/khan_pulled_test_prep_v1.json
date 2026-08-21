@@ -2,8 +2,8 @@
   {
     "external_id": "khan.pull.v1.percent.previous_height.v1",
     "skill": "stats_percent",
-    "subskill": "Khan percent reverse",
-    "label": "Percent reverse change",
+    "subskill": "Reverse percent change",
+    "label": "Reverse percent change",
     "mode": "expression",
     "prompt_template": "A student's current score is {current} and that is {pct}% higher than the previous score. What was the previous score?",
     "answer_expr": "current / (1 + pct/100)",
@@ -33,8 +33,8 @@
   {
     "external_id": "khan.pull.v1.percent.more_less.v1",
     "skill": "stats_percent",
-    "subskill": "Khan percent change",
-    "label": "Percent difference amount",
+    "subskill": "Percent change",
+    "label": "Percent change amount",
     "mode": "expression",
     "prompt_template": "A bottle has {base} mL. The smaller bottle has {pct}% less. How many fewer mL does the smaller bottle have?",
     "answer_expr": "base * pct / 100",
@@ -62,10 +62,65 @@
     "active": true
   },
   {
+    "external_id": "khan.pull.v1.percent.previous_height.intuition.v1",
+    "skill": "stats_percent",
+    "subskill": "Reverse percent change",
+    "label": "Reverse percent multiplier",
+    "mode": "intuition",
+    "prompt_template": "If a current score is {pct}% higher than the previous score, what multiplier turns the previous score into the current score?",
+    "answer_expr": "1 + pct/100",
+    "constraint_expr": "",
+    "explanation_template": "Reverse percent problems start by identifying the growth multiplier before undoing it.",
+    "min_level": 1,
+    "max_level": 4,
+    "choice_spread": 0.6,
+    "vars": [
+      {
+        "name": "pct",
+        "kind": "int",
+        "min": 5,
+        "max": 80,
+        "step": 5
+      }
+    ],
+    "active": true
+  },
+  {
+    "external_id": "khan.pull.v1.percent.more_less.intuition.v1",
+    "skill": "stats_percent",
+    "subskill": "Percent change",
+    "label": "Percent change setup",
+    "mode": "intuition",
+    "prompt_template": "A bottle has {base} mL. The smaller bottle has {pct}% less. Before converting anything to a percent, how many mL is the change?",
+    "answer_expr": "base * pct / 100",
+    "constraint_expr": "",
+    "explanation_template": "Percent change begins with the raw change amount before comparing it to the original.",
+    "min_level": 1,
+    "max_level": 4,
+    "choice_spread": 7.0,
+    "vars": [
+      {
+        "name": "base",
+        "kind": "int",
+        "min": 20,
+        "max": 250,
+        "step": 5
+      },
+      {
+        "name": "pct",
+        "kind": "int",
+        "min": 5,
+        "max": 90,
+        "step": 5
+      }
+    ],
+    "active": true
+  },
+  {
     "external_id": "khan.pull.v1.percent.previous_height.v2",
     "skill": "stats_percent",
-    "subskill": "Khan percent reverse",
-    "label": "Percent reverse change",
+    "subskill": "Reverse percent change",
+    "label": "Reverse percent change",
     "mode": "expression",
     "prompt_template": "A student's current score is {current} and that is {pct}% higher than the previous score. What was the previous score?",
     "answer_expr": "current / (1 + pct/100)",
@@ -95,8 +150,8 @@
   {
     "external_id": "khan.pull.v1.percent.more_less.v2",
     "skill": "stats_percent",
-    "subskill": "Khan percent change",
-    "label": "Percent difference amount",
+    "subskill": "Percent change",
+    "label": "Percent change amount",
     "mode": "expression",
     "prompt_template": "A bottle has {base} mL. The smaller bottle has {pct}% less. How many fewer mL does the smaller bottle have?",
     "answer_expr": "base * pct / 100",
@@ -124,10 +179,65 @@
     "active": true
   },
   {
+    "external_id": "khan.pull.v1.percent.previous_height.intuition.v2",
+    "skill": "stats_percent",
+    "subskill": "Reverse percent change",
+    "label": "Reverse percent multiplier",
+    "mode": "intuition",
+    "prompt_template": "If a current score is {pct}% higher than the previous score, what multiplier turns the previous score into the current score?",
+    "answer_expr": "1 + pct/100",
+    "constraint_expr": "",
+    "explanation_template": "Reverse percent problems start by identifying the growth multiplier before undoing it.",
+    "min_level": 1,
+    "max_level": 4,
+    "choice_spread": 0.6,
+    "vars": [
+      {
+        "name": "pct",
+        "kind": "int",
+        "min": 5,
+        "max": 80,
+        "step": 5
+      }
+    ],
+    "active": true
+  },
+  {
+    "external_id": "khan.pull.v1.percent.more_less.intuition.v2",
+    "skill": "stats_percent",
+    "subskill": "Percent change",
+    "label": "Percent change setup",
+    "mode": "intuition",
+    "prompt_template": "A bottle has {base} mL. The smaller bottle has {pct}% less. Before converting anything to a percent, how many mL is the change?",
+    "answer_expr": "base * pct / 100",
+    "constraint_expr": "",
+    "explanation_template": "Percent change begins with the raw change amount before comparing it to the original.",
+    "min_level": 1,
+    "max_level": 4,
+    "choice_spread": 7.0,
+    "vars": [
+      {
+        "name": "base",
+        "kind": "int",
+        "min": 20,
+        "max": 250,
+        "step": 5
+      },
+      {
+        "name": "pct",
+        "kind": "int",
+        "min": 5,
+        "max": 90,
+        "step": 5
+      }
+    ],
+    "active": true
+  },
+  {
     "external_id": "khan.pull.v1.percent.previous_height.v3",
     "skill": "stats_percent",
-    "subskill": "Khan percent reverse",
-    "label": "Percent reverse change",
+    "subskill": "Reverse percent change",
+    "label": "Reverse percent change",
     "mode": "expression",
     "prompt_template": "A student's current score is {current} and that is {pct}% higher than the previous score. What was the previous score?",
     "answer_expr": "current / (1 + pct/100)",
@@ -157,8 +267,8 @@
   {
     "external_id": "khan.pull.v1.percent.more_less.v3",
     "skill": "stats_percent",
-    "subskill": "Khan percent change",
-    "label": "Percent difference amount",
+    "subskill": "Percent change",
+    "label": "Percent change amount",
     "mode": "expression",
     "prompt_template": "A bottle has {base} mL. The smaller bottle has {pct}% less. How many fewer mL does the smaller bottle have?",
     "answer_expr": "base * pct / 100",
@@ -186,10 +296,65 @@
     "active": true
   },
   {
+    "external_id": "khan.pull.v1.percent.previous_height.intuition.v3",
+    "skill": "stats_percent",
+    "subskill": "Reverse percent change",
+    "label": "Reverse percent multiplier",
+    "mode": "intuition",
+    "prompt_template": "If a current score is {pct}% higher than the previous score, what multiplier turns the previous score into the current score?",
+    "answer_expr": "1 + pct/100",
+    "constraint_expr": "",
+    "explanation_template": "Reverse percent problems start by identifying the growth multiplier before undoing it.",
+    "min_level": 1,
+    "max_level": 4,
+    "choice_spread": 0.6,
+    "vars": [
+      {
+        "name": "pct",
+        "kind": "int",
+        "min": 5,
+        "max": 80,
+        "step": 5
+      }
+    ],
+    "active": true
+  },
+  {
+    "external_id": "khan.pull.v1.percent.more_less.intuition.v3",
+    "skill": "stats_percent",
+    "subskill": "Percent change",
+    "label": "Percent change setup",
+    "mode": "intuition",
+    "prompt_template": "A bottle has {base} mL. The smaller bottle has {pct}% less. Before converting anything to a percent, how many mL is the change?",
+    "answer_expr": "base * pct / 100",
+    "constraint_expr": "",
+    "explanation_template": "Percent change begins with the raw change amount before comparing it to the original.",
+    "min_level": 1,
+    "max_level": 4,
+    "choice_spread": 7.0,
+    "vars": [
+      {
+        "name": "base",
+        "kind": "int",
+        "min": 20,
+        "max": 250,
+        "step": 5
+      },
+      {
+        "name": "pct",
+        "kind": "int",
+        "min": 5,
+        "max": 90,
+        "step": 5
+      }
+    ],
+    "active": true
+  },
+  {
     "external_id": "khan.pull.v1.percent.previous_height.v4",
     "skill": "stats_percent",
-    "subskill": "Khan percent reverse",
-    "label": "Percent reverse change",
+    "subskill": "Reverse percent change",
+    "label": "Reverse percent change",
     "mode": "expression",
     "prompt_template": "A student's current score is {current} and that is {pct}% higher than the previous score. What was the previous score?",
     "answer_expr": "current / (1 + pct/100)",
@@ -219,8 +384,8 @@
   {
     "external_id": "khan.pull.v1.percent.more_less.v4",
     "skill": "stats_percent",
-    "subskill": "Khan percent change",
-    "label": "Percent difference amount",
+    "subskill": "Percent change",
+    "label": "Percent change amount",
     "mode": "expression",
     "prompt_template": "A bottle has {base} mL. The smaller bottle has {pct}% less. How many fewer mL does the smaller bottle have?",
     "answer_expr": "base * pct / 100",
@@ -248,10 +413,65 @@
     "active": true
   },
   {
+    "external_id": "khan.pull.v1.percent.previous_height.intuition.v4",
+    "skill": "stats_percent",
+    "subskill": "Reverse percent change",
+    "label": "Reverse percent multiplier",
+    "mode": "intuition",
+    "prompt_template": "If a current score is {pct}% higher than the previous score, what multiplier turns the previous score into the current score?",
+    "answer_expr": "1 + pct/100",
+    "constraint_expr": "",
+    "explanation_template": "Reverse percent problems start by identifying the growth multiplier before undoing it.",
+    "min_level": 1,
+    "max_level": 4,
+    "choice_spread": 0.6,
+    "vars": [
+      {
+        "name": "pct",
+        "kind": "int",
+        "min": 5,
+        "max": 80,
+        "step": 5
+      }
+    ],
+    "active": true
+  },
+  {
+    "external_id": "khan.pull.v1.percent.more_less.intuition.v4",
+    "skill": "stats_percent",
+    "subskill": "Percent change",
+    "label": "Percent change setup",
+    "mode": "intuition",
+    "prompt_template": "A bottle has {base} mL. The smaller bottle has {pct}% less. Before converting anything to a percent, how many mL is the change?",
+    "answer_expr": "base * pct / 100",
+    "constraint_expr": "",
+    "explanation_template": "Percent change begins with the raw change amount before comparing it to the original.",
+    "min_level": 1,
+    "max_level": 4,
+    "choice_spread": 7.0,
+    "vars": [
+      {
+        "name": "base",
+        "kind": "int",
+        "min": 20,
+        "max": 250,
+        "step": 5
+      },
+      {
+        "name": "pct",
+        "kind": "int",
+        "min": 5,
+        "max": 90,
+        "step": 5
+      }
+    ],
+    "active": true
+  },
+  {
     "external_id": "khan.pull.v1.percent.previous_height.v5",
     "skill": "stats_percent",
-    "subskill": "Khan percent reverse",
-    "label": "Percent reverse change",
+    "subskill": "Reverse percent change",
+    "label": "Reverse percent change",
     "mode": "expression",
     "prompt_template": "A student's current score is {current} and that is {pct}% higher than the previous score. What was the previous score?",
     "answer_expr": "current / (1 + pct/100)",
@@ -281,8 +501,8 @@
   {
     "external_id": "khan.pull.v1.percent.more_less.v5",
     "skill": "stats_percent",
-    "subskill": "Khan percent change",
-    "label": "Percent difference amount",
+    "subskill": "Percent change",
+    "label": "Percent change amount",
     "mode": "expression",
     "prompt_template": "A bottle has {base} mL. The smaller bottle has {pct}% less. How many fewer mL does the smaller bottle have?",
     "answer_expr": "base * pct / 100",
@@ -310,10 +530,65 @@
     "active": true
   },
   {
+    "external_id": "khan.pull.v1.percent.previous_height.intuition.v5",
+    "skill": "stats_percent",
+    "subskill": "Reverse percent change",
+    "label": "Reverse percent multiplier",
+    "mode": "intuition",
+    "prompt_template": "If a current score is {pct}% higher than the previous score, what multiplier turns the previous score into the current score?",
+    "answer_expr": "1 + pct/100",
+    "constraint_expr": "",
+    "explanation_template": "Reverse percent problems start by identifying the growth multiplier before undoing it.",
+    "min_level": 1,
+    "max_level": 4,
+    "choice_spread": 0.6,
+    "vars": [
+      {
+        "name": "pct",
+        "kind": "int",
+        "min": 5,
+        "max": 80,
+        "step": 5
+      }
+    ],
+    "active": true
+  },
+  {
+    "external_id": "khan.pull.v1.percent.more_less.intuition.v5",
+    "skill": "stats_percent",
+    "subskill": "Percent change",
+    "label": "Percent change setup",
+    "mode": "intuition",
+    "prompt_template": "A bottle has {base} mL. The smaller bottle has {pct}% less. Before converting anything to a percent, how many mL is the change?",
+    "answer_expr": "base * pct / 100",
+    "constraint_expr": "",
+    "explanation_template": "Percent change begins with the raw change amount before comparing it to the original.",
+    "min_level": 1,
+    "max_level": 4,
+    "choice_spread": 7.0,
+    "vars": [
+      {
+        "name": "base",
+        "kind": "int",
+        "min": 20,
+        "max": 250,
+        "step": 5
+      },
+      {
+        "name": "pct",
+        "kind": "int",
+        "min": 5,
+        "max": 90,
+        "step": 5
+      }
+    ],
+    "active": true
+  },
+  {
     "external_id": "khan.pull.v1.percent.previous_height.v6",
     "skill": "stats_percent",
-    "subskill": "Khan percent reverse",
-    "label": "Percent reverse change",
+    "subskill": "Reverse percent change",
+    "label": "Reverse percent change",
     "mode": "expression",
     "prompt_template": "A student's current score is {current} and that is {pct}% higher than the previous score. What was the previous score?",
     "answer_expr": "current / (1 + pct/100)",
@@ -343,8 +618,8 @@
   {
     "external_id": "khan.pull.v1.percent.more_less.v6",
     "skill": "stats_percent",
-    "subskill": "Khan percent change",
-    "label": "Percent difference amount",
+    "subskill": "Percent change",
+    "label": "Percent change amount",
     "mode": "expression",
     "prompt_template": "A bottle has {base} mL. The smaller bottle has {pct}% less. How many fewer mL does the smaller bottle have?",
     "answer_expr": "base * pct / 100",
@@ -372,10 +647,65 @@
     "active": true
   },
   {
+    "external_id": "khan.pull.v1.percent.previous_height.intuition.v6",
+    "skill": "stats_percent",
+    "subskill": "Reverse percent change",
+    "label": "Reverse percent multiplier",
+    "mode": "intuition",
+    "prompt_template": "If a current score is {pct}% higher than the previous score, what multiplier turns the previous score into the current score?",
+    "answer_expr": "1 + pct/100",
+    "constraint_expr": "",
+    "explanation_template": "Reverse percent problems start by identifying the growth multiplier before undoing it.",
+    "min_level": 1,
+    "max_level": 4,
+    "choice_spread": 0.6,
+    "vars": [
+      {
+        "name": "pct",
+        "kind": "int",
+        "min": 5,
+        "max": 80,
+        "step": 5
+      }
+    ],
+    "active": true
+  },
+  {
+    "external_id": "khan.pull.v1.percent.more_less.intuition.v6",
+    "skill": "stats_percent",
+    "subskill": "Percent change",
+    "label": "Percent change setup",
+    "mode": "intuition",
+    "prompt_template": "A bottle has {base} mL. The smaller bottle has {pct}% less. Before converting anything to a percent, how many mL is the change?",
+    "answer_expr": "base * pct / 100",
+    "constraint_expr": "",
+    "explanation_template": "Percent change begins with the raw change amount before comparing it to the original.",
+    "min_level": 1,
+    "max_level": 4,
+    "choice_spread": 7.0,
+    "vars": [
+      {
+        "name": "base",
+        "kind": "int",
+        "min": 20,
+        "max": 250,
+        "step": 5
+      },
+      {
+        "name": "pct",
+        "kind": "int",
+        "min": 5,
+        "max": 90,
+        "step": 5
+      }
+    ],
+    "active": true
+  },
+  {
     "external_id": "khan.pull.v1.percent.previous_height.v7",
     "skill": "stats_percent",
-    "subskill": "Khan percent reverse",
-    "label": "Percent reverse change",
+    "subskill": "Reverse percent change",
+    "label": "Reverse percent change",
     "mode": "expression",
     "prompt_template": "A student's current score is {current} and that is {pct}% higher than the previous score. What was the previous score?",
     "answer_expr": "current / (1 + pct/100)",
@@ -405,8 +735,8 @@
   {
     "external_id": "khan.pull.v1.percent.more_less.v7",
     "skill": "stats_percent",
-    "subskill": "Khan percent change",
-    "label": "Percent difference amount",
+    "subskill": "Percent change",
+    "label": "Percent change amount",
     "mode": "expression",
     "prompt_template": "A bottle has {base} mL. The smaller bottle has {pct}% less. How many fewer mL does the smaller bottle have?",
     "answer_expr": "base * pct / 100",
@@ -434,10 +764,65 @@
     "active": true
   },
   {
+    "external_id": "khan.pull.v1.percent.previous_height.intuition.v7",
+    "skill": "stats_percent",
+    "subskill": "Reverse percent change",
+    "label": "Reverse percent multiplier",
+    "mode": "intuition",
+    "prompt_template": "If a current score is {pct}% higher than the previous score, what multiplier turns the previous score into the current score?",
+    "answer_expr": "1 + pct/100",
+    "constraint_expr": "",
+    "explanation_template": "Reverse percent problems start by identifying the growth multiplier before undoing it.",
+    "min_level": 1,
+    "max_level": 4,
+    "choice_spread": 0.6,
+    "vars": [
+      {
+        "name": "pct",
+        "kind": "int",
+        "min": 5,
+        "max": 80,
+        "step": 5
+      }
+    ],
+    "active": true
+  },
+  {
+    "external_id": "khan.pull.v1.percent.more_less.intuition.v7",
+    "skill": "stats_percent",
+    "subskill": "Percent change",
+    "label": "Percent change setup",
+    "mode": "intuition",
+    "prompt_template": "A bottle has {base} mL. The smaller bottle has {pct}% less. Before converting anything to a percent, how many mL is the change?",
+    "answer_expr": "base * pct / 100",
+    "constraint_expr": "",
+    "explanation_template": "Percent change begins with the raw change amount before comparing it to the original.",
+    "min_level": 1,
+    "max_level": 4,
+    "choice_spread": 7.0,
+    "vars": [
+      {
+        "name": "base",
+        "kind": "int",
+        "min": 20,
+        "max": 250,
+        "step": 5
+      },
+      {
+        "name": "pct",
+        "kind": "int",
+        "min": 5,
+        "max": 90,
+        "step": 5
+      }
+    ],
+    "active": true
+  },
+  {
     "external_id": "khan.pull.v1.percent.previous_height.v8",
     "skill": "stats_percent",
-    "subskill": "Khan percent reverse",
-    "label": "Percent reverse change",
+    "subskill": "Reverse percent change",
+    "label": "Reverse percent change",
     "mode": "expression",
     "prompt_template": "A student's current score is {current} and that is {pct}% higher than the previous score. What was the previous score?",
     "answer_expr": "current / (1 + pct/100)",
@@ -467,8 +852,8 @@
   {
     "external_id": "khan.pull.v1.percent.more_less.v8",
     "skill": "stats_percent",
-    "subskill": "Khan percent change",
-    "label": "Percent difference amount",
+    "subskill": "Percent change",
+    "label": "Percent change amount",
     "mode": "expression",
     "prompt_template": "A bottle has {base} mL. The smaller bottle has {pct}% less. How many fewer mL does the smaller bottle have?",
     "answer_expr": "base * pct / 100",
@@ -496,9 +881,64 @@
     "active": true
   },
   {
+    "external_id": "khan.pull.v1.percent.previous_height.intuition.v8",
+    "skill": "stats_percent",
+    "subskill": "Reverse percent change",
+    "label": "Reverse percent multiplier",
+    "mode": "intuition",
+    "prompt_template": "If a current score is {pct}% higher than the previous score, what multiplier turns the previous score into the current score?",
+    "answer_expr": "1 + pct/100",
+    "constraint_expr": "",
+    "explanation_template": "Reverse percent problems start by identifying the growth multiplier before undoing it.",
+    "min_level": 1,
+    "max_level": 4,
+    "choice_spread": 0.6,
+    "vars": [
+      {
+        "name": "pct",
+        "kind": "int",
+        "min": 5,
+        "max": 80,
+        "step": 5
+      }
+    ],
+    "active": true
+  },
+  {
+    "external_id": "khan.pull.v1.percent.more_less.intuition.v8",
+    "skill": "stats_percent",
+    "subskill": "Percent change",
+    "label": "Percent change setup",
+    "mode": "intuition",
+    "prompt_template": "A bottle has {base} mL. The smaller bottle has {pct}% less. Before converting anything to a percent, how many mL is the change?",
+    "answer_expr": "base * pct / 100",
+    "constraint_expr": "",
+    "explanation_template": "Percent change begins with the raw change amount before comparing it to the original.",
+    "min_level": 1,
+    "max_level": 4,
+    "choice_spread": 7.0,
+    "vars": [
+      {
+        "name": "base",
+        "kind": "int",
+        "min": 20,
+        "max": 250,
+        "step": 5
+      },
+      {
+        "name": "pct",
+        "kind": "int",
+        "min": 5,
+        "max": 90,
+        "step": 5
+      }
+    ],
+    "active": true
+  },
+  {
     "external_id": "khan.pull.v1.slope.two_points.v1",
     "skill": "calculus_slope",
-    "subskill": "Khan slope from points",
+    "subskill": "Average rate of change between two points",
     "label": "Slope from two points",
     "mode": "expression",
     "prompt_template": "Find the slope of the line through ({x1}, {y1}) and ({x2}, {y2}).",
@@ -543,7 +983,7 @@
   {
     "external_id": "khan.pull.v1.slope.two_points.v2",
     "skill": "calculus_slope",
-    "subskill": "Khan slope from points",
+    "subskill": "Average rate of change between two points",
     "label": "Slope from two points",
     "mode": "expression",
     "prompt_template": "Find the slope of the line through ({x1}, {y1}) and ({x2}, {y2}).",
@@ -588,7 +1028,7 @@
   {
     "external_id": "khan.pull.v1.slope.two_points.v3",
     "skill": "calculus_slope",
-    "subskill": "Khan slope from points",
+    "subskill": "Average rate of change between two points",
     "label": "Slope from two points",
     "mode": "expression",
     "prompt_template": "Find the slope of the line through ({x1}, {y1}) and ({x2}, {y2}).",
@@ -633,7 +1073,7 @@
   {
     "external_id": "khan.pull.v1.slope.two_points.v4",
     "skill": "calculus_slope",
-    "subskill": "Khan slope from points",
+    "subskill": "Average rate of change between two points",
     "label": "Slope from two points",
     "mode": "expression",
     "prompt_template": "Find the slope of the line through ({x1}, {y1}) and ({x2}, {y2}).",
@@ -678,7 +1118,7 @@
   {
     "external_id": "khan.pull.v1.slope.two_points.v5",
     "skill": "calculus_slope",
-    "subskill": "Khan slope from points",
+    "subskill": "Average rate of change between two points",
     "label": "Slope from two points",
     "mode": "expression",
     "prompt_template": "Find the slope of the line through ({x1}, {y1}) and ({x2}, {y2}).",
@@ -723,7 +1163,7 @@
   {
     "external_id": "khan.pull.v1.slope.two_points.v6",
     "skill": "calculus_slope",
-    "subskill": "Khan slope from points",
+    "subskill": "Average rate of change between two points",
     "label": "Slope from two points",
     "mode": "expression",
     "prompt_template": "Find the slope of the line through ({x1}, {y1}) and ({x2}, {y2}).",
@@ -1258,16 +1698,68 @@
   {
     "external_id": "khan.pull.v1.mean.five_values.v1",
     "skill": "stats_mean",
-    "subskill": "Khan mean from display",
-    "label": "Mean of five values",
+    "subskill": "Mean from display",
+    "label": "Mean from display",
     "mode": "expression",
-    "prompt_template": "Find the mean of the values: {a}, {b}, {c}, {d}, {e}.",
+    "prompt_template": "A display lists five values: {a}, {b}, {c}, {d}, and {e}. What is the mean?",
     "answer_expr": "(a + b + c + d + e) / 5",
     "constraint_expr": "(a + b + c + d + e) % 5 == 0",
     "explanation_template": "Add all values and divide by 5.",
     "min_level": 1,
     "max_level": 4,
     "choice_spread": 6.0,
+    "vars": [
+      {
+        "name": "a",
+        "kind": "int",
+        "min": 1,
+        "max": 30,
+        "step": 1
+      },
+      {
+        "name": "b",
+        "kind": "int",
+        "min": 1,
+        "max": 30,
+        "step": 1
+      },
+      {
+        "name": "c",
+        "kind": "int",
+        "min": 1,
+        "max": 30,
+        "step": 1
+      },
+      {
+        "name": "d",
+        "kind": "int",
+        "min": 1,
+        "max": 30,
+        "step": 1
+      },
+      {
+        "name": "e",
+        "kind": "int",
+        "min": 1,
+        "max": 30,
+        "step": 1
+      }
+    ],
+    "active": true
+  },
+  {
+    "external_id": "khan.pull.v1.mean.five_values.intuition.v1",
+    "skill": "stats_mean",
+    "subskill": "Mean from display",
+    "label": "Sum before mean",
+    "mode": "intuition",
+    "prompt_template": "A display lists five values: {a}, {b}, {c}, {d}, and {e}. What total sum will you divide by 5 to find the mean?",
+    "answer_expr": "a + b + c + d + e",
+    "constraint_expr": "",
+    "explanation_template": "For a mean, first combine the full total shown by the display, then divide by the count.",
+    "min_level": 1,
+    "max_level": 4,
+    "choice_spread": 12.0,
     "vars": [
       {
         "name": "a",
@@ -1310,16 +1802,68 @@
   {
     "external_id": "khan.pull.v1.mean.five_values.v2",
     "skill": "stats_mean",
-    "subskill": "Khan mean from display",
-    "label": "Mean of five values",
+    "subskill": "Mean from display",
+    "label": "Mean from display",
     "mode": "expression",
-    "prompt_template": "Find the mean of the values: {a}, {b}, {c}, {d}, {e}.",
+    "prompt_template": "A display lists five values: {a}, {b}, {c}, {d}, and {e}. What is the mean?",
     "answer_expr": "(a + b + c + d + e) / 5",
     "constraint_expr": "(a + b + c + d + e) % 5 == 0",
     "explanation_template": "Add all values and divide by 5.",
     "min_level": 1,
     "max_level": 4,
     "choice_spread": 6.0,
+    "vars": [
+      {
+        "name": "a",
+        "kind": "int",
+        "min": 1,
+        "max": 30,
+        "step": 1
+      },
+      {
+        "name": "b",
+        "kind": "int",
+        "min": 1,
+        "max": 30,
+        "step": 1
+      },
+      {
+        "name": "c",
+        "kind": "int",
+        "min": 1,
+        "max": 30,
+        "step": 1
+      },
+      {
+        "name": "d",
+        "kind": "int",
+        "min": 1,
+        "max": 30,
+        "step": 1
+      },
+      {
+        "name": "e",
+        "kind": "int",
+        "min": 1,
+        "max": 30,
+        "step": 1
+      }
+    ],
+    "active": true
+  },
+  {
+    "external_id": "khan.pull.v1.mean.five_values.intuition.v2",
+    "skill": "stats_mean",
+    "subskill": "Mean from display",
+    "label": "Sum before mean",
+    "mode": "intuition",
+    "prompt_template": "A display lists five values: {a}, {b}, {c}, {d}, and {e}. What total sum will you divide by 5 to find the mean?",
+    "answer_expr": "a + b + c + d + e",
+    "constraint_expr": "",
+    "explanation_template": "For a mean, first combine the full total shown by the display, then divide by the count.",
+    "min_level": 1,
+    "max_level": 4,
+    "choice_spread": 12.0,
     "vars": [
       {
         "name": "a",
@@ -1362,16 +1906,68 @@
   {
     "external_id": "khan.pull.v1.mean.five_values.v3",
     "skill": "stats_mean",
-    "subskill": "Khan mean from display",
-    "label": "Mean of five values",
+    "subskill": "Mean from display",
+    "label": "Mean from display",
     "mode": "expression",
-    "prompt_template": "Find the mean of the values: {a}, {b}, {c}, {d}, {e}.",
+    "prompt_template": "A display lists five values: {a}, {b}, {c}, {d}, and {e}. What is the mean?",
     "answer_expr": "(a + b + c + d + e) / 5",
     "constraint_expr": "(a + b + c + d + e) % 5 == 0",
     "explanation_template": "Add all values and divide by 5.",
     "min_level": 1,
     "max_level": 4,
     "choice_spread": 6.0,
+    "vars": [
+      {
+        "name": "a",
+        "kind": "int",
+        "min": 1,
+        "max": 30,
+        "step": 1
+      },
+      {
+        "name": "b",
+        "kind": "int",
+        "min": 1,
+        "max": 30,
+        "step": 1
+      },
+      {
+        "name": "c",
+        "kind": "int",
+        "min": 1,
+        "max": 30,
+        "step": 1
+      },
+      {
+        "name": "d",
+        "kind": "int",
+        "min": 1,
+        "max": 30,
+        "step": 1
+      },
+      {
+        "name": "e",
+        "kind": "int",
+        "min": 1,
+        "max": 30,
+        "step": 1
+      }
+    ],
+    "active": true
+  },
+  {
+    "external_id": "khan.pull.v1.mean.five_values.intuition.v3",
+    "skill": "stats_mean",
+    "subskill": "Mean from display",
+    "label": "Sum before mean",
+    "mode": "intuition",
+    "prompt_template": "A display lists five values: {a}, {b}, {c}, {d}, and {e}. What total sum will you divide by 5 to find the mean?",
+    "answer_expr": "a + b + c + d + e",
+    "constraint_expr": "",
+    "explanation_template": "For a mean, first combine the full total shown by the display, then divide by the count.",
+    "min_level": 1,
+    "max_level": 4,
+    "choice_spread": 12.0,
     "vars": [
       {
         "name": "a",
@@ -1414,10 +2010,10 @@
   {
     "external_id": "khan.pull.v1.mean.five_values.v4",
     "skill": "stats_mean",
-    "subskill": "Khan mean from display",
-    "label": "Mean of five values",
+    "subskill": "Mean from display",
+    "label": "Mean from display",
     "mode": "expression",
-    "prompt_template": "Find the mean of the values: {a}, {b}, {c}, {d}, {e}.",
+    "prompt_template": "A display lists five values: {a}, {b}, {c}, {d}, and {e}. What is the mean?",
     "answer_expr": "(a + b + c + d + e) / 5",
     "constraint_expr": "(a + b + c + d + e) % 5 == 0",
     "explanation_template": "Add all values and divide by 5.",
@@ -1464,9 +2060,61 @@
     "active": true
   },
   {
+    "external_id": "khan.pull.v1.mean.five_values.intuition.v4",
+    "skill": "stats_mean",
+    "subskill": "Mean from display",
+    "label": "Sum before mean",
+    "mode": "intuition",
+    "prompt_template": "A display lists five values: {a}, {b}, {c}, {d}, and {e}. What total sum will you divide by 5 to find the mean?",
+    "answer_expr": "a + b + c + d + e",
+    "constraint_expr": "",
+    "explanation_template": "For a mean, first combine the full total shown by the display, then divide by the count.",
+    "min_level": 1,
+    "max_level": 4,
+    "choice_spread": 12.0,
+    "vars": [
+      {
+        "name": "a",
+        "kind": "int",
+        "min": 1,
+        "max": 30,
+        "step": 1
+      },
+      {
+        "name": "b",
+        "kind": "int",
+        "min": 1,
+        "max": 30,
+        "step": 1
+      },
+      {
+        "name": "c",
+        "kind": "int",
+        "min": 1,
+        "max": 30,
+        "step": 1
+      },
+      {
+        "name": "d",
+        "kind": "int",
+        "min": 1,
+        "max": 30,
+        "step": 1
+      },
+      {
+        "name": "e",
+        "kind": "int",
+        "min": 1,
+        "max": 30,
+        "step": 1
+      }
+    ],
+    "active": true
+  },
+  {
     "external_id": "khan.pull.v1.sat.linear_fee.v1",
     "skill": "sat_math",
-    "subskill": "SAT modeling (Khan style)",
+    "subskill": "SAT algebra modeling",
     "label": "SAT fee model",
     "mode": "expression",
     "prompt_template": "An event charges a fixed fee of ${f} plus ${r} per guest. If the total bill is ${t}, how many guests attended?",
@@ -1496,6 +2144,44 @@
         "kind": "int",
         "min": 100,
         "max": 900,
+        "step": 1
+      }
+    ],
+    "active": true
+  },
+  {
+    "external_id": "khan.pull.v1.sat.linear_fee.intuition.v1",
+    "skill": "sat_math",
+    "subskill": "SAT algebra modeling",
+    "label": "SAT fee model setup",
+    "mode": "intuition",
+    "prompt_template": "An event charges a fixed fee of ${f} plus ${r} per guest. If {g} guests attend, what part of the bill comes from the guest charges before the fixed fee is added?",
+    "answer_expr": "r * g",
+    "constraint_expr": "",
+    "explanation_template": "Separate the repeated guest cost from the fixed fee before building the full model.",
+    "min_level": 1,
+    "max_level": 4,
+    "choice_spread": 10.0,
+    "vars": [
+      {
+        "name": "f",
+        "kind": "int",
+        "min": 10,
+        "max": 120,
+        "step": 1
+      },
+      {
+        "name": "r",
+        "kind": "int",
+        "min": 2,
+        "max": 25,
+        "step": 1
+      },
+      {
+        "name": "g",
+        "kind": "int",
+        "min": 3,
+        "max": 24,
         "step": 1
       }
     ],
@@ -1504,7 +2190,7 @@
   {
     "external_id": "khan.pull.v1.sat.linear_fee.v2",
     "skill": "sat_math",
-    "subskill": "SAT modeling (Khan style)",
+    "subskill": "SAT algebra modeling",
     "label": "SAT fee model",
     "mode": "expression",
     "prompt_template": "An event charges a fixed fee of ${f} plus ${r} per guest. If the total bill is ${t}, how many guests attended?",
@@ -1534,6 +2220,44 @@
         "kind": "int",
         "min": 100,
         "max": 900,
+        "step": 1
+      }
+    ],
+    "active": true
+  },
+  {
+    "external_id": "khan.pull.v1.sat.linear_fee.intuition.v2",
+    "skill": "sat_math",
+    "subskill": "SAT algebra modeling",
+    "label": "SAT fee model setup",
+    "mode": "intuition",
+    "prompt_template": "An event charges a fixed fee of ${f} plus ${r} per guest. If {g} guests attend, what part of the bill comes from the guest charges before the fixed fee is added?",
+    "answer_expr": "r * g",
+    "constraint_expr": "",
+    "explanation_template": "Separate the repeated guest cost from the fixed fee before building the full model.",
+    "min_level": 1,
+    "max_level": 4,
+    "choice_spread": 10.0,
+    "vars": [
+      {
+        "name": "f",
+        "kind": "int",
+        "min": 10,
+        "max": 120,
+        "step": 1
+      },
+      {
+        "name": "r",
+        "kind": "int",
+        "min": 2,
+        "max": 25,
+        "step": 1
+      },
+      {
+        "name": "g",
+        "kind": "int",
+        "min": 3,
+        "max": 24,
         "step": 1
       }
     ],
@@ -1542,7 +2266,7 @@
   {
     "external_id": "khan.pull.v1.sat.linear_fee.v3",
     "skill": "sat_math",
-    "subskill": "SAT modeling (Khan style)",
+    "subskill": "SAT algebra modeling",
     "label": "SAT fee model",
     "mode": "expression",
     "prompt_template": "An event charges a fixed fee of ${f} plus ${r} per guest. If the total bill is ${t}, how many guests attended?",
@@ -1578,9 +2302,47 @@
     "active": true
   },
   {
+    "external_id": "khan.pull.v1.sat.linear_fee.intuition.v3",
+    "skill": "sat_math",
+    "subskill": "SAT algebra modeling",
+    "label": "SAT fee model setup",
+    "mode": "intuition",
+    "prompt_template": "An event charges a fixed fee of ${f} plus ${r} per guest. If {g} guests attend, what part of the bill comes from the guest charges before the fixed fee is added?",
+    "answer_expr": "r * g",
+    "constraint_expr": "",
+    "explanation_template": "Separate the repeated guest cost from the fixed fee before building the full model.",
+    "min_level": 1,
+    "max_level": 4,
+    "choice_spread": 10.0,
+    "vars": [
+      {
+        "name": "f",
+        "kind": "int",
+        "min": 10,
+        "max": 120,
+        "step": 1
+      },
+      {
+        "name": "r",
+        "kind": "int",
+        "min": 2,
+        "max": 25,
+        "step": 1
+      },
+      {
+        "name": "g",
+        "kind": "int",
+        "min": 3,
+        "max": 24,
+        "step": 1
+      }
+    ],
+    "active": true
+  },
+  {
     "external_id": "khan.pull.v1.sat.linear_fee.v4",
     "skill": "sat_math",
-    "subskill": "SAT modeling (Khan style)",
+    "subskill": "SAT algebra modeling",
     "label": "SAT fee model",
     "mode": "expression",
     "prompt_template": "An event charges a fixed fee of ${f} plus ${r} per guest. If the total bill is ${t}, how many guests attended?",
@@ -1610,6 +2372,44 @@
         "kind": "int",
         "min": 100,
         "max": 900,
+        "step": 1
+      }
+    ],
+    "active": true
+  },
+  {
+    "external_id": "khan.pull.v1.sat.linear_fee.intuition.v4",
+    "skill": "sat_math",
+    "subskill": "SAT algebra modeling",
+    "label": "SAT fee model setup",
+    "mode": "intuition",
+    "prompt_template": "An event charges a fixed fee of ${f} plus ${r} per guest. If {g} guests attend, what part of the bill comes from the guest charges before the fixed fee is added?",
+    "answer_expr": "r * g",
+    "constraint_expr": "",
+    "explanation_template": "Separate the repeated guest cost from the fixed fee before building the full model.",
+    "min_level": 1,
+    "max_level": 4,
+    "choice_spread": 10.0,
+    "vars": [
+      {
+        "name": "f",
+        "kind": "int",
+        "min": 10,
+        "max": 120,
+        "step": 1
+      },
+      {
+        "name": "r",
+        "kind": "int",
+        "min": 2,
+        "max": 25,
+        "step": 1
+      },
+      {
+        "name": "g",
+        "kind": "int",
+        "min": 3,
+        "max": 24,
         "step": 1
       }
     ],
@@ -1625,6 +2425,37 @@
     "answer_expr": "(new - old) * 100 / old",
     "constraint_expr": "old > 0 and new > old",
     "explanation_template": "Percent increase = (new - old)/old * 100.",
+    "min_level": 1,
+    "max_level": 4,
+    "choice_spread": 9.0,
+    "vars": [
+      {
+        "name": "old",
+        "kind": "int",
+        "min": 20,
+        "max": 300,
+        "step": 1
+      },
+      {
+        "name": "new",
+        "kind": "int",
+        "min": 25,
+        "max": 500,
+        "step": 1
+      }
+    ],
+    "active": true
+  },
+  {
+    "external_id": "khan.pull.v1.gre.percent_change.intuition.v1",
+    "skill": "gre_quant",
+    "subskill": "GRE percent reasoning",
+    "label": "GRE percent setup",
+    "mode": "intuition",
+    "prompt_template": "A quantity increases from {old} to {new}. Before turning the change into a percent, how much did the quantity increase by?",
+    "answer_expr": "new - old",
+    "constraint_expr": "new > old",
+    "explanation_template": "Percent reasoning starts with the raw change before comparing it to the original amount.",
     "min_level": 1,
     "max_level": 4,
     "choice_spread": 9.0,
@@ -1678,6 +2509,37 @@
     "active": true
   },
   {
+    "external_id": "khan.pull.v1.gre.percent_change.intuition.v2",
+    "skill": "gre_quant",
+    "subskill": "GRE percent reasoning",
+    "label": "GRE percent setup",
+    "mode": "intuition",
+    "prompt_template": "A quantity increases from {old} to {new}. Before turning the change into a percent, how much did the quantity increase by?",
+    "answer_expr": "new - old",
+    "constraint_expr": "new > old",
+    "explanation_template": "Percent reasoning starts with the raw change before comparing it to the original amount.",
+    "min_level": 1,
+    "max_level": 4,
+    "choice_spread": 9.0,
+    "vars": [
+      {
+        "name": "old",
+        "kind": "int",
+        "min": 20,
+        "max": 300,
+        "step": 1
+      },
+      {
+        "name": "new",
+        "kind": "int",
+        "min": 25,
+        "max": 500,
+        "step": 1
+      }
+    ],
+    "active": true
+  },
+  {
     "external_id": "khan.pull.v1.gre.percent_change.v3",
     "skill": "gre_quant",
     "subskill": "GRE percent reasoning",
@@ -1709,6 +2571,37 @@
     "active": true
   },
   {
+    "external_id": "khan.pull.v1.gre.percent_change.intuition.v3",
+    "skill": "gre_quant",
+    "subskill": "GRE percent reasoning",
+    "label": "GRE percent setup",
+    "mode": "intuition",
+    "prompt_template": "A quantity increases from {old} to {new}. Before turning the change into a percent, how much did the quantity increase by?",
+    "answer_expr": "new - old",
+    "constraint_expr": "new > old",
+    "explanation_template": "Percent reasoning starts with the raw change before comparing it to the original amount.",
+    "min_level": 1,
+    "max_level": 4,
+    "choice_spread": 9.0,
+    "vars": [
+      {
+        "name": "old",
+        "kind": "int",
+        "min": 20,
+        "max": 300,
+        "step": 1
+      },
+      {
+        "name": "new",
+        "kind": "int",
+        "min": 25,
+        "max": 500,
+        "step": 1
+      }
+    ],
+    "active": true
+  },
+  {
     "external_id": "khan.pull.v1.gre.percent_change.v4",
     "skill": "gre_quant",
     "subskill": "GRE percent reasoning",
@@ -1718,6 +2611,37 @@
     "answer_expr": "(new - old) * 100 / old",
     "constraint_expr": "old > 0 and new > old",
     "explanation_template": "Percent increase = (new - old)/old * 100.",
+    "min_level": 1,
+    "max_level": 4,
+    "choice_spread": 9.0,
+    "vars": [
+      {
+        "name": "old",
+        "kind": "int",
+        "min": 20,
+        "max": 300,
+        "step": 1
+      },
+      {
+        "name": "new",
+        "kind": "int",
+        "min": 25,
+        "max": 500,
+        "step": 1
+      }
+    ],
+    "active": true
+  },
+  {
+    "external_id": "khan.pull.v1.gre.percent_change.intuition.v4",
+    "skill": "gre_quant",
+    "subskill": "GRE percent reasoning",
+    "label": "GRE percent setup",
+    "mode": "intuition",
+    "prompt_template": "A quantity increases from {old} to {new}. Before turning the change into a percent, how much did the quantity increase by?",
+    "answer_expr": "new - old",
+    "constraint_expr": "new > old",
+    "explanation_template": "Percent reasoning starts with the raw change before comparing it to the original amount.",
     "min_level": 1,
     "max_level": 4,
     "choice_spread": 9.0,

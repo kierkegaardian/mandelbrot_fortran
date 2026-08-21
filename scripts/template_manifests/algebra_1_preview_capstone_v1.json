@@ -1,0 +1,122 @@
+[
+  {
+    "external_id": "algebra1_preview_capstone.v1.slope_from_points.expression",
+    "skill": "algebra_1",
+    "subskill": "Slope from points",
+    "label": "Algebra 1 slope from coordinate pairs",
+    "mode": "expression",
+    "prompt_template": "Find the slope through ({x1}, {y1}) and ({x2}, {y2}).",
+    "answer_expr": "(y2 - y1) / (x2 - x1)",
+    "constraint_expr": "x2 > x1 and y2 != y1 and (y2 - y1) % (x2 - x1) == 0",
+    "explanation_template": "Slope is rise divided by run: change in y over change in x.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 8.0,
+    "active": true,
+    "vars": [
+      {"name": "x1", "kind": "int", "min": -8, "max": 4, "step": 1},
+      {"name": "y1", "kind": "int", "min": -12, "max": 12, "step": 1},
+      {"name": "x2", "kind": "int", "min": -2, "max": 10, "step": 1},
+      {"name": "y2", "kind": "int", "min": -18, "max": 18, "step": 1}
+    ]
+  },
+  {
+    "external_id": "algebra1_preview_capstone.v1.slope_from_points.word",
+    "skill": "algebra_1",
+    "subskill": "Slope from points",
+    "label": "Algebra 1 slope from a grid story",
+    "mode": "word",
+    "prompt_template": "A grid trail goes from ({x1}, {y1}) to ({x2}, {y2}). What is its slope?",
+    "answer_expr": "(y2 - y1) / (x2 - x1)",
+    "constraint_expr": "x2 > x1 and y2 != y1 and (y2 - y1) % (x2 - x1) == 0",
+    "explanation_template": "A real path on a coordinate grid still uses rise divided by run.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 8.0,
+    "active": true,
+    "vars": [
+      {"name": "x1", "kind": "int", "min": -8, "max": 4, "step": 1},
+      {"name": "y1", "kind": "int", "min": -12, "max": 12, "step": 1},
+      {"name": "x2", "kind": "int", "min": -2, "max": 10, "step": 1},
+      {"name": "y2", "kind": "int", "min": -18, "max": 18, "step": 1}
+    ]
+  },
+  {
+    "external_id": "algebra1_preview_capstone.v1.slope_intercept.expression",
+    "skill": "algebra_1",
+    "subskill": "Slope-intercept form",
+    "label": "Algebra 1 y-intercept from slope-intercept form",
+    "mode": "expression",
+    "prompt_template": "In y = {m}x + {b}, what is the y-intercept?",
+    "answer_expr": "b",
+    "constraint_expr": "m != 0",
+    "explanation_template": "In y = mx + b, b is the output when x is 0.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 8.0,
+    "active": true,
+    "vars": [
+      {"name": "m", "kind": "int", "min": -8, "max": 8, "step": 1},
+      {"name": "b", "kind": "int", "min": -15, "max": 15, "step": 1}
+    ]
+  },
+  {
+    "external_id": "algebra1_preview_capstone.v1.slope_intercept.word",
+    "skill": "algebra_1",
+    "subskill": "Slope-intercept form",
+    "label": "Algebra 1 starting output story",
+    "mode": "word",
+    "prompt_template": "A line rule is y = {m}x + {b}. What starting output does the rule show?",
+    "answer_expr": "b",
+    "constraint_expr": "m != 0",
+    "explanation_template": "The starting output is the y-intercept, the value left when x is 0.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 8.0,
+    "active": true,
+    "vars": [
+      {"name": "m", "kind": "int", "min": -8, "max": 8, "step": 1},
+      {"name": "b", "kind": "int", "min": -15, "max": 15, "step": 1}
+    ]
+  },
+  {
+    "external_id": "algebra1_preview_capstone.v1.graphing_linear_inequalities.expression",
+    "skill": "algebra_1",
+    "subskill": "Graphing linear inequalities",
+    "label": "Algebra 1 inequality boundary value",
+    "mode": "expression",
+    "prompt_template": "For y > {m}x + {b}, at x = {x}, what boundary y-value should you compare against?",
+    "answer_expr": "m * x + b",
+    "constraint_expr": "m != 0",
+    "explanation_template": "Graph the boundary line first, then shade above it for greater-than.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 12.0,
+    "active": true,
+    "vars": [
+      {"name": "m", "kind": "int", "min": -5, "max": 5, "step": 1},
+      {"name": "b", "kind": "int", "min": -12, "max": 12, "step": 1},
+      {"name": "x", "kind": "int", "min": -6, "max": 6, "step": 1}
+    ]
+  },
+  {
+    "external_id": "algebra1_preview_capstone.v1.graphing_linear_inequalities.word",
+    "skill": "algebra_1",
+    "subskill": "Graphing linear inequalities",
+    "label": "Algebra 1 inequality boundary story",
+    "mode": "word",
+    "prompt_template": "A shaded region uses y < {m}x + {b}. At x = {x}, what boundary value separates above from below?",
+    "answer_expr": "m * x + b",
+    "constraint_expr": "m != 0",
+    "explanation_template": "The inequality compares y-values to the boundary line value.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 12.0,
+    "active": true,
+    "vars": [
+      {"name": "m", "kind": "int", "min": -5, "max": 5, "step": 1},
+      {"name": "b", "kind": "int", "min": -12, "max": 12, "step": 1},
+      {"name": "x", "kind": "int", "min": -6, "max": 6, "step": 1}
+    ]
+  }
+]

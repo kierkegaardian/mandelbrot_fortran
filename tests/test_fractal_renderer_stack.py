@@ -10,6 +10,14 @@ from app import fractal_renderer
 from app.fractal_renderer import FractalConfig, RenderCancelled
 
 
+class FakePipe:
+    def __init__(self) -> None:
+        self.closed = False
+
+    def close(self) -> None:
+        self.closed = True
+
+
 class FractalRendererStackTests(unittest.TestCase):
     def _config(self) -> FractalConfig:
         return FractalConfig(
@@ -56,12 +64,16 @@ class FractalRendererStackTests(unittest.TestCase):
     def test_run_with_cancel_raises_when_cancelled(self) -> None:
         class FakeProc:
             def __init__(self) -> None:
-                self.stdout = None
-                self.stderr = None
+                self.stdout = FakePipe()
+                self.stderr = FakePipe()
                 self._killed = False
 
             def poll(self):
                 return None
+
+            def communicate(self, timeout: float):
+                del timeout
+                return b"", b""
 
             def kill(self) -> None:
                 self._killed = True
@@ -72,31 +84,43 @@ class FractalRendererStackTests(unittest.TestCase):
 
         cancel = Event()
         cancel.set()
-        with patch.object(fractal_renderer.subprocess, "Popen", return_value=FakeProc()):
+        proc = FakeProc()
+        with patch.object(fractal_renderer.subprocess, "Popen", return_value=proc):
             with self.assertRaises(RenderCancelled):
                 fractal_renderer._run_with_cancel(["mandelbrot_gen"], cancel_event=cancel, timeout_seconds=1.0)
+        self.assertTrue(proc._killed)
+        self.assertTrue(proc.stdout.closed)
+        self.assertTrue(proc.stderr.closed)
 
     def test_run_with_cancel_times_out(self) -> None:
         class FakeProc:
             returncode = None
 
             def __init__(self) -> None:
-                self.stdout = None
-                self.stderr = None
+                self.stdout = FakePipe()
+                self.stderr = FakePipe()
+                self._killed = False
+
+            def poll(self):
+                return None
 
             def communicate(self, timeout: float):
                 raise fractal_renderer.subprocess.TimeoutExpired(cmd="mandelbrot_gen", timeout=timeout)
 
             def kill(self) -> None:
-                return
+                self._killed = True
 
             def wait(self, timeout: float) -> int:
                 del timeout
                 return 0
 
-        with patch.object(fractal_renderer.subprocess, "Popen", return_value=FakeProc()):
+        proc = FakeProc()
+        with patch.object(fractal_renderer.subprocess, "Popen", return_value=proc):
             with self.assertRaises(TimeoutError):
                 fractal_renderer._run_with_cancel(["mandelbrot_gen"], cancel_event=None, timeout_seconds=0.1)
+        self.assertTrue(proc._killed)
+        self.assertTrue(proc.stdout.closed)
+        self.assertTrue(proc.stderr.closed)
 
 
 if __name__ == "__main__":

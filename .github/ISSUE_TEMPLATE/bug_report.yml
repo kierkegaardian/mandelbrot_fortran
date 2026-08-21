@@ -1,0 +1,84 @@
+name: Bug report
+description: Report an install, packaging, data, quiz, worksheet, or UI problem.
+title: "[Bug] "
+labels:
+  - bug
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting this. Please include the exact platform, what you expected, and what happened instead.
+  - type: dropdown
+    id: audience
+    attributes:
+      label: Who is affected?
+      options:
+        - Homeschool family
+        - Beta tester
+        - Parent educator
+        - Student
+        - Developer / maintainer
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Problem area
+      options:
+        - Installer / first launch
+        - Profiles / parent PIN
+        - Dashboard / progress
+        - Quiz generation
+        - Worksheet generation
+        - Historical SAT/PSAT/GRE tools
+        - External lesson links
+        - Backup / local data
+        - Packaging artifact
+        - Other
+    validations:
+      required: true
+  - type: input
+    id: platform
+    attributes:
+      label: Platform
+      description: For example Windows 11, macOS 14, Ubuntu 24.04.
+      placeholder: Windows 11
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Open MandelQuest
+        2. Select profile...
+        3. Start...
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+    validations:
+      required: true
+  - type: textarea
+    id: data_impact
+    attributes:
+      label: Did this affect saved data?
+      description: Mention lost progress, missing worksheets, or whether the issue is cosmetic only.
+      placeholder: No saved data loss / quiz progress disappeared / worksheet not saved
+    validations:
+      required: false
+  - type: textarea
+    id: logs
+    attributes:
+      label: Screenshots or logs
+      description: Paste any traceback or attach screenshots if available.
+    validations:
+      required: false

@@ -23,6 +23,9 @@ def _bundle_root() -> Path:
 
 
 def _user_data_root() -> Path:
+    override = os.environ.get("MANDELQUEST_DATA_DIR", "").strip()
+    if override:
+        return Path(override).expanduser().resolve()
     if not _is_frozen():
         return repo_root() / "data"
     if sys.platform.startswith("win"):

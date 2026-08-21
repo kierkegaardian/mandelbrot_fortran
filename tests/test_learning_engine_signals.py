@@ -3,11 +3,14 @@ from __future__ import annotations
 import unittest
 
 from app.learning_engine import (
+    BlendPolicy,
+    BlendPolicyConfig,
     SkillStats,
     build_blended_plan,
     build_free_mode_plan,
     build_skill_stats,
     frontier_skills,
+    pick_blend_policy,
     recommend_next_skill_paths,
     recommend_next_skills_soft,
 )
@@ -80,6 +83,32 @@ class LearningEngineSignalTests(unittest.TestCase):
         )
         review_count = sum(1 for item in items if item.label == "Review")
         self.assertGreaterEqual(review_count, 1)
+
+    def test_blend_policy_uses_configurable_default_and_adaptive_prereq_share(self) -> None:
+        self.assertEqual(pick_blend_policy(None), BlendPolicy(core_pct=60, prereq_pct=25, review_pct=15))
+
+        low = SkillStats("target", 2, 20, 10, 50.0, 50.0, 0, 0, 9.0, -8.0, "Needs work")
+        developing = SkillStats("target", 3, 30, 21, 70.0, 70.0, 0, 0, 8.0, 0.0, "Developing")
+        stable = SkillStats("target", 5, 50, 46, 92.0, 92.0, 2, 2, 7.0, 3.0, "Proficient")
+
+        self.assertEqual(pick_blend_policy(low), BlendPolicy(core_pct=45, prereq_pct=40, review_pct=15))
+        self.assertEqual(pick_blend_policy(developing), BlendPolicy(core_pct=55, prereq_pct=30, review_pct=15))
+        self.assertEqual(pick_blend_policy(stable), BlendPolicy(core_pct=70, prereq_pct=15, review_pct=15))
+
+    def test_blended_plan_accepts_custom_base_policy(self) -> None:
+        items, policy = build_blended_plan(
+            target_skill="target",
+            num_questions=10,
+            skill_order=("target", "prereq", "review"),
+            prerequisites={"target": (("prereq", 1.0),), "prereq": (), "review": ()},
+            stats={"review": SkillStats("review", 2, 20, 18, 90.0, 90.0, 1, 1, 7.0, 1.0, "Proficient")},
+            config=BlendPolicyConfig(base_core_pct=50, base_prereq_pct=35, base_review_pct=15),
+        )
+
+        self.assertEqual(policy, BlendPolicy(core_pct=50, prereq_pct=35, review_pct=15))
+        self.assertEqual(sum(1 for item in items if item.label == "Core"), 5)
+        self.assertEqual(sum(1 for item in items if item.label == "Prereq"), 4)
+        self.assertEqual(sum(1 for item in items if item.label == "Review"), 1)
 
     def test_free_mode_plan_has_preview_prereq_review_labels(self) -> None:
         stats = {

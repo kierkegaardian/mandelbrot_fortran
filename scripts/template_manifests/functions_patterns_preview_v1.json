@@ -1,0 +1,162 @@
+[
+  {
+    "external_id": "functions_preview.v1.functions.expression",
+    "skill": "algebra_1",
+    "subskill": "Functions",
+    "label": "Function rule evaluation",
+    "mode": "expression",
+    "prompt_template": "If f(x) = {a}x + {b}, what is f({x})?",
+    "answer_expr": "a * x + b",
+    "constraint_expr": "",
+    "explanation_template": "A function rule takes one input and produces one output.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 12.0,
+    "active": true,
+    "vars": [
+      {"name": "a", "kind": "int", "min": 2, "max": 8, "step": 1},
+      {"name": "b", "kind": "int", "min": 0, "max": 20, "step": 1},
+      {"name": "x", "kind": "int", "min": 2, "max": 12, "step": 1}
+    ]
+  },
+  {
+    "external_id": "functions_preview.v1.functions.word",
+    "skill": "algebra_1",
+    "subskill": "Functions",
+    "label": "Function story rule",
+    "mode": "word",
+    "prompt_template": "A score rule is score = {a} x level + {b}. What score is level {x}?",
+    "answer_expr": "a * x + b",
+    "constraint_expr": "a != 0",
+    "explanation_template": "Treat the level as the function input and follow the rule.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 16.0,
+    "active": true,
+    "vars": [
+      {"name": "a", "kind": "int", "min": 2, "max": 8, "step": 1},
+      {"name": "b", "kind": "int", "min": 0, "max": 20, "step": 1},
+      {"name": "x", "kind": "int", "min": 2, "max": 12, "step": 1}
+    ]
+  },
+  {
+    "external_id": "functions_preview.v1.sequences.expression",
+    "skill": "algebra_1",
+    "subskill": "Sequences",
+    "label": "Arithmetic sequence term",
+    "mode": "expression",
+    "prompt_template": "An arithmetic sequence starts at {first} and changes by {step}. What is term {n}?",
+    "answer_expr": "first + (n - 1) * step",
+    "constraint_expr": "step > 0",
+    "explanation_template": "For term n, make n - 1 jumps from the first term.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 18.0,
+    "active": true,
+    "vars": [
+      {"name": "first", "kind": "int", "min": 0, "max": 20, "step": 1},
+      {"name": "step", "kind": "int", "min": 2, "max": 9, "step": 1},
+      {"name": "n", "kind": "int", "min": 4, "max": 12, "step": 1}
+    ]
+  },
+  {
+    "external_id": "functions_preview.v1.sequences.word",
+    "skill": "algebra_1",
+    "subskill": "Sequences",
+    "label": "Arithmetic sequence story",
+    "mode": "word",
+    "prompt_template": "A reading streak starts with {first} pages and adds {step} more pages each day. How many pages on day {n}?",
+    "answer_expr": "first + (n - 1) * step",
+    "constraint_expr": "step > 0",
+    "explanation_template": "Each new day adds one more common-difference jump.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 18.0,
+    "active": true,
+    "vars": [
+      {"name": "first", "kind": "int", "min": 4, "max": 20, "step": 1},
+      {"name": "step", "kind": "int", "min": 2, "max": 9, "step": 1},
+      {"name": "n", "kind": "int", "min": 4, "max": 12, "step": 1}
+    ]
+  },
+  {
+    "external_id": "functions_preview.v1.linear_graphs.expression",
+    "skill": "algebra_1",
+    "subskill": "Linear equations & graphs",
+    "label": "Linear graph rule",
+    "mode": "expression",
+    "prompt_template": "For y = {m}x + {b}, find y when x = {x}.",
+    "answer_expr": "m * x + b",
+    "constraint_expr": "",
+    "explanation_template": "A line rule maps each x-value to a y-value.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 12.0,
+    "active": true,
+    "vars": [
+      {"name": "m", "kind": "int", "min": 1, "max": 6, "step": 1},
+      {"name": "b", "kind": "int", "min": 0, "max": 15, "step": 1},
+      {"name": "x", "kind": "int", "min": 1, "max": 10, "step": 1}
+    ]
+  },
+  {
+    "external_id": "functions_preview.v1.linear_graphs.word",
+    "skill": "algebra_1",
+    "subskill": "Linear equations & graphs",
+    "label": "Linear graph story",
+    "mode": "word",
+    "prompt_template": "A line starts at {b} and changes by {m} for each x-step. What is y when x = {x}?",
+    "answer_expr": "b + m * x",
+    "constraint_expr": "",
+    "explanation_template": "The graph follows starting value plus rate times input.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 14.0,
+    "active": true,
+    "vars": [
+      {"name": "b", "kind": "int", "min": 0, "max": 15, "step": 1},
+      {"name": "m", "kind": "int", "min": 1, "max": 6, "step": 1},
+      {"name": "x", "kind": "int", "min": 1, "max": 10, "step": 1}
+    ]
+  },
+  {
+    "external_id": "functions_preview.v1.solving.expression",
+    "skill": "algebra_1",
+    "subskill": "Solving equations & inequalities",
+    "label": "Two-step equation solve",
+    "mode": "expression",
+    "prompt_template": "Solve for x: {m}x + {b} = {rhs}",
+    "answer_expr": "(rhs - b) / m",
+    "constraint_expr": "(rhs - b) % m == 0",
+    "explanation_template": "Undo the constant first, then divide by the coefficient.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 14.0,
+    "active": true,
+    "vars": [
+      {"name": "m", "kind": "int", "min": 2, "max": 9, "step": 1},
+      {"name": "b", "kind": "int", "min": 0, "max": 18, "step": 1},
+      {"name": "rhs", "kind": "int", "min": 20, "max": 120, "step": 1}
+    ]
+  },
+  {
+    "external_id": "functions_preview.v1.solving.word",
+    "skill": "algebra_1",
+    "subskill": "Solving equations & inequalities",
+    "label": "Two-step equation story",
+    "mode": "word",
+    "prompt_template": "A number is multiplied by {m}, then {b} is added, giving {rhs}. What was the number?",
+    "answer_expr": "(rhs - b) / m",
+    "constraint_expr": "(rhs - b) % m == 0",
+    "explanation_template": "Translate the story to mx + b = rhs, then undo the operations.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 14.0,
+    "active": true,
+    "vars": [
+      {"name": "m", "kind": "int", "min": 2, "max": 9, "step": 1},
+      {"name": "b", "kind": "int", "min": 0, "max": 18, "step": 1},
+      {"name": "rhs", "kind": "int", "min": 20, "max": 120, "step": 1}
+    ]
+  }
+]

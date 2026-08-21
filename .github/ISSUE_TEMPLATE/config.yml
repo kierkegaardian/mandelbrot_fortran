@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Support Guide
+    url: https://github.com/kierkegaardian/mandelbrot_fortran/blob/master/docs/support.html
+    about: Check install, backup, worksheet, and offline-mode help before opening a support issue.
+  - name: Privacy and Local Data Policy
+    url: https://github.com/kierkegaardian/mandelbrot_fortran/blob/master/docs/privacy.html
+    about: Review how MandelQuest stores data locally and what optional internet-linked features do.
