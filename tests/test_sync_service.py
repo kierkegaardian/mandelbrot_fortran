@@ -252,7 +252,7 @@ def _success_status() -> SyncStatus:
         server_label="Home sync server",
         profile="home-lan",
         config_source="override",
-        config_path="/tmp/sync.internal.json",
+        config_path="/tmp/sync.fixture.json",
         health=health,
         api_root=api_root,
         error_code=None,
