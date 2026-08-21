@@ -68,6 +68,9 @@ def main() -> None:
             choice_spread=float(item.get("choice_spread", 4.0)),
             active=bool(item.get("active", True)),
             created_at=now_iso(),
+            archetype_id=str(item.get("archetype_id") or external_id or "") or None,
+            reasoning_kind=str(item.get("reasoning_kind", "legacy")),
+            misconceptions_json=json.dumps(item.get("misconceptions", []), ensure_ascii=True),
         )
         for var in item.get("vars", []):
             db.add_template_var(

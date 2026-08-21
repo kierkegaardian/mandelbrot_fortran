@@ -17,6 +17,7 @@ EXPECTED_DB_EXPORTS = (
     "PIN_MIN_LENGTH",
     "add_exercise_candidate",
     "add_question_result",
+    "add_quiz_recovery",
     "add_template_var",
     "apply_historical_answer_key",
     "archive_summer_programs",

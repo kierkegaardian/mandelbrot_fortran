@@ -7,6 +7,7 @@ import random
 from . import db, summer_program
 from .models import ScaffoldStep
 from .quiz_engine import Question, generate_question
+from .content_depth.summer import cumulative_target_schedule, cumulative_targets_for_task, program_question
 from .summer_program_defs import FOUNDATION_BRIDGE_LANE, lane_display_name
 
 
@@ -141,15 +142,23 @@ def build_task_quiz_plan(launch: SummerProgramLaunch) -> ProgramQuizPlan:
 
 def _build_unit_questions(lane: str, task) -> list[Question]:
     count = 3 if task.task_kind == "lesson" else 6 if task.task_kind == "checkpoint" else 5
-    targets = _targets_for_task(task)
+    current_targets = _targets_for_task(task)
+    if task.task_kind in {"mixed_review", "checkpoint"}:
+        all_targets = cumulative_targets_for_task(task, _targets_for_unit) or current_targets
+        schedule = cumulative_target_schedule(current_targets, all_targets, count)
+    else:
+        schedule = [(current_targets[idx % len(current_targets)], False) for idx in range(count)]
     questions: list[Question] = []
-    scaffold_slots = count if task.task_kind == "lesson" else count // 2 if task.task_kind == "checkpoint" else 0
+    scaffold_slots = count if task.task_kind == "lesson" else 0
     level = 1 if lane == FOUNDATION_BRIDGE_LANE else 2
-    for idx in range(count):
-        skill, subskill = targets[idx % len(targets)]
+    used: dict[tuple[str, str], set[str]] = {}
+    for idx, ((skill, subskill), application) in enumerate(schedule):
         question = _scaffolded_question(skill, subskill, idx) if idx < scaffold_slots else None
         if question is None:
-            question = generate_question(skill, level, "typed", subskill=subskill)
+            question = program_question(
+                skill, subskill, level, used,
+                application=application,
+            )
         question.question_label = _task_label(task.task_kind)
         questions.append(question)
     return questions
@@ -179,18 +188,30 @@ def _build_assessment_questions(lane: str, task_kind: str) -> list[Question]:
 
 
 def _build_task_assessment_questions(lane: str, task) -> list[Question]:
-    questions = _build_assessment_questions(lane, task.task_kind)
+    label = "Midpoint" if task.task_kind == "midpoint_assessment" else "Exit"
+    current_targets = _targets_for_task(task)
+    all_targets = cumulative_targets_for_task(task, _targets_for_unit) or current_targets
+    count = len(assessment_blueprint_for_lane(lane))
+    schedule = cumulative_target_schedule(current_targets, all_targets, count)
+    level = 1 if lane == FOUNDATION_BRIDGE_LANE else 2
+    used: dict[tuple[str, str], set[str]] = {}
+    questions: list[Question] = []
+    for (skill, subskill), application in schedule:
+        question = program_question(
+            skill, subskill, level, used, application=application
+        )
+        question.scaffold_steps = None
+        question.question_label = label
+        questions.append(question)
     remediation = summer_program.remediation_targets_for_task(task)
     if not remediation:
         return questions
-    level = 1 if lane == FOUNDATION_BRIDGE_LANE else 2
     remediation_questions: list[Question] = []
     slots = min(3, len(questions))
     for idx in range(slots):
         skill, subskill = remediation[idx % len(remediation)]
-        question = _scaffolded_question(skill, subskill, idx)
-        if question is None:
-            question = generate_question(skill, level, "typed", subskill=subskill)
+        question = program_question(skill, subskill, level, used, application=False)
+        question.scaffold_steps = None
         question.question_label = questions[idx].question_label
         remediation_questions.append(question)
     return remediation_questions + questions[slots:]
@@ -206,10 +227,6 @@ def _assessment_questions_from_blueprint(
         level = 1 if skill in {"place_value", "add_subtract", "multiply", "divide", "fractions", "money", "measurement"} else 2
         question = generate_question(skill, level, "typed", subskill=subskill)
         question.question_label = f"{label_prefix} • {strand}"
-        if label_prefix != "Placement" and idx < max(1, len(blueprint) // 2):
-            scaffold = _scaffolded_question(skill, subskill, idx)
-            if scaffold is not None:
-                question.scaffold_steps = scaffold.scaffold_steps
         questions.append(question)
     return questions
 

@@ -1,0 +1,555 @@
+{
+  "version": 1,
+  "skill": "pre_algebra",
+  "subskills": [
+    {
+      "subskill": "Integer and fraction fluency",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.pre_algebra.integer_and_fraction_fluency.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Integer and fraction fluency?"
+        },
+        {
+          "id": "depth.v1.pre_algebra.integer_and_fraction_fluency.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.pre_algebra.integer_and_fraction_fluency.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.pre_algebra.integer_and_fraction_fluency.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A changing real quantity needs an algebraic model; construct the relationship and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Integer and fraction fluency",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "Convert 44/25 to a decimal.",
+            "explanation": "A fraction is numerator divided by denominator. Answer: 1.76",
+            "expected_answer": "1.76"
+          },
+          {
+            "stage": "guided",
+            "prompt": "Evaluate: -1 + (3)",
+            "explanation": "Simplify one signed-number step and one fraction step before solving the full problem.",
+            "expected_answer": "2"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "Convert 34/20 to a decimal.",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "1.7"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "integer_and_fraction_fluency.model_confusion",
+          "feedback": "Getting stuck on arithmetic details and losing the structure of the problem.",
+          "hint": "Pre-algebra fluency means small numeric skills stop blocking bigger ideas.",
+          "recovery_archetype_id": "depth.v1.pre_algebra.integer_and_fraction_fluency.concept"
+        },
+        {
+          "code": "integer_and_fraction_fluency.procedure_slip",
+          "feedback": "The setup is close, but a step in Integer and fraction fluency changed the result.",
+          "hint": "Simplify one signed-number step and one fraction step before solving the full problem.",
+          "recovery_archetype_id": "depth.v1.pre_algebra.integer_and_fraction_fluency.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Order of operations",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.pre_algebra.order_of_operations.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Order of operations?"
+        },
+        {
+          "id": "depth.v1.pre_algebra.order_of_operations.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.pre_algebra.order_of_operations.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.pre_algebra.order_of_operations.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A changing real quantity needs an algebraic model; construct the relationship and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Order of operations",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "Evaluate: 5 - (8 * -4) + 6",
+            "explanation": "Resolve parentheses first, then multiplication, then addition/subtraction. Answer: 43",
+            "expected_answer": "43"
+          },
+          {
+            "stage": "guided",
+            "prompt": "Evaluate: -9 - (2 * -2) + 10",
+            "explanation": "Rewrite the expression after each completed chunk.",
+            "expected_answer": "5"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "Evaluate: 9 - (-12 * -1) + -9",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "-12"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "order_of_operations.model_confusion",
+          "feedback": "Working left to right even when grouping changes the value.",
+          "hint": "The order of operations keeps one expression from having many answers.",
+          "recovery_archetype_id": "depth.v1.pre_algebra.order_of_operations.concept"
+        },
+        {
+          "code": "order_of_operations.procedure_slip",
+          "feedback": "The setup is close, but a step in Order of operations changed the result.",
+          "hint": "Rewrite the expression after each completed chunk.",
+          "recovery_archetype_id": "depth.v1.pre_algebra.order_of_operations.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Expressions and variables",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.pre_algebra.expressions_and_variables.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Expressions and variables?"
+        },
+        {
+          "id": "depth.v1.pre_algebra.expressions_and_variables.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.pre_algebra.expressions_and_variables.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.pre_algebra.expressions_and_variables.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A changing real quantity needs an algebraic model; construct the relationship and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Expressions and variables",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "Simplify and evaluate (-3x) + (2x) + (-2) when x = -4.",
+            "explanation": "Combine like terms first, then substitute the value for x. Answer: 2",
+            "expected_answer": "2"
+          },
+          {
+            "stage": "guided",
+            "prompt": "Simplify and evaluate (2x) + (1x) + (-2) when x = 5.",
+            "explanation": "Say what each part of 3x + 5 does to the input.",
+            "expected_answer": "13"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "Simplify and evaluate (-3x) + (2x) + (2) when x = 7.",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "-5"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "expressions_and_variables.model_confusion",
+          "feedback": "Plugging in the value before combining obvious like terms.",
+          "hint": "A variable stands for a value, and the expression tells how to transform it.",
+          "recovery_archetype_id": "depth.v1.pre_algebra.expressions_and_variables.concept"
+        },
+        {
+          "code": "expressions_and_variables.procedure_slip",
+          "feedback": "The setup is close, but a step in Expressions and variables changed the result.",
+          "hint": "Say what each part of 3x + 5 does to the input.",
+          "recovery_archetype_id": "depth.v1.pre_algebra.expressions_and_variables.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "One-step equations",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.pre_algebra.one_step_equations.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports One-step equations?"
+        },
+        {
+          "id": "depth.v1.pre_algebra.one_step_equations.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.pre_algebra.one_step_equations.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.pre_algebra.one_step_equations.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A changing real quantity needs an algebraic model; construct the relationship and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: One-step equations",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "Solve for x: x + (-10) = -24",
+            "explanation": "Undo the addition to isolate x. Answer: -14",
+            "expected_answer": "-14"
+          },
+          {
+            "stage": "guided",
+            "prompt": "Solve for x: x - (3) = 4",
+            "explanation": "Ask what single operation is trapping the variable.",
+            "expected_answer": "7"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "Solve for x: x + (3) = 10",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "7"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "one_step_equations.model_confusion",
+          "feedback": "Doing a move to only one side of the equation.",
+          "hint": "One-step equations are balances solved by one inverse move.",
+          "recovery_archetype_id": "depth.v1.pre_algebra.one_step_equations.concept"
+        },
+        {
+          "code": "one_step_equations.procedure_slip",
+          "feedback": "The setup is close, but a step in One-step equations changed the result.",
+          "hint": "Ask what single operation is trapping the variable.",
+          "recovery_archetype_id": "depth.v1.pre_algebra.one_step_equations.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Two-step equations and inequalities",
+      "content_status": "ready",
+      "archetypes": [
+        {
+          "id": "depth.v1.pre_algebra.two_step_equations_and_inequalities.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Two-step equations and inequalities?"
+        },
+        {
+          "id": "depth.v1.pre_algebra.two_step_equations_and_inequalities.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.pre_algebra.two_step_equations_and_inequalities.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.pre_algebra.two_step_equations_and_inequalities.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A service charges a fixed fee plus a rate. Construct a two-step equation or inequality, then solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Two-step equations and inequalities",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "Solve 3x + 5 = 20.",
+            "explanation": "Subtract 5, then divide by 3: 3x = 15, so x = 5.",
+            "expected_answer": "5"
+          },
+          {
+            "stage": "guided",
+            "prompt": "Solve 4x - 7 = 13.",
+            "explanation": "Add 7 to both sides, then divide by 4.",
+            "expected_answer": "5"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "Find the greatest integer x with 2x + 3 <= 12.",
+            "explanation": "2x <= 9, so x <= 4.5; the greatest integer is 4.",
+            "expected_answer": "4"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "inverse_order",
+          "feedback": "The operations were undone in an order that did not isolate the variable.",
+          "hint": "Undo the added or subtracted amount, then undo multiplication or division.",
+          "recovery_archetype_id": "depth.v1.pre_algebra.two_step_equations_and_inequalities.concept"
+        },
+        {
+          "code": "inequality_direction",
+          "feedback": "The boundary or inequality direction was interpreted incorrectly.",
+          "hint": "Check the result in the original inequality and describe which side of the boundary works.",
+          "recovery_archetype_id": "depth.v1.pre_algebra.two_step_equations_and_inequalities.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Ratios, rates, and proportional relationships",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.pre_algebra.ratios_rates_and_proportional_relationships.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Ratios, rates, and proportional relationships?"
+        },
+        {
+          "id": "depth.v1.pre_algebra.ratios_rates_and_proportional_relationships.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.pre_algebra.ratios_rates_and_proportional_relationships.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.pre_algebra.ratios_rates_and_proportional_relationships.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A changing real quantity needs an algebraic model; construct the relationship and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Ratios, rates, and proportional relationships",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "At $16 per notebook, what is the total cost for 18 notebooks?",
+            "explanation": "A unit rate multiplies by the number of groups to get the total. Answer: 288",
+            "expected_answer": "288"
+          },
+          {
+            "stage": "guided",
+            "prompt": "At $16 per notebook, what is the total cost for 16 notebooks?",
+            "explanation": "Find the unit rate first, then scale to the new situation.",
+            "expected_answer": "256"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "Complete the proportion: 11/14 = x/56",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "44"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "ratios_rates_and_proportional_relationships.model_confusion",
+          "feedback": "Comparing totals instead of comparing per-1 amounts.",
+          "hint": "Proportional relationships keep the same multiplier or same unit rate every time.",
+          "recovery_archetype_id": "depth.v1.pre_algebra.ratios_rates_and_proportional_relationships.concept"
+        },
+        {
+          "code": "ratios_rates_and_proportional_relationships.procedure_slip",
+          "feedback": "The setup is close, but a step in Ratios, rates, and proportional relationships changed the result.",
+          "hint": "Find the unit rate first, then scale to the new situation.",
+          "recovery_archetype_id": "depth.v1.pre_algebra.ratios_rates_and_proportional_relationships.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Percent problems",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.pre_algebra.percent_problems.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Percent problems?"
+        },
+        {
+          "id": "depth.v1.pre_algebra.percent_problems.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.pre_algebra.percent_problems.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.pre_algebra.percent_problems.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A changing real quantity needs an algebraic model; construct the relationship and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Percent problems",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "What is the percent change from 94 to 59? Enter the percent number.",
+            "explanation": "Percent change is change divided by the original amount. Answer: 37.23",
+            "expected_answer": "37.23"
+          },
+          {
+            "stage": "guided",
+            "prompt": "What is the percent change from 101 to 68? Enter the percent number.",
+            "explanation": "Find 15% of 80 as 10% plus 5%.",
+            "expected_answer": "32.67"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "What is 60% of 66?",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "39.6"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "percent_problems.model_confusion",
+          "feedback": "Moving the decimal without saying what percent means.",
+          "hint": "Percent means out of 100, so convert it to a decimal or fraction before solving.",
+          "recovery_archetype_id": "depth.v1.pre_algebra.percent_problems.concept"
+        },
+        {
+          "code": "percent_problems.procedure_slip",
+          "feedback": "The setup is close, but a step in Percent problems changed the result.",
+          "hint": "Find 15% of 80 as 10% plus 5%.",
+          "recovery_archetype_id": "depth.v1.pre_algebra.percent_problems.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Exponents, roots, and scientific notation",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.pre_algebra.exponents_roots_and_scientific_notation.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Exponents, roots, and scientific notation?"
+        },
+        {
+          "id": "depth.v1.pre_algebra.exponents_roots_and_scientific_notation.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.pre_algebra.exponents_roots_and_scientific_notation.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.pre_algebra.exponents_roots_and_scientific_notation.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A changing real quantity needs an algebraic model; construct the relationship and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Exponents, roots, and scientific notation",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "Evaluate sqrt(25).",
+            "explanation": "A square root asks for the positive number whose square is the original value. Answer: 5",
+            "expected_answer": "5"
+          },
+          {
+            "stage": "guided",
+            "prompt": "Evaluate: 3^3",
+            "explanation": "Explain how 4^3, sqrt(16), and 3.2 x 10^4 each describe size.",
+            "expected_answer": "27"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "Evaluate: 6^4",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "1296"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "exponents_roots_and_scientific_notation.model_confusion",
+          "feedback": "Mixing the exponent with the coefficient or ignoring place value in scientific notation.",
+          "hint": "These ideas all track size changes efficiently: repeated factors, undoing squares, or powers of 10.",
+          "recovery_archetype_id": "depth.v1.pre_algebra.exponents_roots_and_scientific_notation.concept"
+        },
+        {
+          "code": "exponents_roots_and_scientific_notation.procedure_slip",
+          "feedback": "The setup is close, but a step in Exponents, roots, and scientific notation changed the result.",
+          "hint": "Explain how 4^3, sqrt(16), and 3.2 x 10^4 each describe size.",
+          "recovery_archetype_id": "depth.v1.pre_algebra.exponents_roots_and_scientific_notation.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Coordinate plane and function tables",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.pre_algebra.coordinate_plane_and_function_tables.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Coordinate plane and function tables?"
+        },
+        {
+          "id": "depth.v1.pre_algebra.coordinate_plane_and_function_tables.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.pre_algebra.coordinate_plane_and_function_tables.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.pre_algebra.coordinate_plane_and_function_tables.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A changing real quantity needs an algebraic model; construct the relationship and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Coordinate plane and function tables",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "A function table follows y = 5x + (-5). What is y when x = 0?",
+            "explanation": "Use the rule to map the input x to its output y. Answer: -5",
+            "expected_answer": "-5"
+          },
+          {
+            "stage": "guided",
+            "prompt": "A function table follows y = -3x + (-8). What is y when x = 1?",
+            "explanation": "Plot (2, 5), then say what happens when x increases by 1.",
+            "expected_answer": "-11"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "A function table follows y = 5x + (1). What is y when x = 0?",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "1"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "coordinate_plane_and_function_tables.model_confusion",
+          "feedback": "Reading x and y in the wrong order or changing the rule mid-table.",
+          "hint": "Coordinates and tables show a rule pairing each input with one output.",
+          "recovery_archetype_id": "depth.v1.pre_algebra.coordinate_plane_and_function_tables.concept"
+        },
+        {
+          "code": "coordinate_plane_and_function_tables.procedure_slip",
+          "feedback": "The setup is close, but a step in Coordinate plane and function tables changed the result.",
+          "hint": "Plot (2, 5), then say what happens when x increases by 1.",
+          "recovery_archetype_id": "depth.v1.pre_algebra.coordinate_plane_and_function_tables.procedure"
+        }
+      ]
+    }
+  ]
+}

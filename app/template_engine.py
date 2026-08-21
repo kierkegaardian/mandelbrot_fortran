@@ -14,6 +14,7 @@ class InstantiatedTemplate:
     answer: str
     explanation: str
     numeric_answer: float | None
+    values: dict[str, float]
 
 
 def instantiate_template(
@@ -25,7 +26,39 @@ def instantiate_template(
     answer = _format_numeric(numeric)
     prompt = template.prompt_template.format_map(_format_map(values))
     explanation = template.explanation_template.format_map(_format_map(values))
-    return InstantiatedTemplate(prompt=prompt, answer=answer, explanation=explanation, numeric_answer=float(numeric))
+    return InstantiatedTemplate(
+        prompt=prompt,
+        answer=answer,
+        explanation=explanation,
+        numeric_answer=float(numeric),
+        values=dict(values),
+    )
+
+
+def evaluate_diagnostic_answer(expr: str, values: dict[str, float]) -> str:
+    return _format_numeric(_safe_eval_numeric(expr, values))
+
+
+def validate_numeric_expression(expr: str) -> None:
+    """Reject calls, attributes, containers, and operators outside the safe evaluator grammar."""
+    try:
+        node = ast.parse(expr, mode="eval")
+    except SyntaxError as exc:
+        raise ValueError("Invalid numeric expression") from exc
+    allowed = (
+        ast.Expression, ast.Constant, ast.Name, ast.Load, ast.UnaryOp, ast.UAdd, ast.USub,
+        ast.BinOp, ast.Add, ast.Sub, ast.Mult, ast.Div, ast.FloorDiv, ast.Mod, ast.Pow,
+        ast.IfExp, ast.Compare, ast.Eq, ast.NotEq, ast.Lt, ast.LtE, ast.Gt, ast.GtE,
+        ast.BoolOp, ast.And, ast.Or, ast.UnaryOp, ast.Not, ast.Call,
+    )
+    for child in ast.walk(node):
+        if not isinstance(child, allowed):
+            raise ValueError(f"Unsupported expression node: {type(child).__name__}")
+        if isinstance(child, ast.Constant) and not isinstance(child.value, (int, float)):
+            raise ValueError("Only numeric constants are supported")
+        if isinstance(child, ast.Call):
+            if not isinstance(child.func, ast.Name) or child.func.id != "abs" or len(child.args) != 1 or child.keywords:
+                raise ValueError("Only abs(value) calls are supported")
 
 
 def mc_choices(numeric_answer: float, *, spread: float, rng: random.Random) -> list[str]:
@@ -135,7 +168,7 @@ def _safe_eval_numeric(expr: str, variables: dict[str, float]) -> float:
 
 def _sample_with_constraints(constraint_expr: str, vars_spec: list[TemplateVar], *, rng: random.Random) -> dict[str, float]:
     constraint_expr = (constraint_expr or "").strip()
-    for _attempt in range(200):
+    for _attempt in range(2000):
         values: dict[str, float] = {}
         for var in vars_spec:
             values[var.name] = _sample_var(var, rng=rng)
@@ -157,8 +190,9 @@ def _eval_bool_node(node: ast.AST, variables: dict[str, float]) -> bool:
     if isinstance(node, ast.UnaryOp) and isinstance(node.op, ast.Not):
         return not _eval_bool_node(node.operand, variables)
     if isinstance(node, ast.BoolOp) and isinstance(node.op, (ast.And, ast.Or)):
-        values = [_eval_bool_node(v, variables) for v in node.values]
-        return all(values) if isinstance(node.op, ast.And) else any(values)
+        if isinstance(node.op, ast.And):
+            return all(_eval_bool_node(value, variables) for value in node.values)
+        return any(_eval_bool_node(value, variables) for value in node.values)
     if isinstance(node, ast.Compare):
         left = _eval_node(node.left, variables)
         for op, comp in zip(node.ops, node.comparators):
@@ -198,6 +232,13 @@ def _eval_node(node: ast.AST, variables: dict[str, float]) -> float:
     if isinstance(node, ast.UnaryOp) and isinstance(node.op, (ast.UAdd, ast.USub)):
         val = _eval_node(node.operand, variables)
         return val if isinstance(node.op, ast.UAdd) else -val
+    if isinstance(node, ast.IfExp):
+        branch = node.body if _eval_bool_node(node.test, variables) else node.orelse
+        return _eval_node(branch, variables)
+    if isinstance(node, ast.Call):
+        if isinstance(node.func, ast.Name) and node.func.id == "abs" and len(node.args) == 1 and not node.keywords:
+            return abs(_eval_node(node.args[0], variables))
+        raise ValueError("Unsupported function call")
     if isinstance(node, ast.BinOp) and isinstance(
         node.op, (ast.Add, ast.Sub, ast.Mult, ast.Div, ast.FloorDiv, ast.Mod, ast.Pow)
     ):
@@ -221,10 +262,14 @@ def _eval_node(node: ast.AST, variables: dict[str, float]) -> float:
 
 def _safe_pow(base: float, exp: float) -> float:
     # Prevent accidental/hostile exponentiation from consuming huge CPU/memory.
+    if abs(exp - 0.5) < 1e-9:
+        if base < 0:
+            raise ValueError("Square root base must be non-negative")
+        return float(math.sqrt(base))
     if abs(exp - round(exp)) > 1e-9:
         raise ValueError("Exponent must be an integer")
     iexp = int(round(exp))
-    if iexp < -8 or iexp > 8:
+    if iexp < -16 or iexp > 16:
         raise ValueError("Exponent out of allowed range")
     if abs(base) > 1e6 and abs(iexp) > 2:
         raise ValueError("Base too large for exponentiation")

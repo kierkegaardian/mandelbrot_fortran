@@ -1,0 +1,311 @@
+{
+  "version": 1,
+  "skill": "fractions",
+  "subskills": [
+    {
+      "subskill": "Unit fractions",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.fractions.unit_fractions.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Unit fractions?"
+        },
+        {
+          "id": "depth.v1.fractions.unit_fractions.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.fractions.unit_fractions.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.fractions.unit_fractions.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A recipe is divided into equal portions; choose a fraction model and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Unit fractions",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "What fraction is shaded? (fraction, decimal, or repeating like 0.(3) or 0.1(6))",
+            "explanation": "The denominator is the total slices; the numerator is the shaded slices. Answer: 6/4",
+            "expected_answer": "6/4"
+          },
+          {
+            "stage": "guided",
+            "prompt": "What fraction is shaded? (fraction, decimal, or repeating like 0.(3) or 0.1(6))",
+            "explanation": "Cut a bar into 5 equal parts and name one part as 1/5.",
+            "expected_answer": "3/7"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "What fraction is shaded? (fraction, decimal, or repeating like 0.(3) or 0.1(6))",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "5/3"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "unit_fractions.model_confusion",
+          "feedback": "Using unequal pieces and still calling them fractional parts.",
+          "hint": "A unit fraction names one equal piece of a whole.",
+          "recovery_archetype_id": "depth.v1.fractions.unit_fractions.concept"
+        },
+        {
+          "code": "unit_fractions.procedure_slip",
+          "feedback": "The setup is close, but a step in Unit fractions changed the result.",
+          "hint": "Cut a bar into 5 equal parts and name one part as 1/5.",
+          "recovery_archetype_id": "depth.v1.fractions.unit_fractions.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Equivalent fractions",
+      "content_status": "ready",
+      "archetypes": [
+        {
+          "id": "depth.v1.fractions.equivalent_fractions.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Equivalent fractions?"
+        },
+        {
+          "id": "depth.v1.fractions.equivalent_fractions.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.fractions.equivalent_fractions.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.fractions.equivalent_fractions.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A recipe is rescaled. Build equal-area or multiplicative fraction models, then solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Equivalent fractions",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "Rename 1/2 using fourths.",
+            "explanation": "Split each half into two equal pieces: 1/2 = 2/4.",
+            "expected_answer": "2/4"
+          },
+          {
+            "stage": "guided",
+            "prompt": "Complete 2/3 = ?/9.",
+            "explanation": "The denominator was multiplied by 3, so multiply the numerator by 3 too.",
+            "expected_answer": "6"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "Write a fraction equivalent to 3/5 with denominator 20.",
+            "explanation": "Scale both parts by 4.",
+            "expected_answer": "12/20"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "one_part_scaled",
+          "feedback": "Only one part of the fraction was scaled, so its value changed.",
+          "hint": "Multiply the numerator and denominator by the same nonzero number.",
+          "recovery_archetype_id": "depth.v1.fractions.equivalent_fractions.concept"
+        },
+        {
+          "code": "reciprocal_confusion",
+          "feedback": "The fraction was flipped instead of renamed.",
+          "hint": "Keep the same numerator-to-denominator relationship while scaling both parts.",
+          "recovery_archetype_id": "depth.v1.fractions.equivalent_fractions.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Shaded region meaning",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.fractions.shaded_region_meaning.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Shaded region meaning?"
+        },
+        {
+          "id": "depth.v1.fractions.shaded_region_meaning.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.fractions.shaded_region_meaning.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.fractions.shaded_region_meaning.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A recipe is divided into equal portions; choose a fraction model and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Shaded region meaning",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "What fraction is shaded? (fraction, decimal, or repeating like 0.(3) or 0.1(6))",
+            "explanation": "The denominator is the total slices; the numerator is the shaded slices. Answer: 6/7",
+            "expected_answer": "6/7"
+          },
+          {
+            "stage": "guided",
+            "prompt": "What fraction is shaded? (fraction, decimal, or repeating like 0.(3) or 0.1(6))",
+            "explanation": "State the whole first, then count shaded equal pieces.",
+            "expected_answer": "1/3"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "What fraction is shaded? (fraction, decimal, or repeating like 0.(3) or 0.1(6))",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "3/2"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "shaded_region_meaning.model_confusion",
+          "feedback": "Counting shaded pieces when the whole is not split evenly.",
+          "hint": "The denominator sets the slice count; the numerator counts chosen slices.",
+          "recovery_archetype_id": "depth.v1.fractions.shaded_region_meaning.concept"
+        },
+        {
+          "code": "shaded_region_meaning.procedure_slip",
+          "feedback": "The setup is close, but a step in Shaded region meaning changed the result.",
+          "hint": "State the whole first, then count shaded equal pieces.",
+          "recovery_archetype_id": "depth.v1.fractions.shaded_region_meaning.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Fraction to decimal",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.fractions.fraction_to_decimal.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Fraction to decimal?"
+        },
+        {
+          "id": "depth.v1.fractions.fraction_to_decimal.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.fractions.fraction_to_decimal.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.fractions.fraction_to_decimal.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A recipe is divided into equal portions; choose a fraction model and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Fraction to decimal",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "What fraction is shaded? (fraction, decimal, or repeating like 0.(3) or 0.1(6))",
+            "explanation": "The denominator is the total slices; the numerator is the shaded slices. Answer: 3/4",
+            "expected_answer": "3/4"
+          },
+          {
+            "stage": "guided",
+            "prompt": "What fraction is shaded? (fraction, decimal, or repeating like 0.(3) or 0.1(6))",
+            "explanation": "Rename 1/4 as 25/100, then write 0.25.",
+            "expected_answer": "1/7"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "What fraction is shaded? (fraction, decimal, or repeating like 0.(3) or 0.1(6))",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "2/3"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "fraction_to_decimal.model_confusion",
+          "feedback": "Reading 0.25 as 25 wholes instead of 25 hundredths.",
+          "hint": "A decimal is another way to write a fraction using place value.",
+          "recovery_archetype_id": "depth.v1.fractions.fraction_to_decimal.concept"
+        },
+        {
+          "code": "fraction_to_decimal.procedure_slip",
+          "feedback": "The setup is close, but a step in Fraction to decimal changed the result.",
+          "hint": "Rename 1/4 as 25/100, then write 0.25.",
+          "recovery_archetype_id": "depth.v1.fractions.fraction_to_decimal.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Compare fractions and mixed numbers",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.fractions.compare_fractions_and_mixed_numbers.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Compare fractions and mixed numbers?"
+        },
+        {
+          "id": "depth.v1.fractions.compare_fractions_and_mixed_numbers.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.fractions.compare_fractions_and_mixed_numbers.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.fractions.compare_fractions_and_mixed_numbers.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A recipe is divided into equal portions; choose a fraction model and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Compare fractions and mixed numbers",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "What fraction is shaded? (fraction, decimal, or repeating like 0.(3) or 0.1(6))",
+            "explanation": "The denominator is the total slices; the numerator is the shaded slices. Answer: 3/7",
+            "expected_answer": "3/7"
+          },
+          {
+            "stage": "guided",
+            "prompt": "What fraction is shaded? (fraction, decimal, or repeating like 0.(3) or 0.1(6))",
+            "explanation": "Decide whether 5/8 is above or below 1/2 before comparing it further.",
+            "expected_answer": "1/8"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "What fraction is shaded? (fraction, decimal, or repeating like 0.(3) or 0.1(6))",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "7/8"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "compare_fractions_and_mixed_numbers.model_confusion",
+          "feedback": "Comparing only numerators when denominators differ.",
+          "hint": "Compare using common piece sizes, common numerators, or benchmark values like 1/2 and 1.",
+          "recovery_archetype_id": "depth.v1.fractions.compare_fractions_and_mixed_numbers.concept"
+        },
+        {
+          "code": "compare_fractions_and_mixed_numbers.procedure_slip",
+          "feedback": "The setup is close, but a step in Compare fractions and mixed numbers changed the result.",
+          "hint": "Decide whether 5/8 is above or below 1/2 before comparing it further.",
+          "recovery_archetype_id": "depth.v1.fractions.compare_fractions_and_mixed_numbers.procedure"
+        }
+      ]
+    }
+  ]
+}

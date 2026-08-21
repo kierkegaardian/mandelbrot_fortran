@@ -19,6 +19,9 @@ MandelQuest is an offline-first desktop math practice app for homeschool familie
 - **Offline-first math practice:** Core learning flows run locally with no required internet connection.
 - **Parent-managed learning:** Multiple profiles, parent PIN protection, quiz sets, assignments, grades, and printable worksheets.
 - **Intuition-first practice:** Visual explanations, intuition prompts, expression practice, and word-problem practice.
+- **Curriculum-depth beta:** The typed framework and review manifests cover 26 skills and 158 subskills. Sixteen
+  representative subskills currently have authored conceptual, strategic, transfer, application, worked-example,
+  and misconception-recovery content; the remaining 142 are explicitly reported as scaffold-only.
 - **Cross-platform packaging path:** Windows, macOS, and Linux packaging workflows are included.
 - **Fractal exploration bonus:** The original Mandelbrot and Julia visualizer remains available as a separate learning/exploration mode.
 
@@ -45,7 +48,7 @@ Optional: ImageMagick for PNG conversion (`sudo pacman -S imagemagick`).
 - Keyboard-first shortcuts:
   - Global tabs: `Ctrl+1..6`, `Ctrl+Tab`, `Ctrl+Shift+Tab`
   - Global refresh/focus: `F5` or `Ctrl+R`, `Ctrl+L`
-  - Quiz: `Alt+S` start, `Ctrl+Enter` or `Alt+N` submit/next, `Alt+I` intuition hint
+  - Quiz: `Alt+S` start, `Ctrl+Enter` or `Alt+N` submit/next, `Alt+I` intuition hint, `Alt+E` worked example
   - Parent: `Alt+1..5` sub-tabs, `Ctrl+R` refresh tab, `Ctrl+N` primary create action
   - Dashboard: `Ctrl+R` refresh, `Alt+D` daily review, `Alt+A` assignment
 
@@ -58,6 +61,9 @@ Optional: ImageMagick for PNG conversion (`sudo pacman -S imagemagick`).
 - The beta sends profiles, quiz sets, assignments, completed quiz attempts, and question history (including prompts and answers) to the configured server. Parent PIN data, UI/offline settings, local PDFs, worksheet files and records, Summer Program state, school-year targets, and in-progress quiz resume state stay on the device.
 - Machine-local sync config files should stay outside Git. Back up the local data directory before beta testing.
 - To disable external lesson launches, enable `Enforce offline mode` in Parent settings. Family Sync beta has its own separate opt-in control.
+- `Curriculum Depth beta` is parent-only and off by default. When enabled, it activates only the sixteen subskills
+  that pass the substantive depth audit; scaffold-only, missing, and out-of-scope content falls back to normal
+  practice behavior.
 
 ### Local Data and Backup
 
@@ -75,9 +81,24 @@ Optional: ImageMagick for PNG conversion (`sudo pacman -S imagemagick`).
 
 - Best current fit: homeschool families who want local-first math review, parent oversight, printable practice, and calm desktop workflows.
 - Honest limits today:
-  - Full geometry-proof coverage is not complete.
+  - The deterministic proof-builder is proven on Triangle congruence criteria. Four additional Geometry proof
+    specifications remain scaffold coverage and are not yet exposed as depth-ready curriculum.
   - Algebra 2 and post-Algebra-1 tracks are selective rather than course-complete.
   - The app is not yet positioned as a web/mobile college-placement product.
+
+### Curriculum Depth Audit
+
+- Regenerate the 26 versioned manifests: `python scripts/generate_content_depth_manifests.py`
+- CI-depth audit (25 deterministic seeds per archetype/form):
+  `python -m unittest tests.test_content_depth_framework`
+- Release audit (100 deterministic seeds per archetype/form):
+  `python scripts/audit_content_depth.py --seeds 100 --summary-only`
+- Current reconciled result: `16 ready / 142 thin / 0 missing`. The release command intentionally exits nonzero
+  until all 158 subskills have substantive authored content.
+- Parents can open `Depth Review` in Parent tools and export the same 25-seed ready/thin/missing audit as
+  printable HTML.
+- This is a deep offline practice and instruction companion, not a complete textbook replacement. Algebra 2,
+  Precalculus, Calculus, composite Statistics, and expanded test prep remain outside this initiative.
 - Planned launch pricing: closed beta free, then `$59` per household with a 14-day refund window.
 
 ### Optional Dependency Fallbacks
@@ -138,7 +159,8 @@ Local packaging (same machine):
 ### Known Limitations (v1.0)
 
 - No hosted cloud/LAN sync service ships with v1. The operator-configured Family Sync beta remains disabled unless a compatible server config is supplied and a parent explicitly opts in.
-- Curriculum depth beyond Foundations through Algebra 1 is intentionally deferred.
+- Full curriculum-depth rollout is incomplete: sixteen subskills are ready and 142 remain scaffold-only.
+  Content beyond Foundations through Algebra 1 is intentionally deferred.
 - Historical-PDF ingestion and some conversion helpers rely on optional system tools (`pdftotext`, ImageMagick).
 
 ## Fractal Engine

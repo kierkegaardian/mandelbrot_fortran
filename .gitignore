@@ -27,6 +27,8 @@ __pycache__/
 
 # Local app runtime state
 /data/*
+!/data/content_depth/
+!/data/content_depth/*.json
 !/data/curriculum_index.json
 /worksheets/
 /video_test/

@@ -1,0 +1,433 @@
+{
+  "version": 1,
+  "skill": "data_displays",
+  "subskills": [
+    {
+      "subskill": "Sort data into categories",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.data_displays.sort_data_into_categories.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Sort data into categories?"
+        },
+        {
+          "id": "depth.v1.data_displays.sort_data_into_categories.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.data_displays.sort_data_into_categories.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.data_displays.sort_data_into_categories.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A class survey must be represented and interpreted; choose the display model and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Sort data into categories",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "A T-chart shows apples: 7, bananas: 2, oranges: 2. How many oranges are in the chart?",
+            "explanation": "A category count tells how many items belong in that sorted group. Answer: 2",
+            "expected_answer": "2"
+          },
+          {
+            "stage": "guided",
+            "prompt": "A T-chart shows apples: 6, bananas: 7, oranges: 5. How many bananas are in the chart?",
+            "explanation": "Sort ten toys by color, then count how many are in each group.",
+            "expected_answer": "7"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "A T-chart shows apples: 2, bananas: 2, oranges: 2. How many bananas are in the chart?",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "2"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "sort_data_into_categories.model_confusion",
+          "feedback": "Counting an item twice or putting it in the wrong category.",
+          "hint": "Data becomes useful when each item is placed in the right category before counting.",
+          "recovery_archetype_id": "depth.v1.data_displays.sort_data_into_categories.concept"
+        },
+        {
+          "code": "sort_data_into_categories.procedure_slip",
+          "feedback": "The setup is close, but a step in Sort data into categories changed the result.",
+          "hint": "Sort ten toys by color, then count how many are in each group.",
+          "recovery_archetype_id": "depth.v1.data_displays.sort_data_into_categories.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Picture and bar graphs",
+      "content_status": "ready",
+      "archetypes": [
+        {
+          "id": "depth.v1.data_displays.picture_and_bar_graphs.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Picture and bar graphs?"
+        },
+        {
+          "id": "depth.v1.data_displays.picture_and_bar_graphs.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.data_displays.picture_and_bar_graphs.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.data_displays.picture_and_bar_graphs.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A class survey needs a display. Choose the scale and bar/picture model before answering."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Picture and bar graphs",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "A picture graph has 3 stars and each star means 2 votes. How many votes?",
+            "explanation": "Apply the key: 3 x 2 = 6 votes.",
+            "expected_answer": "6"
+          },
+          {
+            "stage": "guided",
+            "prompt": "A bar reaches 12 while another reaches 7. How many more?",
+            "explanation": "Compare the labeled values: 12 - 7.",
+            "expected_answer": "5"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "Choose a display for counts in four pet categories.",
+            "explanation": "A bar or keyed picture graph compares categorical counts.",
+            "expected_answer": "bar graph"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "ignores_scale",
+          "feedback": "You counted symbols or bar marks without applying the graph scale.",
+          "hint": "Read the key or axis interval before comparing values.",
+          "recovery_archetype_id": "depth.v1.data_displays.picture_and_bar_graphs.concept"
+        },
+        {
+          "code": "wrong_comparison",
+          "feedback": "You read the display but compared the wrong categories or operation.",
+          "hint": "Point to each named category and write its value before calculating.",
+          "recovery_archetype_id": "depth.v1.data_displays.picture_and_bar_graphs.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Dot plots",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.data_displays.dot_plots.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Dot plots?"
+        },
+        {
+          "id": "depth.v1.data_displays.dot_plots.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.data_displays.dot_plots.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.data_displays.dot_plots.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A class survey must be represented and interpreted; choose the display model and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Dot plots",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "A dot plot has 2 dots above oranges. How many oranges were counted?",
+            "explanation": "Each dot stands for one item, so the number of dots is the count. Answer: 2",
+            "expected_answer": "2"
+          },
+          {
+            "stage": "guided",
+            "prompt": "A dot plot has 4 dots above apples. How many apples were counted?",
+            "explanation": "Put one dot for each book read this week, then count the dots above each number.",
+            "expected_answer": "4"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "A dot plot has 3 dots above bananas. How many bananas were counted?",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "3"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "dot_plots.model_confusion",
+          "feedback": "Counting the labels instead of counting the dots.",
+          "hint": "Each dot stands for one data value, stacked above its matching label or number.",
+          "recovery_archetype_id": "depth.v1.data_displays.dot_plots.concept"
+        },
+        {
+          "code": "dot_plots.procedure_slip",
+          "feedback": "The setup is close, but a step in Dot plots changed the result.",
+          "hint": "Put one dot for each book read this week, then count the dots above each number.",
+          "recovery_archetype_id": "depth.v1.data_displays.dot_plots.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Frequency tables",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.data_displays.frequency_tables.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Frequency tables?"
+        },
+        {
+          "id": "depth.v1.data_displays.frequency_tables.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.data_displays.frequency_tables.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.data_displays.frequency_tables.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A class survey must be represented and interpreted; choose the display model and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Frequency tables",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "A frequency table shows apples: 7, bananas: 5, oranges: 5. What is the frequency for apples?",
+            "explanation": "The frequency is the count listed beside a category or value. Answer: 7",
+            "expected_answer": "7"
+          },
+          {
+            "stage": "guided",
+            "prompt": "A frequency table shows apples: 6, bananas: 3, oranges: 5. How many items are in the data set?",
+            "explanation": "Make a table of three snack choices and add the frequencies to check the total.",
+            "expected_answer": "14"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "A frequency table shows apples: 6, bananas: 2, oranges: 4. How many items are in the data set?",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "12"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "frequency_tables.model_confusion",
+          "feedback": "Adding labels instead of adding the frequency counts.",
+          "hint": "A frequency table pairs each category or value with how often it appeared.",
+          "recovery_archetype_id": "depth.v1.data_displays.frequency_tables.concept"
+        },
+        {
+          "code": "frequency_tables.procedure_slip",
+          "feedback": "The setup is close, but a step in Frequency tables changed the result.",
+          "hint": "Make a table of three snack choices and add the frequencies to check the total.",
+          "recovery_archetype_id": "depth.v1.data_displays.frequency_tables.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Stem-and-leaf plots",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.data_displays.stem_and_leaf_plots.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Stem-and-leaf plots?"
+        },
+        {
+          "id": "depth.v1.data_displays.stem_and_leaf_plots.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.data_displays.stem_and_leaf_plots.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.data_displays.stem_and_leaf_plots.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A class survey must be represented and interpreted; choose the display model and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Stem-and-leaf plots",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "In a stem-and-leaf plot, stem 4 has leaves 0, 1, 4. What is the greatest value?",
+            "explanation": "The stem gives the tens digit. The largest leaf 4 makes 44. Answer: 44",
+            "expected_answer": "44"
+          },
+          {
+            "stage": "guided",
+            "prompt": "In a stem-and-leaf plot, stem 6 has leaves 2, 3, 4. What is the greatest value?",
+            "explanation": "Read stem 4 with leaves 2, 5, 8 as 42, 45, and 48.",
+            "expected_answer": "64"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "In a stem-and-leaf plot, stem 3 has leaves 0, 4, 5. What is the greatest value?",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "35"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "stem_and_leaf_plots.model_confusion",
+          "feedback": "Reading the stem or leaf alone instead of joining them into one number.",
+          "hint": "A stem-and-leaf plot keeps place value visible while listing many numbers compactly.",
+          "recovery_archetype_id": "depth.v1.data_displays.stem_and_leaf_plots.concept"
+        },
+        {
+          "code": "stem_and_leaf_plots.procedure_slip",
+          "feedback": "The setup is close, but a step in Stem-and-leaf plots changed the result.",
+          "hint": "Read stem 4 with leaves 2, 5, 8 as 42, 45, and 48.",
+          "recovery_archetype_id": "depth.v1.data_displays.stem_and_leaf_plots.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Scatterplots and paired data",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.data_displays.scatterplots_and_paired_data.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Scatterplots and paired data?"
+        },
+        {
+          "id": "depth.v1.data_displays.scatterplots_and_paired_data.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.data_displays.scatterplots_and_paired_data.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.data_displays.scatterplots_and_paired_data.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A class survey must be represented and interpreted; choose the display model and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Scatterplots and paired data",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "Paired data on a scatterplot follows y = 6x. What y-value pairs with x = 4?",
+            "explanation": "A paired-data point uses an x-value and its matching y-value from the rule. Answer: 24",
+            "expected_answer": "24"
+          },
+          {
+            "stage": "guided",
+            "prompt": "Paired data on a scatterplot follows y = 5x. What y-value pairs with x = 7?",
+            "explanation": "Plot (2, 6) and say what the 2 measures and what the 6 measures.",
+            "expected_answer": "35"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "Paired data on a scatterplot follows y = 6x. What y-value pairs with x = 6?",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "36"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "scatterplots_and_paired_data.model_confusion",
+          "feedback": "Reading only one coordinate and forgetting the pair.",
+          "hint": "A scatterplot shows paired values, so each point answers both x and y at once.",
+          "recovery_archetype_id": "depth.v1.data_displays.scatterplots_and_paired_data.concept"
+        },
+        {
+          "code": "scatterplots_and_paired_data.procedure_slip",
+          "feedback": "The setup is close, but a step in Scatterplots and paired data changed the result.",
+          "hint": "Plot (2, 6) and say what the 2 measures and what the 6 measures.",
+          "recovery_archetype_id": "depth.v1.data_displays.scatterplots_and_paired_data.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Questions from data displays",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.data_displays.questions_from_data_displays.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Questions from data displays?"
+        },
+        {
+          "id": "depth.v1.data_displays.questions_from_data_displays.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.data_displays.questions_from_data_displays.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.data_displays.questions_from_data_displays.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A class survey must be represented and interpreted; choose the display model and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Questions from data displays",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "A graph shows apples: 8, bananas: 1, oranges: 3. How many more apples are there than bananas?",
+            "explanation": "Compare graph counts by subtracting the smaller count from the larger count. Answer: 7",
+            "expected_answer": "7"
+          },
+          {
+            "stage": "guided",
+            "prompt": "A graph shows apples: 7, bananas: 5, oranges: 1. How many more apples are there than oranges?",
+            "explanation": "Ask 'how many more?' about two bars and solve by comparing their heights.",
+            "expected_answer": "6"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "A graph shows apples: 7, bananas: 4, oranges: 5. How many more apples are there than bananas?",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "3"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "questions_from_data_displays.model_confusion",
+          "feedback": "Answering from a favorite category instead of from the data.",
+          "hint": "Graph questions ask you to read, compare, or combine the counts shown in the display.",
+          "recovery_archetype_id": "depth.v1.data_displays.questions_from_data_displays.concept"
+        },
+        {
+          "code": "questions_from_data_displays.procedure_slip",
+          "feedback": "The setup is close, but a step in Questions from data displays changed the result.",
+          "hint": "Ask 'how many more?' about two bars and solve by comparing their heights.",
+          "recovery_archetype_id": "depth.v1.data_displays.questions_from_data_displays.procedure"
+        }
+      ]
+    }
+  ]
+}

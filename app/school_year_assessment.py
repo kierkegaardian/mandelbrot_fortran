@@ -8,6 +8,11 @@ from .paths import worksheets_dir
 from .quiz_content import ContentUnavailableError
 from .quiz_engine import Question, generate_question
 from .texas_grade_goals import TexasGoal, texas_grade_plan
+from .content_depth.printable import blank_proof_table, completed_proof_table
+from .content_depth.generation import generate_depth_question
+from .content_depth.models import ContentStatus, QuestionRequest, ReasoningKind
+from .content_depth.registry import depth_spec_for
+from .ui_settings import load_ui_settings
 
 
 @dataclass(frozen=True)
@@ -45,12 +50,7 @@ def generate_texas_grade_assessment(
         for subskill in goal.subskills:
             for _idx in range(max(1, int(questions_per_subskill))):
                 try:
-                    question = generate_question(
-                        goal.skill,
-                        goal.quiz_level,
-                        "typed",
-                        subskill=subskill,
-                    )
+                    question = _assessment_question(goal, subskill)
                 except (ContentUnavailableError, ValueError, ZeroDivisionError) as exc:
                     skipped.append(f"{goal.label} / {subskill}: {exc}")
                     continue
@@ -79,6 +79,31 @@ def generate_texas_grade_assessment(
     )
 
 
+def _assessment_question(goal: TexasGoal, subskill: str) -> Question:
+    assert goal.skill is not None
+    spec = depth_spec_for(goal.skill, subskill)
+    if (
+        load_ui_settings().curriculum_depth_beta
+        and spec is not None
+        and spec.content_status is ContentStatus.READY
+    ):
+        proof_id = next(
+            (item.archetype_id for item in spec.archetypes if item.reasoning_kind is ReasoningKind.PROOF),
+            None,
+        )
+        if proof_id is not None:
+            return generate_depth_question(
+                QuestionRequest(
+                    goal.skill,
+                    goal.quiz_level,
+                    "typed",
+                    subskill,
+                    preferred_archetype_id=proof_id,
+                )
+            )
+    return generate_question(goal.skill, goal.quiz_level, "typed", subskill=subskill)
+
+
 def _render_packet_html(
     *,
     title: str,
@@ -99,6 +124,7 @@ def _render_packet_html(
         ".goal{font-weight:bold;color:#2f4858}",
         ".subskill{color:#5b6f84;font-size:0.94em}",
         ".answer{margin-top:8px}",
+        ".proof-table{border-collapse:collapse;width:100%;margin-top:8px}.proof-table th,.proof-table td{border:1px solid #777;padding:8px;height:24px}",
         ".skipped{color:#8a5b3c}",
         "@media print{*{print-color-adjust:exact;-webkit-print-color-adjust:exact}.answer-key{break-before:page}}",
         "</style></head><body>",
@@ -114,7 +140,10 @@ def _render_packet_html(
         body.append(f"<div class='goal'>{index}. {html.escape(item.goal.label)} ({html.escape(refs)})</div>")
         body.append(f"<div class='subskill'>{html.escape(item.subskill)}</div>")
         body.append(f"<p>{html.escape(item.question.prompt)}</p>")
-        body.append("<div class='answer'>Answer: ______________________________</div>")
+        if item.question.proof_spec is not None:
+            body.append(blank_proof_table(item.question.proof_spec))
+        else:
+            body.append("<div class='answer'>Answer: ______________________________</div>")
         body.append("</div>")
     if not items:
         body.append("<p>No quiz-ready questions could be generated for this grade target.</p>")
@@ -122,10 +151,14 @@ def _render_packet_html(
     body.append("<div class='answer-key'>")
     body.append("<h2>Answer Key</h2>")
     for index, item in enumerate(items, start=1):
-        body.append(
-            f"<div>{index}. {html.escape(str(item.question.correct_answer))} "
-            f"<span class='subskill'>({html.escape(item.subskill)})</span></div>"
-        )
+        if item.question.proof_spec is not None:
+            body.append(f"<div>{index}. <span class='subskill'>({html.escape(item.subskill)})</span></div>")
+            body.append(completed_proof_table(item.question.proof_spec))
+        else:
+            body.append(
+                f"<div>{index}. {html.escape(str(item.question.correct_answer))} "
+                f"<span class='subskill'>({html.escape(item.subskill)})</span></div>"
+            )
     if skipped:
         body.append("<h2>Coverage Notes</h2>")
         body.append("<ul class='skipped'>")

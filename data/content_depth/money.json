@@ -1,0 +1,250 @@
+{
+  "version": 1,
+  "skill": "money",
+  "subskills": [
+    {
+      "subskill": "Dollar-coin values",
+      "content_status": "ready",
+      "archetypes": [
+        {
+          "id": "depth.v1.money.dollar_coin_values.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Dollar-coin values?"
+        },
+        {
+          "id": "depth.v1.money.dollar_coin_values.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.money.dollar_coin_values.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.money.dollar_coin_values.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A family is checking a purchase; select a money model and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Dollar-coin values",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "How many cents is one dime worth?",
+            "explanation": "A dime has the fixed value of 10 cents.",
+            "expected_answer": "10 cents"
+          },
+          {
+            "stage": "guided",
+            "prompt": "How many cents are three nickels worth?",
+            "explanation": "Each nickel is 5 cents, so 3 x 5 = 15 cents.",
+            "expected_answer": "15 cents"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "How many cents equal one dollar?",
+            "explanation": "One dollar is the same value as 100 cents.",
+            "expected_answer": "100 cents"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "coin_count_not_value",
+          "feedback": "You reported how many coins there are instead of what the coins are worth.",
+          "hint": "Multiply the coin count by the cents value of one coin.",
+          "recovery_archetype_id": "depth.v1.money.dollar_coin_values.concept"
+        },
+        {
+          "code": "dollars_cents_scale",
+          "feedback": "You used a cents total as though it were the same number of dollars.",
+          "hint": "Keep the unit visible: one dollar equals 100 cents.",
+          "recovery_archetype_id": "depth.v1.money.dollar_coin_values.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Making change",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.money.making_change.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Making change?"
+        },
+        {
+          "id": "depth.v1.money.making_change.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.money.making_change.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.money.making_change.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A family is checking a purchase; select a money model and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Making change",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "How much money is shown? (write as $d.cc)",
+            "explanation": "Money totals combine dollars and cents. Answer: $2.25",
+            "expected_answer": "$2.25"
+          },
+          {
+            "stage": "guided",
+            "prompt": "How much money is shown? (write as $d.cc)",
+            "explanation": "Count up from the price to the amount paid instead of only subtracting.",
+            "expected_answer": "$34.33"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "How much money is shown? (write as $d.cc)",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "$26.04"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "making_change.model_confusion",
+          "feedback": "Subtracting in the wrong direction and getting a negative change amount.",
+          "hint": "Change is the difference between the cost and what was paid.",
+          "recovery_archetype_id": "depth.v1.money.making_change.concept"
+        },
+        {
+          "code": "making_change.procedure_slip",
+          "feedback": "The setup is close, but a step in Making change changed the result.",
+          "hint": "Count up from the price to the amount paid instead of only subtracting.",
+          "recovery_archetype_id": "depth.v1.money.making_change.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Budget-style totals",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.money.budget_style_totals.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Budget-style totals?"
+        },
+        {
+          "id": "depth.v1.money.budget_style_totals.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.money.budget_style_totals.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.money.budget_style_totals.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A family is checking a purchase; select a money model and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Budget-style totals",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "How much money is shown? (write as $d.cc)",
+            "explanation": "Money totals combine dollars and cents. Answer: $30.07",
+            "expected_answer": "$30.07"
+          },
+          {
+            "stage": "guided",
+            "prompt": "How much money is shown? (write as $d.cc)",
+            "explanation": "Add two prices and say the cents total before converting past 100 cents.",
+            "expected_answer": "$24.26"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "How much money is shown? (write as $d.cc)",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "$13.83"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "budget_style_totals.model_confusion",
+          "feedback": "Dropping cents when adding dollar amounts.",
+          "hint": "A budget total is just several small costs joined into one amount.",
+          "recovery_archetype_id": "depth.v1.money.budget_style_totals.concept"
+        },
+        {
+          "code": "budget_style_totals.procedure_slip",
+          "feedback": "The setup is close, but a step in Budget-style totals changed the result.",
+          "hint": "Add two prices and say the cents total before converting past 100 cents.",
+          "recovery_archetype_id": "depth.v1.money.budget_style_totals.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Place-value in currency",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.money.place_value_in_currency.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Place-value in currency?"
+        },
+        {
+          "id": "depth.v1.money.place_value_in_currency.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.money.place_value_in_currency.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.money.place_value_in_currency.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A family is checking a purchase; select a money model and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Place-value in currency",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "How much money is shown? (write as $d.cc)",
+            "explanation": "Money totals combine dollars and cents. Answer: $32.93",
+            "expected_answer": "$32.93"
+          },
+          {
+            "stage": "guided",
+            "prompt": "How much money is shown? (write as $d.cc)",
+            "explanation": "Rewrite $2.08 as 2 dollars and 8 hundredths of a dollar.",
+            "expected_answer": "$30.10"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "How much money is shown? (write as $d.cc)",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "$48.14"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "place_value_in_currency.model_confusion",
+          "feedback": "Treating $3.45 like 345 whole dollars.",
+          "hint": "Cents are hundredths of a dollar, so 45 cents means 45/100 of a dollar.",
+          "recovery_archetype_id": "depth.v1.money.place_value_in_currency.concept"
+        },
+        {
+          "code": "place_value_in_currency.procedure_slip",
+          "feedback": "The setup is close, but a step in Place-value in currency changed the result.",
+          "hint": "Rewrite $2.08 as 2 dollars and 8 hundredths of a dollar.",
+          "recovery_archetype_id": "depth.v1.money.place_value_in_currency.procedure"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,189 @@
+{
+  "version": 1,
+  "skill": "stats_percent",
+  "subskills": [
+    {
+      "subskill": "Percent change",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.stats_percent.percent_change.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Percent change?"
+        },
+        {
+          "id": "depth.v1.stats_percent.percent_change.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.stats_percent.percent_change.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.stats_percent.percent_change.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A report compares a part with a whole; choose a percent model and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Percent change",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "What is 76% of 74?",
+            "explanation": "Percent questions are multiplying by a decimal fraction of one. Answer: 56.24",
+            "expected_answer": "56.24"
+          },
+          {
+            "stage": "guided",
+            "prompt": "What is 28% of 365?",
+            "explanation": "Find 15% of 80 by splitting it into 10% and 5%. Why does that mental shortcut work?",
+            "expected_answer": "102.2"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "What is 80% of 366?",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "292.8"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "percent_change.model_confusion",
+          "feedback": "Moving the decimal or dropping the percent sign without changing the value correctly.",
+          "hint": "Percent means per 100. Once you know the out-of-100 version, you can scale it to any total.",
+          "recovery_archetype_id": "depth.v1.stats_percent.percent_change.concept"
+        },
+        {
+          "code": "percent_change.procedure_slip",
+          "feedback": "The setup is close, but a step in Percent change changed the result.",
+          "hint": "Find 15% of 80 by splitting it into 10% and 5%. Why does that mental shortcut work?",
+          "recovery_archetype_id": "depth.v1.stats_percent.percent_change.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Reverse percent change",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.stats_percent.reverse_percent_change.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Reverse percent change?"
+        },
+        {
+          "id": "depth.v1.stats_percent.reverse_percent_change.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.stats_percent.reverse_percent_change.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.stats_percent.reverse_percent_change.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A report compares a part with a whole; choose a percent model and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Reverse percent change",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "26.86 is 17% of what number?",
+            "explanation": "Reverse percent problems divide the part by the percent-as-decimal to recover the whole. Answer: 158",
+            "expected_answer": "158"
+          },
+          {
+            "stage": "guided",
+            "prompt": "58.8 is 40% of what number?",
+            "explanation": "Find 15% of 80 by splitting it into 10% and 5%. Why does that mental shortcut work?",
+            "expected_answer": "147"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "119.7 is 57% of what number?",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "210"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "reverse_percent_change.model_confusion",
+          "feedback": "Moving the decimal or dropping the percent sign without changing the value correctly.",
+          "hint": "Percent means per 100. Once you know the out-of-100 version, you can scale it to any total.",
+          "recovery_archetype_id": "depth.v1.stats_percent.reverse_percent_change.concept"
+        },
+        {
+          "code": "reverse_percent_change.procedure_slip",
+          "feedback": "The setup is close, but a step in Reverse percent change changed the result.",
+          "hint": "Find 15% of 80 by splitting it into 10% and 5%. Why does that mental shortcut work?",
+          "recovery_archetype_id": "depth.v1.stats_percent.reverse_percent_change.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Percent word problems",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.stats_percent.percent_word_problems.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Percent word problems?"
+        },
+        {
+          "id": "depth.v1.stats_percent.percent_word_problems.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.stats_percent.percent_word_problems.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.stats_percent.percent_word_problems.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A report compares a part with a whole; choose a percent model and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Percent word problems",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "A sample has 27 items in one category out of 76 total. About what percent is that category?",
+            "explanation": "A percent compares the category count to the whole sample out of 100. Answer: 35.53",
+            "expected_answer": "35.53"
+          },
+          {
+            "stage": "guided",
+            "prompt": "A sample has 48 items in one category out of 97 total. About what percent is that category?",
+            "explanation": "Find 15% of 80 by splitting it into 10% and 5%. Why does that mental shortcut work?",
+            "expected_answer": "49.48"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "A sample has 8 items in one category out of 25 total. About what percent is that category?",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "32"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "percent_word_problems.model_confusion",
+          "feedback": "Moving the decimal or dropping the percent sign without changing the value correctly.",
+          "hint": "Percent means per 100. Once you know the out-of-100 version, you can scale it to any total.",
+          "recovery_archetype_id": "depth.v1.stats_percent.percent_word_problems.concept"
+        },
+        {
+          "code": "percent_word_problems.procedure_slip",
+          "feedback": "The setup is close, but a step in Percent word problems changed the result.",
+          "hint": "Find 15% of 80 by splitting it into 10% and 5%. Why does that mental shortcut work?",
+          "recovery_archetype_id": "depth.v1.stats_percent.percent_word_problems.procedure"
+        }
+      ]
+    }
+  ]
+}

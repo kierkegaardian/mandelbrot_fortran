@@ -1,0 +1,250 @@
+{
+  "version": 1,
+  "skill": "geometry_shapes",
+  "subskills": [
+    {
+      "subskill": "2D shape attributes",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.geometry_shapes.2d_shape_attributes.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports 2D shape attributes?"
+        },
+        {
+          "id": "depth.v1.geometry_shapes.2d_shape_attributes.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.geometry_shapes.2d_shape_attributes.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.geometry_shapes.2d_shape_attributes.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A designer must classify or build a shape; choose an attribute model and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: 2D shape attributes",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "How many sides does a square have?",
+            "explanation": "A square has 4 sides and 4 vertices. Count defining attributes only. Answer: 4",
+            "expected_answer": "4"
+          },
+          {
+            "stage": "guided",
+            "prompt": "How many vertices does a rhombus have?",
+            "explanation": "Pick a triangle in two sizes and explain why both are still triangles.",
+            "expected_answer": "4"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "How many vertices does a rhombus have?",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "4"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "2d_shape_attributes.model_confusion",
+          "feedback": "Sorting by size or color when the question asks what makes the shape itself.",
+          "hint": "A shape's defining attributes are the features that must stay true, such as sides and vertices.",
+          "recovery_archetype_id": "depth.v1.geometry_shapes.2d_shape_attributes.concept"
+        },
+        {
+          "code": "2d_shape_attributes.procedure_slip",
+          "feedback": "The setup is close, but a step in 2D shape attributes changed the result.",
+          "hint": "Pick a triangle in two sizes and explain why both are still triangles.",
+          "recovery_archetype_id": "depth.v1.geometry_shapes.2d_shape_attributes.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "3D solid attributes",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.geometry_shapes.3d_solid_attributes.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports 3D solid attributes?"
+        },
+        {
+          "id": "depth.v1.geometry_shapes.3d_solid_attributes.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.geometry_shapes.3d_solid_attributes.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.geometry_shapes.3d_solid_attributes.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A designer must classify or build a shape; choose an attribute model and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: 3D solid attributes",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "How many flat faces does a triangular prism have?",
+            "explanation": "Count only flat faces. A triangular prism has 5 flat face(s). Answer: 5",
+            "expected_answer": "5"
+          },
+          {
+            "stage": "guided",
+            "prompt": "Does a cylinder have a curved surface? Answer yes or no.",
+            "explanation": "Hold a can, a box, and a ball; name which parts are flat and which are curved.",
+            "expected_answer": "yes"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "Does a rectangular prism have a curved surface? Answer yes or no.",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "no"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "3d_solid_attributes.model_confusion",
+          "feedback": "Counting a curved surface as a flat face.",
+          "hint": "A solid can be described by flat faces, curved surfaces, edges, and vertices.",
+          "recovery_archetype_id": "depth.v1.geometry_shapes.3d_solid_attributes.concept"
+        },
+        {
+          "code": "3d_solid_attributes.procedure_slip",
+          "feedback": "The setup is close, but a step in 3D solid attributes changed the result.",
+          "hint": "Hold a can, a box, and a ball; name which parts are flat and which are curved.",
+          "recovery_archetype_id": "depth.v1.geometry_shapes.3d_solid_attributes.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Compose 2D shapes",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.geometry_shapes.compose_2d_shapes.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Compose 2D shapes?"
+        },
+        {
+          "id": "depth.v1.geometry_shapes.compose_2d_shapes.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.geometry_shapes.compose_2d_shapes.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.geometry_shapes.compose_2d_shapes.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A designer must classify or build a shape; choose an attribute model and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Compose 2D shapes",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "Two squares side by side can compose what target shape?",
+            "explanation": "Joined without gaps or overlaps, the 2 pieces make a rectangle. Answer: rectangle",
+            "expected_answer": "rectangle"
+          },
+          {
+            "stage": "guided",
+            "prompt": "Two squares side by side can compose what target shape?",
+            "explanation": "Use two squares to make a rectangle, then try another way to make a rectangle.",
+            "expected_answer": "rectangle"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "Six same-size triangles meeting at the center can compose what target shape?",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "hexagon"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "compose_2d_shapes.model_confusion",
+          "feedback": "Leaving a gap between pieces and still counting it as the composed target.",
+          "hint": "Composing shapes means joining smaller shapes without gaps or overlaps to make a target shape.",
+          "recovery_archetype_id": "depth.v1.geometry_shapes.compose_2d_shapes.concept"
+        },
+        {
+          "code": "compose_2d_shapes.procedure_slip",
+          "feedback": "The setup is close, but a step in Compose 2D shapes changed the result.",
+          "hint": "Use two squares to make a rectangle, then try another way to make a rectangle.",
+          "recovery_archetype_id": "depth.v1.geometry_shapes.compose_2d_shapes.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Equal shares of shapes",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.geometry_shapes.equal_shares_of_shapes.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Equal shares of shapes?"
+        },
+        {
+          "id": "depth.v1.geometry_shapes.equal_shares_of_shapes.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.geometry_shapes.equal_shares_of_shapes.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.geometry_shapes.equal_shares_of_shapes.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A designer must classify or build a shape; choose an attribute model and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Equal shares of shapes",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "A rectangle is split into 4 equal parts. What word names the parts?",
+            "explanation": "4 fair shares are called fourths; each part must be the same size. Answer: fourths",
+            "expected_answer": "fourths"
+          },
+          {
+            "stage": "guided",
+            "prompt": "A rectangle is split into 8 equal parts. What word names the parts?",
+            "explanation": "Fold a paper into two equal parts and then four equal parts; name the shares.",
+            "expected_answer": "eighths"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "A rectangle is split into 4 equal parts. What word names the parts?",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "fourths"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "equal_shares_of_shapes.model_confusion",
+          "feedback": "Calling any two pieces halves even when one piece is larger.",
+          "hint": "Fair shares are equal-size parts of the same whole.",
+          "recovery_archetype_id": "depth.v1.geometry_shapes.equal_shares_of_shapes.concept"
+        },
+        {
+          "code": "equal_shares_of_shapes.procedure_slip",
+          "feedback": "The setup is close, but a step in Equal shares of shapes changed the result.",
+          "hint": "Fold a paper into two equal parts and then four equal parts; name the shares.",
+          "recovery_archetype_id": "depth.v1.geometry_shapes.equal_shares_of_shapes.procedure"
+        }
+      ]
+    }
+  ]
+}

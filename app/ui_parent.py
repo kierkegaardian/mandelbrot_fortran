@@ -15,6 +15,8 @@ from . import (
     sync_service,
 )
 from .explanations import PARENT_EXPLANATION
+from .content_depth.audit import build_depth_audit
+from .content_depth.report import generate_depth_review_report
 from .parent_worksheets import WorksheetSection
 from .quiz_engine import SKILLS
 from .skill_graph import SKILL_LABELS, subskills_for
@@ -42,6 +44,7 @@ from .ui_settings import (
     save_enforce_offline_mode,
     save_show_external_links,
     save_summer_mode,
+    save_curriculum_depth_beta,
 )
 from .ui_widgets import int_spinbox
 
@@ -145,6 +148,19 @@ class ParentPanel:
             variable=self.offline_mode_var,
             command=self._toggle_offline_mode,
         ).pack(anchor=tk.W, padx=10, pady=(4, 4))
+
+        depth_box = ttk.LabelFrame(self.profile_tab, text="Depth Review")
+        depth_box.pack(fill=tk.X, padx=10, pady=(8, 4))
+        self.depth_review_var = tk.StringVar(value="Depth Review: refresh to audit all 158 in-scope subskills.")
+        ttk.Label(depth_box, textvariable=self.depth_review_var, wraplength=520).pack(
+            anchor=tk.W, padx=8, pady=(6, 4)
+        )
+        depth_actions = ttk.Frame(depth_box)
+        depth_actions.pack(anchor=tk.W, padx=8, pady=(0, 6))
+        ttk.Button(depth_actions, text="Refresh", command=self._refresh_depth_review).pack(side=tk.LEFT)
+        ttk.Button(depth_actions, text="Export Printable Review", command=self._export_depth_review).pack(
+            side=tk.LEFT, padx=(6, 0)
+        )
         self.summer_mode_var = tk.BooleanVar(value=settings.summer_mode)
         ttk.Checkbutton(
             self.profile_tab,
@@ -152,6 +168,18 @@ class ParentPanel:
             variable=self.summer_mode_var,
             command=self._toggle_summer_mode,
         ).pack(anchor=tk.W, padx=10, pady=(4, 4))
+        self.curriculum_depth_beta_var = tk.BooleanVar(value=settings.curriculum_depth_beta)
+        ttk.Checkbutton(
+            self.profile_tab,
+            text="Curriculum Depth beta (ready subskills only)",
+            variable=self.curriculum_depth_beta_var,
+            command=self._toggle_curriculum_depth_beta,
+        ).pack(anchor=tk.W, padx=10, pady=(4, 4))
+        ttk.Label(
+            self.profile_tab,
+            text="Off by default while authored content rolls out; scaffold-only subskills keep normal practice.",
+            wraplength=520,
+        ).pack(anchor=tk.W, padx=28, pady=(0, 4))
 
         preset_row = ttk.Frame(self.profile_tab)
         preset_row.pack(fill=tk.X, padx=10, pady=(2, 4))
@@ -735,6 +763,23 @@ class ParentPanel:
             "Summer Mode",
             "Summer Mode updates quiz and lesson filtering right away. Tab layout changes apply on the next launch.",
         )
+
+    def _toggle_curriculum_depth_beta(self) -> None:
+        save_curriculum_depth_beta(self.curriculum_depth_beta_var.get())
+        self._notify_settings_changed()
+
+    def _refresh_depth_review(self) -> None:
+        report = build_depth_audit(seeds_per_archetype=25)
+        self.depth_review_var.set(
+            "Depth Review: "
+            f"{report.ready_count} ready • {report.thin_count} thin • {report.missing_count} missing "
+            f"across {len(report.rows)} subskills."
+        )
+
+    def _export_depth_review(self) -> None:
+        path = generate_depth_review_report()
+        webbrowser.open(path.resolve().as_uri())
+        messagebox.showinfo("Depth Review", f"Printable curriculum depth review saved to {path}.")
 
     def _notify_settings_changed(self) -> None:
         if self._settings_changed_callback is None:

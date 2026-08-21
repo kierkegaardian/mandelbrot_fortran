@@ -243,7 +243,7 @@ _INTUITION_BY_SKILL_SUBSKILL: dict[tuple[str, str], IntuitionPack] = {
     ("money", "Dollar-coin values"): _pack(
         "Money uses place value with units: dollars, dimes, nickels, pennies.",
         "Mixing coin names with their values.",
-        "Make $1.37 with bills and coins in two different ways.",
+        "Sort a penny, nickel, dime, and quarter, then say each value in cents.",
     ),
     ("money", "Making change"): _pack(
         "Change is the difference between the cost and what was paid.",

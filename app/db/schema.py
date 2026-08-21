@@ -63,6 +63,9 @@ def init_db() -> None:
                 user_answer TEXT NOT NULL,
                 is_correct INTEGER NOT NULL,
                 explanation TEXT NOT NULL,
+                archetype_id TEXT,
+                misconception_code TEXT,
+                response_kind TEXT,
                 sync_id TEXT NOT NULL,
                 sync_updated_at TEXT NOT NULL,
                 sync_deleted INTEGER NOT NULL DEFAULT 0,
@@ -129,6 +132,9 @@ def init_db() -> None:
                 min_level INTEGER NOT NULL DEFAULT 1,
                 max_level INTEGER NOT NULL DEFAULT 3,
                 choice_spread REAL NOT NULL DEFAULT 4.0,
+                archetype_id TEXT,
+                reasoning_kind TEXT NOT NULL DEFAULT 'legacy',
+                misconceptions_json TEXT NOT NULL DEFAULT '[]',
                 active INTEGER NOT NULL DEFAULT 1,
                 created_at TEXT NOT NULL,
                 FOREIGN KEY(book_id) REFERENCES books(id) ON DELETE SET NULL
@@ -185,6 +191,18 @@ def init_db() -> None:
                 state_json TEXT NOT NULL,
                 updated_at TEXT NOT NULL,
                 FOREIGN KEY(profile_id) REFERENCES profiles(id) ON DELETE CASCADE
+            );
+
+            CREATE TABLE IF NOT EXISTS quiz_recoveries (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                quiz_question_id INTEGER NOT NULL,
+                misconception_code TEXT,
+                corrected_answer TEXT NOT NULL,
+                transfer_archetype_id TEXT,
+                transfer_answer TEXT,
+                transfer_correct INTEGER,
+                created_at TEXT NOT NULL,
+                FOREIGN KEY(quiz_question_id) REFERENCES quiz_questions(id) ON DELETE CASCADE
             );
 
             CREATE TABLE IF NOT EXISTS daily_goal_history (

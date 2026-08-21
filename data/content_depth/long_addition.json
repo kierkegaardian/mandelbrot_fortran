@@ -1,0 +1,250 @@
+{
+  "version": 1,
+  "skill": "long_addition",
+  "subskills": [
+    {
+      "subskill": "Column alignment",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.long_addition.column_alignment.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Column alignment?"
+        },
+        {
+          "id": "depth.v1.long_addition.column_alignment.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.long_addition.column_alignment.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.long_addition.column_alignment.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "Choose a useful mathematical model and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Column alignment",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "Long addition: 196 + 726 = ?",
+            "explanation": "Long addition lines up place values and uses carries. Answer: 922",
+            "expected_answer": "922"
+          },
+          {
+            "stage": "guided",
+            "prompt": "Long addition: 283 + 836 = ?",
+            "explanation": "Line up the rightmost digits before adding anything.",
+            "expected_answer": "1119"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "Long addition: 852 + 364 = ?",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "1216"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "column_alignment.model_confusion",
+          "feedback": "Sliding digits out of their place-value columns.",
+          "hint": "Long addition works because ones stay with ones and tens stay with tens.",
+          "recovery_archetype_id": "depth.v1.long_addition.column_alignment.concept"
+        },
+        {
+          "code": "column_alignment.procedure_slip",
+          "feedback": "The setup is close, but a step in Column alignment changed the result.",
+          "hint": "Line up the rightmost digits before adding anything.",
+          "recovery_archetype_id": "depth.v1.long_addition.column_alignment.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Carry handling",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.long_addition.carry_handling.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Carry handling?"
+        },
+        {
+          "id": "depth.v1.long_addition.carry_handling.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.long_addition.carry_handling.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.long_addition.carry_handling.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "Choose a useful mathematical model and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Carry handling",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "Long addition: 869 + 739 = ?",
+            "explanation": "Long addition lines up place values and uses carries. Answer: 1608",
+            "expected_answer": "1608"
+          },
+          {
+            "stage": "guided",
+            "prompt": "Long addition: 845 + 871 = ?",
+            "explanation": "Add the ones column and explain why 13 ones becomes 1 ten and 3 ones.",
+            "expected_answer": "1716"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "Long addition: 882 + 172 = ?",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "1054"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "carry_handling.model_confusion",
+          "feedback": "Writing the carry but forgetting to add it into the next place.",
+          "hint": "A carry is a regrouped ten, hundred, or thousand written in the next column.",
+          "recovery_archetype_id": "depth.v1.long_addition.carry_handling.concept"
+        },
+        {
+          "code": "carry_handling.procedure_slip",
+          "feedback": "The setup is close, but a step in Carry handling changed the result.",
+          "hint": "Add the ones column and explain why 13 ones becomes 1 ten and 3 ones.",
+          "recovery_archetype_id": "depth.v1.long_addition.carry_handling.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Multi-digit accuracy",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.long_addition.multi_digit_accuracy.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Multi-digit accuracy?"
+        },
+        {
+          "id": "depth.v1.long_addition.multi_digit_accuracy.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.long_addition.multi_digit_accuracy.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.long_addition.multi_digit_accuracy.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "Choose a useful mathematical model and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Multi-digit accuracy",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "Long addition: 607 + 952 = ?",
+            "explanation": "Long addition lines up place values and uses carries. Answer: 1559",
+            "expected_answer": "1559"
+          },
+          {
+            "stage": "guided",
+            "prompt": "Long addition: 464 + 230 = ?",
+            "explanation": "Cover the finished columns and focus on one place at a time.",
+            "expected_answer": "694"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "Long addition: 567 + 494 = ?",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "1061"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "multi_digit_accuracy.model_confusion",
+          "feedback": "Rushing across the row and mixing column values together.",
+          "hint": "Work one column at a time so each place-value decision stays clear.",
+          "recovery_archetype_id": "depth.v1.long_addition.multi_digit_accuracy.concept"
+        },
+        {
+          "code": "multi_digit_accuracy.procedure_slip",
+          "feedback": "The setup is close, but a step in Multi-digit accuracy changed the result.",
+          "hint": "Cover the finished columns and focus on one place at a time.",
+          "recovery_archetype_id": "depth.v1.long_addition.multi_digit_accuracy.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Place-value structure",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.long_addition.place_value_structure.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Place-value structure?"
+        },
+        {
+          "id": "depth.v1.long_addition.place_value_structure.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.long_addition.place_value_structure.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.long_addition.place_value_structure.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "Choose a useful mathematical model and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Place-value structure",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "Long addition: 298 + 245 = ?",
+            "explanation": "Long addition lines up place values and uses carries. Answer: 543",
+            "expected_answer": "543"
+          },
+          {
+            "stage": "guided",
+            "prompt": "Long addition: 771 + 794 = ?",
+            "explanation": "Say each addend in expanded form before adding.",
+            "expected_answer": "1565"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "Long addition: 698 + 152 = ?",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "850"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "place_value_structure.model_confusion",
+          "feedback": "Treating 300 + 40 + 7 like separate unrelated digits.",
+          "hint": "The written algorithm is a place-value trade system, not a digit trick.",
+          "recovery_archetype_id": "depth.v1.long_addition.place_value_structure.concept"
+        },
+        {
+          "code": "place_value_structure.procedure_slip",
+          "feedback": "The setup is close, but a step in Place-value structure changed the result.",
+          "hint": "Say each addend in expanded form before adding.",
+          "recovery_archetype_id": "depth.v1.long_addition.place_value_structure.procedure"
+        }
+      ]
+    }
+  ]
+}
