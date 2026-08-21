@@ -27,9 +27,19 @@
 <body>
   <div class="shell">
     <h1>MandelQuest god-file split plan</h1>
-    <p class="meta">2026-07-08 · Plan only · Revised after Codex · Source: <code>docs/god-file-split-plan-2026-07-08.md</code></p>
-    <p><span class="tag">No implementation yet</span> Behavior-preserving modular split for oversized Python modules.</p>
-    <p><strong>Codex verdict:</strong> <span class="warn">approve-with-changes</span> — review at <code>reviews/codex/god-file-split-plan-review-2026-07-08.md</code>. PR1 blocked until DB config override + explicit export inventory are specified (now in plan §0 / §3.0).</p>
+    <p class="meta">2026-07-08 · PR1 completed 2026-07-13 · Revised after Codex · Source: <code>docs/god-file-split-plan-2026-07-08.md</code></p>
+    <p><span class="tag">PR1 complete</span> Behavior-preserving modular split for oversized Python modules.</p>
+    <p><strong>Codex verdict:</strong> <span class="warn">approve-with-changes</span> — review at <code>reviews/codex/god-file-split-plan-review-2026-07-08.md</code>. The DB config, export-inventory, migration-size, and broad-consumer prerequisites are now implemented.</p>
+
+    <div class="panel">
+      <h2>PR1 receipt</h2>
+      <ul>
+        <li class="ok"><code>app/db.py</code> replaced by an explicit 88-symbol <code>app/db/</code> facade</li>
+        <li class="ok">19 bounded implementation modules; largest is 290 lines</li>
+        <li class="ok">82 public signatures and 153 SQL literals preserved exactly</li>
+        <li class="ok">68 DB-consumer tests and all 347 discovered tests pass; app smoke OK</li>
+      </ul>
+    </div>
 
     <div class="panel">
       <h2>Problem</h2>
@@ -64,8 +74,11 @@
   connection.py
   schema.py
   migrations.py
+  migration_helpers.py
   profiles.py
+  school_year.py
   parent_auth.py
+  quiz_progress.py
   quiz_sets.py
   attempts.py
   progress.py
@@ -73,10 +86,10 @@
   worksheets.py
   assignments.py
   historical.py
-  books.py
-  summer.py
-  school_year.py
-  _rows.py</pre>
+  summer_programs.py
+  summer_tasks.py
+  summer_assessments.py
+  _util.py</pre>
       <p><strong>Quiz:</strong> thin facade + extract helpers; reuse existing <code>*_generators.py</code> modules.</p>
       <p><strong>UI:</strong> keep public classes; compose per-tab/section modules.</p>
     </div>
@@ -120,9 +133,10 @@
       <ul>
         <li>[x] Codex review of this plan vs AGENTS + codebase</li>
         <li>[x] Fold P1/P2 revisions into plan §0 / §3.0 / PR1</li>
-        <li>[ ] Human approve PR1 (package facade + set_db_config)</li>
-        <li>[ ] Implement PR1 only after approval</li>
-        <li>[ ] Re-run broad DB consumer tests + LOC report; decide PR2</li>
+        <li>[x] Human approve PR1 (package facade + set_db_config)</li>
+        <li>[x] Implement PR1 only after approval</li>
+        <li>[x] Re-run broad DB consumer tests + LOC report</li>
+        <li>[ ] Reassess and decide PR2</li>
       </ul>
     </div>
 

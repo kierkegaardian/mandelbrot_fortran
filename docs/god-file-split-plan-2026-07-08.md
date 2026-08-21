@@ -2,11 +2,26 @@
 
 **Date:** 2026-07-08
 **Repo:** `/home/user/projects/mandelbrot_fortran`
-**Status:** Plan only (no implementation in this slice) — **revised after Codex review**
+**Status:** PR1 complete on 2026-07-13; PR2-PR5 remain planned — **revised after Codex review**
 **Trigger:** Maintainability debt from oversized modules vs AGENTS file-size rule (`<= 300` LOC target; pause before committing `> 400` LOC without rationale)
 **Codex review:** `reviews/codex/god-file-split-plan-review-2026-07-08.md` (also `reviews/codex/latest.md`) — **verdict: approve-with-changes** (P1 blockers for PR1 as originally written)
 
 Browser-friendly twin: `docs/god-file-split-plan-2026-07-08.html`
+
+---
+
+## Implementation receipt (2026-07-13)
+
+PR1 is complete. `app/db.py` is replaced by an explicit `app/db/` package with a static 88-symbol facade,
+one shared config provider, and 19 bounded implementation modules. Every package file is `<=290` lines.
+
+Behavior-preservation checks passed:
+
+- all 82 public DB function signatures match the checkpoint source;
+- all 153 SQL literals are preserved with none added or removed;
+- the 68-test broad DB-consumer set passes;
+- all three DB-facing scripts pass import/`--help` smoke;
+- app smoke reports `[smoke-test] OK` and full discovery passes 347 tests.
 
 ---
 
@@ -372,9 +387,9 @@ Do **not** require network. Do **not** change remotes or push without user confi
 
 ---
 
-## 11. Suggested first implementation slice (when approved)
+## 11. Completed first implementation slice
 
-**PR1 only:** `app/db.py` → `app/db/` package with full re-export facade and DB-focused tests. Stop and reassess LOC/test health before PR2.
+**PR1 complete:** `app/db.py` → `app/db/` package with full re-export facade and DB-focused tests. Stop and reassess LOC/test health before PR2.
 
 ---
 
