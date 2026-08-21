@@ -4,7 +4,7 @@ from pathlib import Path
 import sys
 
 
-project_root = Path(__file__).resolve().parent
+project_root = Path(SPECPATH).resolve()
 entry_script = project_root / "explorer.py"
 
 binary_name = "mandelbrot_gen.exe" if sys.platform.startswith("win") else "mandelbrot_gen"
@@ -14,6 +14,7 @@ if not binary_path.exists():
 
 datas = [
     (str(project_root / "assets"), "assets"),
+    (str(project_root / "data" / "curriculum_index.json"), "data"),
 ]
 config_dir = project_root / "config"
 if config_dir.exists():

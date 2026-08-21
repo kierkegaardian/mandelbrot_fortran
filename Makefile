@@ -1,4 +1,5 @@
 FC = gfortran
+PYTHON ?= python3
 FFLAGS = -O3 -Wall -cpp -fPIE -ffree-line-length-none
 LDFLAGS =
 SRC_DIR = src
@@ -42,7 +43,7 @@ png: all
 	magick $(PPM) $(PNG)
 
 test:
-	python -m unittest discover -s tests -q
+	$(PYTHON) -m tests.run_isolated
 
 check: all test
 

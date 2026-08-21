@@ -6,8 +6,7 @@ import sqlite3
 import unittest
 
 from app.early_math_catalog import early_math_specs
-from app.curriculum import curriculum_pdf_path
-from app.paths import data_dir
+from app.paths import bundled_data_dir, data_dir
 from app.quiz_content import ContentUnavailableError
 from app.quiz_engine import SKILLS, generate_question
 from app.skill_graph import subskills_for
@@ -19,7 +18,7 @@ def _db_path():
 
 
 def _curriculum_index_path():
-    return data_dir() / "curriculum_index.json"
+    return bundled_data_dir() / "curriculum_index.json"
 
 TEMPLATE_BACKED_SKILLS = (
     "stats_percent",
@@ -131,12 +130,12 @@ class PedagogicalIntegrityTests(unittest.TestCase):
         with self.assertRaises(ContentUnavailableError):
             generate_question("sat_math", 2, "typed", subskill="Confidence intervals")
 
-    def test_exposed_nonlegacy_skills_have_curriculum_entries_and_local_pdfs(self) -> None:
+    def test_exposed_nonlegacy_skills_have_curriculum_entries_and_pdf_references(self) -> None:
         by_skill = self._curriculum_index_by_skill()
         for skill in SKILLS:
             with self.subTest(skill=skill):
                 self.assertIn(skill, by_skill)
-                self.assertIsNotNone(curriculum_pdf_path(skill))
+                self.assertTrue(str(by_skill[skill].get("pdf", "")).strip())
 
     def test_long_arithmetic_skills_use_basic_arithmetic_source(self) -> None:
         by_skill = self._curriculum_index_by_skill()
