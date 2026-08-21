@@ -1,0 +1,250 @@
+{
+  "version": 1,
+  "skill": "ratios",
+  "subskills": [
+    {
+      "subskill": "Ratio language (to:of)",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.ratios.ratio_language_to_of.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Ratio language (to:of)?"
+        },
+        {
+          "id": "depth.v1.ratios.ratio_language_to_of.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.ratios.ratio_language_to_of.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.ratios.ratio_language_to_of.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A recipe or scale plan must keep quantities proportional; choose a ratio model and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Ratio language (to:of)",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "What is the ratio of A to B if A=7 and B=5? (A:B)",
+            "explanation": "A ratio compares two amounts side by side. Answer: 7:5",
+            "expected_answer": "7:5"
+          },
+          {
+            "stage": "guided",
+            "prompt": "What is the ratio of A to B if A=7 and B=5? (A:B)",
+            "explanation": "Read 2:3 as '2 to 3' and say what each part counts.",
+            "expected_answer": "7:5"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "What is the ratio of A to B if A=5 and B=9? (A:B)",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "5:9"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "ratio_language_to_of.model_confusion",
+          "feedback": "Treating a ratio like a subtraction sentence.",
+          "hint": "A ratio is a comparison recipe: for every this, there are that many of those.",
+          "recovery_archetype_id": "depth.v1.ratios.ratio_language_to_of.concept"
+        },
+        {
+          "code": "ratio_language_to_of.procedure_slip",
+          "feedback": "The setup is close, but a step in Ratio language (to:of) changed the result.",
+          "hint": "Read 2:3 as '2 to 3' and say what each part counts.",
+          "recovery_archetype_id": "depth.v1.ratios.ratio_language_to_of.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Equivalent ratios",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.ratios.equivalent_ratios.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Equivalent ratios?"
+        },
+        {
+          "id": "depth.v1.ratios.equivalent_ratios.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.ratios.equivalent_ratios.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.ratios.equivalent_ratios.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A recipe or scale plan must keep quantities proportional; choose a ratio model and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Equivalent ratios",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "What is the ratio of A to B if A=2 and B=2? (A:B)",
+            "explanation": "A ratio compares two amounts side by side. Answer: 2:2",
+            "expected_answer": "2:2"
+          },
+          {
+            "stage": "guided",
+            "prompt": "What is the ratio of A to B if A=7 and B=5? (A:B)",
+            "explanation": "Double both parts of 3:5 and check that the comparison stays the same.",
+            "expected_answer": "7:5"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "What is the ratio of A to B if A=2 and B=5? (A:B)",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "2:5"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "equivalent_ratios.model_confusion",
+          "feedback": "Changing only one side of the ratio and calling it equivalent.",
+          "hint": "Equivalent ratios tell the same story at a different scale.",
+          "recovery_archetype_id": "depth.v1.ratios.equivalent_ratios.concept"
+        },
+        {
+          "code": "equivalent_ratios.procedure_slip",
+          "feedback": "The setup is close, but a step in Equivalent ratios changed the result.",
+          "hint": "Double both parts of 3:5 and check that the comparison stays the same.",
+          "recovery_archetype_id": "depth.v1.ratios.equivalent_ratios.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Fractional comparison",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.ratios.fractional_comparison.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Fractional comparison?"
+        },
+        {
+          "id": "depth.v1.ratios.fractional_comparison.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.ratios.fractional_comparison.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.ratios.fractional_comparison.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A recipe or scale plan must keep quantities proportional; choose a ratio model and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Fractional comparison",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "What is the ratio of A to B if A=2 and B=10? (A:B)",
+            "explanation": "A ratio compares two amounts side by side. Answer: 2:10",
+            "expected_answer": "2:10"
+          },
+          {
+            "stage": "guided",
+            "prompt": "What is the ratio of A to B if A=1 and B=4? (A:B)",
+            "explanation": "Turn 4 girls to 6 boys into 4/6 and explain what it means.",
+            "expected_answer": "1:4"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "What is the ratio of A to B if A=4 and B=2? (A:B)",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "4:2"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "fractional_comparison.model_confusion",
+          "feedback": "Forgetting which quantity belongs in the numerator.",
+          "hint": "A ratio can be read as a fraction when you want one part compared to another.",
+          "recovery_archetype_id": "depth.v1.ratios.fractional_comparison.concept"
+        },
+        {
+          "code": "fractional_comparison.procedure_slip",
+          "feedback": "The setup is close, but a step in Fractional comparison changed the result.",
+          "hint": "Turn 4 girls to 6 boys into 4/6 and explain what it means.",
+          "recovery_archetype_id": "depth.v1.ratios.fractional_comparison.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Unit rates and proportional relationships",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.ratios.unit_rates_and_proportional_relationships.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Unit rates and proportional relationships?"
+        },
+        {
+          "id": "depth.v1.ratios.unit_rates_and_proportional_relationships.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.ratios.unit_rates_and_proportional_relationships.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.ratios.unit_rates_and_proportional_relationships.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A recipe or scale plan must keep quantities proportional; choose a ratio model and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Unit rates and proportional relationships",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "What is the ratio of A to B if A=3 and B=9? (A:B)",
+            "explanation": "A ratio compares two amounts side by side. Answer: 3:9",
+            "expected_answer": "3:9"
+          },
+          {
+            "stage": "guided",
+            "prompt": "What is the ratio of A to B if A=1 and B=3? (A:B)",
+            "explanation": "If 18 miles takes 3 hours, find the miles in 1 hour first.",
+            "expected_answer": "1:3"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "What is the ratio of A to B if A=1 and B=2? (A:B)",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "1:2"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "unit_rates_and_proportional_relationships.model_confusion",
+          "feedback": "Comparing totals without first finding the per-1 amount.",
+          "hint": "A unit rate shrinks the comparison down to 'per 1' so scaling is easier.",
+          "recovery_archetype_id": "depth.v1.ratios.unit_rates_and_proportional_relationships.concept"
+        },
+        {
+          "code": "unit_rates_and_proportional_relationships.procedure_slip",
+          "feedback": "The setup is close, but a step in Unit rates and proportional relationships changed the result.",
+          "hint": "If 18 miles takes 3 hours, find the miles in 1 hour first.",
+          "recovery_archetype_id": "depth.v1.ratios.unit_rates_and_proportional_relationships.procedure"
+        }
+      ]
+    }
+  ]
+}

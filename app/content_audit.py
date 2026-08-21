@@ -9,6 +9,7 @@ from .quiz_engine import ContentUnavailableError, generate_question
 from .summer_program_defs import SummerUnitDefinition, lane_units
 from .summer_program_quiz import scaffold_step_count_for_target, summer_unit_targets
 from .summer_program_template_seed import EXPRESSION_TARGETS, WORD_TARGETS
+from .content_depth.audit import build_depth_audit
 
 Readiness = str
 
@@ -19,7 +20,7 @@ MISSING: Readiness = "missing"
 _READINESS_ORDER: dict[Readiness, int] = {MISSING: 0, THIN: 1, READY: 2}
 
 _OPEN_RESOURCE_BY_SOURCE_ID: dict[str, str] = {
-    "ray_new_practical_arithmetic_1897": "https://archive.org/details/newpracticalarit00rayj",
+    "ray_new_practical_arithmetic_1897": "https://www.canadiana.ca/view/oocihm.12698",
     "basic_arithmetic_student_workbook_2013": "",
     "elementary_algebra_openstax_2e": "https://openstax.org/details/books/elementary-algebra-2e",
     "college_algebra_stitz_zeager_2013": "https://www.stitz-zeager.com/",
@@ -124,13 +125,17 @@ class SummerResourceReview:
 
 
 def summer_resource_review(lane: str) -> SummerResourceReview:
+    depth_rows = {
+        (row.skill, row.subskill): row
+        for row in build_depth_audit(generation_types=("typed",)).rows
+    }
     rows: list[SummerContentAuditRow] = []
     for unit in lane_units(lane):
-        rows.extend(_audit_unit(lane, unit))
+        rows.extend(_audit_unit(lane, unit, depth_rows))
     return SummerResourceReview(lane=lane, rows=tuple(rows))
 
 
-def _audit_unit(lane: str, unit: SummerUnitDefinition) -> tuple[SummerContentAuditRow, ...]:
+def _audit_unit(lane: str, unit: SummerUnitDefinition, depth_rows: dict) -> tuple[SummerContentAuditRow, ...]:
     rows: list[SummerContentAuditRow] = []
     for skill, subskill in summer_unit_targets(unit.code, unit.skill, unit.subskill):
         if subskill is None:
@@ -153,6 +158,12 @@ def _audit_unit(lane: str, unit: SummerUnitDefinition) -> tuple[SummerContentAud
             khan_url=khan_url,
             open_resource_url=open_resource_url,
         )
+        depth_row = depth_rows.get((skill, subskill))
+        if depth_row is not None:
+            # Resource readiness and curriculum-depth readiness answer different
+            # questions. Preserve the established Summer audit result while
+            # exposing the depth status as compatibility context.
+            notes = tuple((*notes, f"Curriculum depth: {depth_row.readiness}."))
         rows.append(
             SummerContentAuditRow(
                 lane=lane,

@@ -1,0 +1,67 @@
+{
+  "version": 1,
+  "skill": "stats_probability",
+  "subskills": [
+    {
+      "subskill": "Probability models",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.stats_probability.probability_models.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Probability models?"
+        },
+        {
+          "id": "depth.v1.stats_probability.probability_models.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.stats_probability.probability_models.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.stats_probability.probability_models.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A planning decision depends on chance; construct a probability model and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Probability models",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "In equally likely outcomes, if 3 outcomes are a success out of 4, what is the probability of success?",
+            "explanation": "Probability is the number of successful outcomes divided by all equally likely outcomes. Answer: 3/4",
+            "expected_answer": "3/4"
+          },
+          {
+            "stage": "guided",
+            "prompt": "In equally likely outcomes, if 3 outcomes are a success out of 9, what is the probability of success?",
+            "explanation": "A spinner has 3 blue, 1 red, and 2 green sections. What is P(not red), and how do you know?",
+            "expected_answer": "1/3"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "In equally likely outcomes, if 9 outcomes are a success out of 10, what is the probability of success?",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "9/10"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "probability_models.model_confusion",
+          "feedback": "Confusing one observed result with the long-run likelihood of that result.",
+          "hint": "Probability is a fraction of the sample space: favorable outcomes over total equally likely outcomes.",
+          "recovery_archetype_id": "depth.v1.stats_probability.probability_models.concept"
+        },
+        {
+          "code": "probability_models.procedure_slip",
+          "feedback": "The setup is close, but a step in Probability models changed the result.",
+          "hint": "A spinner has 3 blue, 1 red, and 2 green sections. What is P(not red), and how do you know?",
+          "recovery_archetype_id": "depth.v1.stats_probability.probability_models.procedure"
+        }
+      ]
+    }
+  ]
+}

@@ -9,6 +9,13 @@ from .data_analysis import build_data_analysis_problem
 from .early_math_catalog import early_math_subskills_for
 from .financial_literacy import build_financial_literacy_problem
 from .models import ScaffoldStep
+from .content_depth.models import (
+    MisconceptionCandidate,
+    ProofSpec,
+    ReasoningKind,
+    ResponseKind,
+    WorkedExample,
+)
 from .quiz_content import ContentUnavailableError, is_template_only_skill
 from .algebra_1_generators import build_algebra_1_problem
 from .algebra_2_generators import build_algebra_2_problem
@@ -92,6 +99,17 @@ class Question:
     question_label: str = "Core"
     mode: str = "expression"
     scaffold_steps: Optional[list[ScaffoldStep]] = None
+    archetype_id: Optional[str] = None
+    reasoning_kind: ReasoningKind = ReasoningKind.LEGACY
+    response_kind: ResponseKind = ResponseKind.TYPED
+    misconceptions: tuple[MisconceptionCandidate, ...] = ()
+    worked_example: Optional[WorkedExample] = None
+    proof_spec: Optional[ProofSpec] = None
+    matched_misconception_code: Optional[str] = None
+    recovery_corrected_answer: Optional[str] = None
+    recovery_transfer_archetype_id: Optional[str] = None
+    recovery_transfer_answer: Optional[str] = None
+    recovery_transfer_correct: Optional[bool] = None
 
 
 def _level_range(level: int) -> tuple[int, int]:

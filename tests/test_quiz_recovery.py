@@ -5,6 +5,7 @@ import unittest
 from app.quiz_engine import Question
 from app.quiz_flow import submit_answer
 from app.quiz_recovery import build_mistake_recovery_text
+from app.content_depth.models import MisconceptionCandidate
 
 
 class _Var:
@@ -136,6 +137,19 @@ class QuizRecoveryTests(unittest.TestCase):
         self.assertIn("Why this mistake happens: Mixing up the groups.", explanation)
         self.assertIn("Guided redo: Draw 3 groups of 4.", explanation)
         self.assertIn("Mental model: Think about groups.", explanation)
+
+    def test_matched_misconception_uses_targeted_feedback_and_hint(self) -> None:
+        candidate = MisconceptionCandidate(
+            "counted_first_group_twice", "12", "You counted the starting group twice.",
+            "Keep the first group and count on only the second.", "depth.add.concept",
+        )
+        explanation = build_mistake_recovery_text(
+            type("_Explanation", (), {"mental_model": "Join groups.", "common_mistake": "", "try_this": ""})(),
+            phase="redo",
+            misconception=candidate,
+        )
+        self.assertIn(candidate.feedback, explanation)
+        self.assertIn(candidate.hint, explanation)
 
 
 if __name__ == "__main__":

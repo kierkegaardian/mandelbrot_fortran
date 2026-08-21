@@ -5,6 +5,8 @@ from pathlib import Path
 import unittest
 from urllib.parse import unquote, urlsplit
 
+from app.content_depth.audit import build_depth_audit
+
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 DOCS_ROOT = REPO_ROOT / "docs"
@@ -82,6 +84,19 @@ class PublicDocsTests(unittest.TestCase):
         ):
             with self.subTest(expected=expected):
                 self.assertIn(expected, workflow)
+
+    def test_curriculum_depth_copy_matches_the_substantive_audit(self) -> None:
+        report = build_depth_audit(seeds_per_archetype=25)
+        readme = (REPO_ROOT / "README.md").read_text(encoding="utf-8")
+        todo = (REPO_ROOT / "TODO.md").read_text(encoding="utf-8")
+        coverage = (DOCS_ROOT / "coverage.html").read_text(encoding="utf-8")
+        counts = f"`{report.ready_count} ready / {report.thin_count} thin / {report.missing_count} missing`"
+
+        self.assertEqual(len(report.rows), 158)
+        self.assertIn(counts, readme)
+        self.assertIn(counts, todo)
+        self.assertIn("eleven depth-ready subskills", coverage)
+        self.assertIn("one advanced finance pilot", coverage)
 
 
 if __name__ == "__main__":

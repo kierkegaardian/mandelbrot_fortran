@@ -1,0 +1,738 @@
+{
+  "version": 1,
+  "skill": "algebra_linear",
+  "subskills": [
+    {
+      "subskill": "One-step equations",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.algebra_linear.one_step_equations.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports One-step equations?"
+        },
+        {
+          "id": "depth.v1.algebra_linear.one_step_equations.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.algebra_linear.one_step_equations.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.algebra_linear.one_step_equations.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A steady-rate situation needs a linear model; construct the equation and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: One-step equations",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "Solve for x: 5x = -50",
+            "explanation": "Undo multiplication/division to isolate x. Answer: -10",
+            "expected_answer": "-10"
+          },
+          {
+            "stage": "guided",
+            "prompt": "Solve for x: 5x = -35",
+            "explanation": "Solve 2x + 5 = 17 with two mirrored steps.",
+            "expected_answer": "-7"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "Solve for x: -6x = 72",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "-12"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "one_step_equations.model_confusion",
+          "feedback": "Applying an operation to only one side of the equation.",
+          "hint": "Think of a scale: whatever you do to one side, do to the other.",
+          "recovery_archetype_id": "depth.v1.algebra_linear.one_step_equations.concept"
+        },
+        {
+          "code": "one_step_equations.procedure_slip",
+          "feedback": "The setup is close, but a step in One-step equations changed the result.",
+          "hint": "Solve 2x + 5 = 17 with two mirrored steps.",
+          "recovery_archetype_id": "depth.v1.algebra_linear.one_step_equations.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Two-step equations",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.algebra_linear.two_step_equations.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Two-step equations?"
+        },
+        {
+          "id": "depth.v1.algebra_linear.two_step_equations.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.algebra_linear.two_step_equations.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.algebra_linear.two_step_equations.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A steady-rate situation needs a linear model; construct the equation and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Two-step equations",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "Solve for x: 4x + 11 = 7",
+            "explanation": "Undo constant addition/subtraction first, then divide by the coefficient. Answer: -1",
+            "expected_answer": "-1"
+          },
+          {
+            "stage": "guided",
+            "prompt": "Solve for x: 3x + 19 = 22",
+            "explanation": "Solve 2x + 5 = 17 with two mirrored steps.",
+            "expected_answer": "1"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "Solve for x: -2x + -12 = -28",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "8"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "two_step_equations.model_confusion",
+          "feedback": "Applying an operation to only one side of the equation.",
+          "hint": "Think of a scale: whatever you do to one side, do to the other.",
+          "recovery_archetype_id": "depth.v1.algebra_linear.two_step_equations.concept"
+        },
+        {
+          "code": "two_step_equations.procedure_slip",
+          "feedback": "The setup is close, but a step in Two-step equations changed the result.",
+          "hint": "Solve 2x + 5 = 17 with two mirrored steps.",
+          "recovery_archetype_id": "depth.v1.algebra_linear.two_step_equations.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Variables on both sides",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.algebra_linear.variables_on_both_sides.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Variables on both sides?"
+        },
+        {
+          "id": "depth.v1.algebra_linear.variables_on_both_sides.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.algebra_linear.variables_on_both_sides.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.algebra_linear.variables_on_both_sides.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A steady-rate situation needs a linear model; construct the equation and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Variables on both sides",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "Solve for x: -2x + 1 = -6x + -23",
+            "explanation": "Move x terms to one side and constants to the other, then divide. Answer: -6",
+            "expected_answer": "-6"
+          },
+          {
+            "stage": "guided",
+            "prompt": "Solve for x: 8x + 8 = 7x + 1",
+            "explanation": "Solve 2x + 5 = 17 with two mirrored steps.",
+            "expected_answer": "-7"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "Solve for x: 3x + 3 = 2x + 8",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "5"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "variables_on_both_sides.model_confusion",
+          "feedback": "Applying an operation to only one side of the equation.",
+          "hint": "Think of a scale: whatever you do to one side, do to the other.",
+          "recovery_archetype_id": "depth.v1.algebra_linear.variables_on_both_sides.concept"
+        },
+        {
+          "code": "variables_on_both_sides.procedure_slip",
+          "feedback": "The setup is close, but a step in Variables on both sides changed the result.",
+          "hint": "Solve 2x + 5 = 17 with two mirrored steps.",
+          "recovery_archetype_id": "depth.v1.algebra_linear.variables_on_both_sides.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Distributive property equations",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.algebra_linear.distributive_property_equations.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Distributive property equations?"
+        },
+        {
+          "id": "depth.v1.algebra_linear.distributive_property_equations.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.algebra_linear.distributive_property_equations.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.algebra_linear.distributive_property_equations.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A steady-rate situation needs a linear model; construct the equation and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Distributive property equations",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "Solve for x: 4(x + 2) + -9 = -25",
+            "explanation": "Distribute, combine like terms, then isolate x. Answer: -6",
+            "expected_answer": "-6"
+          },
+          {
+            "stage": "guided",
+            "prompt": "Solve for x: -2(x + -3) + -10 = -12",
+            "explanation": "Solve 2x + 5 = 17 with two mirrored steps.",
+            "expected_answer": "4"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "Solve for x: 5(x + 0) + 4 = -26",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "-6"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "distributive_property_equations.model_confusion",
+          "feedback": "Applying an operation to only one side of the equation.",
+          "hint": "Think of a scale: whatever you do to one side, do to the other.",
+          "recovery_archetype_id": "depth.v1.algebra_linear.distributive_property_equations.concept"
+        },
+        {
+          "code": "distributive_property_equations.procedure_slip",
+          "feedback": "The setup is close, but a step in Distributive property equations changed the result.",
+          "hint": "Solve 2x + 5 = 17 with two mirrored steps.",
+          "recovery_archetype_id": "depth.v1.algebra_linear.distributive_property_equations.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Fraction and decimal equations",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.algebra_linear.fraction_and_decimal_equations.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Fraction and decimal equations?"
+        },
+        {
+          "id": "depth.v1.algebra_linear.fraction_and_decimal_equations.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.algebra_linear.fraction_and_decimal_equations.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.algebra_linear.fraction_and_decimal_equations.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A steady-rate situation needs a linear model; construct the equation and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Fraction and decimal equations",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "Solve for x: x/10 + -3 = -3",
+            "explanation": "Subtract the constant term, then multiply both sides by the denominator. Answer: 0",
+            "expected_answer": "0"
+          },
+          {
+            "stage": "guided",
+            "prompt": "Solve for x: x/5 + 7 = 8",
+            "explanation": "Solve 2x + 5 = 17 with two mirrored steps.",
+            "expected_answer": "5"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "Solve for x: x/6 + 12 = 7",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "-30"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "fraction_and_decimal_equations.model_confusion",
+          "feedback": "Applying an operation to only one side of the equation.",
+          "hint": "Think of a scale: whatever you do to one side, do to the other.",
+          "recovery_archetype_id": "depth.v1.algebra_linear.fraction_and_decimal_equations.concept"
+        },
+        {
+          "code": "fraction_and_decimal_equations.procedure_slip",
+          "feedback": "The setup is close, but a step in Fraction and decimal equations changed the result.",
+          "hint": "Solve 2x + 5 = 17 with two mirrored steps.",
+          "recovery_archetype_id": "depth.v1.algebra_linear.fraction_and_decimal_equations.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Linear inequalities",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.algebra_linear.linear_inequalities.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Linear inequalities?"
+        },
+        {
+          "id": "depth.v1.algebra_linear.linear_inequalities.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.algebra_linear.linear_inequalities.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.algebra_linear.linear_inequalities.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A steady-rate situation needs a linear model; construct the equation and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Linear inequalities",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "For 5x + 2 > 44, what is the smallest integer value of x that satisfies it?",
+            "explanation": "Solve the inequality, then choose the next integer above the boundary. Answer: 9",
+            "expected_answer": "9"
+          },
+          {
+            "stage": "guided",
+            "prompt": "For 3x + 4 > 47, what is the smallest integer value of x that satisfies it?",
+            "explanation": "Solve 2x + 5 = 17 with two mirrored steps.",
+            "expected_answer": "15"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "For 4x + 5 > -1, what is the smallest integer value of x that satisfies it?",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "-1"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "linear_inequalities.model_confusion",
+          "feedback": "Applying an operation to only one side of the equation.",
+          "hint": "Think of a scale: whatever you do to one side, do to the other.",
+          "recovery_archetype_id": "depth.v1.algebra_linear.linear_inequalities.concept"
+        },
+        {
+          "code": "linear_inequalities.procedure_slip",
+          "feedback": "The setup is close, but a step in Linear inequalities changed the result.",
+          "hint": "Solve 2x + 5 = 17 with two mirrored steps.",
+          "recovery_archetype_id": "depth.v1.algebra_linear.linear_inequalities.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Slope from points",
+      "content_status": "ready",
+      "archetypes": [
+        {
+          "id": "depth.v1.algebra_linear.slope_from_points.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Slope from points?"
+        },
+        {
+          "id": "depth.v1.algebra_linear.slope_from_points.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.algebra_linear.slope_from_points.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.algebra_linear.slope_from_points.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A ramp designer compares rise with run. Construct the rate-of-change model, then solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Slope from points",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "Find the slope through (1, 2) and (4, 8).",
+            "explanation": "Slope = (8 - 2)/(4 - 1) = 6/3.",
+            "expected_answer": "2"
+          },
+          {
+            "stage": "guided",
+            "prompt": "Find the slope through (0, 5) and (2, 1).",
+            "explanation": "Use change in y over change in x: (1 - 5)/(2 - 0).",
+            "expected_answer": "-2"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "A ramp rises 3 units over a run of 12. Find its slope.",
+            "explanation": "Rise/run = 3/12 = 1/4.",
+            "expected_answer": "1/4"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "run_over_rise",
+          "feedback": "The slope ratio was inverted.",
+          "hint": "Use change in y over change in x in the same point order.",
+          "recovery_archetype_id": "depth.v1.algebra_linear.slope_from_points.concept"
+        },
+        {
+          "code": "coordinate_sign",
+          "feedback": "A coordinate order or subtraction sign changed between numerator and denominator.",
+          "hint": "Write (y2-y1)/(x2-x1) before substituting values.",
+          "recovery_archetype_id": "depth.v1.algebra_linear.slope_from_points.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Slope-intercept interpretation",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.algebra_linear.slope_intercept_interpretation.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Slope-intercept interpretation?"
+        },
+        {
+          "id": "depth.v1.algebra_linear.slope_intercept_interpretation.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.algebra_linear.slope_intercept_interpretation.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.algebra_linear.slope_intercept_interpretation.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A steady-rate situation needs a linear model; construct the equation and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Slope-intercept interpretation",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "For y = 6x + -9, what is y when x = 2?",
+            "explanation": "Substitute x into slope-intercept form and evaluate. Answer: 3",
+            "expected_answer": "3"
+          },
+          {
+            "stage": "guided",
+            "prompt": "For y = 1x + -12, what is y when x = 6?",
+            "explanation": "Solve 2x + 5 = 17 with two mirrored steps.",
+            "expected_answer": "-6"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "For y = 6x + -5, what is y when x = 5?",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "25"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "slope_intercept_interpretation.model_confusion",
+          "feedback": "Applying an operation to only one side of the equation.",
+          "hint": "Think of a scale: whatever you do to one side, do to the other.",
+          "recovery_archetype_id": "depth.v1.algebra_linear.slope_intercept_interpretation.concept"
+        },
+        {
+          "code": "slope_intercept_interpretation.procedure_slip",
+          "feedback": "The setup is close, but a step in Slope-intercept interpretation changed the result.",
+          "hint": "Solve 2x + 5 = 17 with two mirrored steps.",
+          "recovery_archetype_id": "depth.v1.algebra_linear.slope_intercept_interpretation.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Systems of linear equations",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.algebra_linear.systems_of_linear_equations.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Systems of linear equations?"
+        },
+        {
+          "id": "depth.v1.algebra_linear.systems_of_linear_equations.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.algebra_linear.systems_of_linear_equations.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.algebra_linear.systems_of_linear_equations.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A steady-rate situation needs a linear model; construct the equation and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Systems of linear equations",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "Solve the system and report x: x + y = 11, x - y = 3.",
+            "explanation": "Add the equations to eliminate y, then divide by 2. Answer: 7",
+            "expected_answer": "7"
+          },
+          {
+            "stage": "guided",
+            "prompt": "Solve the system and report x: x + y = 4, x - y = 8.",
+            "explanation": "Solve 2x + 5 = 17 with two mirrored steps.",
+            "expected_answer": "6"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "Solve the system and report x: x + y = -14, x - y = -2.",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "-8"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "systems_of_linear_equations.model_confusion",
+          "feedback": "Applying an operation to only one side of the equation.",
+          "hint": "Think of a scale: whatever you do to one side, do to the other.",
+          "recovery_archetype_id": "depth.v1.algebra_linear.systems_of_linear_equations.concept"
+        },
+        {
+          "code": "systems_of_linear_equations.procedure_slip",
+          "feedback": "The setup is close, but a step in Systems of linear equations changed the result.",
+          "hint": "Solve 2x + 5 = 17 with two mirrored steps.",
+          "recovery_archetype_id": "depth.v1.algebra_linear.systems_of_linear_equations.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Direct variation",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.algebra_linear.direct_variation.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Direct variation?"
+        },
+        {
+          "id": "depth.v1.algebra_linear.direct_variation.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.algebra_linear.direct_variation.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.algebra_linear.direct_variation.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A steady-rate situation needs a linear model; construct the equation and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Direct variation",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "If y varies directly with x and y = 8 when x = 2, find y when x = 14.",
+            "explanation": "Direct variation means y = kx with constant ratio y/x. Answer: 56",
+            "expected_answer": "56"
+          },
+          {
+            "stage": "guided",
+            "prompt": "If y varies directly with x and y = 24 when x = 3, find y when x = 10.",
+            "explanation": "Solve 2x + 5 = 17 with two mirrored steps.",
+            "expected_answer": "80"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "If y varies directly with x and y = 16 when x = 4, find y when x = 9.",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "36"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "direct_variation.model_confusion",
+          "feedback": "Applying an operation to only one side of the equation.",
+          "hint": "Think of a scale: whatever you do to one side, do to the other.",
+          "recovery_archetype_id": "depth.v1.algebra_linear.direct_variation.concept"
+        },
+        {
+          "code": "direct_variation.procedure_slip",
+          "feedback": "The setup is close, but a step in Direct variation changed the result.",
+          "hint": "Solve 2x + 5 = 17 with two mirrored steps.",
+          "recovery_archetype_id": "depth.v1.algebra_linear.direct_variation.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Rate and unit-rate modeling",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.algebra_linear.rate_and_unit_rate_modeling.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Rate and unit-rate modeling?"
+        },
+        {
+          "id": "depth.v1.algebra_linear.rate_and_unit_rate_modeling.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.algebra_linear.rate_and_unit_rate_modeling.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.algebra_linear.rate_and_unit_rate_modeling.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A steady-rate situation needs a linear model; construct the equation and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Rate and unit-rate modeling",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "A ride costs $4 plus $2 per mile. What is the total cost for 20 miles?",
+            "explanation": "This is a linear model: total = fixed fee + rate * quantity. Answer: 44",
+            "expected_answer": "44"
+          },
+          {
+            "stage": "guided",
+            "prompt": "A ride costs $7 plus $5 per mile. What is the total cost for 5 miles?",
+            "explanation": "Solve 2x + 5 = 17 with two mirrored steps.",
+            "expected_answer": "32"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "A ride costs $4 plus $2 per mile. What is the total cost for 16 miles?",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "36"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "rate_and_unit_rate_modeling.model_confusion",
+          "feedback": "Applying an operation to only one side of the equation.",
+          "hint": "Think of a scale: whatever you do to one side, do to the other.",
+          "recovery_archetype_id": "depth.v1.algebra_linear.rate_and_unit_rate_modeling.concept"
+        },
+        {
+          "code": "rate_and_unit_rate_modeling.procedure_slip",
+          "feedback": "The setup is close, but a step in Rate and unit-rate modeling changed the result.",
+          "hint": "Solve 2x + 5 = 17 with two mirrored steps.",
+          "recovery_archetype_id": "depth.v1.algebra_linear.rate_and_unit_rate_modeling.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Word problems with linear models",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.algebra_linear.word_problems_with_linear_models.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Word problems with linear models?"
+        },
+        {
+          "id": "depth.v1.algebra_linear.word_problems_with_linear_models.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.algebra_linear.word_problems_with_linear_models.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.algebra_linear.word_problems_with_linear_models.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A steady-rate situation needs a linear model; construct the equation and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Word problems with linear models",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "A school event sold 25 adult tickets at $10 each and 6 child tickets at $5 each. What was the total revenue?",
+            "explanation": "Build and evaluate a linear expression for each group, then add. Answer: 280",
+            "expected_answer": "280"
+          },
+          {
+            "stage": "guided",
+            "prompt": "A school event sold 27 adult tickets at $13 each and 8 child tickets at $4 each. What was the total revenue?",
+            "explanation": "Solve 2x + 5 = 17 with two mirrored steps.",
+            "expected_answer": "383"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "A school event sold 28 adult tickets at $13 each and 23 child tickets at $10 each. What was the total revenue?",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "594"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "word_problems_with_linear_models.model_confusion",
+          "feedback": "Applying an operation to only one side of the equation.",
+          "hint": "Think of a scale: whatever you do to one side, do to the other.",
+          "recovery_archetype_id": "depth.v1.algebra_linear.word_problems_with_linear_models.concept"
+        },
+        {
+          "code": "word_problems_with_linear_models.procedure_slip",
+          "feedback": "The setup is close, but a step in Word problems with linear models changed the result.",
+          "hint": "Solve 2x + 5 = 17 with two mirrored steps.",
+          "recovery_archetype_id": "depth.v1.algebra_linear.word_problems_with_linear_models.procedure"
+        }
+      ]
+    }
+  ]
+}

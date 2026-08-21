@@ -1,5 +1,23 @@
 # TODO
 
+## Foundations-to-Algebra-1 Curriculum Depth Initiative
+
+- [x] Add typed depth models, request-based generation, stable archetype metadata, v18 local persistence, and resume serialization.
+- [x] Publish one versioned review manifest for each of 26 in-scope skills, covering all 158 current subskills.
+- [x] Prove first-launch lessons, optional examples, diagnostic recovery, distinct transfer, application modeling, and structured proof behavior on the nine-subskill vertical slice.
+- [x] Add deterministic proof grading and printable proof/answer tables; Triangle congruence is the ready pilot and four additional proof specifications remain scaffold-only.
+- [x] Add cumulative composition helpers and preserve cumulative Pre-Algebra reviews plus the 85% exit threshold.
+- [x] Add a substantive Depth Review/export that reports honest authored readiness instead of treating structural manifests as completed curriculum.
+- [x] Complete the first standards-ordered authoring slice: both Grade 1 place-value subskills now pass the substantive gate, moving the audit to `11 ready / 147 thin / 0 missing`.
+- [x] Complete the Grade 1 addition/subtraction depth goal: subtraction, missing addends, and join/separate/compare word problems now move the audit to `14 ready / 144 thin / 0 missing`.
+- [x] Complete the Grade 1 money depth goal with bounded coin-name/value, coin-count-versus-value, and dollar/cents reasoning, moving the audit to `15 ready / 143 thin / 0 missing`.
+- [x] Complete the Grade 1 personal-finance depth goal with income/gift sources, context-sensitive needs/wants, and concrete job-skill reasoning, moving the audit to `16 ready / 142 thin / 0 missing`.
+- [ ] Author and accept the remaining 142 subskills in the four planned content waves.
+- [ ] Integrate Texas and seven-unit Algebra 1 soft cumulative checks into child progression and persist recommended review outcomes.
+- [ ] Promote the remaining four Geometry proof targets only after their authored archetypes and proof content pass the release audit.
+- [ ] Enable Curriculum Depth by default only after all 158 subskills pass the substantive 100-seed release gate.
+- [ ] Keep Algebra 2, Precalculus, Calculus, composite Statistics, and expanded test prep outside this initiative until separately approved.
+
 ## Immediate Next: Fall School Year Texas Alignment
 
 ### P0 - Standards-aligned planning spine
@@ -133,6 +151,15 @@ Current boundary: the client is an explicitly labeled beta behind a machine-loca
 - [x] Validate packaged app smoke tests on Windows 10+, macOS 11+, Ubuntu LTS baseline.
 - [x] Update `README.md` with offline setup, parent controls, backup/recovery, and troubleshooting.
 - [x] Publish v1.0 release checklist and known limitations.
+
+### P3 — Optional Public Beta Site (Deferred)
+- [ ] Decide whether to recruit beta families outside the current private/local use before activating a public site.
+- [ ] Keep the public site optional and separate from app startup, core learning, and Family Sync operation.
+- [ ] Before external beta recruitment, publish plain-language privacy and local-only-default disclosures.
+- [ ] Publish honest curriculum coverage, incomplete areas, and current best-fit/wrong-fit guidance.
+- [ ] Publish the support path, backup guidance, known limitations, and beta-feedback expectations.
+- [ ] Publish sample worksheets and evaluation guides; add release/download links only after suitable artifacts exist.
+- [ ] When public recruitment is approved, enable GitHub Actions as the Pages source, deploy the validated `docs/` artifact, and verify the live site.
 
 ## Status (Implemented)
 - Skill tracks + prerequisite-based recommendations.

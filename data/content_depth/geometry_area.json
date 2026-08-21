@@ -1,0 +1,1061 @@
+{
+  "version": 1,
+  "skill": "geometry_area",
+  "subskills": [
+    {
+      "subskill": "Area of rectangles and squares",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.geometry_area.area_of_rectangles_and_squares.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Area of rectangles and squares?"
+        },
+        {
+          "id": "depth.v1.geometry_area.area_of_rectangles_and_squares.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.geometry_area.area_of_rectangles_and_squares.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.geometry_area.area_of_rectangles_and_squares.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A construction plan needs geometric justification; choose the geometric model and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Area of rectangles and squares",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "Find the area of a rectangle with length 3 and width 8.",
+            "explanation": "Rectangle area is length * width. Answer: 24",
+            "expected_answer": "24"
+          },
+          {
+            "stage": "guided",
+            "prompt": "Find the area of a rectangle with length 15 and width 13.",
+            "explanation": "Draw a 4 by 6 rectangle as rows and columns, then count why 4 * 6 gives the area.",
+            "expected_answer": "195"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "Find the area of a rectangle with length 6 and width 16.",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "96"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "area_of_rectangles_and_squares.model_confusion",
+          "feedback": "Counting only the outside edge, which is perimeter, instead of the whole covered surface.",
+          "hint": "Area counts equal-size square units covering a flat surface with no gaps or overlaps.",
+          "recovery_archetype_id": "depth.v1.geometry_area.area_of_rectangles_and_squares.concept"
+        },
+        {
+          "code": "area_of_rectangles_and_squares.procedure_slip",
+          "feedback": "The setup is close, but a step in Area of rectangles and squares changed the result.",
+          "hint": "Draw a 4 by 6 rectangle as rows and columns, then count why 4 * 6 gives the area.",
+          "recovery_archetype_id": "depth.v1.geometry_area.area_of_rectangles_and_squares.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Area of triangles and parallelograms",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.geometry_area.area_of_triangles_and_parallelograms.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Area of triangles and parallelograms?"
+        },
+        {
+          "id": "depth.v1.geometry_area.area_of_triangles_and_parallelograms.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.geometry_area.area_of_triangles_and_parallelograms.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.geometry_area.area_of_triangles_and_parallelograms.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A construction plan needs geometric justification; choose the geometric model and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Area of triangles and parallelograms",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "Find the area of a parallelogram with base 11 and height 9.",
+            "explanation": "Parallelogram area uses base * perpendicular height. Answer: 99",
+            "expected_answer": "99"
+          },
+          {
+            "stage": "guided",
+            "prompt": "Find the area of a parallelogram with base 5 and height 12.",
+            "explanation": "Sketch a parallelogram, cut off one triangle, and slide it to make a rectangle with the same area.",
+            "expected_answer": "60"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "Find the area of a triangle with base 16 and height 13.",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "104"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "area_of_triangles_and_parallelograms.model_confusion",
+          "feedback": "Using the slanted side as height instead of the perpendicular distance to the base.",
+          "hint": "Triangles and parallelograms both use base and perpendicular height; a triangle is half of its matching rectangle or parallelogram.",
+          "recovery_archetype_id": "depth.v1.geometry_area.area_of_triangles_and_parallelograms.concept"
+        },
+        {
+          "code": "area_of_triangles_and_parallelograms.procedure_slip",
+          "feedback": "The setup is close, but a step in Area of triangles and parallelograms changed the result.",
+          "hint": "Sketch a parallelogram, cut off one triangle, and slide it to make a rectangle with the same area.",
+          "recovery_archetype_id": "depth.v1.geometry_area.area_of_triangles_and_parallelograms.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Area of trapezoids and composite figures",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.geometry_area.area_of_trapezoids_and_composite_figures.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Area of trapezoids and composite figures?"
+        },
+        {
+          "id": "depth.v1.geometry_area.area_of_trapezoids_and_composite_figures.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.geometry_area.area_of_trapezoids_and_composite_figures.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.geometry_area.area_of_trapezoids_and_composite_figures.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A construction plan needs geometric justification; choose the geometric model and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Area of trapezoids and composite figures",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "Find the area of a trapezoid with bases 16 and 13, and height 14.",
+            "explanation": "Trapezoid area is 1/2 * (b1 + b2) * h. Answer: 203",
+            "expected_answer": "203"
+          },
+          {
+            "stage": "guided",
+            "prompt": "Find the area of a trapezoid with bases 13 and 5, and height 13.",
+            "explanation": "Split an L-shaped figure into two rectangles and write the two area products before adding.",
+            "expected_answer": "117"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "Find the area of a trapezoid with bases 6 and 8, and height 8.",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "56"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "area_of_trapezoids_and_composite_figures.model_confusion",
+          "feedback": "Adding every side length when the problem asks for area, or forgetting to divide the trapezoid formula by 2.",
+          "hint": "Composite area comes from decomposing a figure into known pieces, and trapezoids average the two bases before multiplying by height.",
+          "recovery_archetype_id": "depth.v1.geometry_area.area_of_trapezoids_and_composite_figures.concept"
+        },
+        {
+          "code": "area_of_trapezoids_and_composite_figures.procedure_slip",
+          "feedback": "The setup is close, but a step in Area of trapezoids and composite figures changed the result.",
+          "hint": "Split an L-shaped figure into two rectangles and write the two area products before adding.",
+          "recovery_archetype_id": "depth.v1.geometry_area.area_of_trapezoids_and_composite_figures.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Perimeter and missing sides",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.geometry_area.perimeter_and_missing_sides.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Perimeter and missing sides?"
+        },
+        {
+          "id": "depth.v1.geometry_area.perimeter_and_missing_sides.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.geometry_area.perimeter_and_missing_sides.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.geometry_area.perimeter_and_missing_sides.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A construction plan needs geometric justification; choose the geometric model and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Perimeter and missing sides",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "A rectangle has perimeter 28 and length 8. What is its width?",
+            "explanation": "Use P = 2L + 2W, then solve for W. Answer: 6",
+            "expected_answer": "6"
+          },
+          {
+            "stage": "guided",
+            "prompt": "A rectangle has perimeter 78 and length 24. What is its width?",
+            "explanation": "For a rectangle with perimeter 30 and length 10, subtract the two lengths first, then split what remains.",
+            "expected_answer": "15"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "A rectangle has perimeter 64 and length 20. What is its width?",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "12"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "perimeter_and_missing_sides.model_confusion",
+          "feedback": "Using area multiplication when the problem gives a perimeter total.",
+          "hint": "Perimeter is the walking distance around the boundary; missing sides can be recovered from the total path length.",
+          "recovery_archetype_id": "depth.v1.geometry_area.perimeter_and_missing_sides.concept"
+        },
+        {
+          "code": "perimeter_and_missing_sides.procedure_slip",
+          "feedback": "The setup is close, but a step in Perimeter and missing sides changed the result.",
+          "hint": "For a rectangle with perimeter 30 and length 10, subtract the two lengths first, then split what remains.",
+          "recovery_archetype_id": "depth.v1.geometry_area.perimeter_and_missing_sides.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Circumference and area of circles",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.geometry_area.circumference_and_area_of_circles.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Circumference and area of circles?"
+        },
+        {
+          "id": "depth.v1.geometry_area.circumference_and_area_of_circles.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.geometry_area.circumference_and_area_of_circles.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.geometry_area.circumference_and_area_of_circles.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A construction plan needs geometric justification; choose the geometric model and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Circumference and area of circles",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "Using pi, find the circumference of a circle with radius 8. Round to 2 decimals.",
+            "explanation": "Circumference is C = 2*pi*r. Answer: 50.27",
+            "expected_answer": "50.27"
+          },
+          {
+            "stage": "guided",
+            "prompt": "Using pi, find the area of a circle with radius 6. Round to 2 decimals.",
+            "explanation": "For radius 5, compute 2*pi*r and pi*r^2 and explain which answer is around versus inside.",
+            "expected_answer": "113.1"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "Using pi, find the area of a circle with radius 2. Round to 2 decimals.",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "12.57"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "circumference_and_area_of_circles.model_confusion",
+          "feedback": "Using radius and diameter interchangeably without doubling or halving first.",
+          "hint": "A circle has two linked measures: circumference wraps around it, while area covers the inside disk.",
+          "recovery_archetype_id": "depth.v1.geometry_area.circumference_and_area_of_circles.concept"
+        },
+        {
+          "code": "circumference_and_area_of_circles.procedure_slip",
+          "feedback": "The setup is close, but a step in Circumference and area of circles changed the result.",
+          "hint": "For radius 5, compute 2*pi*r and pi*r^2 and explain which answer is around versus inside.",
+          "recovery_archetype_id": "depth.v1.geometry_area.circumference_and_area_of_circles.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Surface area and volume",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.geometry_area.surface_area_and_volume.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Surface area and volume?"
+        },
+        {
+          "id": "depth.v1.geometry_area.surface_area_and_volume.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.geometry_area.surface_area_and_volume.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.geometry_area.surface_area_and_volume.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A construction plan needs geometric justification; choose the geometric model and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Surface area and volume",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "Find the surface area of a rectangular prism with l=12, w=8, h=3.",
+            "explanation": "Surface area adds both of each face pair. Answer: 312",
+            "expected_answer": "312"
+          },
+          {
+            "stage": "guided",
+            "prompt": "Find the surface area of a rectangular prism with l=8, w=8, h=3.",
+            "explanation": "For a 2 by 3 by 4 box, name the three face-pair areas before adding surface area.",
+            "expected_answer": "224"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "Find the surface area of a rectangular prism with l=6, w=3, h=5.",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "126"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "surface_area_and_volume.model_confusion",
+          "feedback": "Giving a volume formula when the question asks for outside covering, or missing one pair of faces.",
+          "hint": "Volume fills a 3D solid, while surface area wraps all outside faces.",
+          "recovery_archetype_id": "depth.v1.geometry_area.surface_area_and_volume.concept"
+        },
+        {
+          "code": "surface_area_and_volume.procedure_slip",
+          "feedback": "The setup is close, but a step in Surface area and volume changed the result.",
+          "hint": "For a 2 by 3 by 4 box, name the three face-pair areas before adding surface area.",
+          "recovery_archetype_id": "depth.v1.geometry_area.surface_area_and_volume.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Pythagorean theorem",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.geometry_area.pythagorean_theorem.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Pythagorean theorem?"
+        },
+        {
+          "id": "depth.v1.geometry_area.pythagorean_theorem.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.geometry_area.pythagorean_theorem.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.geometry_area.pythagorean_theorem.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A construction plan needs geometric justification; choose the geometric model and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Pythagorean theorem",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "A right triangle has hypotenuse 17 and one leg 8. Find the other leg.",
+            "explanation": "Use a^2 + b^2 = c^2. Answer: 15",
+            "expected_answer": "15"
+          },
+          {
+            "stage": "guided",
+            "prompt": "A right triangle has legs 8 and 15. Find the hypotenuse.",
+            "explanation": "Check the 3-4-5 triangle by comparing 3^2 + 4^2 with 5^2.",
+            "expected_answer": "17"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "A right triangle has hypotenuse 15 and one leg 9. Find the other leg.",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "12"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "pythagorean_theorem.model_confusion",
+          "feedback": "Putting the hypotenuse in the wrong place or adding the side lengths instead of their squares.",
+          "hint": "Right-triangle side lengths obey a square relationship: leg square plus leg square equals hypotenuse square.",
+          "recovery_archetype_id": "depth.v1.geometry_area.pythagorean_theorem.concept"
+        },
+        {
+          "code": "pythagorean_theorem.procedure_slip",
+          "feedback": "The setup is close, but a step in Pythagorean theorem changed the result.",
+          "hint": "Check the 3-4-5 triangle by comparing 3^2 + 4^2 with 5^2.",
+          "recovery_archetype_id": "depth.v1.geometry_area.pythagorean_theorem.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Coordinate geometry distance and midpoint",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.geometry_area.coordinate_geometry_distance_and_midpoint.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Coordinate geometry distance and midpoint?"
+        },
+        {
+          "id": "depth.v1.geometry_area.coordinate_geometry_distance_and_midpoint.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.geometry_area.coordinate_geometry_distance_and_midpoint.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.geometry_area.coordinate_geometry_distance_and_midpoint.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A construction plan needs geometric justification; choose the geometric model and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Coordinate geometry distance and midpoint",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "Find the distance between (8, -6) and (0, 9).",
+            "explanation": "Distance uses the coordinate form of the Pythagorean theorem. Answer: 17",
+            "expected_answer": "17"
+          },
+          {
+            "stage": "guided",
+            "prompt": "Find the x-coordinate of the midpoint between (3, 3) and (11, -12).",
+            "explanation": "Find the midpoint of (2, 5) and (8, 1), then explain which average gives the x-coordinate.",
+            "expected_answer": "7"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "Find the distance between (7, 1) and (10, 5).",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "5"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "coordinate_geometry_distance_and_midpoint.model_confusion",
+          "feedback": "Averaging all four coordinates together instead of averaging x-values and y-values separately.",
+          "hint": "Coordinate geometry turns a diagram into arithmetic: distance uses horizontal and vertical changes, midpoint averages endpoints.",
+          "recovery_archetype_id": "depth.v1.geometry_area.coordinate_geometry_distance_and_midpoint.concept"
+        },
+        {
+          "code": "coordinate_geometry_distance_and_midpoint.procedure_slip",
+          "feedback": "The setup is close, but a step in Coordinate geometry distance and midpoint changed the result.",
+          "hint": "Find the midpoint of (2, 5) and (8, 1), then explain which average gives the x-coordinate.",
+          "recovery_archetype_id": "depth.v1.geometry_area.coordinate_geometry_distance_and_midpoint.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Angles in lines and triangles",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.geometry_area.angles_in_lines_and_triangles.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Angles in lines and triangles?"
+        },
+        {
+          "id": "depth.v1.geometry_area.angles_in_lines_and_triangles.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.geometry_area.angles_in_lines_and_triangles.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.geometry_area.angles_in_lines_and_triangles.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A construction plan needs geometric justification; choose the geometric model and solve."
+        },
+        {
+          "id": "depth.v1.geometry_area.angles_in_lines_and_triangles.proof",
+          "reasoning_kind": "proof"
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Angles in lines and triangles",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "In a triangle, two angles are 74 and 75 degrees. What is the third angle?",
+            "explanation": "Triangle angles sum to 180 degrees. Answer: 31",
+            "expected_answer": "31"
+          },
+          {
+            "stage": "guided",
+            "prompt": "In a triangle, two angles are 62 and 25 degrees. What is the third angle?",
+            "explanation": "Draw a triangle with two known angles 50 and 65; use the 180-degree total to find the third.",
+            "expected_answer": "93"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "In a triangle, two angles are 62 and 28 degrees. What is the third angle?",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "90"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "angles_in_lines_and_triangles.model_confusion",
+          "feedback": "Adding known angles without first deciding whether they form a line, a triangle, or a vertical-angle pair.",
+          "hint": "Angle facts are conservation rules: a straight line has 180 degrees, and a triangle's angles total 180 degrees.",
+          "recovery_archetype_id": "depth.v1.geometry_area.angles_in_lines_and_triangles.concept"
+        },
+        {
+          "code": "angles_in_lines_and_triangles.procedure_slip",
+          "feedback": "The setup is close, but a step in Angles in lines and triangles changed the result.",
+          "hint": "Draw a triangle with two known angles 50 and 65; use the 180-degree total to find the third.",
+          "recovery_archetype_id": "depth.v1.geometry_area.angles_in_lines_and_triangles.procedure"
+        }
+      ],
+      "proof": {
+        "prompt": "Prove the missing triangle angle relationship from parallel-line angle facts.",
+        "required_steps": [
+          {
+            "id": "given",
+            "statement": "The marked lines are parallel.",
+            "reason": "Given",
+            "depends_on": []
+          },
+          {
+            "id": "corresponding",
+            "statement": "The corresponding angles are congruent.",
+            "reason": "Corresponding angles theorem",
+            "depends_on": [
+              "given"
+            ]
+          },
+          {
+            "id": "vertical",
+            "statement": "The vertical angles are congruent.",
+            "reason": "Vertical angles theorem",
+            "depends_on": [
+              "corresponding"
+            ]
+          },
+          {
+            "id": "conclusion",
+            "statement": "The target angles have equal measure.",
+            "reason": "Transitive property",
+            "depends_on": [
+              "vertical"
+            ]
+          }
+        ],
+        "distractor_steps": [
+          {
+            "id": "distractor_guess",
+            "statement": "The diagram looks accurate, so the claim is true.",
+            "reason": "Visual appearance",
+            "depends_on": []
+          },
+          {
+            "id": "distractor_converse",
+            "statement": "Reverse an unrelated theorem to reach the claim.",
+            "reason": "Invalid converse",
+            "depends_on": []
+          }
+        ]
+      }
+    },
+    {
+      "subskill": "Triangle congruence criteria",
+      "content_status": "ready",
+      "archetypes": [
+        {
+          "id": "depth.v1.geometry_area.triangle_congruence_criteria.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Triangle congruence criteria?"
+        },
+        {
+          "id": "depth.v1.geometry_area.triangle_congruence_criteria.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.geometry_area.triangle_congruence_criteria.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.geometry_area.triangle_congruence_criteria.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A bridge frame uses matching triangular braces. Select sufficient corresponding facts and justify congruence."
+        },
+        {
+          "id": "depth.v1.geometry_area.triangle_congruence_criteria.proof",
+          "reasoning_kind": "proof"
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Triangle congruence criteria",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "Two side pairs and their included angles match. Name the criterion.",
+            "explanation": "The angle lies between the two known sides, so this is SAS.",
+            "expected_answer": "SAS"
+          },
+          {
+            "stage": "guided",
+            "prompt": "Three corresponding side pairs match. Name the criterion.",
+            "explanation": "Three matching side pairs establish SSS.",
+            "expected_answer": "SSS"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "Three angles match. Does that prove congruence?",
+            "explanation": "AAA proves similarity, not equal size.",
+            "expected_answer": "no"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "invalid_criterion",
+          "feedback": "The facts establish similarity or an ambiguous case, not triangle congruence.",
+          "hint": "Use only SSS, SAS, ASA, AAS, or HL when its conditions are satisfied.",
+          "recovery_archetype_id": "depth.v1.geometry_area.triangle_congruence_criteria.concept"
+        },
+        {
+          "code": "correspondence_error",
+          "feedback": "The named sides or angles do not correspond in the same order.",
+          "hint": "Mark matching vertices first, then read every pair in that order.",
+          "recovery_archetype_id": "depth.v1.geometry_area.triangle_congruence_criteria.procedure"
+        }
+      ],
+      "proof": {
+        "prompt": "Prove the two triangular braces are congruent using the marked corresponding facts.",
+        "required_steps": [
+          {
+            "id": "side_one",
+            "statement": "The first pair of corresponding sides is congruent.",
+            "reason": "Given",
+            "depends_on": []
+          },
+          {
+            "id": "angle",
+            "statement": "The included angles are congruent.",
+            "reason": "Given",
+            "depends_on": []
+          },
+          {
+            "id": "side_two",
+            "statement": "The second pair of corresponding sides is congruent.",
+            "reason": "Given",
+            "depends_on": []
+          },
+          {
+            "id": "conclusion",
+            "statement": "The triangles are congruent.",
+            "reason": "SAS congruence",
+            "depends_on": [
+              "side_one",
+              "angle",
+              "side_two"
+            ]
+          }
+        ],
+        "distractor_steps": [
+          {
+            "id": "distractor_guess",
+            "statement": "The diagram looks accurate, so the claim is true.",
+            "reason": "Visual appearance",
+            "depends_on": []
+          },
+          {
+            "id": "distractor_converse",
+            "statement": "Reverse an unrelated theorem to reach the claim.",
+            "reason": "Invalid converse",
+            "depends_on": []
+          }
+        ]
+      }
+    },
+    {
+      "subskill": "Transformations and congruence",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.geometry_area.transformations_and_congruence.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Transformations and congruence?"
+        },
+        {
+          "id": "depth.v1.geometry_area.transformations_and_congruence.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.geometry_area.transformations_and_congruence.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.geometry_area.transformations_and_congruence.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A construction plan needs geometric justification; choose the geometric model and solve."
+        },
+        {
+          "id": "depth.v1.geometry_area.transformations_and_congruence.proof",
+          "reasoning_kind": "proof"
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Transformations and congruence",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "Point (-8, -7) is reflected across the y-axis. What is the new x-coordinate?",
+            "explanation": "Reflection across the y-axis flips the sign of x. Answer: 8",
+            "expected_answer": "8"
+          },
+          {
+            "stage": "guided",
+            "prompt": "Point (-5, -5) is reflected across the y-axis. What is the new x-coordinate?",
+            "explanation": "Reflect point (4, -2) over the y-axis, then explain why the new point is still the same distance from the y-axis.",
+            "expected_answer": "5"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "Point (2, 2) is reflected across the y-axis. What is the new x-coordinate?",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "-2"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "transformations_and_congruence.model_confusion",
+          "feedback": "Changing the coordinates but forgetting that reflection flips orientation while preserving distance.",
+          "hint": "Rigid transformations move a figure without changing size or shape, so corresponding lengths and angles stay equal.",
+          "recovery_archetype_id": "depth.v1.geometry_area.transformations_and_congruence.concept"
+        },
+        {
+          "code": "transformations_and_congruence.procedure_slip",
+          "feedback": "The setup is close, but a step in Transformations and congruence changed the result.",
+          "hint": "Reflect point (4, -2) over the y-axis, then explain why the new point is still the same distance from the y-axis.",
+          "recovery_archetype_id": "depth.v1.geometry_area.transformations_and_congruence.procedure"
+        }
+      ],
+      "proof": {
+        "prompt": "Prove a translated figure is congruent to its original.",
+        "required_steps": [
+          {
+            "id": "map",
+            "statement": "Every vertex moves by the same translation vector.",
+            "reason": "Definition of translation",
+            "depends_on": []
+          },
+          {
+            "id": "length",
+            "statement": "Corresponding side lengths are preserved.",
+            "reason": "Translations preserve distance",
+            "depends_on": [
+              "map"
+            ]
+          },
+          {
+            "id": "angle",
+            "statement": "Corresponding angle measures are preserved.",
+            "reason": "Translations preserve angles",
+            "depends_on": [
+              "map"
+            ]
+          },
+          {
+            "id": "conclusion",
+            "statement": "The image is congruent to the original figure.",
+            "reason": "Rigid-motion definition",
+            "depends_on": [
+              "length",
+              "angle"
+            ]
+          }
+        ],
+        "distractor_steps": [
+          {
+            "id": "distractor_guess",
+            "statement": "The diagram looks accurate, so the claim is true.",
+            "reason": "Visual appearance",
+            "depends_on": []
+          },
+          {
+            "id": "distractor_converse",
+            "statement": "Reverse an unrelated theorem to reach the claim.",
+            "reason": "Invalid converse",
+            "depends_on": []
+          }
+        ]
+      }
+    },
+    {
+      "subskill": "Similarity and scale factor",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.geometry_area.similarity_and_scale_factor.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Similarity and scale factor?"
+        },
+        {
+          "id": "depth.v1.geometry_area.similarity_and_scale_factor.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.geometry_area.similarity_and_scale_factor.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.geometry_area.similarity_and_scale_factor.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A construction plan needs geometric justification; choose the geometric model and solve."
+        },
+        {
+          "id": "depth.v1.geometry_area.similarity_and_scale_factor.proof",
+          "reasoning_kind": "proof"
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Similarity and scale factor",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "Two similar triangles have scale factor 4 from small to large. If a side on the small triangle is 13, what is the corresponding large side?",
+            "explanation": "Corresponding sides in similar figures scale by the same factor. Answer: 52",
+            "expected_answer": "52"
+          },
+          {
+            "stage": "guided",
+            "prompt": "Two similar triangles have scale factor 5 from small to large. If a side on the small triangle is 7, what is the corresponding large side?",
+            "explanation": "If a triangle is scaled by 3, multiply two different side lengths and check that both ratios match.",
+            "expected_answer": "35"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "Two similar triangles have scale factor 3 from small to large. If a side on the small triangle is 14, what is the corresponding large side?",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "42"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "similarity_and_scale_factor.model_confusion",
+          "feedback": "Adding the scale factor to side lengths instead of multiplying each corresponding length.",
+          "hint": "Similar figures keep angle measures and multiply every corresponding length by the same scale factor.",
+          "recovery_archetype_id": "depth.v1.geometry_area.similarity_and_scale_factor.concept"
+        },
+        {
+          "code": "similarity_and_scale_factor.procedure_slip",
+          "feedback": "The setup is close, but a step in Similarity and scale factor changed the result.",
+          "hint": "If a triangle is scaled by 3, multiply two different side lengths and check that both ratios match.",
+          "recovery_archetype_id": "depth.v1.geometry_area.similarity_and_scale_factor.procedure"
+        }
+      ],
+      "proof": {
+        "prompt": "Prove two triangles are similar from their corresponding measurements.",
+        "required_steps": [
+          {
+            "id": "ratio_one",
+            "statement": "One pair of corresponding sides has the stated scale factor.",
+            "reason": "Given measurements",
+            "depends_on": []
+          },
+          {
+            "id": "ratio_two",
+            "statement": "A second pair has the same scale factor.",
+            "reason": "Compute corresponding ratios",
+            "depends_on": []
+          },
+          {
+            "id": "angle",
+            "statement": "The included angles are congruent.",
+            "reason": "Given",
+            "depends_on": []
+          },
+          {
+            "id": "conclusion",
+            "statement": "The triangles are similar.",
+            "reason": "SAS similarity",
+            "depends_on": [
+              "ratio_one",
+              "ratio_two",
+              "angle"
+            ]
+          }
+        ],
+        "distractor_steps": [
+          {
+            "id": "distractor_guess",
+            "statement": "The diagram looks accurate, so the claim is true.",
+            "reason": "Visual appearance",
+            "depends_on": []
+          },
+          {
+            "id": "distractor_converse",
+            "statement": "Reverse an unrelated theorem to reach the claim.",
+            "reason": "Invalid converse",
+            "depends_on": []
+          }
+        ]
+      }
+    },
+    {
+      "subskill": "Analytic geometry and coordinate proofs",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.geometry_area.analytic_geometry_and_coordinate_proofs.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Analytic geometry and coordinate proofs?"
+        },
+        {
+          "id": "depth.v1.geometry_area.analytic_geometry_and_coordinate_proofs.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.geometry_area.analytic_geometry_and_coordinate_proofs.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.geometry_area.analytic_geometry_and_coordinate_proofs.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A construction plan needs geometric justification; choose the geometric model and solve."
+        },
+        {
+          "id": "depth.v1.geometry_area.analytic_geometry_and_coordinate_proofs.proof",
+          "reasoning_kind": "proof"
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Analytic geometry and coordinate proofs",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "Points A(-4,7), B(-5,-5), C(-4,-5), and D(-5,-5) form a translated shape. What is the horizontal shift from A to C?",
+            "explanation": "Coordinate proofs track consistent horizontal and vertical shifts. Answer: 0",
+            "expected_answer": "0"
+          },
+          {
+            "stage": "guided",
+            "prompt": "Points A(5,-3), B(-7,4), C(-4,4), and D(-16,4) form a translated shape. What is the horizontal shift from A to C?",
+            "explanation": "Use coordinates to show opposite sides of a translated quadrilateral moved by the same horizontal and vertical shifts.",
+            "expected_answer": "-9"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "Points A(-2,-3), B(-4,6), C(-1,6), and D(-3,6) form a translated shape. What is the horizontal shift from A to C?",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "1"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "analytic_geometry_and_coordinate_proofs.model_confusion",
+          "feedback": "Relying on how a diagram looks instead of proving a side length, slope, or midpoint from coordinates.",
+          "hint": "Coordinate proofs replace visual claims with slope, distance, midpoint, and shift calculations.",
+          "recovery_archetype_id": "depth.v1.geometry_area.analytic_geometry_and_coordinate_proofs.concept"
+        },
+        {
+          "code": "analytic_geometry_and_coordinate_proofs.procedure_slip",
+          "feedback": "The setup is close, but a step in Analytic geometry and coordinate proofs changed the result.",
+          "hint": "Use coordinates to show opposite sides of a translated quadrilateral moved by the same horizontal and vertical shifts.",
+          "recovery_archetype_id": "depth.v1.geometry_area.analytic_geometry_and_coordinate_proofs.procedure"
+        }
+      ],
+      "proof": {
+        "prompt": "Use coordinates to prove the described quadrilateral has the claimed property.",
+        "required_steps": [
+          {
+            "id": "coordinates",
+            "statement": "List the relevant endpoint coordinates.",
+            "reason": "Given",
+            "depends_on": []
+          },
+          {
+            "id": "slopes",
+            "statement": "Compute the slopes of opposite sides.",
+            "reason": "Slope formula",
+            "depends_on": [
+              "coordinates"
+            ]
+          },
+          {
+            "id": "parallel",
+            "statement": "The opposite sides are parallel.",
+            "reason": "Equal slopes imply parallel lines",
+            "depends_on": [
+              "slopes"
+            ]
+          },
+          {
+            "id": "conclusion",
+            "statement": "The coordinate evidence proves the claimed property.",
+            "reason": "Definition of the quadrilateral",
+            "depends_on": [
+              "parallel"
+            ]
+          }
+        ],
+        "distractor_steps": [
+          {
+            "id": "distractor_guess",
+            "statement": "The diagram looks accurate, so the claim is true.",
+            "reason": "Visual appearance",
+            "depends_on": []
+          },
+          {
+            "id": "distractor_converse",
+            "statement": "Reverse an unrelated theorem to reach the claim.",
+            "reason": "Invalid converse",
+            "depends_on": []
+          }
+        ]
+      }
+    }
+  ]
+}

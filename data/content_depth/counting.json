@@ -1,0 +1,189 @@
+{
+  "version": 1,
+  "skill": "counting",
+  "subskills": [
+    {
+      "subskill": "Number recognition",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.counting.number_recognition.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Number recognition?"
+        },
+        {
+          "id": "depth.v1.counting.number_recognition.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.counting.number_recognition.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.counting.number_recognition.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "During an inventory count, choose a one-to-one counting model and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Number recognition",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "Count the objects. How many are there?",
+            "explanation": "Counting matches a number to a group of objects. Answer: 4",
+            "expected_answer": "4"
+          },
+          {
+            "stage": "guided",
+            "prompt": "Count the objects. How many are there?",
+            "explanation": "Show 7 objects, hide the digit, then decide which numeral matches.",
+            "expected_answer": "4"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "Count the objects. How many are there?",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "8"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "number_recognition.model_confusion",
+          "feedback": "Reading the symbol without connecting it to an actual quantity.",
+          "hint": "A numeral is a label for how many objects are in the set.",
+          "recovery_archetype_id": "depth.v1.counting.number_recognition.concept"
+        },
+        {
+          "code": "number_recognition.procedure_slip",
+          "feedback": "The setup is close, but a step in Number recognition changed the result.",
+          "hint": "Show 7 objects, hide the digit, then decide which numeral matches.",
+          "recovery_archetype_id": "depth.v1.counting.number_recognition.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Skip-counting",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.counting.skip_counting.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Skip-counting?"
+        },
+        {
+          "id": "depth.v1.counting.skip_counting.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.counting.skip_counting.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.counting.skip_counting.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "During an inventory count, choose a one-to-one counting model and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Skip-counting",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "Count the objects. How many are there?",
+            "explanation": "Counting matches a number to a group of objects. Answer: 3",
+            "expected_answer": "3"
+          },
+          {
+            "stage": "guided",
+            "prompt": "Count the objects. How many are there?",
+            "explanation": "Count by 5s on your fingers: 5, 10, 15, 20.",
+            "expected_answer": "17"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "Count the objects. How many are there?",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "3"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "skip_counting.model_confusion",
+          "feedback": "Changing jump size in the middle of the count.",
+          "hint": "Skip-counting is taking equal jumps instead of one-step counts.",
+          "recovery_archetype_id": "depth.v1.counting.skip_counting.concept"
+        },
+        {
+          "code": "skip_counting.procedure_slip",
+          "feedback": "The setup is close, but a step in Skip-counting changed the result.",
+          "hint": "Count by 5s on your fingers: 5, 10, 15, 20.",
+          "recovery_archetype_id": "depth.v1.counting.skip_counting.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Count-to-number matching",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.counting.count_to_number_matching.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Count-to-number matching?"
+        },
+        {
+          "id": "depth.v1.counting.count_to_number_matching.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.counting.count_to_number_matching.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.counting.count_to_number_matching.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "During an inventory count, choose a one-to-one counting model and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Count-to-number matching",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "Count the objects. How many are there?",
+            "explanation": "Counting matches a number to a group of objects. Answer: 5",
+            "expected_answer": "5"
+          },
+          {
+            "stage": "guided",
+            "prompt": "Count the objects. How many are there?",
+            "explanation": "Touch each object once while saying the count out loud.",
+            "expected_answer": "11"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "Count the objects. How many are there?",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "8"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "count_to_number_matching.model_confusion",
+          "feedback": "Double-counting one object or skipping one entirely.",
+          "hint": "Each object gets one count word, and the last word tells the total.",
+          "recovery_archetype_id": "depth.v1.counting.count_to_number_matching.concept"
+        },
+        {
+          "code": "count_to_number_matching.procedure_slip",
+          "feedback": "The setup is close, but a step in Count-to-number matching changed the result.",
+          "hint": "Touch each object once while saying the count out loud.",
+          "recovery_archetype_id": "depth.v1.counting.count_to_number_matching.procedure"
+        }
+      ]
+    }
+  ]
+}

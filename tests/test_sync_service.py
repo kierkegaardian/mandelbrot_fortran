@@ -4,7 +4,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from app import db, sync_service, sync_state, sync_store
+from app import db, sync_payloads, sync_service, sync_state, sync_store
 from app.sync_client import FamilyLinkResult, SyncBatchChange, SyncBatchResult, SyncEndpointResult, SyncStatus
 
 
@@ -132,6 +132,59 @@ class SyncServiceTests(unittest.TestCase):
         self.assertEqual(len(synced_profiles), 2)
         self.assertTrue(any(item.id == profile.id for item in synced_profiles))
 
+    def test_depth_history_is_local_only_and_wire_payload_is_unchanged(self) -> None:
+        child = db.create_profile("Depth Child", "child", "2026-07-14T00:00:00+00:00")
+        sync_service.record_completed_quiz(
+            profile_id=child.id,
+            quiz_set_id=None,
+            skill="fractions",
+            question_type="typed",
+            num_questions=1,
+            level=2,
+            score=0,
+            created_at="2026-07-14T00:01:00+00:00",
+            elapsed_seconds=5.0,
+            question_results=[sync_service.QuestionResultInput(
+                skill="fractions",
+                subskill="Equivalent fractions",
+                question_label="Error Analysis",
+                mode="expression",
+                prompt="1/2 = ?/4",
+                correct_answer="2",
+                user_answer="3",
+                is_correct=False,
+                explanation="Scale both parts.",
+                archetype_id="depth.v1.fractions.equivalent_fractions.transfer",
+                misconception_code="scaled_one_part",
+                response_kind="typed",
+                recovery_corrected_answer="2",
+                recovery_transfer_archetype_id="depth.v1.fractions.equivalent_fractions.application",
+                recovery_transfer_answer="bar, number-line, or ratio model; 2",
+                recovery_transfer_correct=True,
+            )],
+            record_progress=True,
+            streak_to_master=3,
+            record_daily_review=False,
+        )
+        with db.managed_connection() as conn:
+            row = conn.execute(
+                "SELECT archetype_id, misconception_code, response_kind FROM quiz_questions"
+            ).fetchone()
+        self.assertEqual(str(row["misconception_code"]), "scaled_one_part")
+        with db.managed_connection() as conn:
+            recovery = conn.execute(
+                "SELECT corrected_answer, transfer_archetype_id, transfer_correct FROM quiz_recoveries"
+            ).fetchone()
+        self.assertEqual(str(recovery["corrected_answer"]), "2")
+        self.assertEqual(int(recovery["transfer_correct"]), 1)
+        entry = next(item for item in sync_store.list_pending_changes() if item.entity_type == "quiz_questions")
+        outbound = sync_payloads.build_outbound_change(entry)
+        assert outbound is not None
+        data = outbound["data"]
+        self.assertNotIn("archetype_id", data)
+        self.assertNotIn("misconception_code", data)
+        self.assertNotIn("response_kind", data)
+
     def test_delete_profile_enqueues_dependent_delete_changes(self) -> None:
         child = sync_service.create_profile("Child", "child", "2026-04-11T10:00:00+00:00")
         sync_store.mark_changes_synced([entry.id for entry in sync_store.list_pending_changes()], "2026-04-11T10:01:00+00:00")
@@ -199,7 +252,7 @@ def _success_status() -> SyncStatus:
         server_label="Home sync server",
         profile="home-lan",
         config_source="override",
-        config_path="/tmp/sync.internal.json",
+        config_path="/tmp/sync.fixture.json",
         health=health,
         api_root=api_root,
         error_code=None,

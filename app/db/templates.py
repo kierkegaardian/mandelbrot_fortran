@@ -1,6 +1,8 @@
 from __future__ import annotations
 
 from ..models import QuestionTemplate, TemplateVar
+from ..content_depth.template_metadata import validate_misconceptions_json
+from ..content_depth.models import ReasoningKind
 from .connection import managed_connection
 
 def has_active_question_templates(skill: str, *, subskill: str | None = None, mode: str | None = None) -> bool:
@@ -59,14 +61,21 @@ def create_question_template(
     choice_spread: float,
     active: bool,
     created_at: str,
+    archetype_id: str | None = None,
+    reasoning_kind: str = "legacy",
+    misconceptions_json: str = "[]",
 ) -> int:
+    misconceptions_json = validate_misconceptions_json(misconceptions_json)
+    reasoning_kind = ReasoningKind(reasoning_kind).value
+    if reasoning_kind != ReasoningKind.LEGACY.value and not (archetype_id or "").strip():
+        raise ValueError("Classified templates require a stable archetype_id")
     with managed_connection() as conn:
         cur = conn.execute(
             """
             INSERT INTO question_templates
             (book_id, external_id, skill, subskill, label, mode, prompt_template, answer_expr, constraint_expr, explanation_template,
-             min_level, max_level, choice_spread, active, created_at)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+             min_level, max_level, choice_spread, archetype_id, reasoning_kind, misconceptions_json, active, created_at)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             """,
             (
                 book_id,
@@ -82,6 +91,9 @@ def create_question_template(
                 int(min_level),
                 int(max_level),
                 float(choice_spread),
+                archetype_id,
+                reasoning_kind,
+                misconceptions_json,
                 int(bool(active)),
                 created_at,
             ),
@@ -116,7 +128,7 @@ def list_question_templates(
             rows = conn.execute(
                 """
                 SELECT id, book_id, external_id, skill, subskill, label, prompt_template, answer_expr, constraint_expr, explanation_template,
-                       min_level, max_level, choice_spread, mode, active
+                       min_level, max_level, choice_spread, mode, active, archetype_id, reasoning_kind, misconceptions_json
                 FROM question_templates
                 WHERE active = 1 AND skill = ? AND ? BETWEEN min_level AND max_level
                 ORDER BY id DESC
@@ -127,7 +139,7 @@ def list_question_templates(
             rows = conn.execute(
                 """
                 SELECT id, book_id, external_id, skill, subskill, label, prompt_template, answer_expr, constraint_expr, explanation_template,
-                       min_level, max_level, choice_spread, mode, active
+                       min_level, max_level, choice_spread, mode, active, archetype_id, reasoning_kind, misconceptions_json
                 FROM question_templates
                 WHERE active = 1 AND skill = ? AND ? BETWEEN min_level AND max_level AND mode = ?
                 ORDER BY id DESC
@@ -138,7 +150,7 @@ def list_question_templates(
             rows = conn.execute(
                 """
                 SELECT id, book_id, external_id, skill, subskill, label, prompt_template, answer_expr, constraint_expr, explanation_template,
-                       min_level, max_level, choice_spread, mode, active
+                       min_level, max_level, choice_spread, mode, active, archetype_id, reasoning_kind, misconceptions_json
                 FROM question_templates
                 WHERE active = 1 AND skill = ? AND subskill = ? AND ? BETWEEN min_level AND max_level
                 ORDER BY id DESC
@@ -149,7 +161,7 @@ def list_question_templates(
             rows = conn.execute(
                 """
                 SELECT id, book_id, external_id, skill, subskill, label, prompt_template, answer_expr, constraint_expr, explanation_template,
-                       min_level, max_level, choice_spread, mode, active
+                       min_level, max_level, choice_spread, mode, active, archetype_id, reasoning_kind, misconceptions_json
                 FROM question_templates
                 WHERE active = 1 AND skill = ? AND subskill = ? AND ? BETWEEN min_level AND max_level AND mode = ?
                 ORDER BY id DESC
@@ -173,6 +185,9 @@ def list_question_templates(
             float(r["choice_spread"]),
             r["mode"],
             bool(r["active"]),
+            r["archetype_id"],
+            r["reasoning_kind"],
+            r["misconceptions_json"],
         )
         for r in rows
     ]
@@ -225,7 +240,7 @@ def list_all_question_templates(active_only: bool = True) -> list[QuestionTempla
             rows = conn.execute(
                 """
                 SELECT id, book_id, external_id, skill, subskill, label, prompt_template, answer_expr, constraint_expr, explanation_template,
-                       min_level, max_level, choice_spread, mode, active
+                       min_level, max_level, choice_spread, mode, active, archetype_id, reasoning_kind, misconceptions_json
                 FROM question_templates
                 WHERE active = 1
                 ORDER BY skill ASC, id ASC
@@ -235,7 +250,7 @@ def list_all_question_templates(active_only: bool = True) -> list[QuestionTempla
             rows = conn.execute(
                 """
                 SELECT id, book_id, external_id, skill, subskill, label, prompt_template, answer_expr, constraint_expr, explanation_template,
-                       min_level, max_level, choice_spread, mode, active
+                       min_level, max_level, choice_spread, mode, active, archetype_id, reasoning_kind, misconceptions_json
                 FROM question_templates
                 ORDER BY skill ASC, id ASC
                 """
@@ -257,6 +272,9 @@ def list_all_question_templates(active_only: bool = True) -> list[QuestionTempla
             float(r["choice_spread"]),
             r["mode"],
             bool(r["active"]),
+            r["archetype_id"],
+            r["reasoning_kind"],
+            r["misconceptions_json"],
         )
         for r in rows
     ]

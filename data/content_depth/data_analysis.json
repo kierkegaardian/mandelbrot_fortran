@@ -1,0 +1,494 @@
+{
+  "version": 1,
+  "skill": "data_analysis",
+  "subskills": [
+    {
+      "subskill": "Histograms",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.data_analysis.histograms.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Histograms?"
+        },
+        {
+          "id": "depth.v1.data_analysis.histograms.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.data_analysis.histograms.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.data_analysis.histograms.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A community survey supports a decision; choose a defensible data model and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Histograms",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "A histogram has bin frequencies 0-9: 3, 10-19: 3, 20-29: 9, 30-39: 4. Which interval has the greatest frequency?",
+            "explanation": "A histogram groups numeric values into intervals; compare the bar heights. Answer: 20-29",
+            "expected_answer": "20-29"
+          },
+          {
+            "stage": "guided",
+            "prompt": "A histogram has bin frequencies 0-9: 8, 10-19: 6, 20-29: 3, 30-39: 7. Which interval has the greatest frequency?",
+            "explanation": "Name the interval with the tallest bar before doing any arithmetic.",
+            "expected_answer": "0-9"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "A histogram has bin frequencies 0-9: 7, 10-19: 8, 20-29: 2, 30-39: 2. Which interval has the greatest frequency?",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "10-19"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "histograms.model_confusion",
+          "feedback": "Reading a bin label as one exact value instead of an interval.",
+          "hint": "Histograms group numeric values into intervals so distribution shape becomes visible.",
+          "recovery_archetype_id": "depth.v1.data_analysis.histograms.concept"
+        },
+        {
+          "code": "histograms.procedure_slip",
+          "feedback": "The setup is close, but a step in Histograms changed the result.",
+          "hint": "Name the interval with the tallest bar before doing any arithmetic.",
+          "recovery_archetype_id": "depth.v1.data_analysis.histograms.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Box plots",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.data_analysis.box_plots.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Box plots?"
+        },
+        {
+          "id": "depth.v1.data_analysis.box_plots.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.data_analysis.box_plots.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.data_analysis.box_plots.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A community survey supports a decision; choose a defensible data model and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Box plots",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "A box plot has min 3, Q1 6, median 11, Q3 15, max 18. Find the median.",
+            "explanation": "The median is the middle marker. The IQR is Q3 minus Q1. Answer: 11",
+            "expected_answer": "11"
+          },
+          {
+            "stage": "guided",
+            "prompt": "A box plot has min 3, Q1 7, median 13, Q3 18, max 20. Find the IQR.",
+            "explanation": "Point to Q1, median, and Q3, then compute Q3 - Q1.",
+            "expected_answer": "11"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "A box plot has min 10, Q1 14, median 16, Q3 21, max 24. Find the median.",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "16"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "box_plots.model_confusion",
+          "feedback": "Using max minus min when the question asks for IQR.",
+          "hint": "A box plot compresses data into five landmarks: min, Q1, median, Q3, and max.",
+          "recovery_archetype_id": "depth.v1.data_analysis.box_plots.concept"
+        },
+        {
+          "code": "box_plots.procedure_slip",
+          "feedback": "The setup is close, but a step in Box plots changed the result.",
+          "hint": "Point to Q1, median, and Q3, then compute Q3 - Q1.",
+          "recovery_archetype_id": "depth.v1.data_analysis.box_plots.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Center, spread, and shape",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.data_analysis.center_spread_and_shape.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Center, spread, and shape?"
+        },
+        {
+          "id": "depth.v1.data_analysis.center_spread_and_shape.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.data_analysis.center_spread_and_shape.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.data_analysis.center_spread_and_shape.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A community survey supports a decision; choose a defensible data model and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Center, spread, and shape",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "For the data values 9, 14, 25, what is the range?",
+            "explanation": "Range measures spread by subtracting the smallest value from the largest value. Answer: 16",
+            "expected_answer": "16"
+          },
+          {
+            "stage": "guided",
+            "prompt": "For the data values 9, 11, 24, what is the range?",
+            "explanation": "For one data set, state its median, range, and whether values cluster or spread out.",
+            "expected_answer": "15"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "For the data values 3, 17, 26, what is the range?",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "23"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "center_spread_and_shape.model_confusion",
+          "feedback": "Naming only the largest value and missing the distribution.",
+          "hint": "Center, spread, and shape describe what is typical, how variable values are, and how values are distributed.",
+          "recovery_archetype_id": "depth.v1.data_analysis.center_spread_and_shape.concept"
+        },
+        {
+          "code": "center_spread_and_shape.procedure_slip",
+          "feedback": "The setup is close, but a step in Center, spread, and shape changed the result.",
+          "hint": "For one data set, state its median, range, and whether values cluster or spread out.",
+          "recovery_archetype_id": "depth.v1.data_analysis.center_spread_and_shape.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Median, range, and IQR",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.data_analysis.median_range_and_iqr.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Median, range, and IQR?"
+        },
+        {
+          "id": "depth.v1.data_analysis.median_range_and_iqr.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.data_analysis.median_range_and_iqr.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.data_analysis.median_range_and_iqr.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A community survey supports a decision; choose a defensible data model and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Median, range, and IQR",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "For the ordered data 12, 14, 20, 21, 38, 40, 49, find the IQR.",
+            "explanation": "The median is the middle value. The IQR is the upper-half median minus the lower-half median. Answer: 26",
+            "expected_answer": "26"
+          },
+          {
+            "stage": "guided",
+            "prompt": "For the ordered data 10, 14, 15, 18, 24, 40, 52, find the IQR.",
+            "explanation": "Sort seven numbers, circle the median, then find the middle of each half.",
+            "expected_answer": "26"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "For the ordered data 12, 15, 19, 20, 30, 32, 50, find the IQR.",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "17"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "median_range_and_iqr.model_confusion",
+          "feedback": "Finding quartiles before sorting the data.",
+          "hint": "Median and IQR use ordered data to describe center and middle spread.",
+          "recovery_archetype_id": "depth.v1.data_analysis.median_range_and_iqr.concept"
+        },
+        {
+          "code": "median_range_and_iqr.procedure_slip",
+          "feedback": "The setup is close, but a step in Median, range, and IQR changed the result.",
+          "hint": "Sort seven numbers, circle the median, then find the middle of each half.",
+          "recovery_archetype_id": "depth.v1.data_analysis.median_range_and_iqr.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Variability in data",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.data_analysis.variability_in_data.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Variability in data?"
+        },
+        {
+          "id": "depth.v1.data_analysis.variability_in_data.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.data_analysis.variability_in_data.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.data_analysis.variability_in_data.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A community survey supports a decision; choose a defensible data model and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Variability in data",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "Set A: (8, 8, 8, 8). Set B: (4, 7, 9, 12). Which set has variability?",
+            "explanation": "A data set has variability when its values are not all the same. Answer: Set B",
+            "expected_answer": "Set B"
+          },
+          {
+            "stage": "guided",
+            "prompt": "Set A: (8, 8, 8, 8). Set B: (4, 7, 9, 12). Which set has variability?",
+            "explanation": "Compare 5,5,5,5 with 3,5,7,9 and say which has variability.",
+            "expected_answer": "Set B"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "Set A: (4, 7, 9, 12). Set B: (8, 8, 8, 8). Which set has variability?",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "Set A"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "variability_in_data.model_confusion",
+          "feedback": "Assuming every data set has spread just because it has several values.",
+          "hint": "Variability means the data values change; no variability means all values match.",
+          "recovery_archetype_id": "depth.v1.data_analysis.variability_in_data.concept"
+        },
+        {
+          "code": "variability_in_data.procedure_slip",
+          "feedback": "The setup is close, but a step in Variability in data changed the result.",
+          "hint": "Compare 5,5,5,5 with 3,5,7,9 and say which has variability.",
+          "recovery_archetype_id": "depth.v1.data_analysis.variability_in_data.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Comparative dot and box plots",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.data_analysis.comparative_dot_and_box_plots.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Comparative dot and box plots?"
+        },
+        {
+          "id": "depth.v1.data_analysis.comparative_dot_and_box_plots.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.data_analysis.comparative_dot_and_box_plots.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.data_analysis.comparative_dot_and_box_plots.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A community survey supports a decision; choose a defensible data model and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Comparative dot and box plots",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "Two box plots have medians: Group A 19, Group B 14. Which group has the greater median?",
+            "explanation": "Compare the center markers of the two displays to decide which group is greater. Answer: Group A",
+            "expected_answer": "Group A"
+          },
+          {
+            "stage": "guided",
+            "prompt": "Two box plots have medians: Group A 17, Group B 12. Which group has the greater median?",
+            "explanation": "Compare two groups by median first, then compare spread.",
+            "expected_answer": "Group A"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "Two box plots have medians: Group A 13, Group B 8. Which group has the greater median?",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "Group A"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "comparative_dot_and_box_plots.model_confusion",
+          "feedback": "Declaring a winner from one extreme value instead of comparing the whole display.",
+          "hint": "Comparative displays let two groups be judged by center, spread, and shape side by side.",
+          "recovery_archetype_id": "depth.v1.data_analysis.comparative_dot_and_box_plots.concept"
+        },
+        {
+          "code": "comparative_dot_and_box_plots.procedure_slip",
+          "feedback": "The setup is close, but a step in Comparative dot and box plots changed the result.",
+          "hint": "Compare two groups by median first, then compare spread.",
+          "recovery_archetype_id": "depth.v1.data_analysis.comparative_dot_and_box_plots.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Sample inferences from displays",
+      "content_status": "ready",
+      "archetypes": [
+        {
+          "id": "depth.v1.data_analysis.sample_inferences_from_displays.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Sample inferences from displays?"
+        },
+        {
+          "id": "depth.v1.data_analysis.sample_inferences_from_displays.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.data_analysis.sample_inferences_from_displays.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.data_analysis.sample_inferences_from_displays.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A community survey informs a town decision. Check the sample and display before making an inference."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Sample inferences from displays",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "12 of 30 randomly sampled students prefer art. Estimate out of 100.",
+            "explanation": "Use the sample proportion: 12/30 = 0.4, then 0.4 x 100.",
+            "expected_answer": "40"
+          },
+          {
+            "stage": "guided",
+            "prompt": "15 of 50 randomly sampled voters support a proposal. Estimate out of 200.",
+            "explanation": "Scale 15/50 to the population of 200.",
+            "expected_answer": "60"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "A sports club poll is used to describe all students. Is that justified?",
+            "explanation": "No; the sampling group is biased toward sports-club members.",
+            "expected_answer": "no"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "biased_sample",
+          "feedback": "The conclusion treats a biased or convenience sample as representative.",
+          "hint": "Check how the sample was selected before generalizing.",
+          "recovery_archetype_id": "depth.v1.data_analysis.sample_inferences_from_displays.concept"
+        },
+        {
+          "code": "unscaled_proportion",
+          "feedback": "The sample count was copied without scaling its proportion to the population.",
+          "hint": "Compute sample successes divided by sample size, then multiply by the population.",
+          "recovery_archetype_id": "depth.v1.data_analysis.sample_inferences_from_displays.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Part-to-whole display comparisons",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.data_analysis.part_to_whole_display_comparisons.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Part-to-whole display comparisons?"
+        },
+        {
+          "id": "depth.v1.data_analysis.part_to_whole_display_comparisons.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.data_analysis.part_to_whole_display_comparisons.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.data_analysis.part_to_whole_display_comparisons.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A community survey supports a decision; choose a defensible data model and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Part-to-whole display comparisons",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "A circle graph category has 14 out of 28 responses. About what percent of the whole is that?",
+            "explanation": "A part-to-whole comparison divides the category by the total and scales to 100. Answer: 50%",
+            "expected_answer": "50%"
+          },
+          {
+            "stage": "guided",
+            "prompt": "A circle graph category has 17 out of 39 responses. About what percent of the whole is that?",
+            "explanation": "Write one part-to-whole fraction from a graph, then convert it to a percent.",
+            "expected_answer": "44%"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "A circle graph category has 12 out of 22 responses. About what percent of the whole is that?",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "55%"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "part_to_whole_display_comparisons.model_confusion",
+          "feedback": "Comparing parts without first finding the whole.",
+          "hint": "Circle graphs and bar graphs often compare each part to the whole or to another part.",
+          "recovery_archetype_id": "depth.v1.data_analysis.part_to_whole_display_comparisons.concept"
+        },
+        {
+          "code": "part_to_whole_display_comparisons.procedure_slip",
+          "feedback": "The setup is close, but a step in Part-to-whole display comparisons changed the result.",
+          "hint": "Write one part-to-whole fraction from a graph, then convert it to a percent.",
+          "recovery_archetype_id": "depth.v1.data_analysis.part_to_whole_display_comparisons.procedure"
+        }
+      ]
+    }
+  ]
+}

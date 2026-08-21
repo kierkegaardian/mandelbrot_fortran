@@ -5,6 +5,7 @@ import re
 import shutil
 import subprocess
 import threading
+from dataclasses import replace
 from pathlib import Path
 
 from .curriculum import get_curriculum_for_skill
@@ -89,17 +90,10 @@ def apply_story_wrapper(question: Question, *, rng: random.Random) -> Question:
     )
     wrapped_explanation = f"Story-to-math translation: identify the operation, then solve. {question.explanation}"
 
-    return Question(
-        skill=question.skill,
+    return replace(
+        question,
         prompt=wrapped_prompt,
-        correct_answer=question.correct_answer,
         explanation=wrapped_explanation,
-        choices=question.choices,
-        visual=question.visual,
-        template_id=question.template_id,
-        template_external_id=question.template_external_id,
-        subskill=question.subskill,
-        question_label=question.question_label,
         mode="word",
     )
 

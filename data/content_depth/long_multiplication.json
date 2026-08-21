@@ -1,0 +1,189 @@
+{
+  "version": 1,
+  "skill": "long_multiplication",
+  "subskills": [
+    {
+      "subskill": "Partial products",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.long_multiplication.partial_products.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Partial products?"
+        },
+        {
+          "id": "depth.v1.long_multiplication.partial_products.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.long_multiplication.partial_products.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.long_multiplication.partial_products.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "Choose a useful mathematical model and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Partial products",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "Long multiplication: 27 x 55 = ?",
+            "explanation": "Long multiplication builds partial products by place value. Answer: 1485",
+            "expected_answer": "1485"
+          },
+          {
+            "stage": "guided",
+            "prompt": "Long multiplication: 60 x 31 = ?",
+            "explanation": "Read 23 x 14 as 23 x 4 plus 23 x 10.",
+            "expected_answer": "1860"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "Long multiplication: 97 x 42 = ?",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "4074"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "partial_products.model_confusion",
+          "feedback": "Adding a row without noticing what place value it represents.",
+          "hint": "Each row is one factor multiplied by one place of the other factor.",
+          "recovery_archetype_id": "depth.v1.long_multiplication.partial_products.concept"
+        },
+        {
+          "code": "partial_products.procedure_slip",
+          "feedback": "The setup is close, but a step in Partial products changed the result.",
+          "hint": "Read 23 x 14 as 23 x 4 plus 23 x 10.",
+          "recovery_archetype_id": "depth.v1.long_multiplication.partial_products.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Place-value breakdown",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.long_multiplication.place_value_breakdown.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Place-value breakdown?"
+        },
+        {
+          "id": "depth.v1.long_multiplication.place_value_breakdown.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.long_multiplication.place_value_breakdown.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.long_multiplication.place_value_breakdown.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "Choose a useful mathematical model and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Place-value breakdown",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "Long multiplication: 19 x 45 = ?",
+            "explanation": "Long multiplication builds partial products by place value. Answer: 855",
+            "expected_answer": "855"
+          },
+          {
+            "stage": "guided",
+            "prompt": "Long multiplication: 34 x 54 = ?",
+            "explanation": "Split 34 into 30 and 4 before starting the algorithm.",
+            "expected_answer": "1836"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "Long multiplication: 33 x 25 = ?",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "825"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "place_value_breakdown.model_confusion",
+          "feedback": "Forgetting the zero placeholder for a tens row.",
+          "hint": "Two-digit multiplication is multiplying tens and ones, then combining the parts.",
+          "recovery_archetype_id": "depth.v1.long_multiplication.place_value_breakdown.concept"
+        },
+        {
+          "code": "place_value_breakdown.procedure_slip",
+          "feedback": "The setup is close, but a step in Place-value breakdown changed the result.",
+          "hint": "Split 34 into 30 and 4 before starting the algorithm.",
+          "recovery_archetype_id": "depth.v1.long_multiplication.place_value_breakdown.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Two-digit multiplies",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.long_multiplication.two_digit_multiplies.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Two-digit multiplies?"
+        },
+        {
+          "id": "depth.v1.long_multiplication.two_digit_multiplies.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.long_multiplication.two_digit_multiplies.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.long_multiplication.two_digit_multiplies.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "Choose a useful mathematical model and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Two-digit multiplies",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "Long multiplication: 69 x 31 = ?",
+            "explanation": "Long multiplication builds partial products by place value. Answer: 2139",
+            "expected_answer": "2139"
+          },
+          {
+            "stage": "guided",
+            "prompt": "Long multiplication: 69 x 92 = ?",
+            "explanation": "Estimate first so you know roughly where the final product should land.",
+            "expected_answer": "6348"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "Long multiplication: 47 x 55 = ?",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "2585"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "two_digit_multiplies.model_confusion",
+          "feedback": "Treating the second digit as if it were ones when it is really tens.",
+          "hint": "The algorithm is a compact way to organize repeated place-value products.",
+          "recovery_archetype_id": "depth.v1.long_multiplication.two_digit_multiplies.concept"
+        },
+        {
+          "code": "two_digit_multiplies.procedure_slip",
+          "feedback": "The setup is close, but a step in Two-digit multiplies changed the result.",
+          "hint": "Estimate first so you know roughly where the final product should land.",
+          "recovery_archetype_id": "depth.v1.long_multiplication.two_digit_multiplies.procedure"
+        }
+      ]
+    }
+  ]
+}

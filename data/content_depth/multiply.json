@@ -1,0 +1,311 @@
+{
+  "version": 1,
+  "skill": "multiply",
+  "subskills": [
+    {
+      "subskill": "Repeated addition",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.multiply.repeated_addition.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Repeated addition?"
+        },
+        {
+          "id": "depth.v1.multiply.repeated_addition.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.multiply.repeated_addition.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.multiply.repeated_addition.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A coordinator is arranging equal groups; choose an array or group model and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Repeated addition",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "2 x 10 = ?",
+            "explanation": "Multiplication is repeated groups. Answer: 20",
+            "expected_answer": "20"
+          },
+          {
+            "stage": "guided",
+            "prompt": "2 x 6 = ?",
+            "explanation": "Read 4 x 3 as 4 groups of 3, then list the repeated sum.",
+            "expected_answer": "12"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "3 x 8 = ?",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "24"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "repeated_addition.model_confusion",
+          "feedback": "Using multiplication when the groups are not equal in size.",
+          "hint": "Multiplication compresses equal additions into one rule.",
+          "recovery_archetype_id": "depth.v1.multiply.repeated_addition.concept"
+        },
+        {
+          "code": "repeated_addition.procedure_slip",
+          "feedback": "The setup is close, but a step in Repeated addition changed the result.",
+          "hint": "Read 4 x 3 as 4 groups of 3, then list the repeated sum.",
+          "recovery_archetype_id": "depth.v1.multiply.repeated_addition.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Times tables",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.multiply.times_tables.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Times tables?"
+        },
+        {
+          "id": "depth.v1.multiply.times_tables.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.multiply.times_tables.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.multiply.times_tables.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A coordinator is arranging equal groups; choose an array or group model and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Times tables",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "3 x 1 = ?",
+            "explanation": "Multiplication is repeated groups. Answer: 3",
+            "expected_answer": "3"
+          },
+          {
+            "stage": "guided",
+            "prompt": "6 x 7 = ?",
+            "explanation": "Use 6 x 7 as 5 x 7 plus 1 x 7.",
+            "expected_answer": "42"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "1 x 6 = ?",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "6"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "times_tables.model_confusion",
+          "feedback": "Memorizing digits without linking them to a group picture.",
+          "hint": "A fact family is a fast recall shortcut for equal groups.",
+          "recovery_archetype_id": "depth.v1.multiply.times_tables.concept"
+        },
+        {
+          "code": "times_tables.procedure_slip",
+          "feedback": "The setup is close, but a step in Times tables changed the result.",
+          "hint": "Use 6 x 7 as 5 x 7 plus 1 x 7.",
+          "recovery_archetype_id": "depth.v1.multiply.times_tables.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Array and grid models",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.multiply.array_and_grid_models.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Array and grid models?"
+        },
+        {
+          "id": "depth.v1.multiply.array_and_grid_models.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.multiply.array_and_grid_models.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.multiply.array_and_grid_models.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A coordinator is arranging equal groups; choose an array or group model and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Array and grid models",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "7 x 9 = ?",
+            "explanation": "Multiplication is repeated groups. Answer: 63",
+            "expected_answer": "63"
+          },
+          {
+            "stage": "guided",
+            "prompt": "6 x 4 = ?",
+            "explanation": "Rotate a 3-by-4 array and notice the total stays 12.",
+            "expected_answer": "24"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "4 x 6 = ?",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "24"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "array_and_grid_models.model_confusion",
+          "feedback": "Counting one row twice when reading the grid.",
+          "hint": "Rows and columns make equal groups visible all at once.",
+          "recovery_archetype_id": "depth.v1.multiply.array_and_grid_models.concept"
+        },
+        {
+          "code": "array_and_grid_models.procedure_slip",
+          "feedback": "The setup is close, but a step in Array and grid models changed the result.",
+          "hint": "Rotate a 3-by-4 array and notice the total stays 12.",
+          "recovery_archetype_id": "depth.v1.multiply.array_and_grid_models.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Simple product facts",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.multiply.simple_product_facts.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Simple product facts?"
+        },
+        {
+          "id": "depth.v1.multiply.simple_product_facts.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.multiply.simple_product_facts.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.multiply.simple_product_facts.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A coordinator is arranging equal groups; choose an array or group model and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Simple product facts",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "3 x 3 = ?",
+            "explanation": "Multiplication is repeated groups. Answer: 9",
+            "expected_answer": "9"
+          },
+          {
+            "stage": "guided",
+            "prompt": "3 x 5 = ?",
+            "explanation": "Say which numbers are groups, items per group, and total.",
+            "expected_answer": "15"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "10 x 8 = ?",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "80"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "simple_product_facts.model_confusion",
+          "feedback": "Mixing up factors and the product in a fact family.",
+          "hint": "A product is the total number of items in equal groups.",
+          "recovery_archetype_id": "depth.v1.multiply.simple_product_facts.concept"
+        },
+        {
+          "code": "simple_product_facts.procedure_slip",
+          "feedback": "The setup is close, but a step in Simple product facts changed the result.",
+          "hint": "Say which numbers are groups, items per group, and total.",
+          "recovery_archetype_id": "depth.v1.multiply.simple_product_facts.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Multiplicative comparison and estimation",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.multiply.multiplicative_comparison_and_estimation.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Multiplicative comparison and estimation?"
+        },
+        {
+          "id": "depth.v1.multiply.multiplicative_comparison_and_estimation.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.multiply.multiplicative_comparison_and_estimation.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.multiply.multiplicative_comparison_and_estimation.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A coordinator is arranging equal groups; choose an array or group model and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Multiplicative comparison and estimation",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "5 x 3 = ?",
+            "explanation": "Multiplication is repeated groups. Answer: 15",
+            "expected_answer": "15"
+          },
+          {
+            "stage": "guided",
+            "prompt": "7 x 8 = ?",
+            "explanation": "If one box has 6 and another has 3 times as many, picture 3 boxes of 6.",
+            "expected_answer": "56"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "3 x 5 = ?",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "15"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "multiplicative_comparison_and_estimation.model_confusion",
+          "feedback": "Treating '3 times as many' like '3 more'.",
+          "hint": "Times-as-many compares scaling, not just adding the same difference.",
+          "recovery_archetype_id": "depth.v1.multiply.multiplicative_comparison_and_estimation.concept"
+        },
+        {
+          "code": "multiplicative_comparison_and_estimation.procedure_slip",
+          "feedback": "The setup is close, but a step in Multiplicative comparison and estimation changed the result.",
+          "hint": "If one box has 6 and another has 3 times as many, picture 3 boxes of 6.",
+          "recovery_archetype_id": "depth.v1.multiply.multiplicative_comparison_and_estimation.procedure"
+        }
+      ]
+    }
+  ]
+}

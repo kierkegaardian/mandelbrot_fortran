@@ -1,0 +1,128 @@
+{
+  "version": 1,
+  "skill": "stats_mean",
+  "subskills": [
+    {
+      "subskill": "Mean",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.stats_mean.mean.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Mean?"
+        },
+        {
+          "id": "depth.v1.stats_mean.mean.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.stats_mean.mean.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.stats_mean.mean.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A report needs a fair summary; choose a center model and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Mean",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "Find the mean of these values: 26, 18, 24, 25",
+            "explanation": "The mean is the sum of values divided by how many values there are. Answer: 23.25",
+            "expected_answer": "23.25"
+          },
+          {
+            "stage": "guided",
+            "prompt": "Find the mean of these values: 13, 22, 1, 4",
+            "explanation": "For 4, 6, and 20, compute the mean and then decide whether it feels representative of the set.",
+            "expected_answer": "10"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "Find the mean of these values: 12, 19, 6, 10",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "11.75"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "mean.model_confusion",
+          "feedback": "Using the mean as the whole story when one extreme value is pulling it away from the typical case.",
+          "hint": "The mean is the fair-share value: combine all the data, then redistribute it evenly.",
+          "recovery_archetype_id": "depth.v1.stats_mean.mean.concept"
+        },
+        {
+          "code": "mean.procedure_slip",
+          "feedback": "The setup is close, but a step in Mean changed the result.",
+          "hint": "For 4, 6, and 20, compute the mean and then decide whether it feels representative of the set.",
+          "recovery_archetype_id": "depth.v1.stats_mean.mean.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Mean from display",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.stats_mean.mean_from_display.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Mean from display?"
+        },
+        {
+          "id": "depth.v1.stats_mean.mean_from_display.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.stats_mean.mean_from_display.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.stats_mean.mean_from_display.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A report needs a fair summary; choose a center model and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Mean from display",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "A dot plot shows these counts by value: 2, 10, 9, 30. Find the mean count.",
+            "explanation": "Read the displayed counts, add them, then divide by how many counts are shown. Answer: 12.75",
+            "expected_answer": "12.75"
+          },
+          {
+            "stage": "guided",
+            "prompt": "A dot plot shows these counts by value: 29, 4, 7, 13. Find the mean count.",
+            "explanation": "For 4, 6, and 20, compute the mean and then decide whether it feels representative of the set.",
+            "expected_answer": "13.25"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "A dot plot shows these counts by value: 4, 12, 22, 3. Find the mean count.",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "10.25"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "mean_from_display.model_confusion",
+          "feedback": "Using the mean as the whole story when one extreme value is pulling it away from the typical case.",
+          "hint": "The mean is the fair-share value: combine all the data, then redistribute it evenly.",
+          "recovery_archetype_id": "depth.v1.stats_mean.mean_from_display.concept"
+        },
+        {
+          "code": "mean_from_display.procedure_slip",
+          "feedback": "The setup is close, but a step in Mean from display changed the result.",
+          "hint": "For 4, 6, and 20, compute the mean and then decide whether it feels representative of the set.",
+          "recovery_archetype_id": "depth.v1.stats_mean.mean_from_display.procedure"
+        }
+      ]
+    }
+  ]
+}

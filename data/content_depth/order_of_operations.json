@@ -1,0 +1,250 @@
+{
+  "version": 1,
+  "skill": "order_of_operations",
+  "subskills": [
+    {
+      "subskill": "Parentheses first",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.order_of_operations.parentheses_first.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Parentheses first?"
+        },
+        {
+          "id": "depth.v1.order_of_operations.parentheses_first.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.order_of_operations.parentheses_first.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.order_of_operations.parentheses_first.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A calculation procedure must be followed reliably; choose the operation order and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Parentheses first",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "Evaluate: -2 * (-12 + 5)",
+            "explanation": "Use order-of-operations: parentheses, multiplication, then addition and subtraction. Answer: 14",
+            "expected_answer": "14"
+          },
+          {
+            "stage": "guided",
+            "prompt": "Evaluate: -4 - (10 * 1)",
+            "explanation": "Evaluate (3 + 4) x 2 and say why the addition happens first.",
+            "expected_answer": "-14"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "Evaluate: (-6 + 2) * 3",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "-12"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "parentheses_first.model_confusion",
+          "feedback": "Ignoring the grouped chunk and working left to right anyway.",
+          "hint": "Parentheses make a chunk that must be finished before the rest.",
+          "recovery_archetype_id": "depth.v1.order_of_operations.parentheses_first.concept"
+        },
+        {
+          "code": "parentheses_first.procedure_slip",
+          "feedback": "The setup is close, but a step in Parentheses first changed the result.",
+          "hint": "Evaluate (3 + 4) x 2 and say why the addition happens first.",
+          "recovery_archetype_id": "depth.v1.order_of_operations.parentheses_first.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Multiplication vs addition/subtraction",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.order_of_operations.multiplication_vs_addition_subtraction.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Multiplication vs addition/subtraction?"
+        },
+        {
+          "id": "depth.v1.order_of_operations.multiplication_vs_addition_subtraction.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.order_of_operations.multiplication_vs_addition_subtraction.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.order_of_operations.multiplication_vs_addition_subtraction.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A calculation procedure must be followed reliably; choose the operation order and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Multiplication vs addition/subtraction",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "Evaluate: (-12 + -12) - (-4 * 2)",
+            "explanation": "Use order-of-operations: parentheses, multiplication, then addition and subtraction. Answer: -16",
+            "expected_answer": "-16"
+          },
+          {
+            "stage": "guided",
+            "prompt": "Evaluate: 1 - (11 * 3)",
+            "explanation": "Compare 3 + 2 x 5 with (3 + 2) x 5.",
+            "expected_answer": "-32"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "Evaluate: (-12 + 9) * 1",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "-3"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "multiplication_vs_addition_subtraction.model_confusion",
+          "feedback": "Adding first because it appears earlier in the line.",
+          "hint": "Multiplication and division build pieces before addition combines them.",
+          "recovery_archetype_id": "depth.v1.order_of_operations.multiplication_vs_addition_subtraction.concept"
+        },
+        {
+          "code": "multiplication_vs_addition_subtraction.procedure_slip",
+          "feedback": "The setup is close, but a step in Multiplication vs addition/subtraction changed the result.",
+          "hint": "Compare 3 + 2 x 5 with (3 + 2) x 5.",
+          "recovery_archetype_id": "depth.v1.order_of_operations.multiplication_vs_addition_subtraction.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Expression grouping",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.order_of_operations.expression_grouping.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Expression grouping?"
+        },
+        {
+          "id": "depth.v1.order_of_operations.expression_grouping.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.order_of_operations.expression_grouping.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.order_of_operations.expression_grouping.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A calculation procedure must be followed reliably; choose the operation order and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Expression grouping",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "Evaluate: -5 * (3 + 2)",
+            "explanation": "Use order-of-operations: parentheses, multiplication, then addition and subtraction. Answer: -25",
+            "expected_answer": "-25"
+          },
+          {
+            "stage": "guided",
+            "prompt": "Evaluate: (-12 * 8) + (6 * 6)",
+            "explanation": "Underline one chunk, simplify it, then rewrite the shorter expression.",
+            "expected_answer": "-60"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "Evaluate: -11 * (8 + -6)",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "-22"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "expression_grouping.model_confusion",
+          "feedback": "Trying to do every operation at once.",
+          "hint": "A long expression is solved by simplifying one sensible chunk at a time.",
+          "recovery_archetype_id": "depth.v1.order_of_operations.expression_grouping.concept"
+        },
+        {
+          "code": "expression_grouping.procedure_slip",
+          "feedback": "The setup is close, but a step in Expression grouping changed the result.",
+          "hint": "Underline one chunk, simplify it, then rewrite the shorter expression.",
+          "recovery_archetype_id": "depth.v1.order_of_operations.expression_grouping.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Exponents in expressions",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.order_of_operations.exponents_in_expressions.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Exponents in expressions?"
+        },
+        {
+          "id": "depth.v1.order_of_operations.exponents_in_expressions.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.order_of_operations.exponents_in_expressions.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.order_of_operations.exponents_in_expressions.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A calculation procedure must be followed reliably; choose the operation order and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Exponents in expressions",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "Evaluate: (5 * -5) + (2 * 2)",
+            "explanation": "Use order-of-operations: parentheses, multiplication, then addition and subtraction. Answer: -21",
+            "expected_answer": "-21"
+          },
+          {
+            "stage": "guided",
+            "prompt": "Evaluate: (7 + -12) - (-5 * 2)",
+            "explanation": "Evaluate 2 + 3^2 and explain why the square happens before addition.",
+            "expected_answer": "5"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "Evaluate: (3 - 2) * 4",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "4"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "exponents_in_expressions.model_confusion",
+          "feedback": "Reading 3^2 as 3 x 2 instead of 3 x 3.",
+          "hint": "An exponent is repeated multiplication that belongs to its base before other operations.",
+          "recovery_archetype_id": "depth.v1.order_of_operations.exponents_in_expressions.concept"
+        },
+        {
+          "code": "exponents_in_expressions.procedure_slip",
+          "feedback": "The setup is close, but a step in Exponents in expressions changed the result.",
+          "hint": "Evaluate 2 + 3^2 and explain why the square happens before addition.",
+          "recovery_archetype_id": "depth.v1.order_of_operations.exponents_in_expressions.procedure"
+        }
+      ]
+    }
+  ]
+}

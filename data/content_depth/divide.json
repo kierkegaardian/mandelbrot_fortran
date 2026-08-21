@@ -1,0 +1,311 @@
+{
+  "version": 1,
+  "skill": "divide",
+  "subskills": [
+    {
+      "subskill": "Equal sharing",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.divide.equal_sharing.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Equal sharing?"
+        },
+        {
+          "id": "depth.v1.divide.equal_sharing.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.divide.equal_sharing.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.divide.equal_sharing.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A team is sharing materials equally; construct a division model and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Equal sharing",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "20 / 4 = ?",
+            "explanation": "Division shares a total into equal groups. Answer: 5",
+            "expected_answer": "5"
+          },
+          {
+            "stage": "guided",
+            "prompt": "30 / 5 = ?",
+            "explanation": "Share 12 counters into 3 bowls until every bowl matches.",
+            "expected_answer": "6"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "5 / 5 = ?",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "1"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "equal_sharing.model_confusion",
+          "feedback": "Stopping before all the items are distributed.",
+          "hint": "Division answers how much each group gets in a fair share.",
+          "recovery_archetype_id": "depth.v1.divide.equal_sharing.concept"
+        },
+        {
+          "code": "equal_sharing.procedure_slip",
+          "feedback": "The setup is close, but a step in Equal sharing changed the result.",
+          "hint": "Share 12 counters into 3 bowls until every bowl matches.",
+          "recovery_archetype_id": "depth.v1.divide.equal_sharing.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Division as repeated subtraction",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.divide.division_as_repeated_subtraction.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Division as repeated subtraction?"
+        },
+        {
+          "id": "depth.v1.divide.division_as_repeated_subtraction.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.divide.division_as_repeated_subtraction.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.divide.division_as_repeated_subtraction.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A team is sharing materials equally; construct a division model and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Division as repeated subtraction",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "20 / 5 = ?",
+            "explanation": "Division shares a total into equal groups. Answer: 4",
+            "expected_answer": "4"
+          },
+          {
+            "stage": "guided",
+            "prompt": "10 / 2 = ?",
+            "explanation": "Take away 4s from 20 until nothing is left.",
+            "expected_answer": "5"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "3 / 3 = ?",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "1"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "division_as_repeated_subtraction.model_confusion",
+          "feedback": "Subtracting different-sized groups and still calling it division.",
+          "hint": "Each subtraction removes one full group of the divisor.",
+          "recovery_archetype_id": "depth.v1.divide.division_as_repeated_subtraction.concept"
+        },
+        {
+          "code": "division_as_repeated_subtraction.procedure_slip",
+          "feedback": "The setup is close, but a step in Division as repeated subtraction changed the result.",
+          "hint": "Take away 4s from 20 until nothing is left.",
+          "recovery_archetype_id": "depth.v1.divide.division_as_repeated_subtraction.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Remainders",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.divide.remainders.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Remainders?"
+        },
+        {
+          "id": "depth.v1.divide.remainders.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.divide.remainders.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.divide.remainders.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A team is sharing materials equally; construct a division model and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Remainders",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "4 / 2 = ?",
+            "explanation": "Division shares a total into equal groups. Answer: 2",
+            "expected_answer": "2"
+          },
+          {
+            "stage": "guided",
+            "prompt": "6 / 3 = ?",
+            "explanation": "Divide 14 by 3 and explain why 2 is leftover.",
+            "expected_answer": "2"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "4 / 4 = ?",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "1"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "remainders.model_confusion",
+          "feedback": "Forcing leftovers into a full group when they do not fit.",
+          "hint": "A remainder is what cannot make another full equal group.",
+          "recovery_archetype_id": "depth.v1.divide.remainders.concept"
+        },
+        {
+          "code": "remainders.procedure_slip",
+          "feedback": "The setup is close, but a step in Remainders changed the result.",
+          "hint": "Divide 14 by 3 and explain why 2 is leftover.",
+          "recovery_archetype_id": "depth.v1.divide.remainders.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Inverse thinking",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.divide.inverse_thinking.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Inverse thinking?"
+        },
+        {
+          "id": "depth.v1.divide.inverse_thinking.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.divide.inverse_thinking.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.divide.inverse_thinking.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A team is sharing materials equally; construct a division model and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Inverse thinking",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "12 / 4 = ?",
+            "explanation": "Division shares a total into equal groups. Answer: 3",
+            "expected_answer": "3"
+          },
+          {
+            "stage": "guided",
+            "prompt": "6 / 3 = ?",
+            "explanation": "Solve 24 \u00f7 6, then ask what times 6 makes 24.",
+            "expected_answer": "2"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "2 / 2 = ?",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "1"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "inverse_thinking.model_confusion",
+          "feedback": "Forgetting to multiply back to see if the answer fits.",
+          "hint": "Division can be checked by asking what multiplication rebuilds the total.",
+          "recovery_archetype_id": "depth.v1.divide.inverse_thinking.concept"
+        },
+        {
+          "code": "inverse_thinking.procedure_slip",
+          "feedback": "The setup is close, but a step in Inverse thinking changed the result.",
+          "hint": "Solve 24 \u00f7 6, then ask what times 6 makes 24.",
+          "recovery_archetype_id": "depth.v1.divide.inverse_thinking.procedure"
+        }
+      ]
+    },
+    {
+      "subskill": "Remainder interpretation and estimation",
+      "content_status": "scaffold",
+      "archetypes": [
+        {
+          "id": "depth.v1.divide.remainder_interpretation_and_estimation.concept",
+          "reasoning_kind": "conceptual",
+          "prompt_prefix": "Which mental model best supports Remainder interpretation and estimation?"
+        },
+        {
+          "id": "depth.v1.divide.remainder_interpretation_and_estimation.procedure",
+          "reasoning_kind": "procedural"
+        },
+        {
+          "id": "depth.v1.divide.remainder_interpretation_and_estimation.transfer",
+          "reasoning_kind": "transfer"
+        },
+        {
+          "id": "depth.v1.divide.remainder_interpretation_and_estimation.application",
+          "reasoning_kind": "application",
+          "prompt_prefix": "A team is sharing materials equally; construct a division model and solve."
+        }
+      ],
+      "worked_example": {
+        "title": "Worked example: Remainder interpretation and estimation",
+        "steps": [
+          {
+            "stage": "model",
+            "prompt": "5 / 5 = ?",
+            "explanation": "Division shares a total into equal groups. Answer: 1",
+            "expected_answer": "1"
+          },
+          {
+            "stage": "guided",
+            "prompt": "20 / 5 = ?",
+            "explanation": "Ask whether the leftover gets ignored, kept, or forces one more group.",
+            "expected_answer": "4"
+          },
+          {
+            "stage": "transfer",
+            "prompt": "25 / 5 = ?",
+            "explanation": "Solve independently, then compare with the worked strategy.",
+            "expected_answer": "5"
+          }
+        ]
+      },
+      "misconceptions": [
+        {
+          "code": "remainder_interpretation_and_estimation.model_confusion",
+          "feedback": "Reporting only the raw remainder without deciding what the context means.",
+          "hint": "A remainder changes meaning depending on the story: leftover, extra trip, or partial group.",
+          "recovery_archetype_id": "depth.v1.divide.remainder_interpretation_and_estimation.concept"
+        },
+        {
+          "code": "remainder_interpretation_and_estimation.procedure_slip",
+          "feedback": "The setup is close, but a step in Remainder interpretation and estimation changed the result.",
+          "hint": "Ask whether the leftover gets ignored, kept, or forces one more group.",
+          "recovery_archetype_id": "depth.v1.divide.remainder_interpretation_and_estimation.procedure"
+        }
+      ]
+    }
+  ]
+}
