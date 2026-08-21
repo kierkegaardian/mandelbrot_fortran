@@ -67,7 +67,7 @@ def _cue_count(text: str) -> int:
 
 
 def _fetch_candidates(book_ids: list[int], status: str, limit: int) -> list[dict[str, object]]:
-    with db.connect() as conn:
+    with db.managed_connection() as conn:
         sql = """
             SELECT ec.id AS candidate_id, ec.book_id, ec.location, ec.text, b.title
             FROM exercise_candidates ec
@@ -97,7 +97,7 @@ def _fetch_candidates(book_ids: list[int], status: str, limit: int) -> list[dict
 def _mark_templated(candidate_ids: list[int]) -> None:
     if not candidate_ids:
         return
-    with db.connect() as conn:
+    with db.managed_connection() as conn:
         conn.executemany(
             "UPDATE exercise_candidates SET status = 'templated' WHERE id = ?",
             [(int(candidate_id),) for candidate_id in candidate_ids],

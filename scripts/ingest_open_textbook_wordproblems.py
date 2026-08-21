@@ -130,7 +130,7 @@ def ingest_source(
 
     db.init_db()
     book_id = _ensure_book(source)
-    with db.connect() as conn:
+    with db.managed_connection() as conn:
         conn.execute(
             "DELETE FROM exercise_candidates WHERE book_id = ? AND location LIKE ?",
             (book_id, f"open-src:{source.source_id}:%"),
@@ -156,7 +156,7 @@ def ingest_source(
 
 
 def _ensure_book(source: SourceCatalogItem) -> int:
-    with db.connect() as conn:
+    with db.managed_connection() as conn:
         row = conn.execute(
             "SELECT id FROM books WHERE title = ? AND source = ? AND pdf_filename = ?",
             (source.title, source.source, source.pdf_filename),
