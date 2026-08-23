@@ -5,7 +5,7 @@ Target platforms: Windows 10+, macOS 11+, Ubuntu LTS
 
 ## Security and Privacy
 - [ ] Parent PIN is configured and enforced for Parent tab access.
-- [ ] Parent lockout and clear-lock workflow validated.
+- [ ] Parent lockout and automatic timed unlock validated.
 - [ ] Core learning flows run without required outbound network access.
 - [ ] Local data paths and backup steps are documented.
 - [ ] Family Sync is labeled beta, defaults off, and cannot be enabled without an operator-supplied server config.

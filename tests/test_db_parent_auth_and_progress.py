@@ -41,9 +41,8 @@ class DbParentAuthAndProgressTests(unittest.TestCase):
         self.assertTrue(db.parent_pin_locked("2026-03-02T00:01:11+00:00")[0])
         self.assertFalse(db.verify_parent_pin("1234", "2026-03-02T00:01:12+00:00"))
 
-        db.clear_parent_lock("2026-03-02T00:02:00+00:00")
-        self.assertFalse(db.parent_pin_locked("2026-03-02T00:02:01+00:00")[0])
-        self.assertTrue(db.verify_parent_pin("1234", "2026-03-02T00:02:01+00:00"))
+        self.assertFalse(db.parent_pin_locked("2026-03-02T00:16:11+00:00")[0])
+        self.assertTrue(db.verify_parent_pin("1234", "2026-03-02T00:16:11+00:00"))
 
     def test_set_parent_pin_requires_parent_role(self) -> None:
         with self.assertRaises(ValueError):

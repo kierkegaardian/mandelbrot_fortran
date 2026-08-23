@@ -180,8 +180,6 @@ class ParentPanel:
         pin_row.pack(fill=tk.X, padx=10, pady=(6, 2))
         self.set_parent_pin_btn = ttk.Button(pin_row, text="Set / Change Parent PIN", command=self._set_parent_pin)
         self.set_parent_pin_btn.pack(side=tk.LEFT)
-        self.clear_parent_pin_btn = ttk.Button(pin_row, text="Clear Parent Lockout", command=self._clear_parent_pin_lock)
-        self.clear_parent_pin_btn.pack(side=tk.LEFT, padx=(8, 0))
 
     def _build_quiz_tab(self) -> None:
         self.quiz_list = tk.Listbox(self.quiz_tab, height=6)
@@ -777,23 +775,6 @@ class ParentPanel:
             messagebox.showerror("Invalid PIN", str(exc))
             return
         messagebox.showinfo("PIN updated", "Parent PIN has been set.")
-
-    def _clear_parent_pin_lock(self) -> None:
-        current = self._profile_getter()
-        if current is None:
-            return
-        if current.role != "parent":
-            messagebox.showerror("Parent profile required", "Switch to a parent profile to clear lockout.")
-            return
-        if db.parent_pin_configured():
-            pin = simpledialog.askstring("Verify PIN", "Enter parent PIN to clear lockout:", show="*", parent=self.profile_tab)
-            if pin is None:
-                return
-            if not db.verify_parent_pin(pin):
-                messagebox.showerror("Incorrect PIN", "PIN verification failed.")
-                return
-        db.clear_parent_lock(now_iso())
-        messagebox.showinfo("Lockout cleared", "Parent PIN lockout has been cleared.")
 
     def _add_profile(self) -> None:
         name = self.profile_name.get().strip()
