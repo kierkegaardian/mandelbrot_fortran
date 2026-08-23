@@ -4,7 +4,7 @@ from dataclasses import dataclass
 from pathlib import Path
 import json
 
-from .paths import data_dir
+from .paths import bundled_data_dir, data_dir
 
 
 @dataclass(frozen=True)
@@ -14,10 +14,13 @@ class CurriculumEntry:
     topics: tuple[str, ...]
     pdf: str
     source: str
+    grade_band: str = ""
+    mvp_tier: str = ""
+    standard_refs: tuple[str, ...] = ()
 
 
 def _load_curriculum() -> list[CurriculumEntry]:
-    path = data_dir() / "curriculum_index.json"
+    path = bundled_data_dir() / "curriculum_index.json"
     if not path.exists():
         return []
     raw = json.loads(path.read_text(encoding="utf-8"))
@@ -30,6 +33,9 @@ def _load_curriculum() -> list[CurriculumEntry]:
                 topics=tuple(str(topic) for topic in item.get("topics", [])),
                 pdf=str(item.get("pdf", "")),
                 source=str(item.get("source", "")),
+                grade_band=str(item.get("grade_band", "")),
+                mvp_tier=str(item.get("mvp_tier", "")),
+                standard_refs=tuple(str(ref) for ref in item.get("standard_refs", [])),
             )
         )
     return entries

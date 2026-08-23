@@ -1,0 +1,61 @@
+name: Beta feedback
+description: Share homeschool-family or adult-learner feedback from real use.
+title: "[Feedback] "
+labels:
+  - feedback
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this form for product feedback, not break/fix bugs. The most useful reports describe who used the app, what they tried, and what would make the experience more trustworthy or easier to keep using.
+  - type: dropdown
+    id: role
+    attributes:
+      label: Feedback from
+      options:
+        - Parent / homeschool organizer
+        - Student learner
+        - Adult learner
+        - Tutor / teacher
+        - Reviewer / convention contact
+    validations:
+      required: true
+  - type: dropdown
+    id: stage
+    attributes:
+      label: Product stage
+      options:
+        - First launch
+        - First week of use
+        - Two-week beta
+        - Review / sponsorship conversation
+    validations:
+      required: true
+  - type: textarea
+    id: summary
+    attributes:
+      label: What felt strongest?
+      description: Mention what made you trust the app or what was most useful.
+    validations:
+      required: true
+  - type: textarea
+    id: friction
+    attributes:
+      label: What created friction?
+      description: Mention install issues, confusing language, missing topics, or weak moments.
+    validations:
+      required: true
+  - type: textarea
+    id: outcomes
+    attributes:
+      label: What outcome did you get?
+      description: For example calmer review sessions, worksheet use, SAT review, or no clear outcome yet.
+    validations:
+      required: true
+  - type: textarea
+    id: quote
+    attributes:
+      label: Optional public quote
+      description: Share a short quote we can ask permission to use later.
+    validations:
+      required: false

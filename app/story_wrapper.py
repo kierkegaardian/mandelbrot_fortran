@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import random
 import re
+import shutil
 import subprocess
 import threading
 from pathlib import Path
@@ -26,6 +27,15 @@ WORD_WRAPPER_SKILLS = {
     "integers",
     "order_of_operations",
     "algebra_linear",
+    "pre_algebra",
+    "algebra_1",
+    "algebra_2",
+    "geometry_area",
+    "statistics",
+    "trig_right_triangle",
+    "calculus_1",
+    "calculus_2",
+    "calculus_3",
 }
 
 SKILL_KEYWORDS: dict[str, tuple[str, ...]] = {
@@ -43,6 +53,15 @@ SKILL_KEYWORDS: dict[str, tuple[str, ...]] = {
     "integers": ("negative", "positive", "temperature", "below zero"),
     "order_of_operations": ("expression", "parentheses", "operations"),
     "algebra_linear": ("equation", "variable", "solve", "unknown"),
+    "pre_algebra": ("ratio", "fraction", "percent", "rate"),
+    "algebra_1": ("equation", "graph", "function", "model"),
+    "algebra_2": ("polynomial", "quadratic", "function", "logarithm"),
+    "geometry_area": ("area", "perimeter", "triangle", "rectangle"),
+    "statistics": ("survey", "sample", "mean", "probability"),
+    "trig_right_triangle": ("triangle", "angle", "height", "distance"),
+    "calculus_1": ("rate", "change", "slope", "motion"),
+    "calculus_2": ("area", "accumulation", "integral", "velocity"),
+    "calculus_3": ("surface", "gradient", "partial", "vector"),
 }
 
 _PDF_SNIPPETS_CACHE: dict[Path, list[str]] = {}
@@ -131,6 +150,10 @@ def _ensure_background_extract(pdf_path: Path, txt_path: Path) -> None:
 
     def worker() -> None:
         try:
+            if shutil.which("pdftotext") is None:
+                with _CACHE_LOCK:
+                    _PDF_SNIPPETS_CACHE[pdf_path] = []
+                return
             subprocess.run(["pdftotext", "-layout", str(pdf_path), str(txt_path)], check=True)
             text = txt_path.read_text(encoding="utf-8", errors="replace")
             snippets = _extract_story_snippets(text)

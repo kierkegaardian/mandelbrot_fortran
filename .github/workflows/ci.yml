@@ -1,0 +1,39 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install toolchain
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y gfortran make
+
+      - name: Install PyInstaller
+        run: python -m pip install --upgrade pip pyinstaller
+
+      - name: Run Makefile check contract
+        run: make check OPENMP=0
+
+      - name: Build packaged app
+        run: pyinstaller --noconfirm --clean mandelquest.spec
+
+      - name: Smoke-test packaged app
+        run: |
+          export MANDELQUEST_DATA_DIR="$RUNNER_TEMP/mandelquest-smoke-ci"
+          mkdir -p "$MANDELQUEST_DATA_DIR"
+          ./dist/MandelQuest/MandelQuest --smoke-test

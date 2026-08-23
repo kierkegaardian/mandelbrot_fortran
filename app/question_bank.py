@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import random
+import sqlite3
 
 from . import db
 from .template_engine import instantiate_template, mc_choices
@@ -18,7 +19,11 @@ def try_generate_from_templates(
     # Local import to avoid circular dependency with quiz_engine.
     from .quiz_engine import Question
 
-    templates = db.list_question_templates(skill, level, subskill=subskill, mode=mode)
+    try:
+        templates = db.list_question_templates(skill, level, subskill=subskill, mode=mode)
+    except sqlite3.OperationalError:
+        # If DB schema is not initialized yet, fall back to generator logic.
+        return None
     if not templates:
         return None
     # Try a few templates; constraints or eval errors should not crash the app.

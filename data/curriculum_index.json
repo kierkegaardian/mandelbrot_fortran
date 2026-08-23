@@ -1,0 +1,505 @@
+[
+  {
+    "skill": "counting",
+    "label": "Basic Arithmetic",
+    "topics": [
+      "Count and cardinality"
+    ],
+    "pdf": "basic_arithmetic_student_workbook.pdf",
+    "source": "Sandra Z. Aragon et al. (2013)",
+    "grade_band": "K-1",
+    "mvp_tier": "v1_core",
+    "standard_refs": [
+      "CCSS.COUNTING"
+    ]
+  },
+  {
+    "skill": "place_value",
+    "label": "Place Value",
+    "topics": [
+      "Ones, tens, hundreds identification",
+      "Expanded form",
+      "Comparing numbers by place value"
+    ],
+    "pdf": "basic_arithmetic_student_workbook.pdf",
+    "source": "Sandra Z. Aragon et al. (2013)",
+    "grade_band": "K-2",
+    "mvp_tier": "v1_core",
+    "standard_refs": [
+      "CCSS.NBT"
+    ]
+  },
+  {
+    "skill": "add_subtract",
+    "label": "Arithmetic",
+    "topics": [
+      "Addition and subtraction practice"
+    ],
+    "pdf": "basic_arithmetic_student_workbook.pdf",
+    "source": "Sandra Z. Aragon et al. (2013)",
+    "grade_band": "1-2",
+    "mvp_tier": "v1_core",
+    "standard_refs": [
+      "CCSS.OA"
+    ]
+  },
+  {
+    "skill": "multiply",
+    "label": "Arithmetic",
+    "topics": [
+      "Multiplication",
+      "Repeated addition"
+    ],
+    "pdf": "basic_arithmetic_student_workbook.pdf",
+    "source": "Sandra Z. Aragon et al. (2013)",
+    "grade_band": "3-4",
+    "mvp_tier": "v1_core",
+    "standard_refs": [
+      "CCSS.OA"
+    ]
+  },
+  {
+    "skill": "divide",
+    "label": "Arithmetic",
+    "topics": [
+      "Division and division with remainders"
+    ],
+    "pdf": "basic_arithmetic_student_workbook.pdf",
+    "source": "Sandra Z. Aragon et al. (2013)",
+    "grade_band": "3-4",
+    "mvp_tier": "v1_core",
+    "standard_refs": [
+      "CCSS.OA"
+    ]
+  },
+  {
+    "skill": "ratios",
+    "label": "Fractions & Ratios",
+    "topics": [
+      "Ratios and proportional reasoning"
+    ],
+    "pdf": "new_practical_arithmetic.pdf",
+    "source": "Joseph Ray (1897)",
+    "grade_band": "6-7",
+    "mvp_tier": "v1_core",
+    "standard_refs": [
+      "CCSS.RP"
+    ]
+  },
+  {
+    "skill": "fractions",
+    "label": "Fractions",
+    "topics": [
+      "Shaded fraction interpretation",
+      "Equivalent fractions"
+    ],
+    "pdf": "elementary_algebra_openstax.pdf",
+    "source": "OpenStax Elementary Algebra 2e",
+    "grade_band": "3-5",
+    "mvp_tier": "v1_core",
+    "standard_refs": [
+      "CCSS.NF"
+    ]
+  },
+  {
+    "skill": "long_addition",
+    "label": "Large-number operations",
+    "topics": [
+      "Long arithmetic methods"
+    ],
+    "pdf": "elementary_algebra_openstax.pdf",
+    "source": "OpenStax Elementary Algebra 2e",
+    "grade_band": "3-4",
+    "mvp_tier": "v1_core",
+    "standard_refs": []
+  },
+  {
+    "skill": "long_subtraction",
+    "label": "Large-number operations",
+    "topics": [
+      "Long subtraction and borrowing"
+    ],
+    "pdf": "basic_arithmetic_student_workbook.pdf",
+    "source": "Sandra Z. Aragon et al. (2013)",
+    "grade_band": "3-4",
+    "mvp_tier": "v1_core",
+    "standard_refs": []
+  },
+  {
+    "skill": "long_multiplication",
+    "label": "Large-number operations",
+    "topics": [
+      "Long multiplication",
+      "Place value"
+    ],
+    "pdf": "basic_arithmetic_student_workbook.pdf",
+    "source": "Sandra Z. Aragon et al. (2013)",
+    "grade_band": "4-5",
+    "mvp_tier": "v1_core",
+    "standard_refs": []
+  },
+  {
+    "skill": "long_division",
+    "label": "Division",
+    "topics": [
+      "Long division",
+      "Remainders"
+    ],
+    "pdf": "new_practical_arithmetic.pdf",
+    "source": "Joseph Ray (1897)",
+    "grade_band": "4-6",
+    "mvp_tier": "v1_core",
+    "standard_refs": []
+  },
+  {
+    "skill": "money",
+    "label": "Money",
+    "topics": [
+      "Currency breakdown and place values"
+    ],
+    "pdf": "basic_arithmetic_student_workbook.pdf",
+    "source": "Sandra Z. Aragon et al. (2013)",
+    "grade_band": "2-4",
+    "mvp_tier": "v1_core",
+    "standard_refs": []
+  },
+  {
+    "skill": "financial_literacy",
+    "label": "Personal Financial Literacy",
+    "topics": [
+      "Income, gifts, wants, and needs",
+      "Saving, spending, giving, borrowing, and lending",
+      "Budgets, accounts, tax, credit, interest, and incentives"
+    ],
+    "pdf": "new_practical_arithmetic.pdf",
+    "source": "Joseph Ray (1897) plus Texas TEKS-aligned native generators",
+    "grade_band": "1-7",
+    "mvp_tier": "v1_core",
+    "standard_refs": [
+      "TX.1.9",
+      "TX.2.11",
+      "TX.3.9",
+      "TX.4.10",
+      "TX.5.10",
+      "TX.6.14",
+      "TX.7.13"
+    ]
+  },
+  {
+    "skill": "measurement",
+    "label": "Measurement",
+    "topics": [
+      "Length unit conversion",
+      "Time reading and arithmetic",
+      "Temperature basics"
+    ],
+    "pdf": "basic_arithmetic_student_workbook.pdf",
+    "source": "Sandra Z. Aragon et al. (2013)",
+    "grade_band": "2-5",
+    "mvp_tier": "v1_core",
+    "standard_refs": [
+      "CCSS.MD"
+    ]
+  },
+  {
+    "skill": "geometry_shapes",
+    "label": "Shapes",
+    "topics": [
+      "2D shape attributes",
+      "3D solid attributes",
+      "Composing shapes",
+      "Equal shares"
+    ],
+    "pdf": "school_geometry_1921_hs21.pdf",
+    "source": "H. S. Hall and F. H. Stevens (1921)",
+    "grade_band": "1-2",
+    "mvp_tier": "v1_core",
+    "standard_refs": [
+      "TX.1.6",
+      "TX.1.7"
+    ]
+  },
+  {
+    "skill": "data_displays",
+    "label": "Data Displays",
+    "topics": [
+      "Sorting data into categories",
+      "Picture graphs",
+      "Bar graphs",
+      "Dot plots"
+    ],
+    "pdf": "basic_arithmetic_student_workbook.pdf",
+    "source": "Sandra Z. Aragon et al. (2013)",
+    "grade_band": "1-3",
+    "mvp_tier": "v1_core",
+    "standard_refs": [
+      "TX.1.8"
+    ]
+  },
+  {
+    "skill": "data_analysis",
+    "label": "Middle School Data Analysis",
+    "topics": [
+      "Histograms",
+      "Box plots",
+      "Center, spread, and shape",
+      "Comparative displays and sample inferences"
+    ],
+    "pdf": "openintro_statistics_4e_2019.pdf",
+    "source": "OpenIntro Statistics plus Texas TEKS-aligned native generators",
+    "grade_band": "6-7",
+    "mvp_tier": "v1_core",
+    "standard_refs": [
+      "TX.6.12",
+      "TX.6.13",
+      "TX.7.12"
+    ]
+  },
+  {
+    "skill": "integers",
+    "label": "Integer Algebra",
+    "topics": [
+      "Signed integers",
+      "Evaluating signed expressions"
+    ],
+    "pdf": "new_practical_arithmetic.pdf",
+    "source": "Joseph Ray (1897)",
+    "grade_band": "6-7",
+    "mvp_tier": "v1_core",
+    "standard_refs": [
+      "CCSS.NS"
+    ]
+  },
+  {
+    "skill": "order_of_operations",
+    "label": "Order of Operations",
+    "topics": [
+      "Parentheses",
+      "PEMDAS",
+      "Expression evaluation"
+    ],
+    "pdf": "new_practical_arithmetic.pdf",
+    "source": "Joseph Ray (1897)",
+    "grade_band": "5-7",
+    "mvp_tier": "v1_core",
+    "standard_refs": [
+      "CCSS.EE"
+    ]
+  },
+  {
+    "skill": "algebra_linear",
+    "label": "Linear Algebra",
+    "topics": [
+      "Linear equations",
+      "Solving for x"
+    ],
+    "pdf": "elementary_algebra_openstax.pdf",
+    "source": "OpenStax Elementary Algebra 2e",
+    "grade_band": "7-8",
+    "mvp_tier": "v1_core",
+    "standard_refs": [
+      "CCSS.EE"
+    ]
+  },
+  {
+    "skill": "pre_algebra",
+    "label": "Pre-Algebra Foundations",
+    "topics": [
+      "Integers, fractions, and ratios"
+    ],
+    "pdf": "elementary_algebra_openstax.pdf",
+    "source": "OpenStax Elementary Algebra 2e",
+    "grade_band": "6-8",
+    "mvp_tier": "post_v1",
+    "standard_refs": []
+  },
+  {
+    "skill": "algebra_1",
+    "label": "Algebra I",
+    "topics": [
+      "Equations, functions, and quadratics"
+    ],
+    "pdf": "elementary_algebra_openstax.pdf",
+    "source": "OpenStax Elementary Algebra 2e",
+    "grade_band": "8-10",
+    "mvp_tier": "post_v1",
+    "standard_refs": []
+  },
+  {
+    "skill": "algebra_2",
+    "label": "Algebra II",
+    "topics": [
+      "Polynomials, logarithms, and functions"
+    ],
+    "pdf": "college_algebra_sitz_zeager_2013.pdf",
+    "source": "Carl Stitz and Jeff Zeager (2013)",
+    "grade_band": "9-11",
+    "mvp_tier": "post_v1",
+    "standard_refs": []
+  },
+  {
+    "skill": "geometry_area",
+    "label": "Geometry Basics",
+    "topics": [
+      "Area of rectangles and triangles"
+    ],
+    "pdf": "school_geometry_1921_hs21.pdf",
+    "source": "H. S. Hall and F. H. Stephens (1889)",
+    "grade_band": "6-8",
+    "mvp_tier": "post_v1",
+    "standard_refs": []
+  },
+  {
+    "skill": "trig_right_triangle",
+    "label": "Right Triangle Trig",
+    "topics": [
+      "Trig ratios in right triangles"
+    ],
+    "pdf": "trigonometry_michael_corral_2020.pdf",
+    "source": "Michael Corral (2020)",
+    "grade_band": "9-11",
+    "mvp_tier": "post_v1",
+    "standard_refs": []
+  },
+  {
+    "skill": "stats_percent",
+    "label": "Percent",
+    "topics": [
+      "Percent of"
+    ],
+    "pdf": "openintro_statistics_4e_2019.pdf",
+    "source": "OpenIntro Statistics",
+    "grade_band": "6-8",
+    "mvp_tier": "post_v1",
+    "standard_refs": []
+  },
+  {
+    "skill": "stats_mean",
+    "label": "Descriptive Statistics",
+    "topics": [
+      "Mean / average"
+    ],
+    "pdf": "introduction_to_statistics_david_lane_2013.pdf",
+    "source": "David M. Lane (2013)",
+    "grade_band": "6-8",
+    "mvp_tier": "post_v1",
+    "standard_refs": []
+  },
+  {
+    "skill": "stats_probability",
+    "label": "Probability",
+    "topics": [
+      "Outcomes, success ratio"
+    ],
+    "pdf": "openintro_statistics_4e_2019.pdf",
+    "source": "OpenIntro Statistics",
+    "grade_band": "6-8",
+    "mvp_tier": "post_v1",
+    "standard_refs": []
+  },
+  {
+    "skill": "statistics",
+    "label": "Statistics",
+    "topics": [
+      "Descriptive statistics, probability, and inference"
+    ],
+    "pdf": "openintro_statistics_4e_2019.pdf",
+    "source": "OpenIntro Statistics",
+    "grade_band": "9-12",
+    "mvp_tier": "post_v1",
+    "standard_refs": []
+  },
+  {
+    "skill": "calculus_1",
+    "label": "Calculus I",
+    "topics": [
+      "Limits",
+      "Derivatives",
+      "Rate of change",
+      "Basic antiderivatives"
+    ],
+    "pdf": "calculus_volume_2_openstax_2016.pdf",
+    "source": "OpenStax Calculus Volume 2",
+    "grade_band": "11-12",
+    "mvp_tier": "post_v1",
+    "standard_refs": []
+  },
+  {
+    "skill": "calculus_2",
+    "label": "Calculus II",
+    "topics": [
+      "Definite integrals",
+      "Integration techniques",
+      "Sequences and series"
+    ],
+    "pdf": "calculus_volume_2_openstax_2016.pdf",
+    "source": "OpenStax Calculus Volume 2",
+    "grade_band": "12+",
+    "mvp_tier": "post_v1",
+    "standard_refs": []
+  },
+  {
+    "skill": "calculus_3",
+    "label": "Calculus III",
+    "topics": [
+      "Vectors",
+      "Partial derivatives",
+      "Multiple integrals",
+      "Vector calculus basics"
+    ],
+    "pdf": "calculus_volume_2_openstax_2016.pdf",
+    "source": "OpenStax Calculus Volume 2",
+    "grade_band": "12+",
+    "mvp_tier": "post_v1",
+    "standard_refs": []
+  },
+  {
+    "skill": "sat_math",
+    "label": "SAT Math",
+    "topics": [
+      "Timed mixed-domain SAT practice"
+    ],
+    "pdf": "historical/sat-practice-test-10-digital.pdf",
+    "source": "College Board",
+    "grade_band": "10-12",
+    "mvp_tier": "post_v1",
+    "standard_refs": []
+  },
+  {
+    "skill": "psat_math",
+    "label": "PSAT Math",
+    "topics": [
+      "Timed mixed-domain PSAT practice"
+    ],
+    "pdf": "historical/psat-nmsqt-practice-test-1.pdf",
+    "source": "College Board",
+    "grade_band": "8-11",
+    "mvp_tier": "post_v1",
+    "standard_refs": []
+  },
+  {
+    "skill": "gre_quant",
+    "label": "GRE Quantitative Reasoning",
+    "topics": [
+      "Quantitative comparison, arithmetic, and data interpretation"
+    ],
+    "pdf": "historical/gre-math-review.pdf",
+    "source": "ETS",
+    "grade_band": "12+",
+    "mvp_tier": "post_v1",
+    "standard_refs": []
+  },
+  {
+    "skill": "calculus_slope",
+    "label": "Calculus I (Legacy Alias)",
+    "topics": [
+      "Slope between points",
+      "Rate of change"
+    ],
+    "pdf": "calculus_volume_2_openstax_2016.pdf",
+    "source": "OpenStax Calculus Volume 2",
+    "grade_band": "11-12",
+    "mvp_tier": "post_v1",
+    "standard_refs": []
+  }
+]

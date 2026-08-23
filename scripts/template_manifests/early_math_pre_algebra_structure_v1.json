@@ -1,0 +1,723 @@
+[
+  {
+    "external_id": "openstax.prealgebra.fluency.v1",
+    "skill": "pre_algebra",
+    "subskill": "Integer and fraction fluency",
+    "label": "Signed sum",
+    "mode": "expression",
+    "prompt_template": "Evaluate {a} + ({b}).",
+    "answer_expr": "a + b",
+    "constraint_expr": "",
+    "explanation_template": "Pre-algebra fluency starts with reliable signed-number work.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 8.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "a",
+        "min": -20,
+        "max": 20,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "b",
+        "min": -20,
+        "max": 20,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "openstax.prealgebra.fluency.v2",
+    "skill": "pre_algebra",
+    "subskill": "Integer and fraction fluency",
+    "label": "Fraction as decimal",
+    "mode": "expression",
+    "prompt_template": "Write {n}/{d} as a decimal.",
+    "answer_expr": "n / d",
+    "constraint_expr": "d > n and (d == 2 or d == 4 or d == 5 or d == 8 or d == 10)",
+    "explanation_template": "Convert the fraction by dividing numerator by denominator.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 1.5,
+    "active": true,
+    "vars": [
+      {
+        "name": "d",
+        "min": 2,
+        "max": 10,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "n",
+        "min": 1,
+        "max": 9,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "openstax.prealgebra.order.v1",
+    "skill": "pre_algebra",
+    "subskill": "Order of operations",
+    "label": "Nested expression",
+    "mode": "expression",
+    "prompt_template": "Evaluate ({a} + {b}) * {c}.",
+    "answer_expr": "(a + b) * c",
+    "constraint_expr": "",
+    "explanation_template": "Finish grouped work before multiplication.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 10.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "a",
+        "min": -9,
+        "max": 12,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "b",
+        "min": -9,
+        "max": 12,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "c",
+        "min": 2,
+        "max": 6,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "openstax.prealgebra.order.v2",
+    "skill": "pre_algebra",
+    "subskill": "Order of operations",
+    "label": "Mixed expression",
+    "mode": "expression",
+    "prompt_template": "Evaluate {a} - ({b} * {c}) + {d}.",
+    "answer_expr": "a - (b * c) + d",
+    "constraint_expr": "",
+    "explanation_template": "Apply multiplication before combining with the rest.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 10.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "a",
+        "min": -9,
+        "max": 12,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "b",
+        "min": -9,
+        "max": 12,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "c",
+        "min": 2,
+        "max": 6,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "d",
+        "min": -9,
+        "max": 12,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "openstax.prealgebra.expr.v1",
+    "skill": "pre_algebra",
+    "subskill": "Expressions and variables",
+    "label": "Substitute value",
+    "mode": "expression",
+    "prompt_template": "Evaluate {coeff}x + ({bias}) when x = {x}.",
+    "answer_expr": "coeff * x + bias",
+    "constraint_expr": "coeff != 0",
+    "explanation_template": "Substitute the value for x, then simplify.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 10.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "coeff",
+        "min": -6,
+        "max": 6,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "bias",
+        "min": -12,
+        "max": 12,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "x",
+        "min": -6,
+        "max": 9,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "openstax.prealgebra.expr.v2",
+    "skill": "pre_algebra",
+    "subskill": "Expressions and variables",
+    "label": "Combine like terms",
+    "mode": "expression",
+    "prompt_template": "Evaluate ({a}x) + ({b}x) + ({c}) when x = {x}.",
+    "answer_expr": "(a + b) * x + c",
+    "constraint_expr": "a != 0 and b != 0",
+    "explanation_template": "Combine like terms before substituting the value.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 10.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "a",
+        "min": -5,
+        "max": 5,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "b",
+        "min": -5,
+        "max": 5,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "c",
+        "min": -10,
+        "max": 10,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "x",
+        "min": -6,
+        "max": 9,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "openstax.prealgebra.one_step.v1",
+    "skill": "pre_algebra",
+    "subskill": "One-step equations",
+    "label": "Additive equation",
+    "mode": "expression",
+    "prompt_template": "Solve for x: x + ({offset}) = {rhs}",
+    "answer_expr": "rhs - offset",
+    "constraint_expr": "",
+    "explanation_template": "Undo the addition or subtraction trapping the variable.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 10.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "offset",
+        "min": -12,
+        "max": 12,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "rhs",
+        "min": -20,
+        "max": 30,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "openstax.prealgebra.one_step.v2",
+    "skill": "pre_algebra",
+    "subskill": "One-step equations",
+    "label": "Multiplicative equation",
+    "mode": "expression",
+    "prompt_template": "Solve for x: {coeff}x = {rhs}",
+    "answer_expr": "rhs / coeff",
+    "constraint_expr": "rhs % coeff == 0",
+    "explanation_template": "Divide by the coefficient to isolate the variable.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 10.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "coeff",
+        "min": 2,
+        "max": 9,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "rhs",
+        "min": -81,
+        "max": 81,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "openstax.prealgebra.two_step.v1",
+    "skill": "pre_algebra",
+    "subskill": "Two-step equations and inequalities",
+    "label": "Solve two-step equation",
+    "mode": "expression",
+    "prompt_template": "Solve for x: {coeff}x + ({bias}) = {rhs}",
+    "answer_expr": "(rhs - bias) / coeff",
+    "constraint_expr": "(rhs - bias) % coeff == 0",
+    "explanation_template": "Undo the constant term first, then divide by the coefficient.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 10.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "coeff",
+        "min": 2,
+        "max": 8,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "bias",
+        "min": -15,
+        "max": 15,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "rhs",
+        "min": -90,
+        "max": 90,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "openstax.prealgebra.two_step.v2",
+    "skill": "pre_algebra",
+    "subskill": "Two-step equations and inequalities",
+    "label": "Smallest integer solution",
+    "mode": "expression",
+    "prompt_template": "Find the smallest integer x satisfying {coeff}x + {bias} > {rhs}",
+    "answer_expr": "((rhs - bias) // coeff) + 1",
+    "constraint_expr": "",
+    "explanation_template": "Solve the inequality boundary, then take the next integer above it.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 6.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "coeff",
+        "min": 2,
+        "max": 6,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "bias",
+        "min": -8,
+        "max": 8,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "rhs",
+        "min": 3,
+        "max": 50,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "openstax.prealgebra.ratio.v1",
+    "skill": "pre_algebra",
+    "subskill": "Ratios, rates, and proportional relationships",
+    "label": "Unit rate",
+    "mode": "expression",
+    "prompt_template": "{total} miles are traveled in {hours} hours. What is the unit rate in miles per hour?",
+    "answer_expr": "total / hours",
+    "constraint_expr": "total % hours == 0",
+    "explanation_template": "Find the amount for 1 unit first.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 8.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "total",
+        "min": 18,
+        "max": 180,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "hours",
+        "min": 2,
+        "max": 12,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "openstax.prealgebra.ratio.v2",
+    "skill": "pre_algebra",
+    "subskill": "Ratios, rates, and proportional relationships",
+    "label": "Scale proportion",
+    "mode": "expression",
+    "prompt_template": "If {a} tickets cost ${b}, how much do {scale} equal groups of {a} tickets cost?",
+    "answer_expr": "b * scale",
+    "constraint_expr": "",
+    "explanation_template": "A proportional pair scales both quantities by the same factor.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 10.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "a",
+        "min": 1,
+        "max": 8,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "b",
+        "min": 2,
+        "max": 16,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "scale",
+        "min": 2,
+        "max": 6,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "openstax.prealgebra.ratio.word.v1",
+    "skill": "pre_algebra",
+    "subskill": "Ratios, rates, and proportional relationships",
+    "label": "Rate story",
+    "mode": "word",
+    "prompt_template": "A printer makes {total} pages in {hours} hours. At the same rate, how many pages does it make in 1 hour?",
+    "answer_expr": "total / hours",
+    "constraint_expr": "total % hours == 0",
+    "explanation_template": "The unit rate is the per-1 amount.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 8.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "total",
+        "min": 18,
+        "max": 180,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "hours",
+        "min": 2,
+        "max": 12,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "openstax.prealgebra.percent.v1",
+    "skill": "pre_algebra",
+    "subskill": "Percent problems",
+    "label": "Percent of a quantity",
+    "mode": "expression",
+    "prompt_template": "What is {percent}% of {base}?",
+    "answer_expr": "percent * base / 100",
+    "constraint_expr": "",
+    "explanation_template": "Convert the percent to a decimal or fraction of 100, then multiply.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 15.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "percent",
+        "min": 5,
+        "max": 80,
+        "step": 5,
+        "kind": "int"
+      },
+      {
+        "name": "base",
+        "min": 20,
+        "max": 240,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "openstax.prealgebra.percent.v2",
+    "skill": "pre_algebra",
+    "subskill": "Percent problems",
+    "label": "Percent change",
+    "mode": "expression",
+    "prompt_template": "A value increases by {delta} from an original {base}. What is the percent change?",
+    "answer_expr": "delta * 100 / base",
+    "constraint_expr": "(delta * 100) % base == 0",
+    "explanation_template": "Percent change compares the change to the original amount.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 12.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "base",
+        "min": 20,
+        "max": 200,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "delta",
+        "min": 5,
+        "max": 60,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "openstax.prealgebra.percent.word.v1",
+    "skill": "pre_algebra",
+    "subskill": "Percent problems",
+    "label": "Discount story",
+    "mode": "word",
+    "prompt_template": "A shirt costs ${base} and is discounted by {percent}%. How many dollars is the discount?",
+    "answer_expr": "percent * base / 100",
+    "constraint_expr": "",
+    "explanation_template": "Find the percent of the original price to get the discount amount.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 12.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "base",
+        "min": 20,
+        "max": 200,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "percent",
+        "min": 5,
+        "max": 50,
+        "step": 5,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "openstax.prealgebra.exponents.v1",
+    "skill": "pre_algebra",
+    "subskill": "Exponents, roots, and scientific notation",
+    "label": "Evaluate power",
+    "mode": "expression",
+    "prompt_template": "Evaluate {base}^{power}.",
+    "answer_expr": "base ** power",
+    "constraint_expr": "",
+    "explanation_template": "Exponents count repeated multiplication of the base.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 15.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "base",
+        "min": 2,
+        "max": 9,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "power",
+        "min": 2,
+        "max": 4,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "openstax.prealgebra.exponents.v2",
+    "skill": "pre_algebra",
+    "subskill": "Exponents, roots, and scientific notation",
+    "label": "Scientific notation exponent",
+    "mode": "expression",
+    "prompt_template": "Write {coefficient} x 10^{power} in scientific notation. What is the exponent on 10?",
+    "answer_expr": "power",
+    "constraint_expr": "",
+    "explanation_template": "The exponent tracks how many places the decimal moved.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 6.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "coefficient",
+        "min": 2,
+        "max": 9,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "power",
+        "min": -5,
+        "max": 7,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "openstax.prealgebra.coordinate.v1",
+    "skill": "pre_algebra",
+    "subskill": "Coordinate plane and function tables",
+    "label": "Function output",
+    "mode": "expression",
+    "prompt_template": "A table follows y = {m}x + ({b}). What is y when x = {x}?",
+    "answer_expr": "m * x + b",
+    "constraint_expr": "m != 0",
+    "explanation_template": "Use the rule to map the input x to its output.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 8.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "m",
+        "min": -5,
+        "max": 5,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "b",
+        "min": -8,
+        "max": 8,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "x",
+        "min": -4,
+        "max": 6,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "openstax.prealgebra.coordinate.v2",
+    "skill": "pre_algebra",
+    "subskill": "Coordinate plane and function tables",
+    "label": "Distance from axis",
+    "mode": "expression",
+    "prompt_template": "Point P is at ({x}, {y}). How far is P from the y-axis?",
+    "answer_expr": "x",
+    "constraint_expr": "",
+    "explanation_template": "Distance from the y-axis depends only on the x-coordinate's magnitude.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 5.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "x",
+        "min": 1,
+        "max": 9,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "y",
+        "min": -9,
+        "max": 9,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "openstax.prealgebra.coordinate.word.v1",
+    "skill": "pre_algebra",
+    "subskill": "Coordinate plane and function tables",
+    "label": "Coordinate story",
+    "mode": "word",
+    "prompt_template": "A point with coordinates ({x}, {y}) marks a drone's location. How far is the drone from the y-axis?",
+    "answer_expr": "x",
+    "constraint_expr": "",
+    "explanation_template": "Distance from the y-axis is the absolute value of the x-coordinate.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 5.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "x",
+        "min": 1,
+        "max": 9,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "y",
+        "min": -9,
+        "max": 9,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  }
+]

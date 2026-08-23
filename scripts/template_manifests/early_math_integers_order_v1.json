@@ -1,0 +1,571 @@
+[
+  {
+    "external_id": "khan.early_math.integers.signed.v1",
+    "skill": "integers",
+    "subskill": "Signed numbers",
+    "label": "Larger signed number",
+    "mode": "expression",
+    "prompt_template": "Which number is larger: {a} or {b}?",
+    "answer_expr": "a",
+    "constraint_expr": "a > b",
+    "explanation_template": "On a number line, numbers farther right are larger.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 8.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "a",
+        "min": -5,
+        "max": 12,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "b",
+        "min": -12,
+        "max": 11,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.integers.signed.v2",
+    "skill": "integers",
+    "subskill": "Signed numbers",
+    "label": "Distance from zero",
+    "mode": "expression",
+    "prompt_template": "What number is {m} units to the left of 0?",
+    "answer_expr": "-m",
+    "constraint_expr": "",
+    "explanation_template": "Moving left from zero gives a negative number.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 8.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "m",
+        "min": 1,
+        "max": 12,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.integers.negative.v1",
+    "skill": "integers",
+    "subskill": "Negative arithmetic",
+    "label": "Signed addition",
+    "mode": "expression",
+    "prompt_template": "Evaluate {a} + ({b}).",
+    "answer_expr": "a + b",
+    "constraint_expr": "",
+    "explanation_template": "Treat signed addition as movement on the number line.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 8.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "a",
+        "min": -20,
+        "max": 20,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "b",
+        "min": -15,
+        "max": 15,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.integers.negative.v2",
+    "skill": "integers",
+    "subskill": "Negative arithmetic",
+    "label": "Signed subtraction",
+    "mode": "expression",
+    "prompt_template": "Evaluate {a} - ({b}).",
+    "answer_expr": "a - b",
+    "constraint_expr": "",
+    "explanation_template": "Subtracting a negative changes the direction of the move.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 8.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "a",
+        "min": -20,
+        "max": 20,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "b",
+        "min": -15,
+        "max": 15,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.integers.order.v1",
+    "skill": "integers",
+    "subskill": "Order-dependent operations",
+    "label": "Compare order",
+    "mode": "expression",
+    "prompt_template": "What is {a} - {b}?",
+    "answer_expr": "a - b",
+    "constraint_expr": "",
+    "explanation_template": "Changing the order changes the result for subtraction.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 8.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "a",
+        "min": -12,
+        "max": 12,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "b",
+        "min": -12,
+        "max": 12,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.integers.order.v2",
+    "skill": "integers",
+    "subskill": "Order-dependent operations",
+    "label": "Signed expression",
+    "mode": "expression",
+    "prompt_template": "Evaluate ({a} - {b}) + {c}.",
+    "answer_expr": "a - b + c",
+    "constraint_expr": "",
+    "explanation_template": "Each signed operation changes the starting value for the next step.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 8.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "a",
+        "min": -12,
+        "max": 12,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "b",
+        "min": -12,
+        "max": 12,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "c",
+        "min": -8,
+        "max": 8,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.integers.abs.v1",
+    "skill": "integers",
+    "subskill": "Absolute value",
+    "label": "Absolute value",
+    "mode": "expression",
+    "prompt_template": "What is |-{m}|?",
+    "answer_expr": "m",
+    "constraint_expr": "",
+    "explanation_template": "Absolute value is distance from zero, so it is never negative.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 5.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "m",
+        "min": 1,
+        "max": 15,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.integers.abs.v2",
+    "skill": "integers",
+    "subskill": "Absolute value",
+    "label": "Absolute value compare",
+    "mode": "word",
+    "prompt_template": "If a diver is at -{m} meters, how far is the diver from sea level?",
+    "answer_expr": "m",
+    "constraint_expr": "",
+    "explanation_template": "Distance from sea level uses the absolute value.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 5.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "m",
+        "min": 1,
+        "max": 20,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.integers.abs.v3",
+    "skill": "integers",
+    "subskill": "Absolute value",
+    "label": "Distance to zero",
+    "mode": "expression",
+    "prompt_template": "A point is at {n} on the number line. How many units is it from 0?",
+    "answer_expr": "0 - n",
+    "constraint_expr": "",
+    "explanation_template": "Distance from zero ignores direction, so a negative location becomes a positive distance.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 5.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "n",
+        "min": -20,
+        "max": -1,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.order.parentheses.v1",
+    "skill": "order_of_operations",
+    "subskill": "Parentheses first",
+    "label": "Evaluate grouped expression",
+    "mode": "expression",
+    "prompt_template": "Evaluate ({a} + {b}) * {c}.",
+    "answer_expr": "(a + b) * c",
+    "constraint_expr": "",
+    "explanation_template": "Solve the parentheses before multiplying.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 10.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "a",
+        "min": -9,
+        "max": 12,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "b",
+        "min": -9,
+        "max": 12,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "c",
+        "min": 2,
+        "max": 6,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.order.parentheses.v2",
+    "skill": "order_of_operations",
+    "subskill": "Parentheses first",
+    "label": "Grouped subtraction",
+    "mode": "expression",
+    "prompt_template": "Evaluate {a} - ({b} - {c}).",
+    "answer_expr": "a - (b - c)",
+    "constraint_expr": "",
+    "explanation_template": "The grouped subtraction must be finished first.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 10.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "a",
+        "min": -9,
+        "max": 12,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "b",
+        "min": -9,
+        "max": 12,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "c",
+        "min": -9,
+        "max": 12,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.order.mult_before_add.v1",
+    "skill": "order_of_operations",
+    "subskill": "Multiplication vs addition/subtraction",
+    "label": "Multiply before add",
+    "mode": "expression",
+    "prompt_template": "Evaluate {a} + {b} * {c}.",
+    "answer_expr": "a + b * c",
+    "constraint_expr": "",
+    "explanation_template": "Multiplication happens before addition unless parentheses say otherwise.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 10.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "a",
+        "min": -9,
+        "max": 12,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "b",
+        "min": 2,
+        "max": 9,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "c",
+        "min": 2,
+        "max": 9,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.order.mult_before_add.v2",
+    "skill": "order_of_operations",
+    "subskill": "Multiplication vs addition/subtraction",
+    "label": "Multiply before subtract",
+    "mode": "expression",
+    "prompt_template": "Evaluate {a} - {b} * {c}.",
+    "answer_expr": "a - b * c",
+    "constraint_expr": "",
+    "explanation_template": "Form the product first, then combine it with the addition or subtraction.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 10.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "a",
+        "min": -9,
+        "max": 20,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "b",
+        "min": 2,
+        "max": 9,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "c",
+        "min": 2,
+        "max": 9,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.order.grouping.v1",
+    "skill": "order_of_operations",
+    "subskill": "Expression grouping",
+    "label": "Chunk expression",
+    "mode": "expression",
+    "prompt_template": "Evaluate ({a} + {b}) - ({c} * {d}).",
+    "answer_expr": "(a + b) - (c * d)",
+    "constraint_expr": "",
+    "explanation_template": "Simplify one grouped chunk at a time.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 12.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "a",
+        "min": -9,
+        "max": 12,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "b",
+        "min": -9,
+        "max": 12,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "c",
+        "min": 2,
+        "max": 8,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "d",
+        "min": 2,
+        "max": 8,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.order.grouping.v2",
+    "skill": "order_of_operations",
+    "subskill": "Expression grouping",
+    "label": "Mixed grouping",
+    "mode": "expression",
+    "prompt_template": "Evaluate {a} + ({b} * {c}) - {d}.",
+    "answer_expr": "a + (b * c) - d",
+    "constraint_expr": "",
+    "explanation_template": "Group the multiplication as one chunk before the last subtraction.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 12.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "a",
+        "min": -9,
+        "max": 12,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "b",
+        "min": 2,
+        "max": 8,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "c",
+        "min": 2,
+        "max": 8,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "d",
+        "min": -9,
+        "max": 12,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.order.exponents.v1",
+    "skill": "order_of_operations",
+    "subskill": "Exponents in expressions",
+    "label": "Evaluate exponent",
+    "mode": "expression",
+    "prompt_template": "Evaluate {base}^{power}.",
+    "answer_expr": "base ** power",
+    "constraint_expr": "",
+    "explanation_template": "An exponent means repeated multiplication of the base.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 15.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "base",
+        "min": 2,
+        "max": 6,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "power",
+        "min": 2,
+        "max": 4,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  },
+  {
+    "external_id": "khan.early_math.order.exponents.v2",
+    "skill": "order_of_operations",
+    "subskill": "Exponents in expressions",
+    "label": "Exponent before addition",
+    "mode": "expression",
+    "prompt_template": "Evaluate {a} + {base}^{power}.",
+    "answer_expr": "a + (base ** power)",
+    "constraint_expr": "",
+    "explanation_template": "Compute the exponent before adding it to the rest of the expression.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 15.0,
+    "active": true,
+    "vars": [
+      {
+        "name": "a",
+        "min": 1,
+        "max": 20,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "base",
+        "min": 2,
+        "max": 5,
+        "step": 1,
+        "kind": "int"
+      },
+      {
+        "name": "power",
+        "min": 2,
+        "max": 4,
+        "step": 1,
+        "kind": "int"
+      }
+    ]
+  }
+]

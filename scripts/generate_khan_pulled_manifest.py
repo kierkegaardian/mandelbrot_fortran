@@ -14,6 +14,7 @@ def _entry(
     answer_expr: str,
     explanation: str,
     vars_spec: list[dict[str, float | str]],
+    mode: str = "expression",
     constraint: str = "",
     min_level: int = 1,
     max_level: int = 4,
@@ -24,7 +25,7 @@ def _entry(
         "skill": skill,
         "subskill": subskill,
         "label": label,
-        "mode": "expression",
+        "mode": mode,
         "prompt_template": prompt,
         "answer_expr": answer_expr,
         "constraint_expr": constraint,
@@ -45,8 +46,8 @@ def build_manifest() -> list[dict[str, object]]:
             _entry(
                 external_id=f"khan.pull.v1.percent.previous_height.v{i}",
                 skill="stats_percent",
-                subskill="Khan percent reverse",
-                label="Percent reverse change",
+                subskill="Reverse percent change",
+                label="Reverse percent change",
                 prompt=(
                     "A student's current score is {current} and that is {pct}% higher than the previous score. "
                     "What was the previous score?"
@@ -67,8 +68,8 @@ def build_manifest() -> list[dict[str, object]]:
             _entry(
                 external_id=f"khan.pull.v1.percent.more_less.v{i}",
                 skill="stats_percent",
-                subskill="Khan percent change",
-                label="Percent difference amount",
+                subskill="Percent change",
+                label="Percent change amount",
                 prompt=(
                     "A bottle has {base} mL. The smaller bottle has {pct}% less. "
                     "How many fewer mL does the smaller bottle have?"
@@ -82,13 +83,47 @@ def build_manifest() -> list[dict[str, object]]:
                 spread=7.0,
             )
         )
+        items.append(
+            _entry(
+                external_id=f"khan.pull.v1.percent.previous_height.intuition.v{i}",
+                skill="stats_percent",
+                subskill="Reverse percent change",
+                label="Reverse percent multiplier",
+                mode="intuition",
+                prompt="If a current score is {pct}% higher than the previous score, what multiplier turns the previous score into the current score?",
+                answer_expr="1 + pct/100",
+                explanation="Reverse percent problems start by identifying the growth multiplier before undoing it.",
+                vars_spec=[{"name": "pct", "kind": "int", "min": 5, "max": 80, "step": 5}],
+                spread=0.6,
+            )
+        )
+        items.append(
+            _entry(
+                external_id=f"khan.pull.v1.percent.more_less.intuition.v{i}",
+                skill="stats_percent",
+                subskill="Percent change",
+                label="Percent change setup",
+                mode="intuition",
+                prompt=(
+                    "A bottle has {base} mL. The smaller bottle has {pct}% less. "
+                    "Before converting anything to a percent, how many mL is the change?"
+                ),
+                answer_expr="base * pct / 100",
+                explanation="Percent change begins with the raw change amount before comparing it to the original.",
+                vars_spec=[
+                    {"name": "base", "kind": "int", "min": 20, "max": 250, "step": 5},
+                    {"name": "pct", "kind": "int", "min": 5, "max": 90, "step": 5},
+                ],
+                spread=7.0,
+            )
+        )
 
     for i in range(1, 7):
         items.append(
             _entry(
                 external_id=f"khan.pull.v1.slope.two_points.v{i}",
                 skill="calculus_slope",
-                subskill="Khan slope from points",
+                subskill="Average rate of change between two points",
                 label="Slope from two points",
                 prompt="Find the slope of the line through ({x1}, {y1}) and ({x2}, {y2}).",
                 answer_expr="(y2 - y1) / (x2 - x1)",
@@ -147,9 +182,9 @@ def build_manifest() -> list[dict[str, object]]:
             _entry(
                 external_id=f"khan.pull.v1.mean.five_values.v{i}",
                 skill="stats_mean",
-                subskill="Khan mean from display",
-                label="Mean of five values",
-                prompt="Find the mean of the values: {a}, {b}, {c}, {d}, {e}.",
+                subskill="Mean from display",
+                label="Mean from display",
+                prompt="A display lists five values: {a}, {b}, {c}, {d}, and {e}. What is the mean?",
                 answer_expr="(a + b + c + d + e) / 5",
                 constraint="(a + b + c + d + e) % 5 == 0",
                 explanation="Add all values and divide by 5.",
@@ -163,13 +198,33 @@ def build_manifest() -> list[dict[str, object]]:
                 spread=6.0,
             )
         )
+        items.append(
+            _entry(
+                external_id=f"khan.pull.v1.mean.five_values.intuition.v{i}",
+                skill="stats_mean",
+                subskill="Mean from display",
+                label="Sum before mean",
+                mode="intuition",
+                prompt="A display lists five values: {a}, {b}, {c}, {d}, and {e}. What total sum will you divide by 5 to find the mean?",
+                answer_expr="a + b + c + d + e",
+                explanation="For a mean, first combine the full total shown by the display, then divide by the count.",
+                vars_spec=[
+                    {"name": "a", "kind": "int", "min": 1, "max": 30, "step": 1},
+                    {"name": "b", "kind": "int", "min": 1, "max": 30, "step": 1},
+                    {"name": "c", "kind": "int", "min": 1, "max": 30, "step": 1},
+                    {"name": "d", "kind": "int", "min": 1, "max": 30, "step": 1},
+                    {"name": "e", "kind": "int", "min": 1, "max": 30, "step": 1},
+                ],
+                spread=12.0,
+            )
+        )
 
     for i in range(1, 5):
         items.append(
             _entry(
                 external_id=f"khan.pull.v1.sat.linear_fee.v{i}",
                 skill="sat_math",
-                subskill="SAT modeling (Khan style)",
+                subskill="SAT algebra modeling",
                 label="SAT fee model",
                 prompt=(
                     "An event charges a fixed fee of ${f} plus ${r} per guest. "
@@ -182,6 +237,27 @@ def build_manifest() -> list[dict[str, object]]:
                     {"name": "f", "kind": "int", "min": 10, "max": 120, "step": 1},
                     {"name": "r", "kind": "int", "min": 2, "max": 25, "step": 1},
                     {"name": "t", "kind": "int", "min": 100, "max": 900, "step": 1},
+                ],
+                spread=10.0,
+            )
+        )
+        items.append(
+            _entry(
+                external_id=f"khan.pull.v1.sat.linear_fee.intuition.v{i}",
+                skill="sat_math",
+                subskill="SAT algebra modeling",
+                label="SAT fee model setup",
+                mode="intuition",
+                prompt=(
+                    "An event charges a fixed fee of ${f} plus ${r} per guest. "
+                    "If {g} guests attend, what part of the bill comes from the guest charges before the fixed fee is added?"
+                ),
+                answer_expr="r * g",
+                explanation="Separate the repeated guest cost from the fixed fee before building the full model.",
+                vars_spec=[
+                    {"name": "f", "kind": "int", "min": 10, "max": 120, "step": 1},
+                    {"name": "r", "kind": "int", "min": 2, "max": 25, "step": 1},
+                    {"name": "g", "kind": "int", "min": 3, "max": 24, "step": 1},
                 ],
                 spread=10.0,
             )
@@ -200,6 +276,27 @@ def build_manifest() -> list[dict[str, object]]:
                 answer_expr="(new - old) * 100 / old",
                 constraint="old > 0 and new > old",
                 explanation="Percent increase = (new - old)/old * 100.",
+                vars_spec=[
+                    {"name": "old", "kind": "int", "min": 20, "max": 300, "step": 1},
+                    {"name": "new", "kind": "int", "min": 25, "max": 500, "step": 1},
+                ],
+                spread=9.0,
+            )
+        )
+        items.append(
+            _entry(
+                external_id=f"khan.pull.v1.gre.percent_change.intuition.v{i}",
+                skill="gre_quant",
+                subskill="GRE percent reasoning",
+                label="GRE percent setup",
+                mode="intuition",
+                prompt=(
+                    "A quantity increases from {old} to {new}. "
+                    "Before turning the change into a percent, how much did the quantity increase by?"
+                ),
+                answer_expr="new - old",
+                constraint="new > old",
+                explanation="Percent reasoning starts with the raw change before comparing it to the original amount.",
                 vars_spec=[
                     {"name": "old", "kind": "int", "min": 20, "max": 300, "step": 1},
                     {"name": "new", "kind": "int", "min": 25, "max": 500, "step": 1},

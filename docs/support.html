@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MandelQuest Math | Support guide</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="shell">
+    <header class="site-header">
+      <a class="brand" href="index.html">MandelQuest<small>Support guide</small></a>
+      <nav class="nav">
+        <a href="index.html">Home</a>
+        <a href="privacy.html">Privacy</a>
+        <a href="homeschool-beta.html">Homeschool Beta</a>
+      </nav>
+    </header>
+
+    <section class="panel">
+      <h1>Support and backup guide</h1>
+      <p class="lede">Current support is optimized for beta and early family launch. Use the guide below before opening an issue so reports come in with the right context.</p>
+      <div class="button-row">
+        <a class="button button-primary" href="https://github.com/kierkegaardian/mandelbrot_fortran/issues/new/choose">Open a support issue</a>
+        <a class="button" href="https://github.com/kierkegaardian/mandelbrot_fortran#readme">Read local setup docs</a>
+      </div>
+    </section>
+
+    <section class="section grid grid-2">
+      <article class="card">
+        <h3>Before opening an issue</h3>
+        <ul class="checklist">
+          <li>Confirm which platform you are on.</li>
+          <li>Note whether this is a development run or packaged app.</li>
+          <li>Capture the exact step where the app stopped behaving as expected.</li>
+          <li>If saved data is involved, back up the data directory first.</li>
+        </ul>
+      </article>
+      <article class="card">
+        <h3>Current support intake</h3>
+        <ul class="checklist">
+          <li>Bug reports: GitHub issue template</li>
+          <li>Beta reactions: GitHub beta-feedback template</li>
+          <li>Release notes: GitHub releases and repo docs</li>
+        </ul>
+        <p class="muted">A dedicated family-support email is still an external launch dependency and should be added before broader paid outreach.</p>
+      </article>
+    </section>
+
+    <section class="panel">
+      <h2 class="section-title">Most common help paths</h2>
+      <div class="grid grid-3">
+        <article class="card">
+          <h3>Install and first launch</h3>
+          <p>If the packaged app does not launch, note the platform, the bundle name, and whether the failure happens before profile selection.</p>
+        </article>
+        <article class="card">
+          <h3>Quiz or worksheet issues</h3>
+          <p>Report the skill, selected subskill if any, and whether the issue happened in intuition, expression, or word mode.</p>
+        </article>
+        <article class="card">
+          <h3>Parent controls</h3>
+          <p>Include whether the issue is about profile creation, parent PIN, assignments, offline-mode settings, or the operator-configured Family Sync beta.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2 class="section-title">Family Sync beta support boundary</h2>
+      <p>Public v1 builds do not include or select a hosted sync server. Local-only is the default, and the beta controls remain disabled unless an operator supplies a compatible server through <code>MANDELQUEST_SYNC_CONFIG</code> and a parent opts in.</p>
+      <p>If beta sync fails, keep using the local app, do not repeatedly relink the family, and back up the data directory before troubleshooting. Report the platform, server label, last sync message, and whether local changes are shown as queued. Do not post pairing codes or learner data in a public issue.</p>
+    </section>
+
+    <section class="panel">
+      <h2 class="section-title">Backup steps</h2>
+      <ol class="steps">
+        <li>Close MandelQuest fully.</li>
+        <li>Copy the full local data directory for your platform.</li>
+        <li>Prioritize <code>app.db</code>, <code>ui_settings.json</code>, and <code>worksheets/</code>.</li>
+        <li>When reporting an issue, keep the original backup untouched.</li>
+      </ol>
+      <div class="callout">
+        <strong>Important:</strong> If support involves missing progress or worksheets, do not keep launching and retrying before you make a backup copy.
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2 class="section-title">Known limitations to mention up front</h2>
+      <ul class="checklist">
+        <li>No hosted cloud/LAN sync service ships with v1; the operator-configured Family Sync beta is experimental and disabled by default.</li>
+        <li>Desktop app first; no browser-first workflow for families or adult learners yet.</li>
+        <li>Geometry proofs, full Algebra 2 depth, and broad college placement prep are not complete.</li>
+        <li>Some PDF conversion helpers depend on optional system tools such as <code>pdftotext</code>.</li>
+      </ul>
+    </section>
+
+    <footer class="footer">
+      <p>For beta expectations and what feedback matters most, read the <a href="homeschool-beta.html">homeschool beta page</a>.</p>
+    </footer>
+  </div>
+</body>
+</html>

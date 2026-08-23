@@ -1,0 +1,240 @@
+from __future__ import annotations
+
+PULLED_ON = "2026-04-17"
+
+Entry = tuple[str, str, str, float]
+
+
+def _template(
+    *,
+    external_id: str,
+    skill: str,
+    subskill: str,
+    label: str,
+    prompt: str,
+    answer_expr: str,
+    explanation: str,
+    mode: str,
+    spread: float,
+) -> dict[str, object]:
+    return {
+        "external_id": external_id,
+        "skill": skill,
+        "subskill": subskill,
+        "label": label,
+        "mode": mode,
+        "prompt_template": prompt,
+        "answer_expr": answer_expr,
+        "constraint_expr": "",
+        "explanation_template": explanation,
+        "min_level": 1,
+        "max_level": 3,
+        "choice_spread": spread,
+        "active": True,
+        "vars": [],
+    }
+
+
+def _group(
+    *,
+    query: str,
+    title: str,
+    assignable_url: str,
+    skill: str,
+    subskill: str,
+    label: str,
+    slug: str,
+    entries: list[Entry],
+    mode: str = "expression",
+) -> dict[str, object]:
+    templates = [
+        _template(
+            external_id=f"khan.connector.early_math.{slug}.{idx:02d}.v1",
+            skill=skill,
+            subskill=subskill,
+            label=label,
+            prompt=prompt,
+            answer_expr=answer_expr,
+            explanation=explanation,
+            mode=mode,
+            spread=spread,
+        )
+        for idx, (prompt, answer_expr, explanation, spread) in enumerate(entries, start=1)
+    ]
+    return {
+        "query": query,
+        "title": title,
+        "assignable_url": assignable_url,
+        "pulled_on": PULLED_ON,
+        "pulled_via": "khan-academy-connector",
+        "templates": templates,
+    }
+
+
+def build_arithmetic_expansion_groups() -> list[dict[str, object]]:
+    return [
+        _group(
+            query="addition subtraction word problems",
+            title="Addition word problems within 100",
+            assignable_url="https://www.khanacademy.org/math/cc-2nd-grade-math/cc-2nd-add-subtract-100/cc-2nd-add-sub-100-word-problems/e/addition-and-subtraction-word-problems-within-100--level-1?utm_campaign=teacher_assign_tool&utm_medium=referral&utm_source=chatgpt",
+            skill="add_subtract",
+            subskill="Word problems",
+            label="Pulled addition word problem",
+            slug="add_subtract.word",
+            mode="word",
+            entries=[
+                ("Momma Chipmunk had some acorns. Her babies ate 34 of the acorns. Then she ate the 18 acorns that were left. What is the total number of acorns that Momma Chipmunk had? Enter only the number of acorns.", "52", "Add the 34 acorns the babies ate and the 18 Momma Chipmunk ate to get 52 acorns total.", 12.0),
+                ("Raj counted the stars in the night sky. He looked north and counted 34 stars. Then he looked south and counted 40 stars. How many stars did Raj count in all? Enter only the number of stars.", "74", "Raj counted 34 + 40 stars, so the total is 74.", 12.0),
+                ("A farmer used 26 fence posts for Hazel Horse's fence and 19 fence posts for Pauly Pony's fence. How many fence posts did the farmer use in all? Enter only the number of fence posts.", "45", "Combine the two fence counts: 26 + 19 = 45.", 10.0),
+                ("A whale watcher saw 17 whales on Monday and 33 whales on Tuesday. What is the total number of whales she saw on Monday and Tuesday? Enter only the number of whales.", "50", "Add the whales from both days: 17 + 33 = 50.", 10.0),
+                ("Smiley School District has 65 school buses and Brighter School District has 34 school buses. How many school buses do both school districts have in all? Enter only the number of buses.", "99", "Add the buses from both districts: 65 + 34 = 99.", 12.0),
+            ],
+        ),
+        _group(
+            query="money word problems",
+            title="Convert money word problems",
+            assignable_url="https://www.khanacademy.org/math/cc-fourth-grade-math/imp-measurement-and-data-2/imp-money-word-problems/e/measuring-and-converting-money-word-problems?utm_campaign=teacher_assign_tool&utm_medium=referral&utm_source=chatgpt",
+            skill="money",
+            subskill="Making change",
+            label="Pulled money word problem",
+            slug="money.change",
+            mode="word",
+            entries=[
+                ("Gabrielle bought 6 cupcakes that cost 95 cents each. She paid with 6 one-dollar bills. How much change did Gabrielle receive? Enter only the number of cents.", "30", "Six cupcakes cost 570 cents. Gabrielle paid 600 cents, so the change is 30 cents.", 15.0),
+                ("Alexis bought 4 cupcakes that cost $1.05 each. She paid with a five-dollar bill. How much change did Alexis receive? Enter only the number of cents.", "80", "Four cupcakes cost 420 cents. Alexis paid 500 cents, so the change is 80 cents.", 18.0),
+                ("George bought 9 apples that cost 50 cents each. He paid with a five-dollar bill. How much change did George receive? Enter only the number of cents.", "50", "Nine apples cost 450 cents. George paid 500 cents, so the change is 50 cents.", 15.0),
+                ("Jami bought 4 cookies that cost $1.45 each. She paid with 6 one-dollar bills. How much change did Jami receive? Enter only the number of cents.", "20", "Four cookies cost 580 cents. Jami paid 600 cents, so the change is 20 cents.", 15.0),
+                ("Lynette bought 7 cookies that cost 64 cents each. She paid with a five-dollar bill. How much change did Lynette receive? Enter only the number of cents.", "52", "Seven cookies cost 448 cents. Lynette paid 500 cents, so the change is 52 cents.", 15.0),
+            ],
+        ),
+        _group(
+            query="multi digit addition",
+            title="Multi-digit addition",
+            assignable_url="https://www.khanacademy.org/math/cc-fourth-grade-math/imp-addition-and-subtraction-2/imp-adding-multi-digit-numbers/e/multi-digit-addition?utm_campaign=teacher_assign_tool&utm_medium=referral&utm_source=chatgpt",
+            skill="long_addition",
+            subskill="Multi-digit accuracy",
+            label="Pulled multi-digit addition",
+            slug="long_addition.multi_digit",
+            entries=[
+                ("Add: 158,944 + 72,071", "231015", "Line up place values and add each column. The total is 231,015.", 4000.0),
+                ("Add: 236,181 + 150,486", "386667", "Add the numbers column by column to get 386,667.", 5000.0),
+                ("Add: 589,003 + 70,409", "659412", "The sum of 589,003 and 70,409 is 659,412.", 5000.0),
+                ("Add: 433,207 + 56,557", "489764", "Adding the two multi-digit numbers gives 489,764.", 5000.0),
+                ("Add: 189,360 + 22,857", "212217", "The total after addition is 212,217.", 4000.0),
+            ],
+        ),
+        _group(
+            query="multi digit subtraction",
+            title="Multi-digit subtraction",
+            assignable_url="https://www.khanacademy.org/math/cc-fourth-grade-math/imp-addition-and-subtraction-2/imp-subtracting-multi-digit-numbers/e/multi-digit-subtraction?utm_campaign=teacher_assign_tool&utm_medium=referral&utm_source=chatgpt",
+            skill="long_subtraction",
+            subskill="Borrowing",
+            label="Pulled multi-digit subtraction",
+            slug="long_subtraction.multi_digit",
+            entries=[
+                ("Subtract: 158,944 - 72,071", "86873", "Regroup where needed, then subtract to get 86,873.", 3000.0),
+                ("Subtract: 205,381 - 37,254", "168127", "Borrow as needed. The difference is 168,127.", 4000.0),
+                ("Subtract: 451,020 - 319,005", "132015", "After regrouping, the result is 132,015.", 4000.0),
+                ("Subtract: 684,392 - 62,297", "622095", "Subtract each place carefully to get 622,095.", 5000.0),
+                ("Subtract: 303,448 - 154,326", "149122", "The difference between the two numbers is 149,122.", 4000.0),
+            ],
+        ),
+        _group(
+            query="solve multiplication word problems",
+            title="Solve multiplication word problems",
+            assignable_url="https://www.khanacademy.org/math/3rd-grade-illustrative-mathematics/x0d15758a763061cf:represent-and-interpret-data/x0d15758a763061cf:more-factors-more-problems/e/solve-multiplication-word-problems?utm_campaign=teacher_assign_tool&utm_medium=referral&utm_source=chatgpt",
+            skill="multiply",
+            subskill="Repeated addition",
+            label="Pulled multiplication word problem",
+            slug="multiply.word",
+            mode="word",
+            entries=[
+                ("A baker makes 5 trays of cookies. Each tray holds 9 cookies. How many cookies does the baker make? Enter only the number of cookies.", "45", "Five groups of 9 cookies make 45 cookies.", 10.0),
+                ("A basket holds 7 eggs. Sofia fills 4 baskets with eggs. How many eggs does Sofia put in the baskets in all? Enter only the number of eggs.", "28", "Four equal groups of 7 eggs give 28 eggs total.", 10.0),
+                ("Manuel has 6 flower vases. Each vase holds 3 flowers. How many flowers does Manuel use to fill all the vases? Enter only the number of flowers.", "18", "Six groups of 3 flowers make 18 flowers.", 10.0),
+                ("Each dinner plate has 2 hamburgers. A chef makes 8 dinner plates. How many hamburgers does the chef use? Enter only the number of hamburgers.", "16", "Eight groups of 2 hamburgers make 16 hamburgers.", 10.0),
+                ("A garden has 3 rows of carrots. Each row has 7 carrots. How many carrots are there in total? Enter only the number of carrots.", "21", "Three rows of 7 carrots give 21 carrots.", 10.0),
+            ],
+        ),
+        _group(
+            query="multiply by 2 digit numbers",
+            title="Multiply 2-digit numbers",
+            assignable_url="https://www.khanacademy.org/math/cc-fourth-grade-math/multiplying-by-2-digit-numbers/multiply-2-digit-numbers-with-partial-products/e/multiplication_3?utm_campaign=teacher_assign_tool&utm_medium=referral&utm_source=chatgpt",
+            skill="long_multiplication",
+            subskill="Two-digit multiplies",
+            label="Pulled two-digit multiplication",
+            slug="long_multiplication.two_digit",
+            entries=[
+                ("Multiply: 18 x 16", "288", "Use partial products or standard multiplication to get 288.", 40.0),
+                ("Multiply: 28 x 48", "1344", "The product of 28 and 48 is 1,344.", 120.0),
+                ("Multiply: 21 x 37", "777", "Use place value products and add them to get 777.", 80.0),
+                ("Multiply: 32 x 38", "1216", "The product of 32 and 38 is 1,216.", 120.0),
+                ("Multiply: 42 x 57", "2394", "Multiply by tens and ones, then combine to get 2,394.", 150.0),
+            ],
+        ),
+        _group(
+            query="unit rates word problems",
+            title="Rate problems",
+            assignable_url="https://www.khanacademy.org/math/cc-sixth-grade-math/x0267d782:cc-6th-rates-and-percentages/cc-6th-rates/e/rate_problems_0.5?utm_campaign=teacher_assign_tool&utm_medium=referral&utm_source=chatgpt",
+            skill="ratios",
+            subskill="Unit rates and proportional relationships",
+            label="Pulled rate problem",
+            slug="ratios.rates",
+            mode="word",
+            entries=[
+                ("At the market, 8 batteries cost $10. How much do 6 batteries cost? Enter only the dollar amount.", "7.5", "One battery costs $1.25, so 6 batteries cost $7.50.", 2.0),
+                ("At the market, 5 light bulbs cost $9. How much do 7 light bulbs cost? Enter only the dollar amount.", "12.6", "One light bulb costs $1.80, so 7 cost $12.60.", 2.0),
+                ("A plane traveled 762 miles in 5 hours at a constant speed. How many miles would it travel in 3 hours? Enter only the number of miles.", "457.2", "Find the unit rate 762 / 5 = 152.4 miles per hour, then multiply by 3.", 20.0),
+                ("At the market, 8 apples cost $4. How much do 9 apples cost? Enter only the dollar amount.", "4.5", "One apple costs $0.50, so 9 apples cost $4.50.", 2.0),
+                ("Amanda can jog 18 miles in 5 hours. At this rate, how many miles can Amanda jog in 4 hours? Enter only the number of miles.", "14.4", "Amanda's unit rate is 18 / 5 = 3.6 miles per hour, so in 4 hours she jogs 14.4 miles.", 10.0),
+            ],
+        ),
+        _group(
+            query="expanded form",
+            title="Decimals in expanded form",
+            assignable_url="https://www.khanacademy.org/math/cc-fifth-grade-math/imp-place-value-and-decimals/imp-decimals-in-expanded-form/e/writing-and-interpreting-decimals?utm_campaign=teacher_assign_tool&utm_medium=referral&utm_source=chatgpt",
+            skill="place_value",
+            subskill="Expanded form",
+            label="Pulled decimal expanded form",
+            slug="place_value.expanded",
+            entries=[
+                ("Represent this expression as a decimal number: (2 x 10) + (2 x 1/10) + (9 x 1/100) + (4 x 1/1000)", "20.294", "Convert each place-value part and add: 20 + 0.2 + 0.09 + 0.004 = 20.294.", 1.0),
+                ("Represent this expression as a decimal number: (3 x 10) + (4 x 1) + (5 x 1/10) + (5 x 1/100) + (6 x 1/1000)", "34.556", "Add the place-value parts to get 34.556.", 1.0),
+                ("Represent this expression as a decimal number: (9 x 100) + (8 x 10) + (7 x 1/100)", "980.07", "The hundreds, tens, and hundredths combine to make 980.07.", 5.0),
+                ("Represent this expression as a decimal number: (8 x 100) + (2 x 1) + (4 x 1/10) + (3 x 1/100)", "802.43", "Write each part by place value, then add to get 802.43.", 5.0),
+                ("Represent this expression as a decimal number: (4 x 1000) + (3 x 100) + (6 x 1/10)", "4300.6", "Combine the thousands, hundreds, and tenths to get 4300.6.", 10.0),
+            ],
+        ),
+        _group(
+            query="converting fractions to decimals",
+            title="Converting fractions to decimals",
+            assignable_url="https://www.khanacademy.org/math/cc-seventh-grade-math/cc-7th-fractions-decimals/cc-7th-fracs-to-decimals/e/converting_fractions_to_decimals?utm_campaign=teacher_assign_tool&utm_medium=referral&utm_source=chatgpt",
+            skill="fractions",
+            subskill="Fraction to decimal",
+            label="Pulled fraction to decimal",
+            slug="fractions.to_decimal",
+            entries=[
+                ("Rewrite the fraction as a decimal: 7/4", "1.75", "Divide 7 by 4 to get 1.75.", 0.8),
+                ("Rewrite the fraction as a decimal: 94/5", "18.8", "Dividing 94 by 5 gives 18.8.", 2.0),
+                ("Rewrite the fraction as a decimal: 13/10", "1.3", "Dividing by 10 moves the decimal one place, so 13/10 = 1.3.", 0.8),
+                ("Rewrite the fraction as a decimal: 15/4", "3.75", "15 divided by 4 is 3.75.", 0.8),
+                ("Rewrite the fraction as a decimal: 19/4", "4.75", "19 divided by 4 is 4.75.", 0.8),
+            ],
+        ),
+        _group(
+            query="order of operations exponents",
+            title="Order of operations with fractions and exponents",
+            assignable_url="https://www.khanacademy.org/math/cc-sixth-grade-math/x0267d782:cc-6th-exponents-and-order-of-operations/x0267d782:more-on-order-of-operations/e/evaluating-numerical-expressions-with-exponents?utm_campaign=teacher_assign_tool&utm_medium=referral&utm_source=chatgpt",
+            skill="order_of_operations",
+            subskill="Exponents in expressions",
+            label="Pulled order-of-operations expression",
+            slug="order_of_operations.exponents",
+            entries=[
+                ("Evaluate the expression: (2 x 3)^2 + 5^2", "61", "Evaluate inside parentheses, then exponents, then add: 6^2 + 25 = 61.", 8.0),
+                ("Evaluate the expression: (2 x 3)^2 - 5^2", "11", "Evaluate the grouped multiplication first, then subtract 25 from 36.", 8.0),
+                ("Evaluate the expression: 2(3^2 + 4^2)", "50", "Find the exponents inside the parentheses, add them, then multiply by 2.", 8.0),
+                ("Evaluate the expression: (4 + 3)^2 + 5", "54", "Add inside parentheses, square the result, then add 5.", 8.0),
+                ("Evaluate the expression: (3 + 2)^2 - 7", "18", "Compute the sum in parentheses, square it, then subtract 7.", 8.0),
+            ],
+        ),
+    ]

@@ -1,0 +1,120 @@
+[
+  {
+    "external_id": "linear_preview.v1.slope_from_points.expression",
+    "skill": "algebra_linear",
+    "subskill": "Slope from points",
+    "label": "Slope from coordinate pairs",
+    "mode": "expression",
+    "prompt_template": "Find the slope through ({x1}, {y1}) and ({x2}, {y2}).",
+    "answer_expr": "(y2 - y1) / (x2 - x1)",
+    "constraint_expr": "x2 > x1 and y2 > y1 and (y2 - y1) % (x2 - x1) == 0",
+    "explanation_template": "Slope is rise divided by run: change in y over change in x.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 6.0,
+    "active": true,
+    "vars": [
+      {"name": "x1", "kind": "int", "min": 0, "max": 8, "step": 1},
+      {"name": "y1", "kind": "int", "min": 0, "max": 20, "step": 1},
+      {"name": "x2", "kind": "int", "min": 1, "max": 10, "step": 1},
+      {"name": "y2", "kind": "int", "min": 1, "max": 30, "step": 1}
+    ]
+  },
+  {
+    "external_id": "linear_preview.v1.slope_intercept.expression",
+    "skill": "algebra_linear",
+    "subskill": "Slope-intercept interpretation",
+    "label": "Read slope from y = mx + b",
+    "mode": "expression",
+    "prompt_template": "In y = {m}x + {b}, what is the slope?",
+    "answer_expr": "m",
+    "constraint_expr": "m != 0",
+    "explanation_template": "In slope-intercept form y = mx + b, m is the slope and b is the starting value.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 6.0,
+    "active": true,
+    "vars": [
+      {"name": "m", "kind": "int", "min": -6, "max": 6, "step": 1},
+      {"name": "b", "kind": "int", "min": -12, "max": 12, "step": 1}
+    ]
+  },
+  {
+    "external_id": "linear_preview.v1.direct_variation.expression",
+    "skill": "algebra_linear",
+    "subskill": "Direct variation",
+    "label": "Direct variation output",
+    "mode": "expression",
+    "prompt_template": "A direct variation has y = {k}x. What is y when x = {x}?",
+    "answer_expr": "k * x",
+    "constraint_expr": "k != 0",
+    "explanation_template": "Direct variation keeps the same multiplier from x to y.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 16.0,
+    "active": true,
+    "vars": [
+      {"name": "k", "kind": "int", "min": 2, "max": 9, "step": 1},
+      {"name": "x", "kind": "int", "min": 2, "max": 12, "step": 1}
+    ]
+  },
+  {
+    "external_id": "linear_preview.v1.unit_rate.expression",
+    "skill": "algebra_linear",
+    "subskill": "Rate and unit-rate modeling",
+    "label": "Unit rate from total",
+    "mode": "expression",
+    "prompt_template": "A pack of {items} notebooks costs ${cost}. What is the unit cost per notebook?",
+    "answer_expr": "cost / items",
+    "constraint_expr": "cost % items == 0",
+    "explanation_template": "Unit rate means one item's share of the total cost.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 8.0,
+    "active": true,
+    "vars": [
+      {"name": "items", "kind": "int", "min": 2, "max": 8, "step": 1},
+      {"name": "cost", "kind": "int", "min": 8, "max": 64, "step": 1}
+    ]
+  },
+  {
+    "external_id": "linear_preview.v1.linear_model.expression",
+    "skill": "algebra_linear",
+    "subskill": "Word problems with linear models",
+    "label": "Linear model total",
+    "mode": "expression",
+    "prompt_template": "A club starts with ${b} and adds ${m} each week. How many dollars after {x} weeks?",
+    "answer_expr": "b + m * x",
+    "constraint_expr": "",
+    "explanation_template": "A linear model adds the same rate for each step after the starting amount.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 18.0,
+    "active": true,
+    "vars": [
+      {"name": "b", "kind": "int", "min": 3, "max": 25, "step": 1},
+      {"name": "m", "kind": "int", "min": 2, "max": 12, "step": 1},
+      {"name": "x", "kind": "int", "min": 2, "max": 12, "step": 1}
+    ]
+  },
+  {
+    "external_id": "linear_preview.v1.linear_model.word",
+    "skill": "algebra_linear",
+    "subskill": "Word problems with linear models",
+    "label": "Linear model story",
+    "mode": "word",
+    "prompt_template": "A music app charges a ${b} signup fee plus ${m} per month. What is the total after {x} months?",
+    "answer_expr": "b + m * x",
+    "constraint_expr": "",
+    "explanation_template": "Translate the story into total = starting fee + rate times number of months.",
+    "min_level": 1,
+    "max_level": 3,
+    "choice_spread": 20.0,
+    "active": true,
+    "vars": [
+      {"name": "b", "kind": "int", "min": 4, "max": 30, "step": 1},
+      {"name": "m", "kind": "int", "min": 2, "max": 15, "step": 1},
+      {"name": "x", "kind": "int", "min": 2, "max": 12, "step": 1}
+    ]
+  }
+]

@@ -17,14 +17,14 @@ def draw_long_subtraction(canvas: tk.Canvas, a: int, b: int, bounds: tuple[int, 
 
 
 def draw_long_multiplication(canvas: tk.Canvas, a: int, b: int, bounds: tuple[int, int, int, int]) -> None:
-    partials = _multiplication_partials(a, b)
+    partial_rows = _multiplication_partials(a, b)
     result = a * b
 
     width = max(
         len(str(a)),
         len(str(b)) + 1,
         len(str(result)),
-        max(len(p) for p in partials),
+        max(len(str(value)) for value, _shift in partial_rows),
     )
     width += 1
     font, small_font, char_w, line_h = _fonts(bounds, width)
@@ -33,29 +33,26 @@ def draw_long_multiplication(canvas: tk.Canvas, a: int, b: int, bounds: tuple[in
     start_x = x0 + max(0, int((w - text_width) / 2))
 
     lines = [str(a).rjust(width), f"x{b}".rjust(width)]
-    line_after_inputs = 2
-    if len(partials) == 1:
+    separator_after_inputs = 1
+    if len(partial_rows) == 1:
         lines += [str(result).rjust(width)]
-        line_after_partials = None
+        separator_before_result = None
     else:
-        lines += partials
-        line_after_partials = len(lines)
+        lines += [str(value).rjust(width) for value, _shift in partial_rows]
+        separator_before_result = len(lines) - 1
         lines += [str(result).rjust(width)]
 
-    total_lines = len(lines) + 1
+    total_lines = len(lines) + 2
     start_y = y0 + max(0, int((h - total_lines * line_h) / 2))
 
     for idx, line in enumerate(lines):
         y = start_y + idx * line_h
         canvas.create_text(start_x, y, text=line, font=font, anchor=tk.NW, fill="#2a2a2a")
-        if idx == line_after_inputs or (line_after_partials is not None and idx == line_after_partials):
-            y_line = y + int(line_h * 0.82)
-            canvas.create_line(start_x, y_line, start_x + text_width, y_line, fill="#2a2a2a", width=2)
 
-    if len(partials) > 1:
-        y_line = start_y + (line_after_inputs) * line_h + int(line_h * 0.82)
-        canvas.create_line(start_x, y_line, start_x + text_width, y_line, fill="#2a2a2a", width=2)
-        y_line = start_y + (line_after_partials) * line_h + int(line_h * 0.82)
+    y_line = start_y + separator_after_inputs * line_h + int(line_h * 0.82)
+    canvas.create_line(start_x, y_line, start_x + text_width, y_line, fill="#2a2a2a", width=2)
+    if separator_before_result is not None:
+        y_line = start_y + separator_before_result * line_h + int(line_h * 0.82)
         canvas.create_line(start_x, y_line, start_x + text_width, y_line, fill="#2a2a2a", width=2)
 
     _draw_note(canvas, bounds, f"{a} x {b} = {result}")
@@ -65,26 +62,73 @@ def draw_long_division(canvas: tk.Canvas, dividend: int, divisor: int, bounds: t
     divisor = max(1, divisor)
     quotient = dividend // divisor
     remainder = dividend % divisor
-
-    line = f"{divisor}){dividend}"
-    font, small_font, char_w, line_h = _fonts(bounds, len(line))
-    text_width = len(line) * char_w
+    dividend_digits = str(max(0, dividend))
+    line = f"{divisor}){dividend_digits}"
+    width = max(len(line), len(str(quotient)) + len(str(divisor)) + 1) + 2
+    font, small_font, char_w, line_h = _fonts(bounds, width)
+    text_width = width * char_w
     x0, y0, w, h = bounds
     start_x = x0 + max(0, int((w - text_width) / 2))
-    base_y = y0 + max(0, int((h - (2 * line_h)) / 2)) + line_h
+    base_y = y0 + 16
 
-    canvas.create_text(start_x, base_y, text=line, font=font, anchor=tk.NW, fill="#2a2a2a")
-    quotient_x = start_x + (len(str(divisor)) + 1 + len(str(dividend)) - len(str(quotient))) * char_w
+    canvas.create_text(start_x, base_y, text=line.rjust(width - 1), font=font, anchor=tk.NW, fill="#2a2a2a")
+    dividend_x = start_x + (width - len(dividend_digits)) * char_w
+    quotient_x = dividend_x + (len(dividend_digits) - len(str(quotient))) * char_w
     canvas.create_text(quotient_x, base_y - line_h, text=str(quotient), font=font, anchor=tk.NW, fill="#2a2a2a")
+    top_line_y = base_y + int(line_h * 0.82)
+    canvas.create_line(
+        dividend_x,
+        top_line_y,
+        dividend_x + len(dividend_digits) * char_w,
+        top_line_y,
+        fill="#2a2a2a",
+        width=2,
+    )
 
-    dividend_x = start_x + (len(str(divisor)) + 1) * char_w
-    y_line = base_y + int(line_h * 0.82)
-    canvas.create_line(dividend_x, y_line, dividend_x + len(str(dividend)) * char_w, y_line, fill="#2a2a2a", width=2)
+    steps = _division_steps(dividend, divisor)
+    y_cursor = base_y + line_h + 2
+    for step in steps:
+        right_x = dividend_x + (step.end_index + 1) * char_w
+        segment_text = str(step.segment)
+        subtract_text = str(step.subtract)
+        segment_x = right_x - len(segment_text) * char_w
+        subtract_x = right_x - len(subtract_text) * char_w
+
+        canvas.create_text(segment_x, y_cursor, text=segment_text, font=font, anchor=tk.NW, fill="#2a2a2a")
+        y_cursor += line_h
+        canvas.create_text(subtract_x - char_w, y_cursor, text=f"-{subtract_text}", font=font, anchor=tk.NW, fill="#2a2a2a")
+        y_sub_line = y_cursor + int(line_h * 0.8)
+        canvas.create_line(subtract_x - char_w, y_sub_line, right_x, y_sub_line, fill="#2a2a2a", width=1)
+        y_cursor += line_h
+
+        remainder_x = right_x - len(str(step.remainder)) * char_w
+        canvas.create_text(remainder_x, y_cursor, text=str(step.remainder), font=font, anchor=tk.NW, fill="#2a2a2a")
+        if step.bring_down is not None:
+            canvas.create_text(
+                right_x + 8,
+                y_cursor + 1,
+                text=f"bring down {step.bring_down}",
+                font=small_font,
+                anchor=tk.NW,
+                fill="#6b6b6b",
+            )
+        y_cursor += line_h
+
+    if not steps:
+        canvas.create_text(
+            dividend_x,
+            y_cursor,
+            text=f"{dividend_digits} is smaller than {divisor}",
+            font=small_font,
+            anchor=tk.NW,
+            fill="#6b6b6b",
+        )
+        y_cursor += line_h
 
     if remainder:
         canvas.create_text(
             dividend_x,
-            base_y + line_h,
+            y_cursor,
             text=f"Remainder {remainder}",
             font=small_font,
             anchor=tk.NW,
@@ -147,14 +191,42 @@ def _breakdown(total: int, denoms: list[tuple[int, str]]) -> list[tuple[int, str
     return rows
 
 
-def _multiplication_partials(a: int, b: int) -> list[str]:
+def _multiplication_partials(a: int, b: int) -> list[tuple[int, int]]:
     digits = list(reversed(str(max(0, b))))
-    partials = []
+    partials: list[tuple[int, int]] = []
     for idx, digit_char in enumerate(digits):
         digit = int(digit_char)
         partial_value = a * digit * (10**idx)
-        partials.append(str(partial_value))
+        partials.append((partial_value, idx))
     return partials
+
+
+class _DivisionStep:
+    def __init__(self, end_index: int, segment: int, subtract: int, remainder: int, bring_down: int | None) -> None:
+        self.end_index = end_index
+        self.segment = segment
+        self.subtract = subtract
+        self.remainder = remainder
+        self.bring_down = bring_down
+
+
+def _division_steps(dividend: int, divisor: int) -> list[_DivisionStep]:
+    digits = [int(ch) for ch in str(max(0, dividend))]
+    steps: list[_DivisionStep] = []
+    current = 0
+    started = False
+    for idx, digit in enumerate(digits):
+        current = (current * 10) + digit
+        if not started and current < divisor:
+            continue
+        started = True
+        q_digit = current // divisor
+        subtract = q_digit * divisor
+        remainder = current - subtract
+        bring_down = digits[idx + 1] if idx + 1 < len(digits) else None
+        steps.append(_DivisionStep(idx, current, subtract, remainder, bring_down))
+        current = remainder
+    return steps
 
 
 def _draw_long_add_sub(

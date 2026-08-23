@@ -253,6 +253,26 @@ def build_manifest() -> list[dict[str, object]]:
         )
         items.append(
             _tpl(
+                external_id=f"khan.v2.stats_percent.word.intuition.v{i}",
+                skill="stats_percent",
+                subskill="Percent word problems",
+                label="Percent denominator setup",
+                mode="intuition",
+                prompt_template=(
+                    "A survey has {part} responses in one category out of {whole} total. "
+                    "What total belongs in the denominator before you convert the ratio to a percent?"
+                ),
+                answer_expr="whole",
+                explanation_template="Percent setup starts with part over whole, so the denominator is the full sample size.",
+                vars=[_var("part", 2, 90), _var("whole", 20, 240)],
+                min_level=1,
+                max_level=3,
+                constraint_expr="whole>part",
+                choice_spread=12.0,
+            )
+        )
+        items.append(
+            _tpl(
                 external_id=f"khan.v2.stats_mean.list.v{i}",
                 skill="stats_mean",
                 subskill="Mean",
@@ -266,6 +286,22 @@ def build_manifest() -> list[dict[str, object]]:
                 max_level=3,
                 constraint_expr="(a+b+c+d)%4==0",
                 choice_spread=4.0,
+            )
+        )
+        items.append(
+            _tpl(
+                external_id=f"khan.v2.stats_mean.list.intuition.v{i}",
+                skill="stats_mean",
+                subskill="Mean",
+                label="Mean total before divide",
+                mode="intuition",
+                prompt_template="Before dividing by 4, what total do you get from {a}, {b}, {c}, and {d}?",
+                answer_expr="a+b+c+d",
+                explanation_template="The mean starts with the total of all values before you divide by the count.",
+                vars=[_var("a", 1, 30), _var("b", 1, 30), _var("c", 1, 30), _var("d", 1, 30)],
+                min_level=1,
+                max_level=3,
+                choice_spread=12.0,
             )
         )
 
@@ -291,6 +327,25 @@ def build_manifest() -> list[dict[str, object]]:
         )
         items.append(
             _tpl(
+                external_id=f"khan.v2.stats_probability.model.intuition.v{i}",
+                skill="stats_probability",
+                subskill="Probability models",
+                label="Probability denominator",
+                mode="intuition",
+                prompt_template=(
+                    "A bag has {a} red, {b} blue, and {c} green marbles. "
+                    "How many total marbles belong in the denominator of the probability ratio?"
+                ),
+                answer_expr="a+b+c",
+                explanation_template="Probability uses favorable outcomes over total outcomes, so first count all possible outcomes.",
+                vars=[_var("a", 2, 40), _var("b", 2, 40), _var("c", 2, 40)],
+                min_level=1,
+                max_level=3,
+                choice_spread=12.0,
+            )
+        )
+        items.append(
+            _tpl(
                 external_id=f"khan.v2.calculus_slope.twopoints.v{i}",
                 skill="calculus_slope",
                 subskill="Slope from two points",
@@ -312,7 +367,7 @@ def build_manifest() -> list[dict[str, object]]:
             _tpl(
                 external_id=f"khan.v2.pre_algebra.mixed.v{i}",
                 skill="pre_algebra",
-                subskill="Foundational mixed operations",
+                subskill="Order of operations",
                 label="Pre-algebra mixed",
                 mode="expression",
                 prompt_template="Evaluate: ({a} - {b})*{c} + {d}",
@@ -362,7 +417,7 @@ def build_manifest() -> list[dict[str, object]]:
             _tpl(
                 external_id=f"khan.v2.statistics.core.v{i}",
                 skill="statistics",
-                subskill="Percent/mean/probability integration",
+                subskill="Integrated descriptive statistics and probability",
                 label="Statistics integrated question",
                 mode="word",
                 prompt_template=(
@@ -375,6 +430,25 @@ def build_manifest() -> list[dict[str, object]]:
                 min_level=1,
                 max_level=3,
                 constraint_expr="(100*b)%(a+b+c)==0",
+            )
+        )
+        items.append(
+            _tpl(
+                external_id=f"khan.v2.statistics.core.intuition.v{i}",
+                skill="statistics",
+                subskill="Integrated descriptive statistics and probability",
+                label="Statistics sample total",
+                mode="intuition",
+                prompt_template=(
+                    "A sample has {a} red, {b} blue, and {c} green items. "
+                    "How many total items are in the sample before you compute any percent?"
+                ),
+                answer_expr="a+b+c",
+                explanation_template="Integrated statistics questions still start by identifying the full sample size before comparing categories.",
+                vars=[_var("a", 5, 40), _var("b", 5, 40), _var("c", 5, 40)],
+                min_level=1,
+                max_level=3,
+                choice_spread=12.0,
             )
         )
 
@@ -396,6 +470,25 @@ def build_manifest() -> list[dict[str, object]]:
         )
         items.append(
             _tpl(
+                external_id=f"khan.v2.sat_math.linear_fee.intuition.v{i}",
+                skill="sat_math",
+                subskill="SAT algebra modeling",
+                label="Linear fee setup",
+                mode="intuition",
+                prompt_template=(
+                    "A plan charges a ${b} fee plus ${m} per month for {n} months. "
+                    "Before adding the fixed fee, how much comes from the monthly charges?"
+                ),
+                answer_expr="m*n",
+                explanation_template="Separate the repeated monthly charge from the fixed fee before building the full model.",
+                vars=[_var("b", 10, 200), _var("m", 5, 60), _var("n", 2, 24)],
+                min_level=2,
+                max_level=3,
+                choice_spread=14.0,
+            )
+        )
+        items.append(
+            _tpl(
                 external_id=f"khan.v2.sat_math.percent_change.v{i}",
                 skill="sat_math",
                 subskill="SAT percent and data",
@@ -408,6 +501,22 @@ def build_manifest() -> list[dict[str, object]]:
                 min_level=2,
                 max_level=3,
                 constraint_expr="a!=0 and ((b-a)*100)%a==0",
+            )
+        )
+        items.append(
+            _tpl(
+                external_id=f"khan.v2.sat_math.percent_change.intuition.v{i}",
+                skill="sat_math",
+                subskill="SAT percent and data",
+                label="Percent change setup",
+                mode="intuition",
+                prompt_template="A value changes from {a} to {b}. What is the signed change before you divide by the original value?",
+                answer_expr="b-a",
+                explanation_template="Percent change starts with new minus original before converting that change to a relative comparison.",
+                vars=[_var("a", 20, 200), _var("b", 10, 260)],
+                min_level=2,
+                max_level=3,
+                choice_spread=16.0,
             )
         )
         items.append(
@@ -428,6 +537,22 @@ def build_manifest() -> list[dict[str, object]]:
         )
         items.append(
             _tpl(
+                external_id=f"khan.v2.sat_math.slope_points.intuition.v{i}",
+                skill="sat_math",
+                subskill="SAT linear relationships",
+                label="Rise before slope",
+                mode="intuition",
+                prompt_template="Between ({x1},{y1}) and ({x2},{y2}), what is the vertical change (rise)?",
+                answer_expr="y2-y1",
+                explanation_template="Slope compares rise to run, so identify the rise first before forming the ratio.",
+                vars=[_var("x1", -10, 5), _var("y1", -20, 20), _var("x2", 6, 20), _var("y2", -20, 20)],
+                min_level=2,
+                max_level=3,
+                choice_spread=9.0,
+            )
+        )
+        items.append(
+            _tpl(
                 external_id=f"khan.v2.sat_math.mean_table.v{i}",
                 skill="sat_math",
                 subskill="SAT statistics",
@@ -440,6 +565,63 @@ def build_manifest() -> list[dict[str, object]]:
                 min_level=2,
                 max_level=3,
                 constraint_expr="(a+b+c+d+e)%5==0",
+            )
+        )
+        items.append(
+            _tpl(
+                external_id=f"khan.v2.sat_math.mean_table.intuition.v{i}",
+                skill="sat_math",
+                subskill="SAT statistics",
+                label="Total before mean",
+                mode="intuition",
+                prompt_template="Before dividing by 5, what total do you get from {a}, {b}, {c}, {d}, and {e}?",
+                answer_expr="a+b+c+d+e",
+                explanation_template="Statistics questions about means begin with the total of all data values before dividing by the count.",
+                vars=[_var("a", 10, 80), _var("b", 10, 80), _var("c", 10, 80), _var("d", 10, 80), _var("e", 10, 80)],
+                min_level=2,
+                max_level=3,
+                choice_spread=16.0,
+            )
+        )
+
+    for i in range(1, 13):
+        items.append(
+            _tpl(
+                external_id=f"khan.v2.sat_math.mixed.v{i}",
+                skill="sat_math",
+                subskill="SAT mixed-domain",
+                label="Discounted plan total",
+                mode="word",
+                prompt_template=(
+                    "A tutoring package charges a fixed fee of ${b} plus ${m} per session. "
+                    "A student attends {n} sessions and then gets a {pct}% discount on the total bill. "
+                    "What is the discounted total cost?"
+                ),
+                answer_expr="(b+m*n)*(100-pct)/100",
+                explanation_template="Build the original linear total first, then keep the remaining percent after the discount.",
+                vars=[_var("b", 20, 180), _var("m", 6, 35), _var("n", 2, 18), _var("pct", 5, 40, 5)],
+                min_level=2,
+                max_level=3,
+                constraint_expr="((b+m*n)*(100-pct))%100==0",
+            )
+        )
+        items.append(
+            _tpl(
+                external_id=f"khan.v2.sat_math.mixed.intuition.v{i}",
+                skill="sat_math",
+                subskill="SAT mixed-domain",
+                label="Original total before discount",
+                mode="intuition",
+                prompt_template=(
+                    "A tutoring package charges a fixed fee of ${b} plus ${m} per session for {n} sessions. "
+                    "Before applying a {pct}% discount, what is the original total bill?"
+                ),
+                answer_expr="b+m*n",
+                explanation_template="Mixed-domain problems are easier when you separate the linear total from the later percent adjustment.",
+                vars=[_var("b", 20, 180), _var("m", 6, 35), _var("n", 2, 18), _var("pct", 5, 40, 5)],
+                min_level=2,
+                max_level=3,
+                choice_spread=16.0,
             )
         )
 
@@ -461,6 +643,25 @@ def build_manifest() -> list[dict[str, object]]:
         )
         items.append(
             _tpl(
+                external_id=f"khan.v2.psat_math.linear_fee.intuition.v{i}",
+                skill="psat_math",
+                subskill="PSAT algebra modeling",
+                label="Event-cost setup",
+                mode="intuition",
+                prompt_template=(
+                    "A school club charges a ${b} signup fee plus ${m} per event for {n} events. "
+                    "Before adding the signup fee, how much comes from the event charges?"
+                ),
+                answer_expr="m*n",
+                explanation_template="Separate the repeated event cost from the one-time fee before building the final expression.",
+                vars=[_var("b", 5, 120), _var("m", 3, 35), _var("n", 2, 18)],
+                min_level=1,
+                max_level=3,
+                choice_spread=12.0,
+            )
+        )
+        items.append(
+            _tpl(
                 external_id=f"khan.v2.psat_math.percent_part.v{i}",
                 skill="psat_math",
                 subskill="PSAT percentages",
@@ -473,6 +674,26 @@ def build_manifest() -> list[dict[str, object]]:
                 min_level=1,
                 max_level=3,
                 constraint_expr="whole>part and (100*part)%whole==0",
+            )
+        )
+        items.append(
+            _tpl(
+                external_id=f"khan.v2.psat_math.percent_part.intuition.v{i}",
+                skill="psat_math",
+                subskill="PSAT percentages",
+                label="Percent denominator",
+                mode="intuition",
+                prompt_template=(
+                    "A sample has {part} items out of {whole} total in one category. "
+                    "What total belongs in the denominator before converting the ratio to a percent?"
+                ),
+                answer_expr="whole",
+                explanation_template="Part-to-percent questions start with part over whole, so the denominator is the full sample.",
+                vars=[_var("part", 5, 90), _var("whole", 20, 180)],
+                min_level=1,
+                max_level=3,
+                constraint_expr="whole>part",
+                choice_spread=12.0,
             )
         )
         items.append(
@@ -492,6 +713,25 @@ def build_manifest() -> list[dict[str, object]]:
         )
         items.append(
             _tpl(
+                external_id=f"khan.v2.psat_math.area_word.intuition.v{i}",
+                skill="psat_math",
+                subskill="PSAT geometry",
+                label="Area before cost",
+                mode="intuition",
+                prompt_template=(
+                    "A rectangle has length {l} and width {w}. "
+                    "Before multiplying by the ${c} cost per square unit, what is the rectangle's area?"
+                ),
+                answer_expr="l*w",
+                explanation_template="Word geometry problems often separate the geometric quantity first and the cost calculation second.",
+                vars=[_var("l", 4, 20), _var("w", 3, 16), _var("c", 2, 15)],
+                min_level=1,
+                max_level=3,
+                choice_spread=14.0,
+            )
+        )
+        items.append(
+            _tpl(
                 external_id=f"khan.v2.psat_math.simple_eq.v{i}",
                 skill="psat_math",
                 subskill="PSAT equation solving",
@@ -506,22 +746,98 @@ def build_manifest() -> list[dict[str, object]]:
                 constraint_expr="(rhs-b)%m==0",
             )
         )
+        items.append(
+            _tpl(
+                external_id=f"khan.v2.psat_math.simple_eq.intuition.v{i}",
+                skill="psat_math",
+                subskill="PSAT equation solving",
+                label="Undo the constant first",
+                mode="intuition",
+                prompt_template="In {m}x + {b} = {rhs}, what value remains after you undo the constant term?",
+                answer_expr="rhs-b",
+                explanation_template="Equation solving starts by removing the constant term before dividing by the coefficient.",
+                vars=[_var("m", 1, 12), _var("b", -24, 24), _var("rhs", -120, 120)],
+                min_level=1,
+                max_level=3,
+                choice_spread=16.0,
+            )
+        )
 
-    for i in range(1, 9):
+    for i in range(1, 13):
+        items.append(
+            _tpl(
+                external_id=f"khan.v2.psat_math.mixed.v{i}",
+                skill="psat_math",
+                subskill="PSAT mixed-domain",
+                label="Discounted club total",
+                mode="word",
+                prompt_template=(
+                    "A school club charges a signup fee of ${b} plus ${m} per event. "
+                    "A student attends {n} events and then receives a {pct}% discount on the final bill. "
+                    "What is the discounted total cost?"
+                ),
+                answer_expr="(b+m*n)*(100-pct)/100",
+                explanation_template="Build the original linear total first, then apply the percent discount to that total.",
+                vars=[_var("b", 10, 120), _var("m", 4, 24), _var("n", 2, 16), _var("pct", 5, 40, 5)],
+                min_level=1,
+                max_level=3,
+                constraint_expr="((b+m*n)*(100-pct))%100==0",
+            )
+        )
+        items.append(
+            _tpl(
+                external_id=f"khan.v2.psat_math.mixed.intuition.v{i}",
+                skill="psat_math",
+                subskill="PSAT mixed-domain",
+                label="Total before discount",
+                mode="intuition",
+                prompt_template=(
+                    "A school club charges a signup fee of ${b} plus ${m} per event for {n} events. "
+                    "Before a {pct}% discount is applied, what is the original total bill?"
+                ),
+                answer_expr="b+m*n",
+                explanation_template="Mixed-domain problems are easier when you first write the undiscounted total and only then handle the percent change.",
+                vars=[_var("b", 10, 120), _var("m", 4, 24), _var("n", 2, 16), _var("pct", 5, 40, 5)],
+                min_level=1,
+                max_level=3,
+                choice_spread=14.0,
+            )
+        )
+
+    for i in range(1, 13):
         items.append(
             _tpl(
                 external_id=f"khan.v2.gre_quant.qc.v{i}",
                 skill="gre_quant",
-                subskill="GRE quantitative comparison style",
-                label="Fraction sum comparison value",
+                subskill="GRE quantitative comparison",
+                label="Quantitative comparison difference",
                 mode="expression",
-                prompt_template="Compute value: ({a}/{b}) + ({c}/{d})",
-                answer_expr="(a/b)+(c/d)",
-                explanation_template="Use common denominators or decimal conversion.",
+                prompt_template=(
+                    "Quantity A is {a}/{b}. Quantity B is {c}/{d}. "
+                    "Compute Quantity A - Quantity B."
+                ),
+                answer_expr="(a/b)-(c/d)",
+                explanation_template="Comparing two quantities is often easiest if you subtract one from the other after finding a common denominator.",
                 vars=[_var("a", 2, 40), _var("b", 2, 20), _var("c", 2, 40), _var("d", 2, 20)],
                 min_level=2,
                 max_level=3,
                 choice_spread=3.0,
+            )
+        )
+        items.append(
+            _tpl(
+                external_id=f"khan.v2.gre_quant.qc.intuition.v{i}",
+                skill="gre_quant",
+                subskill="GRE quantitative comparison",
+                label="Common denominator setup",
+                mode="intuition",
+                prompt_template="To compare {a}/{b} and {c}/{d}, what common denominator could you use?",
+                answer_expr="b*d",
+                explanation_template="A common denominator turns both fractions into comparable quantities before you decide which is larger.",
+                vars=[_var("a", 2, 40), _var("b", 2, 20), _var("c", 2, 40), _var("d", 2, 20)],
+                min_level=2,
+                max_level=3,
+                choice_spread=12.0,
             )
         )
         items.append(
@@ -542,6 +858,23 @@ def build_manifest() -> list[dict[str, object]]:
         )
         items.append(
             _tpl(
+                external_id=f"khan.v2.gre_quant.ratio_word.intuition.v{i}",
+                skill="gre_quant",
+                subskill="GRE ratios and proportions",
+                label="Ratio scaling factor",
+                mode="intuition",
+                prompt_template="A recipe covers {b} servings. If you need {k} servings, by what factor do you scale the recipe?",
+                answer_expr="k/b",
+                explanation_template="Ratio problems are easier when you find the scale factor first and apply it to each quantity after that.",
+                vars=[_var("a", 2, 25), _var("b", 2, 20), _var("k", 4, 60)],
+                min_level=2,
+                max_level=3,
+                constraint_expr="k%b==0",
+                choice_spread=3.0,
+            )
+        )
+        items.append(
+            _tpl(
                 external_id=f"khan.v2.gre_quant.percent_delta.v{i}",
                 skill="gre_quant",
                 subskill="GRE percent reasoning",
@@ -558,6 +891,23 @@ def build_manifest() -> list[dict[str, object]]:
         )
         items.append(
             _tpl(
+                external_id=f"khan.v2.gre_quant.percent_delta.intuition.v{i}",
+                skill="gre_quant",
+                subskill="GRE percent reasoning",
+                label="Raw increase before percent",
+                mode="intuition",
+                prompt_template="A value rises from {a} to {b}. Before converting the increase to a percent, what is the increase amount?",
+                answer_expr="b-a",
+                explanation_template="Percent reasoning begins with the raw increase before you compare it to the original value.",
+                vars=[_var("a", 25, 220), _var("b", 30, 320)],
+                min_level=2,
+                max_level=3,
+                constraint_expr="b>a",
+                choice_spread=12.0,
+            )
+        )
+        items.append(
+            _tpl(
                 external_id=f"khan.v2.gre_quant.mean_set.v{i}",
                 skill="gre_quant",
                 subskill="GRE data interpretation",
@@ -570,6 +920,22 @@ def build_manifest() -> list[dict[str, object]]:
                 min_level=2,
                 max_level=3,
                 constraint_expr="(a+b+c+d)%4==0",
+            )
+        )
+        items.append(
+            _tpl(
+                external_id=f"khan.v2.gre_quant.mean_set.intuition.v{i}",
+                skill="gre_quant",
+                subskill="GRE data interpretation",
+                label="Total before average",
+                mode="intuition",
+                prompt_template="Before dividing by 4, what total do you get from {a}, {b}, {c}, and {d}?",
+                answer_expr="a+b+c+d",
+                explanation_template="Data interpretation with averages starts by combining the full total before dividing by the number of values.",
+                vars=[_var("a", 10, 90), _var("b", 10, 90), _var("c", 10, 90), _var("d", 10, 90)],
+                min_level=2,
+                max_level=3,
+                choice_spread=16.0,
             )
         )
 
